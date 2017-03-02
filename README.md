@@ -11,7 +11,7 @@ We use "shared repository model" to work with the repository. There are two prim
 - once your work or feature is completed and well tested create a pull request
 - after discuss and review the code, request can be merged to the "develop" branch
 
-<br>
+<br><br>
 usefull links : 
 
 - https://guides.github.com/introduction/flow/
