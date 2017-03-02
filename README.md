@@ -12,9 +12,6 @@ We use "shared repository model" to work with the repository. There are two prim
 - after discuss and review the code, request can be merged to the "develop" branch
 
 <br><br>
-
-created home view
-
 usefull links : 
 
 - https://guides.github.com/introduction/flow/
