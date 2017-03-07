@@ -1,6 +1,5 @@
-package com.example.ahmed.sfa.Activities;
+package com.example.ahmed.sfa.activities;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.Paint;

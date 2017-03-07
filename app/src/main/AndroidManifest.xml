@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme"
         >
 
-        <activity android:name=".Activities.Home" android:windowSoftInputMode="stateHidden">
+        <activity android:name=".activities.Home" android:windowSoftInputMode="stateHidden">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

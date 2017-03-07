@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.Activities;
+package com.example.ahmed.sfa.activities;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.ImageManager;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
-import com.example.ahmed.sfa.models.Customer;
 
 /**
  * Created by Ahmed on 3/3/2017.

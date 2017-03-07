@@ -1,16 +1,13 @@
 package com.example.ahmed.sfa.controllers.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.ahmed.sfa.Activities.CustomerPopupFragment;
-import com.example.ahmed.sfa.Activities.Home;
+import com.example.ahmed.sfa.activities.Home;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.models.Itinerary;
 
