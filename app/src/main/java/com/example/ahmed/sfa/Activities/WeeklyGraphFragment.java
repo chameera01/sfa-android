@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa;
+package com.example.ahmed.sfa.Activities;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ahmed.sfa.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
@@ -43,10 +44,10 @@ public class WeeklyGraphFragment extends Fragment{
         gv.getViewport().setMaxX(10);
         gv.getViewport().setMinX(0);
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{
-                new DataPoint(0,2),
-                new DataPoint(1,5),
-                new DataPoint(4,5),
-                new DataPoint(5,3)
+                new DataPoint(1,2),
+                new DataPoint(2,5),
+                new DataPoint(5,5),
+                new DataPoint(6,3)
 
         });
 

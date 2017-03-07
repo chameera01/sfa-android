@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.ahmed.sfa.Home">
+    tools:context="com.example.ahmed.sfa.Activities.Home">
     
     <LinearLayout
         android:orientation="horizontal"
@@ -17,9 +17,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true">
         <LinearLayout
+
             android:layout_width="359dp"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/backshadow">
 
             <SearchView
                 android:id="@+id/routesearch"
@@ -31,33 +33,56 @@
                 ></SearchView>
             <ListView
                 android:id="@+id/routelist"
+                android:paddingTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:choiceMode="singleChoice"
+
                 android:layout_below="@+id/routesearch"></ListView>
 
         </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            
-            <fragment
-               android:id="@+id/weeklytargetfragment"
-                android:layout_width="match_parent"
-                android:layout_height="222dp"
-
-                android:name="com.example.ahmed.sfa.WeeklyGraphFragment"
-                tools:layout="@layout/graph"></fragment>
-
-            <fragment
-                android:id="@+id/monthlytargetfragment"
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:orientation="vertical"
+                android:overScrollMode="ifContentScrolls"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/backshadow"
+                android:layout_marginLeft="10dp">
 
-                android:name="com.example.ahmed.sfa.WeeklyGraphFragment"
-                tools:layout="@layout/graph"></fragment>
+                <FrameLayout
+                    android:id="@+id/customermanagementfragment"
 
-        </LinearLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/backshadow"
+
+
+                    >
+
+                </FrameLayout>
+
+                <fragment
+                    android:id="@+id/weeklytargetfragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="222dp"
+                    android:background="@drawable/backshadow"
+                    android:name="com.example.ahmed.sfa.Activities.WeeklyGraphFragment"
+                    tools:layout="@layout/graph"></fragment>
+
+                <fragment
+                    android:id="@+id/monthlytargetfragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="222dp"
+                    android:background="@drawable/backshadow"
+                    android:name="com.example.ahmed.sfa.Activities.WeeklyGraphFragment"
+                    tools:layout="@layout/graph"></fragment>
+
+            </LinearLayout>
+        </ScrollView>
+
         
     </LinearLayout>
 
