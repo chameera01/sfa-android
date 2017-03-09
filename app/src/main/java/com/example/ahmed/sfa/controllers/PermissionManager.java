@@ -33,7 +33,7 @@ public class PermissionManager {
         if(ActivityCompat.checkSelfPermission(activity,Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(activity,Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED ){
             ActivityCompat.requestPermissions(activity,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION}
-                    , MY_PERMISSIONS_REQUEST_CAMERA);
+                    , MY_PERMISSIONS_REQUEST_LOCATION);
             return false;
         }else{
             return true;

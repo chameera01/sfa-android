@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
 
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
     <LinearLayout
         android:orientation="horizontal"
@@ -34,6 +37,13 @@
                     android:gravity="center_vertical"
                     android:layout_height="match_parent"
                     android:layout_weight="2"/>
+                <TextView
+                    android:text="*"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
                 <EditText
                     android:id="@+id/addcustomer$customername"
                     android:layout_width="0dp"
@@ -41,11 +51,7 @@
                     android:enabled="false"
                     android:maxLines="1"
                     android:layout_height="match_parent" />
-                <ImageView
-                    android:background="@drawable/redcircle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent" />
+
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -58,6 +64,13 @@
                     android:gravity="center_vertical"
                     android:layout_height="match_parent"
                     android:layout_weight="2"/>
+                <TextView
+                    android:text="*"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
                 <EditText
                     android:id="@+id/addcustomer$address"
                     android:layout_width="0dp"
@@ -66,11 +79,7 @@
                     android:enabled="false"
                     android:maxLines="1"
                     android:layout_height="match_parent" />
-                <ImageView
-                    android:background="@drawable/redcircle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent" />
+
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -83,17 +92,20 @@
                     android:gravity="center_vertical"
                     android:layout_height="match_parent"
                     android:layout_weight="2"/>
+                <TextView
+                    android:text="*"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
                 <Spinner
                     android:id="@+id/addcustomer$district"
                     android:layout_width="0dp"
                     android:layout_weight="5"
                     android:enabled="false"
                     android:layout_height="match_parent" />
-                <ImageView
-                    android:background="@drawable/redcircle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent" />
+
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -106,6 +118,13 @@
                     android:gravity="center_vertical"
                     android:layout_height="match_parent"
                     android:layout_weight="2"/>
+                <TextView
+                    android:text="*"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
                 <EditText
                     android:id="@+id/addcustomer$area"
                     android:layout_width="0dp"
@@ -113,11 +132,7 @@
                     android:maxLines="1"
                     android:enabled="false"
                     android:layout_height="match_parent" />
-                <ImageView
-                    android:background="@drawable/redcircle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent" />
+
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -130,6 +145,13 @@
                     android:gravity="center_vertical"
                     android:layout_height="match_parent"
                     android:layout_weight="2"/>
+                <TextView
+                    android:text="*"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
 
                 <EditText
                     android:id="@+id/addcustomer$town"
@@ -139,11 +161,7 @@
                     android:enabled="false"
                     android:layout_height="match_parent" />
 
-                <ImageView
-                    android:background="@drawable/redcircle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent" />
+
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -156,17 +174,20 @@
                     android:gravity="center_vertical"
                     android:layout_height="match_parent"
                     android:layout_weight="2"/>
+                <TextView
+                    android:text="*"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
                 <Spinner
                     android:id="@+id/addcustomer$route"
                     android:layout_width="0dp"
                     android:layout_weight="5"
                     android:enabled="false"
                     android:layout_height="match_parent" />
-                <ImageView
-                    android:background="@drawable/redcircle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent" />
+
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -179,17 +200,20 @@
                     android:gravity="center_vertical"
                     android:layout_height="match_parent"
                     android:layout_weight="2"/>
+                <TextView
+                    android:text="*"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
                 <Spinner
                     android:id="@+id/addcustomer$customerstatus"
                     android:layout_width="0dp"
                     android:layout_weight="5"
                     android:enabled="false"
                     android:layout_height="match_parent" />
-                <ImageView
-                    android:background="@drawable/redcircle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent" />
+
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
@@ -203,6 +227,13 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
                     android:layout_weight="2"/>
+                <TextView
+                    android:text="*"
+                    android:gravity="center"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
                 <EditText
                     android:id="@+id/addcustomer$contactno"
                     android:layout_width="0dp"
@@ -212,11 +243,7 @@
                     android:enabled="false"
                     android:layout_weight="5"
                     android:layout_height="match_parent" />
-                <ImageView
-                    android:background="@drawable/redcircle"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent" />
+
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -346,6 +373,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="5"
                     android:maxLines="1"
+                    android:maxLength="10"
                     android:inputType="phone"
                     android:enabled="false"
                     android:layout_height="match_parent" />

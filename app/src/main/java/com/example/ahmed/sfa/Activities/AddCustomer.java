@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,6 +24,7 @@ import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.ImageManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
+import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.CustomerStatus;
 import com.example.ahmed.sfa.models.District;
@@ -34,9 +37,10 @@ import java.util.List;
  * Created by Ahmed on 3/4/2017.
  */
 
-public class AddCustomer extends Activity{
+public class AddCustomer extends AppCompatActivity {
     ImageManager imgMan;
     DBAdapter dbAdapter;
+
     Bitmap customerImageBitmap;
 
     ImageView customerImage;
@@ -61,6 +65,7 @@ public class AddCustomer extends Activity{
 
     private boolean controlsEnabled=false;
 
+    private Bundle savedInstance;
 
     private void enableControls(){
 
@@ -85,8 +90,23 @@ public class AddCustomer extends Activity{
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        //nvMan = new NavigationItemManager(this);
+
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+
+        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+            //    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        //drawer.setDrawerListener(toggle);
+        //toggle.syncState();
+
+        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //navigationView.setNavigationItemSelectedListener(nvMan);
 
 
+        savedInstance = savedInstanceState;
         //get Location
         PermissionManager pm = new PermissionManager(this);
         if(pm.checkForLocationPermission()) {
@@ -164,7 +184,7 @@ public class AddCustomer extends Activity{
                 saveandsubmitbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        addDataToDB();
+                        if(addDataToDB()) Toast.makeText(AddCustomer.this,"Done adding customer",Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -176,38 +196,55 @@ public class AddCustomer extends Activity{
         }else{
             Toast.makeText(this,"Here 1",Toast.LENGTH_SHORT).show();
             setContentView(R.layout.addcustomer_errorlayout);
+
         }
 
     }
 
-    private boolean addDataToDB(){
-        ContentValues cvFrTrCustomer = new ContentValues();
-        cvFrTrCustomer.put("NewCustomerID","test1");
-        cvFrTrCustomer.put("CustomerName",customerName.getText().toString());
-        cvFrTrCustomer.put("Address",address.getText().toString());
-        cvFrTrCustomer.put("Area",area.getText().toString());
-        cvFrTrCustomer.put("District",district.getSelectedItem().toString());
-        cvFrTrCustomer.put("Town",town.getText().toString());
-        cvFrTrCustomer.put("Telephone",ContactNo.getText().toString());
-        cvFrTrCustomer.put("Fax",fax.getText().toString());
-        cvFrTrCustomer.put("Email",email.getText().toString());
-        cvFrTrCustomer.put("OwnerContactNo",ownersContactNo.getText().toString());
-        cvFrTrCustomer.put("OwnerName",ownersName.getText().toString());
-        cvFrTrCustomer.put("PharmacyRegNo",registrationNo.getText().toString());
-        cvFrTrCustomer.put("CustomerStatusID",((CustomerStatus)customerStatus.getSelectedItem()).getCustomerStatusID());
-        cvFrTrCustomer.put("CustomerStatus",((CustomerStatus)customerStatus.getSelectedItem()).getCustomerStatus());
-        cvFrTrCustomer.put("InsertDate", DateManager.dateToday());
-        cvFrTrCustomer.put("RouteID",((Route)route.getSelectedItem()).getRouteID());
-        cvFrTrCustomer.put("RouteName",((Route)route.getSelectedItem()).getRouteID());
-        //cvFrTrCustomer.put("ImageID",);
-        cvFrTrCustomer.put("Latitude",Double.parseDouble(latitude.getText().toString()));
-        cvFrTrCustomer.put("Longitude",Double.parseDouble(longitude.getText().toString()));
-        cvFrTrCustomer.put("isUpload",1);
-        cvFrTrCustomer.put("UploadDate",DateManager.dateToday());
-        cvFrTrCustomer.put("ApproveStatus",1);
-        cvFrTrCustomer.put("LastUpdateDate",DateManager.dateToday());
 
-        return true;
+
+    private boolean addDataToDB(){
+        RandomNumberGenerator rg = new RandomNumberGenerator();
+        String imageCode = rg.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"CUSIMG_",17);
+        String customerID = rg.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"CUS_",14);
+        if(validateInputs()) {
+            ContentValues cvFrTrCustomer = new ContentValues();
+            cvFrTrCustomer.put("NewCustomerID", customerID);
+            cvFrTrCustomer.put("CustomerName", customerName.getText().toString());
+            cvFrTrCustomer.put("Address", address.getText().toString());
+            cvFrTrCustomer.put("Area", area.getText().toString());
+            cvFrTrCustomer.put("District", district.getSelectedItem().toString());
+            cvFrTrCustomer.put("Town", town.getText().toString());
+            cvFrTrCustomer.put("Telephone", ContactNo.getText().toString());
+            cvFrTrCustomer.put("Fax", fax.getText().toString());
+            cvFrTrCustomer.put("Email", email.getText().toString());
+            cvFrTrCustomer.put("OwnerContactNo", ownersContactNo.getText().toString());
+            cvFrTrCustomer.put("OwnerName", ownersName.getText().toString());
+            cvFrTrCustomer.put("PharmacyRegNo", registrationNo.getText().toString());
+            cvFrTrCustomer.put("CustomerStatusID", ((CustomerStatus) customerStatus.getSelectedItem()).getCustomerStatusID());
+            cvFrTrCustomer.put("CustomerStatus", ((CustomerStatus) customerStatus.getSelectedItem()).getCustomerStatus());
+            cvFrTrCustomer.put("InsertDate", DateManager.dateToday());
+            cvFrTrCustomer.put("RouteID", ((Route) route.getSelectedItem()).getRouteID());
+            cvFrTrCustomer.put("RouteName", ((Route) route.getSelectedItem()).getRouteID());
+            cvFrTrCustomer.put("ImageID",imageCode);
+            cvFrTrCustomer.put("Latitude", Double.parseDouble(latitude.getText().toString()));
+            cvFrTrCustomer.put("Longitude", Double.parseDouble(longitude.getText().toString()));
+            cvFrTrCustomer.put("isUpload", 1);
+            cvFrTrCustomer.put("UploadDate", DateManager.dateToday());
+            cvFrTrCustomer.put("ApproveStatus", 1);
+            cvFrTrCustomer.put("LastUpdateDate", DateManager.dateToday());
+
+            if(imgMan.saveImage(customerImageBitmap,imageCode) && dbAdapter.insertIntoCustomerImage(customerID,imageCode)){
+                cvFrTrCustomer.put("ImageID",imageCode);
+                dbAdapter.insertIntoTrCustomer(cvFrTrCustomer);
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+
     }
 
     private boolean validateInputs(){
@@ -248,6 +285,20 @@ public class AddCustomer extends Activity{
             if(!controlsEnabled){
                 enableControls();
             }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] grantResults){
+        //Toast.makeText(this," permission Received",Toast.LENGTH_SHORT).show();
+        switch (requestCode){
+            case PermissionManager.MY_PERMISSIONS_REQUEST_LOCATION:
+                //Toast.makeText(this," Location",Toast.LENGTH_SHORT).show();
+                if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                    onCreate(savedInstance);
+                    //Toast.makeText(this,"Location permission Received",Toast.LENGTH_SHORT).show();
+                }
+                break;
         }
     }
 
@@ -319,10 +370,18 @@ public class AddCustomer extends Activity{
 
 
         public boolean insertIntoTrCustomer(ContentValues cv){
-            return true;
+            openDB();
+            long tr_newCustomer = db.insert("Tr_NewCustomer", null, cv);
+            if(tr_newCustomer>0)
+                return true;
+            else
+                return false;
         }
 
-        public boolean insertIntoCustomerImage(ContentValues cv){
+        public boolean insertIntoCustomerImage(String imageCode,String customerID){
+            openDB();
+            db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('"+customerID+"','"+imageCode+"')");
+            closeDB();
             return true;
         }
     }
