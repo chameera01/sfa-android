@@ -6,7 +6,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.app.FragmentTransaction;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.adapters.ItineraryAdapter;
+import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Itinerary;
 
@@ -51,12 +54,8 @@ public class Home extends AppCompatActivity {
         drawerToggle.syncState();
 
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                return false;
-            }
-        });
+        NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
+        navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
 
         selectedIndex=-1;
         listView = (ListView)findViewById(R.id.routelist);
@@ -92,6 +91,16 @@ public class Home extends AppCompatActivity {
         getItinerary(null,false);//initially passing the search term as null so the getItineraries method will return all possible itineraries
         listView.setAdapter(adapter);//set the adapter to the list view
 
+    }
+
+    @Override
+    public void onBackPressed(){
+        DrawerLayout drawer = (DrawerLayout )findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.openDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
     }
 
     public int getSelectedIndex(){

@@ -19,7 +19,7 @@ import android.support.v4.content.ContextCompat;
 public class PermissionManager {
     public static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION=101;
-    public static final int CAMERA_REQUEST = 1888;
+
     public static final String ALLOW_KEY = "ALLOWED";
     public static final String CAMERA_PREF = "camera_pref";
 

@@ -11,7 +11,12 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,6 +30,7 @@ import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.ImageManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
+import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.CustomerStatus;
 import com.example.ahmed.sfa.models.District;
@@ -89,6 +95,7 @@ public class AddCustomer extends AppCompatActivity {
     }
 
     public void onCreate(Bundle savedInstanceState){
+
         super.onCreate(savedInstanceState);
         //nvMan = new NavigationItemManager(this);
 
@@ -107,6 +114,21 @@ public class AddCustomer extends AppCompatActivity {
 
 
         savedInstance = savedInstanceState;
+        init();
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawer.setDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
+        navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
+    }
+
+    private void init(){
         //get Location
         PermissionManager pm = new PermissionManager(this);
         if(pm.checkForLocationPermission()) {
@@ -198,7 +220,6 @@ public class AddCustomer extends AppCompatActivity {
             setContentView(R.layout.addcustomer_errorlayout);
 
         }
-
     }
 
 
@@ -295,13 +316,26 @@ public class AddCustomer extends AppCompatActivity {
             case PermissionManager.MY_PERMISSIONS_REQUEST_LOCATION:
                 //Toast.makeText(this," Location",Toast.LENGTH_SHORT).show();
                 if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
-                    onCreate(savedInstance);
+                    init();
                     //Toast.makeText(this,"Location permission Received",Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case PermissionManager.MY_PERMISSIONS_REQUEST_CAMERA:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    imgMan.capture();
                 }
                 break;
         }
     }
 
+    public void onBackPressed(){
+        DrawerLayout drawer = (DrawerLayout )findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.openDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
+    }
 
     class DBAdapter{
         Context context;
