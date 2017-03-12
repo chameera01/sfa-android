@@ -54,7 +54,7 @@ public class CustomerPopupFragment extends Fragment {
             //Customer customer = new Customer(,,,,,,cursor.getString(6), cursor.getString(7));
             View customerView = inflater.inflate(R.layout.customerpopupforhomeui, container, false);
 
-            Button dismissBtn = (Button) customerView.findViewById(R.id.dismiss);
+            Button dismissBtn = (Button) customerView.findViewById(R.id.close_popup);
             dismissBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -63,16 +63,16 @@ public class CustomerPopupFragment extends Fragment {
             });
 
             ((TextView) customerView.findViewById(R.id.customername)).setText(cursor.getString(1));
-            ((TextView) customerView.findViewById(R.id.address)).setText( cursor.getString(3));
+            //((TextView) customerView.findViewById(R.id.address)).setText( cursor.getString(3));
             ((TextView) customerView.findViewById(R.id.town)).setText( cursor.getString(2));
-            ((TextView) customerView.findViewById(R.id.tel)).setText(cursor.getString(4));
-            ((TextView) customerView.findViewById(R.id.lastinvoice)).setText(cursor.getString(5));
-            ((TextView) customerView.findViewById(R.id.lastvisit)).setText(cursor.getString(6));
+            //((TextView) customerView.findViewById(R.id.tel)).setText(cursor.getString(4));
+            //((TextView) customerView.findViewById(R.id.lastinvoice)).setText(cursor.getString(5));
+            //((TextView) customerView.findViewById(R.id.lastvisit)).setText(cursor.getString(6));
 
             ImageManager im = new ImageManager(this.getActivity());
             Bitmap bitmap = im.retrieveImage(cursor.getString(7));
             if (bitmap != null)
-                ((ImageView) customerView.findViewById(R.id.customerimage)).setImageBitmap(bitmap);
+                ((ImageView) customerView.findViewById(R.id.customer_image)).setImageBitmap(bitmap);
 
             return customerView;
         }

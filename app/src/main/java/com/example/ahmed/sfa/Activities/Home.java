@@ -17,9 +17,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -27,6 +30,7 @@ import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.adapters.ItineraryAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
+import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Itinerary;
 
@@ -53,9 +57,12 @@ public class Home extends AppCompatActivity {
         drawer.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
-        NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
-        navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
+
+         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+         NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
+         //navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
+
+
 
         selectedIndex=-1;
         listView = (ListView)findViewById(R.id.routelist);
@@ -89,7 +96,7 @@ public class Home extends AppCompatActivity {
             }
         });
         getItinerary(null,false);//initially passing the search term as null so the getItineraries method will return all possible itineraries
-        listView.setAdapter(adapter);//set the adapter to the list view
+        //listView.setAdapter(adapter);//set the adapter to the list view
 
     }
 
@@ -97,7 +104,7 @@ public class Home extends AppCompatActivity {
     public void onBackPressed(){
         DrawerLayout drawer = (DrawerLayout )findViewById(R.id.drawer_layout);
         if(drawer.isDrawerOpen(GravityCompat.START)){
-            drawer.openDrawer(GravityCompat.START);
+            drawer.closeDrawer(GravityCompat.START);
         }else{
             super.onBackPressed();
         }
@@ -111,7 +118,7 @@ public class Home extends AppCompatActivity {
         itineraries.clear();//clear the array so that results will be start from the beginning without appending
 
         DBAdapter db = new DBAdapter(this);//create the DB Adapter to open and close the db
-        db.openDB();
+        //db.openDB();
 
         Itinerary itinerary;
 
@@ -124,13 +131,15 @@ public class Home extends AppCompatActivity {
         date = year+"/"+month+"/"+day;*/
         String date = DateManager.dateToday();
         Log.w(">Current Date :",date);
-        Cursor cursor = db.retrieveItinerary(searchTerm,date,matchOnlyStart);
+        //Cursor cursor = db.retrieveItinerary(searchTerm,date,matchOnlyStart);
+
+        db.retrieveItinerary(searchTerm,date,matchOnlyStart);
 
         //these two lines werer used for testing purposes
         //String count = cursor.getCount()+"";
         //Toast.makeText(getApplicationContext(),count,Toast.LENGTH_SHORT).show();
 
-        //create an Itinerary object for all the results in the cursor and add them to the array "itineraries"
+        /**create an Itinerary object for all the results in the cursor and add them to the array "itineraries"
         while (cursor.moveToNext()){
             String id = cursor.getString(0);
             String customerNo = cursor.getString(1);
@@ -141,9 +150,9 @@ public class Home extends AppCompatActivity {
             itinerary = new Itinerary(id,customerNo,customer,town,isInvoiced);
 
             itineraries.add(itinerary);
-        }
+        }*/
 
-        db.closeDB();//close the Database
+        //db.closeDB();//close the Database
         listView.setAdapter(adapter);//again set the adapter to the listview to reflect the changes made
     }
 
@@ -165,16 +174,13 @@ public class Home extends AppCompatActivity {
 
 
     //this class handles the database operations
-    class DBAdapter {
-        Context c;
-        SQLiteDatabase db;
-        DBHelper helper;
+    class DBAdapter extends BaseDBAdapter{
 
         public DBAdapter(Context c){
-            this.c = c;
-            helper = new DBHelper(c);
+            super(c);
         }
 
+        /**
         //open DB
         public void openDB(){
             try{
@@ -190,7 +196,7 @@ public class Home extends AppCompatActivity {
             }catch (SQLException e){
                 e.printStackTrace();
             }
-        }
+        }*/
 
         //insert method have to be implemented later
         //db.insert(TABLE_NAME,ROW,CONTENT_VALUES)
@@ -200,7 +206,8 @@ public class Home extends AppCompatActivity {
             //public Cursor retrieveItinerary(String searchTerm){ //making date as a parameter
             //String date="2017/02/03";
             //String[] columns = {"_id","customer","town"};// have to be changed to a constant
-            Cursor c;
+            openDB();
+            Cursor cursor;
 
             String sql= "SELECT b.ItineraryID, a.CustomerNo,a.CustomerName,a.Town,b.IsInvoiced FROM Mst_Customermaster a "+
                     "inner join Tr_ItineraryDetails b on a.CustomerNo=b.CustomerNo WHERE"+
@@ -214,13 +221,29 @@ public class Home extends AppCompatActivity {
                 }
 
                 Log.w("Executing sql",sql);
-                c = db.rawQuery(sql,null);
-                return c;
+                cursor = db.rawQuery(sql,null);
+                //return cursor;
             }
             sql += ";";
-            c=db.rawQuery(sql,null);
+            cursor=db.rawQuery(sql,null);
             Log.w("Executing sql",sql);
-            return c;
+
+            Itinerary itinerary;
+            ArrayList<Itinerary> results = new ArrayList<>();
+            while (cursor.moveToNext()){
+                String id = cursor.getString(0);
+                String customerNo = cursor.getString(1);
+                String customer = cursor.getString(2);
+                String town = cursor.getString(3);
+                int isInvoiced = cursor.getInt(4);
+
+                itinerary = new Itinerary(id,customerNo,customer,town,isInvoiced);
+
+                itineraries.add(itinerary);
+            }
+            Log.w("Count result",itineraries.size()+"");
+            closeDB();
+            return cursor;
         }
 
 

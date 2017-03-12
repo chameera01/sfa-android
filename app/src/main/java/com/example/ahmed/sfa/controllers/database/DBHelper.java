@@ -57,6 +57,21 @@ public class DBHelper extends SQLiteOpenHelper {
                     "CreditLimit INTEGER,CustomerStatusID TEXT,CustomerStatus TEXT,InsertDate TEXT,RouteID TEXT,RouteName TEXT," +
                     "ImageID TEXT,Latitude REAL,Longitude REAL,isUpload INTEGER,UploadDate TEXT,ApproveStatus INTEGER,LastUpdateDate TEXT);");
 
+            //create Tr_DailyRouteDetails
+            db.execSQL("CREATE TABLE Tr_DailyRouteDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,Date TEXT,ItineraryID TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,InvoiceNo TEXT,Reasons TEXT,Comment TEXT,IsUpload TEXT,UploadDate TEXT)");
+
+            //create table for check in check out points
+            db.execSQL("CREATE TABLE Mst_CheckInOutPoints (_id INTEGER PRIMARY KEY AUTOINCREMENT,ServerID TEXT, Type TEXT," +
+                    "PointDescription TEXT,isActive INTEGER,LastUpdateDate)");
+
+            //insert data into mst_checkinoutpoints
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p1','DistributorPoint','WareHouse 1',0)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p2','DistributorPoint','WareHouse 2',0)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p3','DistributorPoint','WareHouse 1',1)");
+
+            //add data to the DailyRouteDetails
+            //db.execSQL("INSERT INTO Tr_DailyRouteDetails (SerialCode ,Date,ItineraryID ,CustomerNo ,IsPlanned ,IsInvoiced ,InvoiceNo ,Reasons ,Comment ,IsUpload ,UploadDate) VALUES ('SER1','2017/3/10','IT1','CUS1',0,1) ");
+
             //adding data to District table
             db.execSQL("INSERT INTO Mst_District(DistrictId,DistrictName,isActive,LastUpdateDate) VALUES('DST1','Matale',1,'2017/3/2');");
             db.execSQL("INSERT INTO Mst_District(DistrictId,DistrictName,isActive,LastUpdateDate) VALUES('DST2','Colombo',1,'2017/3/2');");
@@ -87,15 +102,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
             //INSERT VALUES TO THE ITINERARY DETAILS TABLE
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT1','2017/3/7','CUS1',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT1','2017/3/12','CUS1',1,1);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT2','2017/3/7','CUS2',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT2','2017/3/12','CUS2',1,1);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT3','2017/3/7','CUS3',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT3','2017/3/12','CUS3',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT4','2017/3/7','CUS4',1,0);");//this one is planned but invoiced
+                    ",IsPlanned,IsInvoiced) VALUES ('IT4','2017/3/12','CUS4',1,0);");//this one is planned but invoiced
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT5','2017/3/5','CUS5',1,0);");//this one is for next day
+                    ",IsPlanned,IsInvoiced) VALUES ('IT5','2017/3/11','CUS5',1,0);");//this one is for next day
 
 
             //adding data to customer table

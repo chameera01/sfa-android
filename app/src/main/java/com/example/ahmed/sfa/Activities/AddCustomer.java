@@ -258,7 +258,9 @@ public class AddCustomer extends AppCompatActivity {
             if(imgMan.saveImage(customerImageBitmap,imageCode) && dbAdapter.insertIntoCustomerImage(customerID,imageCode)){
                 cvFrTrCustomer.put("ImageID",imageCode);
                 dbAdapter.insertIntoTrCustomer(cvFrTrCustomer);
+                Toast.makeText(getApplicationContext(),"Customer :"+customerID+" ImageID "+imageCode,Toast.LENGTH_LONG).show();
                 return true;
+
             }else{
                 return false;
             }

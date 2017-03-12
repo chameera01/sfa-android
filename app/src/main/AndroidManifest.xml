@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         >
-        <activity android:name=".activities.Home">
+        <activity android:name=".activities.CheckIn"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +23,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.AddCustomer"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".activities.Home"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".activities.DisplayProductTableActivity"
             android:windowSoftInputMode="stateHidden"></activity>
 
     </application>
