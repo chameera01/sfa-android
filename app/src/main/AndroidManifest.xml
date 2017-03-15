@@ -28,6 +28,9 @@
             android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".activities.DisplayProductTableActivity"
             android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".activities.AndroidDatabaseManager">
+
+        </activity>
 
     </application>
 

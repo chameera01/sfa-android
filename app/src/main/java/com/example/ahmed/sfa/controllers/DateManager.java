@@ -1,5 +1,9 @@
 package com.example.ahmed.sfa.controllers;
 
+import android.widget.TextView;
+
+import com.example.ahmed.sfa.R;
+
 import java.util.Calendar;
 
 /**
@@ -7,7 +11,14 @@ import java.util.Calendar;
  */
 
 public class DateManager {
+    private static String[] days= {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+
+    Calendar cal= Calendar.getInstance();
+
+
+
     public static String dateToday(){
+
         Calendar cal  = Calendar.getInstance();
         String date="1993/12/8"; //intializing a value that doesnt exist to avoid null values
         String year = ""+cal.get(Calendar.YEAR);
@@ -21,6 +32,24 @@ public class DateManager {
         boolean result=false;
 
         return false;
+    }
+
+    public static String dayToday(){
+        Calendar cal= Calendar.getInstance();
+        return cal.get(Calendar.DAY_OF_MONTH)+"";
+    }
+
+    public static String getDayOfWeek(){
+        return days[Calendar.getInstance().get(Calendar.DAY_OF_WEEK)-1];
+    }
+
+    public static String getTimeFull(){
+        String time="";
+        Calendar cal = Calendar.getInstance();
+        time+=cal.get(Calendar.HOUR)+" : ";
+        time+=cal.get(Calendar.MINUTE) + " : ";
+        time+=cal.get(Calendar.AM_PM);
+        return time;
     }
 
 }

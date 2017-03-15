@@ -9,20 +9,21 @@ import java.util.Random;
  */
 
 public class RandomNumberGenerator {
-    private final String ALPHABAT = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private final String ALPHANUMERIC = "0ABCDE1FGHI2JKLMNO3PQRST4UVWXYZ5abcdefghij6klmnopqrst7uvwx89yz";
-    private final String NUMERIC = "0123456789";
+    private static final String ALPHABAT = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    private static final String ALPHANUMERIC = "0ABCDE1FGHI2JKLMNO3PQRST4UVWXYZ5abcdefghij6klmnopqrst7uvwx89yz";
+    private static final String NUMERIC = "0123456789";
     public static final int GENERATE_ALPHABANUMERIC= 0;
     public static final int GENERATE_ALPHABATONLY = 1;
     public static final int GENERATE_NUMERICONLY =2;
 
-    private Random random;
+    private static Random random;
 
     public RandomNumberGenerator(){
         random = new Random();
     }
 
-    public String generateRandomCode(int type,String beginwith,String endwith,int length){
+    public static String generateRandomCode(int type,String beginwith,String endwith,int length){
+        random = new Random();
         String togenfrom="";
         switch (type){
             case GENERATE_ALPHABANUMERIC:
@@ -44,17 +45,17 @@ public class RandomNumberGenerator {
             genCode+=togenfrom.charAt(random.nextInt(togenfrom.length()));
         }
 
-        return beginwith+togenfrom+endwith;
+        return beginwith+genCode+endwith;
     }
 
 
-    public String generateRandomCode(int type,String beginWith,int length){
+    public static String generateRandomCode(int type,String beginWith,int length){
         return generateRandomCode(type,beginWith,"",length);
 
 
     }
 
-    public String generateRandomCode(int type,int length){
+    public static String generateRandomCode(int type,int length){
         return generateRandomCode(type,"","",length);
     }
 }

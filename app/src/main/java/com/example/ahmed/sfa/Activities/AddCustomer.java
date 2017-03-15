@@ -141,7 +141,7 @@ public class AddCustomer extends AppCompatActivity {
                     lastKnownLocation = tempLoc;
                 }
             }
-            lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            //lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             lastKnownLocation = new Location(LocationManager.GPS_PROVIDER);//this line has to be removed
             //this has been added since emmulator failed to send gps points
 
