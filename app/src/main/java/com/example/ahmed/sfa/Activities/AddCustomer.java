@@ -255,7 +255,7 @@ public class AddCustomer extends AppCompatActivity {
             cvFrTrCustomer.put("ApproveStatus", 1);
             cvFrTrCustomer.put("LastUpdateDate", DateManager.dateToday());
 
-            if(imgMan.saveImage(customerImageBitmap,imageCode) && dbAdapter.insertIntoCustomerImage(customerID,imageCode)){
+            if(imgMan.saveImage(customerImageBitmap,imageCode) && dbAdapter.insertIntoCustomerImage(imageCode,customerID)){
                 cvFrTrCustomer.put("ImageID",imageCode);
                 dbAdapter.insertIntoTrCustomer(cvFrTrCustomer);
                 Toast.makeText(getApplicationContext(),"Customer :"+customerID+" ImageID "+imageCode,Toast.LENGTH_LONG).show();

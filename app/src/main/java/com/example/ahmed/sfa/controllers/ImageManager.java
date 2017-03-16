@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.support.annotation.DrawableRes;
+import android.widget.ImageView;
+
+import com.example.ahmed.sfa.R;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -233,6 +237,11 @@ public class ImageManager {
     //returns null if the image location is empty
     public Bitmap retrieveImage(String filename){
         Bitmap bitmap;
+        if(filename==null){
+            ImageView temp = new ImageView(activity);
+            temp.setBackgroundResource(R.drawable.photo_placeholder);
+            return  temp.getDrawingCache();
+        }
         if (permissionManager.checkPermissionToExternalStorage()){
             File root = new File(activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES),"sfaimages");
             if (!root.exists()) root.mkdir();

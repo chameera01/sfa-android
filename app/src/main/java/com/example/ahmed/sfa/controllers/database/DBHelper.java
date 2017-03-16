@@ -70,6 +70,27 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE Tr_CheckInCheckOut (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,Date TEXT,InPoint TEXT DEFAULT NULL,InTime TEXT,InComment TEXT,OutPoint TEXT DEFAULT NULL,OutTime TEXT,OutComment TEXT," +
                     "isUpload INTEGER,LastUpdateDate TEXT, Latitude_CheckIn TEXT,Longitude_CheckIn TEXT,Latitude_CheckOut TEXT,Longitude_CheckOut TEXT);");
 
+            //create reasons table for customer pop up
+            db.execSQL("CREATE TABLE Mst_Reasons (_id INTEGER PRIMARY KEY AUTOINCREMENT,ReasonsID TEXT,Reason TEXT,isActive INTEGER,LastUpdateDate TEXT);");
+
+
+
+            //create  Tr_SalesHeader table
+            db.execSQL("CREATE TABLE Tr_SalesHeader(_id INTEGER PRIMARY KEY AUTOINCREMENT,ItineraryID TEXT,CustomerNo TEXT,InvoiceNo TEXT,InvoiceDate TEXT,PaymentTime TEXT" +
+                    "SubTotal REAL,InvoiceTotal REAL,FullDiscountRate REAL,DiscountAmount REAL,DiscountType REAL,IsOnInvoiceReturn INTEGER,OnInvoiceReturnNo TEXT" +
+                    "OnInvoiceReturnValue REAL,CreditAmount REAL,CashAmount REAL,ChequeAmount REAL,Isprint INTEGER,ProductCount INTEGER" +
+                    "InvoiceType TEXT,Latitude REAL,Longitude REAL,IsUpload INTEGER,UploadDate TEXT)");
+
+            //insert data into reasons table
+            db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN1','Reason 1',1);");
+            db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN2','Reason 2',0);");
+            db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN3','Reason 3',0);");
+
+            //insert data into sales header
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS1','INV1','2017/1/6',1200.00,500.00);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS2','INV2','2017/1/10',1202.02,500.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','2017/1/1',1203.02,530.01);");
+
             //insert data into mst_checkinoutpoints
             db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p1','DistributorPoint','WareHouse 1',0)");
             db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p2','DistributorPoint','WareHouse 2',0)");
@@ -100,23 +121,33 @@ public class DBHelper extends SQLiteOpenHelper {
                     "VALUES('RUT2','TER2','terri2','route2',1,'2017/3/2');");
 
             //add data to the customer_images table
-            db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS1','CUS_IMG_1')");
-            db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS2','CUS_IMG_2')");
-            db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS3','CUS_IMG_3')");
-            db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS4','CUS_IMG_4')");
-            db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS5','CUS_IMG_5')");
+            //db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS1','CUS_IMG_1')");
+            //db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS2','CUS_IMG_2')");
+            //db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS3','CUS_IMG_3')");
+            //db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS4','CUS_IMG_4')");
+            //db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS5','CUS_IMG_5')");
 
             //INSERT VALUES TO THE ITINERARY DETAILS TABLE
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT1','2017/3/12','CUS1',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT1','2017/3/17','CUS1',1,1);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT2','2017/3/12','CUS2',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT2','2017/3/17','CUS2',1,1);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT3','2017/3/12','CUS3',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT3','2017/3/17','CUS3',1,1);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT4','2017/3/12','CUS4',1,0);");//this one is planned but invoiced
+                    ",IsPlanned,IsInvoiced) VALUES ('IT4','2017/3/17','CUS4',1,1);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT5','2017/3/11','CUS5',1,0);");//this one is for next day
+                    ",IsPlanned,IsInvoiced) VALUES ('IT5','2017/3/17','CUS5',1,1);");
+            db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
+                    ",IsPlanned,IsInvoiced) VALUES ('IT6','2017/3/17','CUS6',1,2);");
+            db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
+                    ",IsPlanned,IsInvoiced) VALUES ('IT7','2017/3/17','CUS7',1,1);");
+            db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
+                    ",IsPlanned,IsInvoiced) VALUES ('IT8','2017/3/17','CUS8',1,0);");
+            db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
+                    ",IsPlanned,IsInvoiced) VALUES ('IT9','2017/3/17','CUS9',1,1);");
+            db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
+                    ",IsPlanned,IsInvoiced) VALUES ('IT10','2017/3/17','CUS10',1,0);");
 
 
             //adding data to customer table
@@ -129,7 +160,18 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS4','palva','Town4');");
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
+                    "VALUES ('CUS6','rose','Town5');");
+            db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
+                    "VALUES ('CUS7','aksa','Town1');");
+            db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
+                    "VALUES ('CUS8','barca','Town2');");
+            db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
+                    "VALUES ('CUS9','madrid','Town3');");
+            db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
+                    "VALUES ('CUS10','palva','Town4');");
+            db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS5','rose','Town5');");
+
 
 
 
@@ -226,6 +268,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    //this method will be used only for testing purposes with android database manager testing actibity
     public ArrayList<Cursor> getData2(String Query){
         //get writable database
         SQLiteDatabase sqlDB = this.getWritableDatabase();

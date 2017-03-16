@@ -1,6 +1,7 @@
 package com.example.ahmed.sfa.controllers.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,8 @@ public class ItineraryAdapter extends BaseAdapter {
         return itineraries.get(position);
     }
 
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
         Itinerary itinerary = itineraries.get(position);
@@ -60,13 +63,16 @@ public class ItineraryAdapter extends BaseAdapter {
 
         }*/
 
-        if(itinerary.getIsInvoiced())
-            convertView = inflater.inflate(R.layout.homesearchresultrowdone,parent,false);
-        else
-            convertView = inflater.inflate(R.layout.homesearchresultrow,parent,false);
-
+        if(itinerary.getIsInvoiced()||itinerary.isDismissed()) {
+            convertView = inflater.inflate(R.layout.homesearchresultrowdone, parent, false);
+            //convertView = inflater.inflate(R.layout.homesearchresultrow, parent, false);
+            //Log.w("Done count", "1+ "+position);
+        }else {
+            convertView = inflater.inflate(R.layout.homesearchresultrow, parent, false);
+            //convertView = inflater.inflate(R.layout.homesearchresultrowdone, parent, false);
+        }
         int selected = ((Home)c).getSelectedIndex();
-        String sl =selected+"";
+        //String sl =selected+"";
         if(selected==position){
             //Log.w("position in Home",sl);
             convertView = inflater.inflate(R.layout.homesearchresultrowselected,parent,false);
@@ -81,7 +87,7 @@ public class ItineraryAdapter extends BaseAdapter {
 
 
 
-        final View finalConvertView = convertView;
+       // final View finalConvertView = convertView;
         /**convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

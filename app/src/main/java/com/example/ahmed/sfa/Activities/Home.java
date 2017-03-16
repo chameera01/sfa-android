@@ -74,11 +74,11 @@ public class Home extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showCustomerDetails(itineraries.get(position).getCustomerNo());
+                showCustomerDetails(itineraries.get(position));
                 selectedIndex = position;
                 adapter.notifyDataSetChanged();//unless adaper notified about a false data changed
                 //message it wont refresh the views
-                Toast.makeText(getApplicationContext(),"Item Clicked :"+position,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),"Item Clicked :"+position,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -110,6 +110,10 @@ public class Home extends AppCompatActivity {
         }
     }
 
+    public void refresh(){
+        getItinerary(null,false);
+    }
+
     public int getSelectedIndex(){
         return selectedIndex;
     }
@@ -130,7 +134,7 @@ public class Home extends AppCompatActivity {
         String day = ""+cal.get(Calendar.DAY_OF_MONTH);
         date = year+"/"+month+"/"+day;*/
         String date = DateManager.dateToday();
-        Log.w(">Current Date :",date);
+       // Log.w(">Current Date :",date);
         //Cursor cursor = db.retrieveItinerary(searchTerm,date,matchOnlyStart);
 
         db.retrieveItinerary(searchTerm,date,matchOnlyStart);
@@ -156,17 +160,18 @@ public class Home extends AppCompatActivity {
         listView.setAdapter(adapter);//again set the adapter to the listview to reflect the changes made
     }
 
-    public void showCustomerDetails(String customerNo){
+    public void showCustomerDetails(Itinerary itinerary){
         CustomerPopupFragment customerPopupFragment = (CustomerPopupFragment)getFragmentManager().findFragmentById(R.id.customermanagementfragment);
         //check whether fragment has to be replaced
-        if(customerPopupFragment==null || !customerPopupFragment.getCurrentCustomer().equals(customerNo)){
+
+        if(customerPopupFragment==null || !customerPopupFragment.getCurrentCustomer().equals(itinerary.getCustomerNo())){
             //make new fragment to replace
-            customerPopupFragment = CustomerPopupFragment.newInstance(customerNo);
-            Log.w("Fragment proble","here 0");
+            customerPopupFragment = CustomerPopupFragment.newInstance(itinerary);
+            //Log.w("Fragment proble","here 0");
             //execute a transaction, replacing any existing fragment
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.customermanagementfragment,customerPopupFragment);
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             fragmentTransaction.commit();
         }
     }
@@ -209,7 +214,7 @@ public class Home extends AppCompatActivity {
             openDB();
             Cursor cursor;
 
-            String sql= "SELECT b.ItineraryID, a.CustomerNo,a.CustomerName,a.Town,b.IsInvoiced FROM Mst_Customermaster a "+
+            String sql= "SELECT b.ItineraryID, a.CustomerNo,a.CustomerName,a.Town,b.IsInvoiced,b.IsPlanned FROM Mst_Customermaster a "+
                     "inner join Tr_ItineraryDetails b on a.CustomerNo=b.CustomerNo WHERE"+
                     " b.ItineraryDate ='"+date+"'";
             if(searchTerm != null && searchTerm.length()>0){
@@ -220,28 +225,29 @@ public class Home extends AppCompatActivity {
                     sql +=" AND a.CustomerName LIKE '%"+searchTerm+"%' ;";
                 }
 
-                Log.w("Executing sql",sql);
+                //Log.w("Executing sql",sql);
                 cursor = db.rawQuery(sql,null);
                 //return cursor;
             }
             sql += ";";
             cursor=db.rawQuery(sql,null);
-            Log.w("Executing sql",sql);
+            //Log.w("Executing sql",sql);
 
             Itinerary itinerary;
-            ArrayList<Itinerary> results = new ArrayList<>();
+            //ArrayList<Itinerary> results = new ArrayList<>();
             while (cursor.moveToNext()){
                 String id = cursor.getString(0);
                 String customerNo = cursor.getString(1);
                 String customer = cursor.getString(2);
                 String town = cursor.getString(3);
                 int isInvoiced = cursor.getInt(4);
+                int isPlanned = cursor.getInt(5);
 
-                itinerary = new Itinerary(id,customerNo,customer,town,isInvoiced);
+                itinerary = new Itinerary(id,customerNo,customer,town,isInvoiced,isPlanned);
 
                 itineraries.add(itinerary);
             }
-            Log.w("Count result",itineraries.size()+"");
+            //Log.w("Count result",itineraries.size()+"");
             closeDB();
             return cursor;
         }

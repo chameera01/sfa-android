@@ -1,5 +1,7 @@
 package com.example.ahmed.sfa.models;
 
+import android.database.Cursor;
+
 /**
  * Created by Ahmed on 3/3/2017.
  */
@@ -10,9 +12,40 @@ public class Customer {
     private String town;
     private String address;
     private String tel;
-    private String lastInvoice;
-    private String lastVisit;
+    private String lastInvoiceNo;
+    private String lastInvoiceCredit;
+    private String lastInvoiceTotal;
+    private String lastInvoiceDate;
     private String imagePath;
+
+    public Customer(String customerNo, String name, String town, String address, String tel, String lastInvoiceNo, String lastInvoiceCredit, String lastInvoiceTotal, String lastInvoiceDate, String imagePath) {
+        this.customerNo = customerNo;
+        this.name = name;
+        this.town = town;
+        this.address = address;
+        this.tel = tel;
+        this.lastInvoiceNo = lastInvoiceNo;
+        this.lastInvoiceCredit = lastInvoiceCredit;
+        this.lastInvoiceTotal = lastInvoiceTotal;
+        this.lastInvoiceDate = lastInvoiceDate;
+        this.imagePath = imagePath;
+    }
+
+    public Customer(Cursor cursor){
+        if(cursor.moveToNext()){
+            this.customerNo = cursor.getString(0);
+            this.name = cursor.getString(1);
+            this.town = cursor.getString(2);
+            this.address = cursor.getString(3);
+            this.tel = cursor.getString(4);
+            this.lastInvoiceNo = cursor.getString(5);
+            this.lastInvoiceCredit = cursor.getString(6);
+            this.lastInvoiceTotal = cursor.getString(7);
+            this.lastInvoiceDate = cursor.getString(8);
+            this.imagePath = cursor.getString(9);
+        }
+    }
+
 
     public String getCustomerNo() {
         return customerNo;
@@ -22,19 +55,7 @@ public class Customer {
         this.customerNo = customerNo;
     }
 
-    public Customer(String customerNo, String name, String town, String address, String tel, String lastInvoice, String lastVisit,String imagePath) {
-        this.customerNo = customerNo;
-        this.name = name;
-        this.town = town;
-        this.address = address;
-        this.tel = tel;
-        this.lastInvoice = lastInvoice;
-        this.lastVisit = lastVisit;
-        this.imagePath=imagePath;
-    }
-
     public String getName() {
-
         return name;
     }
 
@@ -66,23 +87,43 @@ public class Customer {
         this.tel = tel;
     }
 
-    public String getLastInvoice() {
-        return lastInvoice;
+    public String getLastInvoiceNo() {
+        return lastInvoiceNo;
     }
 
-    public void setLastInvoice(String lastInvoice) {
-        this.lastInvoice = lastInvoice;
+    public void setLastInvoiceNo(String lastInvoiceNo) {
+        this.lastInvoiceNo = lastInvoiceNo;
     }
 
-    public String getLastVisit() {
-        return lastVisit;
+    public String getLastInvoiceCredit() {
+        return lastInvoiceCredit;
     }
 
-    public void setLastVisit(String lastVisit) {
-        this.lastVisit = lastVisit;
+    public void setLastInvoiceCredit(String lastInvoiceCredit) {
+        this.lastInvoiceCredit = lastInvoiceCredit;
     }
 
-    public String getImagePath(){
+    public String getLastInvoiceTotal() {
+        return lastInvoiceTotal;
+    }
+
+    public void setLastInvoiceTotal(String lastInvoiceTotal) {
+        this.lastInvoiceTotal = lastInvoiceTotal;
+    }
+
+    public String getLastInvoiceDate() {
+        return lastInvoiceDate;
+    }
+
+    public void setLastInvoiceDate(String lastInvoiceDate) {
+        this.lastInvoiceDate = lastInvoiceDate;
+    }
+
+    public String getImagePath() {
         return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }
