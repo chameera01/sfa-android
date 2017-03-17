@@ -1,8 +1,11 @@
 package com.example.ahmed.sfa.activities;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -12,6 +15,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -203,10 +207,23 @@ public class AddCustomer extends AppCompatActivity {
                 latitude.setText(lastKnownLocation.getLatitude()+"");
                 longitude.setText(lastKnownLocation.getLongitude()+"");
                 saveandsubmitbtn = (Button)findViewById(R.id.addcustomer$submitandsend);
+
+                final DialogInterface.OnClickListener confirmedAddingListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(addDataToDB()) Toast.makeText(AddCustomer.this,"Customer Added",Toast.LENGTH_SHORT).show();
+                    }
+                };
+
                 saveandsubmitbtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(addDataToDB()) Toast.makeText(AddCustomer.this,"Done adding customer",Toast.LENGTH_SHORT).show();
+                        //validate the input if valid proceed otherwise return error message
+                        if(validateInputs())
+                            showAlert("Confirm","Are you sure to save this customer","Yes","No",confirmedAddingListener,null);
+                        else
+                            showAlert("Input Invalid","Please check your inputs and try again!","OK","Back",null,null);
+
                     }
                 });
 
@@ -224,53 +241,51 @@ public class AddCustomer extends AppCompatActivity {
 
 
 
+
     private boolean addDataToDB(){
         RandomNumberGenerator rg = new RandomNumberGenerator();
         String imageCode = rg.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"CUSIMG_",17);
         String customerID = rg.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"CUS_",14);
-        if(validateInputs()) {
-            ContentValues cvFrTrCustomer = new ContentValues();
-            cvFrTrCustomer.put("NewCustomerID", customerID);
-            cvFrTrCustomer.put("CustomerName", customerName.getText().toString());
-            cvFrTrCustomer.put("Address", address.getText().toString());
-            cvFrTrCustomer.put("Area", area.getText().toString());
-            cvFrTrCustomer.put("District", district.getSelectedItem().toString());
-            cvFrTrCustomer.put("Town", town.getText().toString());
-            cvFrTrCustomer.put("Telephone", ContactNo.getText().toString());
-            cvFrTrCustomer.put("Fax", fax.getText().toString());
-            cvFrTrCustomer.put("Email", email.getText().toString());
-            cvFrTrCustomer.put("OwnerContactNo", ownersContactNo.getText().toString());
-            cvFrTrCustomer.put("OwnerName", ownersName.getText().toString());
-            cvFrTrCustomer.put("PharmacyRegNo", registrationNo.getText().toString());
-            cvFrTrCustomer.put("CustomerStatusID", ((CustomerStatus) customerStatus.getSelectedItem()).getCustomerStatusID());
-            cvFrTrCustomer.put("CustomerStatus", ((CustomerStatus) customerStatus.getSelectedItem()).getCustomerStatus());
-            cvFrTrCustomer.put("InsertDate", DateManager.dateToday());
-            cvFrTrCustomer.put("RouteID", ((Route) route.getSelectedItem()).getRouteID());
-            cvFrTrCustomer.put("RouteName", ((Route) route.getSelectedItem()).getRouteID());
+        ContentValues cvFrTrCustomer = new ContentValues();
+        cvFrTrCustomer.put("NewCustomerID", customerID);
+        cvFrTrCustomer.put("CustomerName", customerName.getText().toString());
+        cvFrTrCustomer.put("Address", address.getText().toString());
+        cvFrTrCustomer.put("Area", area.getText().toString());
+        cvFrTrCustomer.put("District", district.getSelectedItem().toString());
+        cvFrTrCustomer.put("Town", town.getText().toString());
+        cvFrTrCustomer.put("Telephone", ContactNo.getText().toString());
+        cvFrTrCustomer.put("Fax", fax.getText().toString());
+        cvFrTrCustomer.put("Email", email.getText().toString());
+        cvFrTrCustomer.put("OwnerContactNo", ownersContactNo.getText().toString());
+        cvFrTrCustomer.put("OwnerName", ownersName.getText().toString());
+        cvFrTrCustomer.put("PharmacyRegNo", registrationNo.getText().toString());
+        cvFrTrCustomer.put("CustomerStatusID", ((CustomerStatus) customerStatus.getSelectedItem()).getCustomerStatusID());
+        cvFrTrCustomer.put("CustomerStatus", ((CustomerStatus) customerStatus.getSelectedItem()).getCustomerStatus());
+        cvFrTrCustomer.put("InsertDate", DateManager.dateToday());
+        cvFrTrCustomer.put("RouteID", ((Route) route.getSelectedItem()).getRouteID());
+        cvFrTrCustomer.put("RouteName", ((Route) route.getSelectedItem()).getRouteID());
+        cvFrTrCustomer.put("ImageID",imageCode);
+        cvFrTrCustomer.put("Latitude", Double.parseDouble(latitude.getText().toString()));
+        cvFrTrCustomer.put("Longitude", Double.parseDouble(longitude.getText().toString()));
+        cvFrTrCustomer.put("isUpload", 1);
+        cvFrTrCustomer.put("UploadDate", DateManager.dateToday());
+        cvFrTrCustomer.put("ApproveStatus", 1);
+        cvFrTrCustomer.put("LastUpdateDate", DateManager.dateToday());
+
+        if(imgMan.saveImage(customerImageBitmap,imageCode) && dbAdapter.insertIntoCustomerImage(imageCode,customerID)){
             cvFrTrCustomer.put("ImageID",imageCode);
-            cvFrTrCustomer.put("Latitude", Double.parseDouble(latitude.getText().toString()));
-            cvFrTrCustomer.put("Longitude", Double.parseDouble(longitude.getText().toString()));
-            cvFrTrCustomer.put("isUpload", 1);
-            cvFrTrCustomer.put("UploadDate", DateManager.dateToday());
-            cvFrTrCustomer.put("ApproveStatus", 1);
-            cvFrTrCustomer.put("LastUpdateDate", DateManager.dateToday());
+            dbAdapter.insertIntoTrCustomer(cvFrTrCustomer);
+            Toast.makeText(getApplicationContext(),"Customer :"+customerID+" ImageID "+imageCode,Toast.LENGTH_LONG).show();
+            return true;
 
-            if(imgMan.saveImage(customerImageBitmap,imageCode) && dbAdapter.insertIntoCustomerImage(imageCode,customerID)){
-                cvFrTrCustomer.put("ImageID",imageCode);
-                dbAdapter.insertIntoTrCustomer(cvFrTrCustomer);
-                Toast.makeText(getApplicationContext(),"Customer :"+customerID+" ImageID "+imageCode,Toast.LENGTH_LONG).show();
-                return true;
-
-            }else{
-                return false;
-            }
         }else{
             return false;
         }
 
+
     }
 
-    private boolean validateInputs(){
+    boolean validateInputs(){
         boolean result = true;
 
         if(!(checkTextView(customerName) && checkTextView(address) && checkTextView(area) && checkTextView(town) && checkTextView(ContactNo))){
@@ -289,6 +304,32 @@ public class AddCustomer extends AppCompatActivity {
         return true;
     }
 
+    void showAlert(String title , String message, String positiveButtonCaption, String negativeButtonCaption,
+                   DialogInterface.OnClickListener positiveButtonClickListener,DialogInterface.OnClickListener negativeButtonClickListener) {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+
+        DialogInterface.OnClickListener nulllistener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+            }
+        };
+
+        if(positiveButtonClickListener==null)positiveButtonClickListener = nulllistener;
+        if(negativeButtonClickListener==null)negativeButtonClickListener = nulllistener;
+
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,negativeButtonCaption,negativeButtonClickListener);
+
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,positiveButtonCaption,positiveButtonClickListener);
+        alertDialog.show();
+    }
+
+
+    //this method takes the image captured and initializes it to the instance variable
     @Override
     public void onActivityResult(int requestCode,int resultCode,Intent data){
         if (requestCode == ImageManager.CAMERA_REQUEST) {
@@ -311,6 +352,8 @@ public class AddCustomer extends AppCompatActivity {
         }
     }
 
+    //this method handles the permission updates
+    //camera and location
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] grantResults){
         //Toast.makeText(this," permission Received",Toast.LENGTH_SHORT).show();
@@ -331,9 +374,9 @@ public class AddCustomer extends AppCompatActivity {
     }
 
     public void onBackPressed(){
-        DrawerLayout drawer = (DrawerLayout )findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
         if(drawer.isDrawerOpen(GravityCompat.START)){
-            drawer.openDrawer(GravityCompat.START);
+            drawer.closeDrawer(GravityCompat.START);
         }else{
             super.onBackPressed();
         }
