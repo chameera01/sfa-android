@@ -1,5 +1,10 @@
 
 build/generated/mockable-android-25.jar
 .idea/vcs.xml
+<<<<<<< HEAD
 .idea/workspace.xml
 .idea/misc.xml
+=======
+.idea/misc.xml
+.idea/workspace.xml
+>>>>>>> Asanka
