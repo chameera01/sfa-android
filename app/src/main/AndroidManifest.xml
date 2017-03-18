@@ -1,27 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ahmed.sfa">
+    package="com.example.dell.fragmenttest">
 
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+=======
+>>>>>>> table_views
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+<<<<<<< HEAD
         android:theme="@style/AppTheme.NoActionBar"
         >
         <activity android:name=".activities.CheckIn"
             android:windowSoftInputMode="stateHidden">
+=======
+        android:theme="@style/AppTheme">
+        <supports-screens android:requiresSmallestWidthDp="600" />
+
+        <activity
+            android:name="activities.AddExtraCustomer"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+>>>>>>> table_views
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".activities.AddCustomer"
             android:windowSoftInputMode="stateHidden"></activity>
         <activity android:name=".activities.Home"
@@ -32,6 +46,15 @@
 
         </activity>
 
+=======
+        <!-- activity android:name=".DisplayProductTableActivity"></activity -->
+
+
+        <!-- activity android:name=".StockView"></activity -->
+        <!-- activity android:name="activities.PendingCustomer"></activity -->
+        <!-- activity android:name="activities.AddExtraCustomer"></activity -->
+        <!--activity android:name="activities.AndroidDatabaseManager"></activity-->
+>>>>>>> table_views
     </application>
 
 </manifest>

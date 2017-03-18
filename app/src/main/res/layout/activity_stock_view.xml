@@ -1,53 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_display_message"
+    android:id="@+id/activity_stock_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-<<<<<<< HEAD
-    >
-=======
-    tools:context="activities.DisplayProductTableActivity">
->>>>>>> table_views
+    tools:context="activities.StockView">
+
 
     <Button
+        android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:onClick="selfDestruct"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/button_view" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ViewAll"
-        android:onClick="viewallbtnClick"
-        android:id="@+id/button_view"
-        android:layout_alignTop="@+id/button"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="36dp"
+        android:id="@+id/btn_add"
+        android:onClick="btnStockView"
+        android:visibility="visible" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/relativeLayout"
-        android:layout_below="@+id/button"
-        android:layout_alignParentEnd="true">
+        >
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:id="@+id/linearLayout">
-=======
             android:id="@+id/linearLayout_stockview">
->>>>>>> table_views
 
             <TextView
                 android:layout_width="wrap_content"
@@ -58,7 +43,7 @@
             <Spinner
                 android:layout_width="192dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner_principle" />
+                android:id="@+id/spinner_principle_stockview" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -69,7 +54,7 @@
             <Spinner
                 android:layout_width="249dp"
                 android:layout_height="65dp"
-                android:id="@+id/spinner_brand"
+                android:id="@+id/spinner_brand_stock_view"
                 android:layout_row="2"
                 android:layout_column="0"
                 android:layout_alignParentTop="true"
@@ -79,7 +64,7 @@
             <SearchView
                 android:layout_width="176dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/search_txt"
+                android:id="@+id/search_txt_stockview"
                 android:queryHint="Search" />
 
         </LinearLayout>
@@ -88,151 +73,136 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-<<<<<<< HEAD
-            android:layout_below="@+id/linearLayout"
-=======
             android:layout_below="@+id/linearLayout_stockview"
->>>>>>> table_views
             android:layout_alignParentStart="true">
 
             <LinearLayout
                 android:orientation="horizontal"
-<<<<<<< HEAD
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/scrollView"
                 android:layout_alignEnd="@+id/scrollView">
-=======
-                android:layout_width="644dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/scrollView"
-                android:layout_alignEnd="@+id/scrollView"
-                >
->>>>>>> table_views
-
                 <TextView
                     android:text="ItemCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="1"
                     android:paddingBottom="10dp"
-                    android:paddingLeft="0dp"
-<<<<<<< HEAD
-                    android:paddingRight="50dp"
-                    android:paddingTop="10dp"
-                    android:background="#92C94a"/>
-=======
-                    android:paddingRight="20dp"
+                    android:paddingLeft="10dp"
+
                     android:paddingTop="10dp"
                     android:background="#92C94a"
-                    android:layout_weight="1"/>
->>>>>>> table_views
 
+                    android:layout_weight="1"/>
                 <TextView
-                    android:text="Product"
+                    android:text="Principle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
                     android:paddingBottom="10dp"
-                    android:paddingLeft="0dp"
-<<<<<<< HEAD
-                    android:paddingRight="50dp"
-                    android:paddingTop="10dp"
-                    android:background="#92C94a"/>
 
-                <TextView
-                    android:text="UniteSize"
-                    android:layout_width="wrap_content"
-=======
-                    android:paddingRight="20dp"
                     android:paddingTop="10dp"
                     android:background="#92C94a"
                     android:layout_weight="1"/>
 
                 <TextView
-                    android:text="UniteSize"
->>>>>>> table_views
+                    android:text="Brand"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="3"
                     android:paddingBottom="10dp"
-                    android:paddingLeft="0dp"
-<<<<<<< HEAD
-                    android:paddingRight="50dp"
-                    android:paddingTop="10dp"
-                    android:background="#92C94a"/>
-=======
-                    android:paddingRight="20dp"
+
                     android:paddingTop="10dp"
                     android:background="#92C94a"
-                    android:layout_width="wrap_content"
                     android:layout_weight="1"/>
->>>>>>> table_views
 
                 <TextView
-                    android:text="Selingprice"
-                    android:layout_width="wrap_content"
+                    android:text="ItemCode"
                     android:layout_height="wrap_content"
                     android:layout_column="4"
                     android:paddingBottom="10dp"
-                    android:paddingLeft="0dp"
-<<<<<<< HEAD
-                    android:paddingRight="50dp"
-                    android:paddingTop="10dp"
-                    android:background="#92C94a"/>
-=======
-                    android:paddingRight="20dp"
+
                     android:paddingTop="10dp"
                     android:background="#92C94a"
+                    android:layout_width="wrap_content"
                     android:layout_weight="1"/>
->>>>>>> table_views
 
                 <TextView
-                    android:text="RetailPrice"
+                    android:text="BatchNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="5"
                     android:paddingBottom="10dp"
-                    android:paddingLeft="0dp"
-<<<<<<< HEAD
-                    android:paddingRight="50dp"
+
                     android:paddingTop="10dp"
-=======
-                    android:paddingRight="20dp"
+                    android:background="#92C94a"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:text="ExpiryDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="6"
+                    android:paddingBottom="10dp"
+
                     android:paddingTop="10dp"
                     android:layout_weight="1"
->>>>>>> table_views
+                    android:background="#92C94a"/>
+                <TextView
+                    android:text="SellingPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="7"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="0dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:layout_weight="1"
+                    android:background="#92C94a"/>
+                <TextView
+                    android:text="RetailPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="8"
+                    android:paddingBottom="10dp"
+
+                    android:paddingTop="10dp"
+                    android:layout_weight="1"
+                    android:background="#92C94a"/>
+                <TextView
+                    android:text="Quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="9"
+                    android:paddingBottom="10dp"
+
+                    android:paddingTop="10dp"
+                    android:layout_weight="1"
+                    android:background="#92C94a"/>
+                <TextView
+                    android:text="LastUpdateDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="10"
+                    android:paddingBottom="10dp"
+
+                    android:paddingTop="10dp"
+                    android:layout_weight="1"
                     android:background="#92C94a"/>
             </LinearLayout>
 
             <ScrollView
-<<<<<<< HEAD
-                android:layout_width="wrap_content"
+                android:layout_width="903dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/scrollView"
-                android:layout_below="@+id/linearLayout"
-                android:layout_alignEnd="@+id/linearLayout"
-=======
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/scrollView"
+                android:id="@+id/scrollView_stock"
                 android:layout_below="@+id/linearLayout_stockview"
                 android:layout_alignEnd="@+id/linearLayout_stockview"
->>>>>>> table_views
                 android:layout_marginEnd="62dp">
 
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/table_product"
-<<<<<<< HEAD
-                    android:background="@drawable/border"
-                    android:layout_row="4"
-                    android:layout_column="35"
-                    android:layout_below="@+id/linearLayout"
-                    android:layout_alignParentStart="true"
-
-                    android:layout_alignParentLeft="true">
-=======
+                    android:id="@+id/table_stockview"
 
                     android:layout_row="10"
                     android:layout_column="5"
@@ -241,7 +211,6 @@
 
                     android:layout_alignParentLeft="true"
                     android:orientation="horizontal">
->>>>>>> table_views
 
 
                     <TableRow
@@ -253,26 +222,38 @@
                         android:layout_margin="1dp"
                         android:layout_marginLeft="2dp"
                         android:paddingRight="0dp"
-<<<<<<< HEAD
-                        android:layout_alignParentLeft="true">
-
-
-=======
                         android:layout_alignParentLeft="true"
                         android:orientation="horizontal">
 
 
-                        <CheckBox
+                        <EditText
+                        android:text="CheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="1"
+                        android:id="@+id/checkBox2"
+                        android:layout_weight="1"  />
+                        <EditText
                             android:text="CheckBox"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/checkBox2" />
->>>>>>> table_views
+                            android:layout_column="2"
+                            android:id="@+id/checkBox3"
+                            android:layout_weight="1"/>
+                        <EditText
+                            android:text="CheckBox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_column="2"
+                            android:id="@+id/checkBox4"
+                            android:layout_weight="1"/>
                     </TableRow>
                 </TableLayout>
             </ScrollView>
         </LinearLayout>
 
     </RelativeLayout>
+
+
 
 </RelativeLayout>
