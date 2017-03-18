@@ -1,21 +1,2 @@
-*.iml
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.idea/
-<<<<<<< HEAD
-settings.gradle
-gradlew.bat
-gradlew
-=======
-app/gradle/wrapper/gradle-wrapper.jar
-app/gradle/wrapper/gradle-wrapper.properties
-app/gradlew
-app/gradlew.bat
-app/local.properties
->>>>>>> table_views
+
+build/generated/mockable-android-25.jar
