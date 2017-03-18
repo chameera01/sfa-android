@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">SFA</string>
+    <string name="app_name">FragmentTest</string>
+    <string name="action_settings">Settings</string>
+    <!-- 2elements added by my-->
+
+    <string name="button_send">Send</string>
 </resources>
