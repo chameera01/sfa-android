@@ -15,9 +15,22 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Display Product Details" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/add_extra_customer"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Add Extra Customer" />
+        <item
+            android:id="@+id/stock_view"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Stocks" />
+        <item
+            android:id="@+id/pending_Customer"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Customer Pending" />
+
+        <item
+            android:id="@+id/db_manage"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Database" />
     </group>
 
     <item android:title="Communicate">

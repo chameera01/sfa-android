@@ -191,6 +191,49 @@ public class DBHelper extends SQLiteOpenHelper {
                             "brandid text,brand text,subbrandid text,subbrand text,unitsize integer,unitname text,retailprice real," +
                             "sellingprice real,buyingprice real,active integer,lastupdatedate text,targetallow integer)"
             );
+
+
+            //only few columns were addesto Tr_NewCustome tables
+            db.execSQL(
+                    "create table Tr_NewCustomer" +
+                            "(_ID integer primary key AUTOINCREMENT ,NewCustomerID text,CustomerName text,Address text,Area text,Town text,OwnerContactNo text," +
+                            "IsUpload text,ApproveStatus text)"
+            );
+
+
+
+            //adding datato  table 21 TrNewCustomer
+            db.execSQL("INSERT INTO Tr_NewCustomer VALUES (1,'cus_001','peachnet','addre ','area_dalugama','dalugama','071562895','uploaded','pending');");
+            db.execSQL("INSERT INTO Tr_NewCustomer VALUES (2,'cus_002','healthycafe','addre is goes here','area_dalugama','bambalapitiya','071562895','uploaded','pending');");
+            db.execSQL("INSERT INTO Tr_NewCustomer VALUES (3,'cus_003','thilakawardhana','addre ','area_kiribathgoda','kiribathgoda','071562895','uploaded','pending');");
+            db.execSQL("INSERT INTO Tr_NewCustomer VALUES (4,'cus_004','kandy','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
+            db.execSQL("INSERT INTO Tr_NewCustomer VALUES (5,'cus_005','thilakawardhana','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
+
+
+            db.execSQL(
+                    "create table Mst_ProductMaster" +
+                            "(_ID integer primary key AUTOINCREMENT ,ItemCode text,Description text,PrincipleID text,Principle text," +
+                            "BrandID text,Brand text,SubBrandID text,SubBrand text,UnitSize integer,UnitName text,RetailPrice real," +
+                            "SellingPrice real,BuyingPrice real,Active integer,LastUpdateDate text,TargetAllow  integer)"
+            );
+            db.execSQL(
+                    "create table Tr_TabStock" +
+                            "(_ID integer primary key AUTOINCREMENT ,ServerID  text,PrincipleID text,BrandID text,ItemCode text,BatchNumber text," +
+                            "ExpiryDate text,SellingPrice real,RetailPrice real," +
+                            "Qty  integer,LastUpdateDate text)"
+            );
+            db.execSQL("INSERT INTO Tr_TabStock VALUES (1,'server_id','principle_1','bran_1','cd001','bct_1','2017-10-25',45.50,60.5,895,'2017-02-25');");
+
+            db.execSQL(
+                    "create table Mst_SupplierTable" +
+                            "(_ID integer primary key AUTOINCREMENT , PrincipleID  text,Principle text," +
+                            "Activate  integer,LastUpdateDate text)"
+            );
+            db.execSQL(
+                    "create table Mst_ProductBrandManagement" +
+                            "(_ID integer primary key AUTOINCREMENT ,BrandID text, PrincipleID  text,Principle text," +
+                            "MainBrand text,Activate integer,LastUpdateDate text)"
+            );
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -265,6 +308,37 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
         return result;
+
+    }
+
+    //asankas method
+    public  String inserToStockView(String serverid,String principleid,String brand_id,String itemcode,
+                                    String batch,String exp,double sellingprice,double retailprice,int qty,String lupdate){
+        try{
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+
+            contentValues.put("ServerID", serverid);
+            contentValues.put("PrincipleID", principleid);
+            contentValues.put("BrandID", brand_id);
+            contentValues.put("ItemCode", itemcode);
+            contentValues.put("BatchNumber", batch);
+            contentValues.put("ExpiryDate", exp);
+            contentValues.put("SellingPrice", sellingprice);
+            contentValues.put("RetailPrice",retailprice);
+            contentValues.put("Qty", qty);
+            contentValues.put("LastUpdateDate", lupdate);
+
+            if(db.insert("Tr_TabStock", null, contentValues)>0) {
+                return "success";
+            }else
+                return "fail";
+
+
+        }catch (SQLException e){
+            return e.getMessage();
+
+        }
 
     }
 

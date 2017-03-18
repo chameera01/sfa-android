@@ -16,20 +16,12 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-<<<<<<< HEAD
 
-    <style name="tableRow">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">64dp</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:background">#95f9a9</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">#fff</item>
-        <item name="android:layout_span">20</item>
-        <item name="android:padding">20dp</item>
 
-    </style>
-=======
+
+
+
+
     <!--add style by asanka-->
     <style name="radioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:layout_width">wrap_content</item>
@@ -98,5 +90,5 @@
         <item name="android:layout_height">match_parent</item>
     </style>
     <!--end addtion-->
->>>>>>> table_views
+
 </resources>

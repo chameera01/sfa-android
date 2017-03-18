@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.activities;
+package com.example.ahmed.sfa.activities.supportactivities;
 
 import android.app.Fragment;
 import android.graphics.Color;

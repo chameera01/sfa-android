@@ -8,32 +8,28 @@ import android.support.annotation.NonNull;
 
 import android.support.design.widget.NavigationView;
 
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.activities.AddCustomer;
+import com.example.ahmed.sfa.R;
+
+import com.example.ahmed.sfa.activities.AddExtraCustomer;
 import com.example.ahmed.sfa.activities.AndroidDatabaseManager;
-import com.example.ahmed.sfa.activities.CheckIn;
+
 import com.example.ahmed.sfa.activities.DisplayProductTableActivity;
 import com.example.ahmed.sfa.activities.Home;
+import com.example.ahmed.sfa.activities.PendingCustomer;
+import com.example.ahmed.sfa.activities.StockView;
 import com.example.ahmed.sfa.controllers.CheckInOutManager;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
 import com.example.ahmed.sfa.models.CheckInCheckOutActions;
 import com.example.ahmed.sfa.models.CheckSession;
 
-import java.util.Calendar;
 import java.util.List;
 
 import static android.content.Context.LOCATION_SERVICE;
@@ -189,15 +185,52 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
                 break;
 
             case R.id.add_customer:
+                /**
                 if( !(activity instanceof AddCustomer)){
                     Intent intent = new Intent(activity, AddCustomer.class);
+                    activity.startActivity(intent);
+                    return true;
+                }*/
+                break;
+
+            case R.id.product_details:
+                if(!(activity instanceof DisplayProductTableActivity)){
+                    Intent intent = new Intent(activity,DisplayProductTableActivity.class);
+                    //Intent intent = new Intent(activity, AndroidDatabaseManager.class);
                     activity.startActivity(intent);
                     return true;
                 }
                 break;
 
-            case R.id.product_details:
-                if(!(activity instanceof DisplayProductTableActivity)){
+            case R.id.add_extra_customer:
+                if(!(activity instanceof AddExtraCustomer)){
+                    Intent intent = new Intent(activity,AddExtraCustomer.class);
+                    //Intent intent = new Intent(activity, AndroidDatabaseManager.class);
+                    activity.startActivity(intent);
+                    return true;
+                }
+                break;
+
+            case R.id.pending_Customer:
+                if(!(activity instanceof PendingCustomer)){
+                    Intent intent = new Intent(activity,PendingCustomer.class);
+                    //Intent intent = new Intent(activity, AndroidDatabaseManager.class);
+                    activity.startActivity(intent);
+                    return true;
+                }
+                break;
+
+            case R.id.stock_view:
+                if(!(activity instanceof StockView)){
+                    Intent intent = new Intent(activity,StockView.class);
+                    //Intent intent = new Intent(activity, AndroidDatabaseManager.class);
+                    activity.startActivity(intent);
+                    return true;
+                }
+                break;
+
+            case R.id.db_manage:
+                if(!(activity instanceof AndroidDatabaseManager)){
                     //Intent intent = new Intent(activity,DisplayProductTableActivity.class);
                     Intent intent = new Intent(activity, AndroidDatabaseManager.class);
                     activity.startActivity(intent);

@@ -8,17 +8,9 @@
 /captures
 .externalNativeBuild
 .idea/
-<<<<<<< HEAD
 settings.gradle
 gradlew.bat
 gradlew
 gradle/
 gradle.properties
 build.gradle
-=======
-app/gradle/wrapper/gradle-wrapper.jar
-app/gradle/wrapper/gradle-wrapper.properties
-app/gradlew
-app/gradlew.bat
-app/local.properties
->>>>>>> table_views

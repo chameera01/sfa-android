@@ -1,4 +1,4 @@
-package activities;
+package com.example.ahmed.sfa.activities;
 
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -17,16 +17,17 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.dell.fragmenttest.R;
+
 
 import java.util.ArrayList;
 
 import controllers.DateManager;
-import controllers.adapters.DBAdapter;
+
+import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import controllers.database.DBHelper;
-import model.Mst_Customermaster;
-import model.Tr_ItineraryDetails;
-import model.Tr_NewCustomer;
+import com.example.ahmed.sfa.models.Mst_Customermaster;
+import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 
 public class AddExtraCustomer extends AppCompatActivity {
     Spinner spinner_area;

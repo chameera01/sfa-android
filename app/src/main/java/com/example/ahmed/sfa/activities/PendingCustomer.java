@@ -1,4 +1,4 @@
-package activities;
+package com.example.ahmed.sfa.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,14 +17,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.example.dell.fragmenttest.MainActivity;
-import com.example.dell.fragmenttest.R;
 
 import java.util.ArrayList;
 
-import controllers.adapters.DBAdapter;
+import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import controllers.database.DBHelper;
-import model.Tr_NewCustomer;
+import com.example.ahmed.sfa.models.Tr_NewCustomer;
 
 public class PendingCustomer extends AppCompatActivity {
     Spinner spinner_area;
@@ -43,10 +42,10 @@ public class PendingCustomer extends AppCompatActivity {
 
         /**/
         Intent intent = getIntent();
-        String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+
         TextView textView = new TextView(this);
         textView.setTextSize(40);
-        textView.setText(message);
+        textView.setText("SFA");
 
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_pending_customer);
         layout.addView(textView);

@@ -1,4 +1,4 @@
-package model;
+package com.example.ahmed.sfa.models;
 
 /**
  * Created by DELL on 3/10/2017.

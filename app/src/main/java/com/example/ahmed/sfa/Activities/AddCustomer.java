@@ -1,6 +1,5 @@
 package com.example.ahmed.sfa.activities;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -14,8 +13,8 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -29,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.ImageManager;
@@ -39,6 +39,7 @@ import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.CustomerStatus;
 import com.example.ahmed.sfa.models.District;
 import com.example.ahmed.sfa.models.Route;
+
 
 import java.util.ArrayList;
 import java.util.List;

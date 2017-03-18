@@ -1,4 +1,4 @@
-package controllers.adapters;
+package com.example.ahmed.sfa.controllers.adapters;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import controllers.database.DBHelper;
-import model.Tr_ItineraryDetails;
+import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 
 /**
  * Created by DELL on 3/10/2017.

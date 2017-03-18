@@ -1,4 +1,4 @@
-package model;
+package com.example.ahmed.sfa.models;
 
 import android.database.Cursor;
 import android.os.AsyncTask;

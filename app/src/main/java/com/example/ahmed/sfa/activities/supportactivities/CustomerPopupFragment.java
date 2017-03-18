@@ -1,10 +1,8 @@
-package com.example.ahmed.sfa.activities;
+package com.example.ahmed.sfa.activities.supportactivities;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,18 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.activities.Home;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.ImageManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
-import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Customer;
 import com.example.ahmed.sfa.models.Itinerary;
 
