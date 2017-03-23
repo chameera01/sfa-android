@@ -66,15 +66,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\DELL\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
-        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\support-annotations-25.2.0_7af4f9a679ae3e85bc0556c7124216c33d79d431.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.2.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -111,6 +102,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\DELL\AppData\Local\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\support-annotations-25.2.0_3844fec522c74bf5e58c3eb42103fb5a4350649b.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.2.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -126,6 +126,15 @@
         revision="25.0.2"
         sha1="cb454b52545859ed2f24a6c01366805b0fa04b22">
         <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.2.0_6f809880ba381ac85a8bbb6ef203cafba0bbd085.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.volley\volley\1.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.volley-volley-1.0.0_d16dfc77144c7a3047afc59ce898cf2cfd303cce.jar" />
     </item>
 
 </items>

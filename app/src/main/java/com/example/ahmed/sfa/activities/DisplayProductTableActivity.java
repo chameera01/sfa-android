@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.activities;
+package com.example.ahmed.sfa.Activities;
 
 import android.content.Intent;
 import android.database.Cursor;

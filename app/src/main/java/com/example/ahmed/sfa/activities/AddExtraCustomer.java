@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.activities;
+package com.example.ahmed.sfa.Activities;
 
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;

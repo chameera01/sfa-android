@@ -2,6 +2,7 @@ package com.example.ahmed.sfa.models;
 
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -20,36 +21,44 @@ import java.util.ArrayList;
 /**
  * Created by DELL on 3/18/2017.
  */
-
 public class JsonHelper {
 
-    ArrayList<String> jsonMyArray=new ArrayList();
+    ArrayList<String> jsonMyArray=new ArrayList<String>();
+
+    TextView result_view;
+
+    public JsonHelper(TextView tv){
+        result_view=tv;
+    }
 
 
-    public  void sendPointList(ArrayList<Cursor> curList){
-        String pointSet="";
+    public  void sendInitialData(String devideId,String pass){
 
-        for(Cursor res:curList  ){
-            pointSet=pointSet.toString()+res.toString()+","+res.toString();
-        }
-        new HttpAsyncTask().execute("https://roads.googleapis.com/v1/snapToRoads?path="+pointSet+"&interpolate=true&key=%20AIzaSyDTP80tr9oUgSA6Zv8ImeLj2wnsWj0MviI");
+
+        new HttpAsyncTask().execute("http://www.bizmapexpert.com/api/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93");
 
     }
+
 
 
     private class HttpAsyncTask extends AsyncTask<String,Void,String> {
         @Override
         protected String doInBackground(String... urls){
+
             return GET(urls[0]);
         }
 
         //onPostExecute displays the result of the asyncTask
         @Override
-        protected  void onPostExecute(String result){
+        protected void onPostExecute(String result){
 
-            //filterLoction(jsonMyArray);
+            result_view.setText(jsonMyArray.get(0));
 
         }
+    }
+    public   ArrayList<String> getJsonMyArray(){
+
+        return  jsonMyArray;
     }
 
     public /*static*/ String GET(String txtUrl){
@@ -74,18 +83,19 @@ public class JsonHelper {
                 JSONObject jsonRootObject = null;
 
                 try {
-                    jsonRootObject = new JSONObject(result);
+                    //jsonRootObject = new JSONObject(result);
 
                     //Get the instance of JSONArray that contains JSONObjects
-                    JSONArray jsonArray = jsonRootObject.optJSONArray("snappedPoints");
+                    //JSONArray jsonArray = jsonRootObject.optJSONArray("snappedPoints");
+                    JSONArray jsonArray = new JSONArray(result);
 
                     //Iterate the jsonArray and print the info of JSONObjects
                     for(int i=0; i < jsonArray.length(); i++){
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                        String  location = jsonObject.optString("location").toString();
-                        String index = jsonObject.optString("originalIndex").toString();
-                        jsonMyArray.add(location);
+                        String  principle = jsonObject.optString("Principle").toString();
+                        String mainBrand = jsonObject.optString("MainBrand").toString();
+                        jsonMyArray.add(mainBrand);
                     }
 
                 } catch (JSONException e) {
@@ -156,4 +166,97 @@ public class JsonHelper {
 
 
     }*/
+    public  class Mst_RepTable{
+
+        private  String repId;
+        private String deviceName;
+        private  String repName;
+        private  String address;
+        private  String contactNo;
+        private  String dealerName;
+        private String dealerAdress;
+        private String macAdress;
+        private int isActive;
+        private String lastUpdateDae;
+
+        public String getRepId() {
+            return repId;
+        }
+
+        public void setRepId(String repId) {
+            this.repId = repId;
+        }
+
+        public String getDeviceName() {
+            return deviceName;
+        }
+
+        public void setDeviceName(String deviceName) {
+            this.deviceName = deviceName;
+        }
+
+        public String getRepName() {
+            return repName;
+        }
+
+        public void setRepName(String repName) {
+            this.repName = repName;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public String getContactNo() {
+            return contactNo;
+        }
+
+        public void setContactNo(String contactNo) {
+            this.contactNo = contactNo;
+        }
+
+        public String getDealerName() {
+            return dealerName;
+        }
+
+        public void setDealerName(String dealerName) {
+            this.dealerName = dealerName;
+        }
+
+        public String getDealerAdress() {
+            return dealerAdress;
+        }
+
+        public void setDealerAdress(String dealerAdress) {
+            this.dealerAdress = dealerAdress;
+        }
+
+        public String getMacAdress() {
+            return macAdress;
+        }
+
+        public void setMacAdress(String macAdress) {
+            this.macAdress = macAdress;
+        }
+
+        public int getIsActive() {
+            return isActive;
+        }
+
+        public void setIsActive(int isActive) {
+            this.isActive = isActive;
+        }
+
+        public String getLastUpdateDae() {
+            return lastUpdateDae;
+        }
+
+        public void setLastUpdateDae(String lastUpdateDae) {
+            this.lastUpdateDae = lastUpdateDae;
+        }
+    }
 }

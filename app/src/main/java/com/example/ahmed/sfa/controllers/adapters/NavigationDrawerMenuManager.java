@@ -14,16 +14,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.ahmed.sfa.activities.AddCustomer;
+import com.example.ahmed.sfa.Activities.AddCustomer;
 import com.example.ahmed.sfa.R;
 
-import com.example.ahmed.sfa.activities.AddExtraCustomer;
-import com.example.ahmed.sfa.activities.AndroidDatabaseManager;
+import com.example.ahmed.sfa.Activities.AddExtraCustomer;
+import com.example.ahmed.sfa.Activities.AndroidDatabaseManager;
 
-import com.example.ahmed.sfa.activities.DisplayProductTableActivity;
-import com.example.ahmed.sfa.activities.Home;
-import com.example.ahmed.sfa.activities.PendingCustomer;
-import com.example.ahmed.sfa.activities.StockView;
+import com.example.ahmed.sfa.Activities.DisplayProductTableActivity;
+import com.example.ahmed.sfa.Activities.Home;
+import com.example.ahmed.sfa.Activities.PendingCustomer;
+import com.example.ahmed.sfa.Activities.StockView;
 import com.example.ahmed.sfa.controllers.CheckInOutManager;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
