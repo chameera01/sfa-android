@@ -1,10 +1,16 @@
 package com.example.ahmed.sfa.models;
 
+import android.app.Activity;
+import android.app.Application;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ahmed.sfa.Activities.Login;
+import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +24,7 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.AccessControlContext;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -26,67 +33,92 @@ import java.util.Objects;
  */
 public class JsonHelper {
 
-    ArrayList<String> jsonMyArray=new ArrayList<String>();
+    ArrayList<Object> jsonMyArray=new ArrayList<Object>();
 
     TextView result_view;
     private  boolean isLonding=true;
     private  boolean isRequesting=false;
     private  String filterType="deviceid_pass";
     private  String  activeStatus="no";
+    private Context context;
 
     public JsonHelper(TextView tv){
         result_view=tv;
     }
 
+    /*initial login y sending device Id n password to server*/
     public  String initialLoging(String devideId,String pass){
 
         final String[] recieveData = new String[1];
+
         new JsonDataCallback() {
             @Override
             public void receiveData(Object object) {
                 String tmpData = (String)object;
                 result_view.setText(tmpData);
+                /*universal metho to filter Json Data from Json Array*/
+                filterType="deviceid_pass";
 
+                /*end unit methos*/
                 try {
                     JSONArray jsonArray = new JSONArray(tmpData);
                     JSONObject jsonObject=jsonArray.getJSONObject(0);
                     recieveData[0] =jsonObject.optString("ACTIVESTATUS");
                     result_view.setText(jsonObject.optString("ACTIVESTATUS"));
                     setLonding(false);
+                    filterJsonData(tmpData) ;
+                    getMstProductData("devideId","pass");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
             }
         }.execute("http://www.bizmapexpert.com/api/DeviceCheck/DeviceCheckController?DeviceID="+devideId+"&Password="+pass+"",null,null);
-        filterType="deviceid_pass";
 
 
-
-
-
-
-        return recieveData[0];
+         return recieveData[0];
     }
+        /*
+        * Get data from webservice on Mst_Product * */
+        public  String getMstProductData(String devideId,String pass){
+
+            final String[] recieveData = new String[1];
+
+            new JsonDataCallback() {
+                @Override
+                public void receiveData(Object object) {
+                    String tmpData = (String)object;
+                    result_view.setText(tmpData);
+                /*universal metho to filter Json Data from Json Array*/
+                    filterType="ProductDetails";
+
+                /*end unit methos*/
+                    try {
+                        /*JSONArray jsonArray = new JSONArray(tmpData);
+                        JSONObject jsonObject=jsonArray.getJSONObject(0);
+                        recieveData[0] =jsonObject.optString("ACTIVESTATUS");
+                        result_view.setText(jsonObject.optString("ACTIVESTATUS"));
+                        */
+                        setLonding(false);
+                        filterJsonData(tmpData) ;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }.execute("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93",null,null);
 
 
+            return recieveData[0];
+        }
 
-
-
+        /**/
     public  void sendInitialData(String devideId,String pass){
-
-
         new HttpAsyncTask().execute("http://www.bizmapexpert.com/api/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93");
         filterType="salesProductBrand";
     }
 
-    public boolean getisLonding() {
-        return isLonding;
-    }
 
-    public void setLonding(boolean londing) {
-        isLonding = londing;
-    }
 
 
     private class HttpAsyncTask extends AsyncTask<String,Void,String> {
@@ -100,17 +132,26 @@ public class JsonHelper {
         @Override
         protected void onPostExecute(String result){
             setLonding(false);
-            result_view.setText(jsonMyArray.get(0));
+            insertToTable();
+            result_view.setText(jsonMyArray.get(0).toString());
 
 
         }
     }
-    public   ArrayList<String> getJsonMyArray(){
+
+    private void insertToTable() {
+        DBAdapter adptr=new DBAdapter(context);
+        adptr.setMst_ProductBrandManagement();
+        adptr.setMst_ProductMaster();
+
+    }
+
+    public   ArrayList<Object> getJsonMyArray(){
 
         return  jsonMyArray;
     }
 
-    public /*static*/ String GET(String txtUrl){
+    public String GET(String txtUrl){
         InputStream inputStream = null;
         String result = "";
         HttpURLConnection httpUrlConnection;
@@ -130,7 +171,7 @@ public class JsonHelper {
                 result = convertInputStreamToString(in);
                 /**/
                 JSONObject jsonRootObject = null;
-                filterJsonData(result) ;
+                //filterJsonData(result) ;
 
 
                 /**/
@@ -150,26 +191,61 @@ public class JsonHelper {
 
     private void filterJsonData(String result) {
         try {
+            switch (filterType){
+                case "salesProductBrand":
+                    JSONArray jsonArray = new JSONArray(result);
 
-            if(filterType=="salesProductBrand") {
-                JSONArray jsonArray = new JSONArray(result);
-
-                //Iterate the jsonArray and print the info of JSONObjects
+                    //Iterate the jsonArray and print the info of JSONObjects
 
 
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                    String principle = jsonObject.optString("Principle").toString();
-                    String mainBrand = jsonObject.optString("MainBrand").toString();
-                    jsonMyArray.add(mainBrand);
-                }
-            }else if(filterType=="deviceid_pass"){
-                JSONArray jsonArray = new JSONArray(result);
-                JSONObject jsonObject = jsonArray.getJSONObject(0);
-                String status=jsonObject.optString("ACTIVESTATUS");
-                activeStatus=status;
+                        String principle = jsonObject.optString("Principle").toString();
+                        String mainBrand = jsonObject.optString("MainBrand").toString();
+                        jsonMyArray.add(mainBrand);
+                    }
+
+                    break;
+
+                case   "deviceid_pass":
+
+                    JSONArray jsonArray2 = new JSONArray(result);
+                    JSONObject jsonObject = jsonArray2.getJSONObject(0);
+                    String status=jsonObject.optString("ACTIVESTATUS");
+                    activeStatus=status;
+                    break;
+
+                case "ProductDetails":
+                    Mst_ProductMaster productMst= new Mst_ProductMaster();
+                    JSONArray jsonProductArray = new JSONArray(result);
+                     for (int i = 0; i < jsonProductArray.length(); i++) {
+                        JSONObject jsonProductObject = jsonProductArray.getJSONObject(i);
+
+                         productMst.setItemCode( jsonProductObject.optString("ItemCode"));
+                         productMst.setDescription(  jsonProductObject.optString("Description"));
+                         productMst.setPrincipleId( jsonProductObject.optString("PrincipleID"));
+                         productMst.setPrinciple( jsonProductObject.optString("Principle"));
+                         productMst.setBrandId(  jsonProductObject.optString("BrandID"));
+                         productMst.setBrand( jsonProductObject.optString("Brand"));
+                         productMst.setSubBrandId( jsonProductObject.optString("SubBrandID"));
+                         productMst.setGetSubBrand( jsonProductObject.optString("SubBrand"));
+                         productMst.setUnitSize( jsonProductObject.optInt("UnitSize"));
+                         productMst.setUnitName(  jsonProductObject.optString("UnitName"));
+                         productMst.setRetailPrice(jsonProductObject.optDouble("RetailPrice"));
+                         productMst.setBuyingPrice(jsonProductObject.optDouble("BuyingPrice"));
+                         productMst.setActive( jsonProductObject.optInt("Active"));
+                         productMst.setTargetAllow( jsonProductObject.optInt("TargetAllow"));
+
+                        jsonMyArray.add(productMst);
+                         //Toast.makeText(this.context,productMst.getBrand(),Toast.LENGTH_LONG).show();
+                         result_view.setText(productMst.getBrand());
+                    }
+                    break;
+                default:
+                    break;
             }
+
 
 
         }catch (Exception e){
@@ -228,98 +304,12 @@ public class JsonHelper {
 
 
     }*/
-    public  class Mst_RepTable{
 
-        private  String repId;
-        private String deviceName;
-        private  String repName;
-        private  String address;
-        private  String contactNo;
-        private  String dealerName;
-        private String dealerAdress;
-        private String macAdress;
-        private int isActive;
-        private String lastUpdateDae;
-
-        public String getRepId() {
-            return repId;
-        }
-
-        public void setRepId(String repId) {
-            this.repId = repId;
-        }
-
-        public String getDeviceName() {
-            return deviceName;
-        }
-
-        public void setDeviceName(String deviceName) {
-            this.deviceName = deviceName;
-        }
-
-        public String getRepName() {
-            return repName;
-        }
-
-        public void setRepName(String repName) {
-            this.repName = repName;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public String getContactNo() {
-            return contactNo;
-        }
-
-        public void setContactNo(String contactNo) {
-            this.contactNo = contactNo;
-        }
-
-        public String getDealerName() {
-            return dealerName;
-        }
-
-        public void setDealerName(String dealerName) {
-            this.dealerName = dealerName;
-        }
-
-        public String getDealerAdress() {
-            return dealerAdress;
-        }
-
-        public void setDealerAdress(String dealerAdress) {
-            this.dealerAdress = dealerAdress;
-        }
-
-        public String getMacAdress() {
-            return macAdress;
-        }
-
-        public void setMacAdress(String macAdress) {
-            this.macAdress = macAdress;
-        }
-
-        public int getIsActive() {
-            return isActive;
-        }
-
-        public void setIsActive(int isActive) {
-            this.isActive = isActive;
-        }
-
-        public String getLastUpdateDae() {
-            return lastUpdateDae;
-        }
-
-        public void setLastUpdateDae(String lastUpdateDae) {
-            this.lastUpdateDae = lastUpdateDae;
-        }
+    public boolean getisLonding() {
+        return isLonding;
+    }
+    public void setLonding(boolean londing) {
+        isLonding = londing;
     }
 
     //abstract class to check dara return

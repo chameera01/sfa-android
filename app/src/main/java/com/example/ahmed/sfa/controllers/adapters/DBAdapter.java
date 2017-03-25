@@ -197,4 +197,19 @@ public class DBAdapter{
 
 
     }
+
+    public void setMst_ProductBrandManagement() {
+    }
+
+    public void setMst_ProductMaster() {
+        openDB();
+        db.execSQL("insert or replace into Book (ID, Name, TypeID, Level, Seen) values (\n" +
+                "   (select ID from Book where Name = \"SearchName\")," +
+                "   \"SearchName\"," +
+                "    5," +
+                "    6," +
+                "    (select Seen from Book where Name = \"SearchName\"));",null);
+
+        closeDB();
+    }
 }
