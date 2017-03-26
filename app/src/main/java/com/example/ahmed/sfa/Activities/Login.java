@@ -3,6 +3,9 @@ package com.example.ahmed.sfa.Activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -34,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.models.JsonHelper;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -67,6 +71,9 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
     private View mProgressView;
     private View mLoginFormView;
     private  TextView result_view;
+    private Activity activity;
+    Context contxt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +83,15 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
         mDeviceId = (AutoCompleteTextView) findViewById(R.id.email);
         result_view=(TextView) findViewById(R.id.result_Json);
         populateAutoComplete();
+
+
+        contxt=this;
+        /*database tesst*/
+        /*DBAdapter adp= new DBAdapter(this);
+        adp.setMst_ProductBrandManagement();*/
+        /*delete above code after test*/
+
+        activity=this;
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -94,6 +110,9 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
             @Override
             public void onClick(View view) {
                 attemptLogin();
+                Intent intent = new Intent(activity,AndroidDatabaseManager.class);
+                //Intent intent = new Intent(activity, AndroidDatabaseManager.class);
+                activity.startActivity(intent);
             }
         });
 
@@ -324,16 +343,17 @@ public class Login extends AppCompatActivity implements LoaderCallbacks<Cursor> 
                 Thread.sleep(1000);
                 //
                 try {
-                    JsonHelper jh = new JsonHelper(result_view);
+
+                    JsonHelper jh = new JsonHelper(contxt,result_view);
                     statusStrg=jh.initialLoging(mDevideID, mPassword);
 
-                    for(;1>0;){
+                    /*for(;1>0;){
                         if(jh.getisLonding()==false){
                             break;
                         }
 
                         Toast.makeText(Login.this, "Aweoseme:"+statusStrg, Toast.LENGTH_SHORT).show();
-                    }
+                    }*/
 
 
 

@@ -15,6 +15,7 @@ import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,13 +39,19 @@ public class JsonHelper {
     TextView result_view;
     private  boolean isLonding=true;
     private  boolean isRequesting=false;
-    private  String filterType="deviceid_pass";
+    //private  String filterType="deviceid_pass";
     private  String  activeStatus="no";
-    private Context context;
+    Context context;
 
     public JsonHelper(TextView tv){
         result_view=tv;
+
     }
+    public JsonHelper(Context c, TextView txtv){
+        context=c;
+        result_view=txtv;
+    }
+
 
     /*initial login y sending device Id n password to server*/
     public  String initialLoging(String devideId,String pass){
@@ -57,7 +64,7 @@ public class JsonHelper {
                 String tmpData = (String)object;
                 result_view.setText(tmpData);
                 /*universal metho to filter Json Data from Json Array*/
-                filterType="deviceid_pass";
+                ///filterType="deviceid_pass";
 
                 /*end unit methos*/
                 try {
@@ -66,7 +73,7 @@ public class JsonHelper {
                     recieveData[0] =jsonObject.optString("ACTIVESTATUS");
                     result_view.setText(jsonObject.optString("ACTIVESTATUS"));
                     setLonding(false);
-                    filterJsonData(tmpData) ;
+                    filterJsonData(tmpData,"deviceid_pass") ;
                     getMstProductData("devideId","pass");
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -88,9 +95,9 @@ public class JsonHelper {
                 @Override
                 public void receiveData(Object object) {
                     String tmpData = (String)object;
-                    result_view.setText(tmpData);
+                    result_view.setText("inside Method getMstProductData");
                 /*universal metho to filter Json Data from Json Array*/
-                    filterType="ProductDetails";
+                    //filterType="ProductDetails";
 
                 /*end unit methos*/
                     try {
@@ -99,10 +106,12 @@ public class JsonHelper {
                         recieveData[0] =jsonObject.optString("ACTIVESTATUS");
                         result_view.setText(jsonObject.optString("ACTIVESTATUS"));
                         */
+                        result_view.setText("inside try catch");
                         setLonding(false);
-                        filterJsonData(tmpData) ;
+                        filterJsonData(tmpData,"ProductDetails") ;
                     } catch (Exception e) {
                         e.printStackTrace();
+                        result_view.setText("exception on trycatch "+e.getMessage());
                     }
 
                 }
@@ -115,7 +124,7 @@ public class JsonHelper {
         /**/
     public  void sendInitialData(String devideId,String pass){
         new HttpAsyncTask().execute("http://www.bizmapexpert.com/api/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93");
-        filterType="salesProductBrand";
+       // filterType="salesProductBrand";
     }
 
 
@@ -140,9 +149,9 @@ public class JsonHelper {
     }
 
     private void insertToTable() {
-        DBAdapter adptr=new DBAdapter(context);
-        adptr.setMst_ProductBrandManagement();
-        adptr.setMst_ProductMaster();
+       // DBAdapter adptr=new DBAdapter(context);
+       // adptr.setMst_ProductBrandManagement();
+       // adptr.setMst_ProductMaster();
 
     }
 
@@ -189,9 +198,12 @@ public class JsonHelper {
         return result;
     }
 
-    private void filterJsonData(String result) {
+    private  void filterJsonData(String result,String filter) {
+
+
         try {
-            switch (filterType){
+            DBAdapter adptr=new DBAdapter(context);
+            switch (filter){
                 case "salesProductBrand":
                     JSONArray jsonArray = new JSONArray(result);
 
@@ -229,7 +241,7 @@ public class JsonHelper {
                          productMst.setBrandId(  jsonProductObject.optString("BrandID"));
                          productMst.setBrand( jsonProductObject.optString("Brand"));
                          productMst.setSubBrandId( jsonProductObject.optString("SubBrandID"));
-                         productMst.setGetSubBrand( jsonProductObject.optString("SubBrand"));
+                         productMst.setSubBrand( jsonProductObject.optString("SubBrand"));
                          productMst.setUnitSize( jsonProductObject.optInt("UnitSize"));
                          productMst.setUnitName(  jsonProductObject.optString("UnitName"));
                          productMst.setRetailPrice(jsonProductObject.optDouble("RetailPrice"));
@@ -237,7 +249,8 @@ public class JsonHelper {
                          productMst.setActive( jsonProductObject.optInt("Active"));
                          productMst.setTargetAllow( jsonProductObject.optInt("TargetAllow"));
 
-                        jsonMyArray.add(productMst);
+                         adptr.setMst_ProductMaster(productMst);
+                        //jsonMyArray.add(productMst);
                          //Toast.makeText(this.context,productMst.getBrand(),Toast.LENGTH_LONG).show();
                          result_view.setText(productMst.getBrand());
                     }
@@ -250,6 +263,7 @@ public class JsonHelper {
 
         }catch (Exception e){
             e.printStackTrace();
+            result_view.setText("ex:filter:"+e.getMessage());
         }
     }
 

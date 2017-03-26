@@ -89,12 +89,12 @@ public class Mst_ProductMaster {
         this.subBrandId = subBrandId;
     }
 
-    public String getGetSubBrand() {
+    public String getSubBrand() {
         return subBrand;
     }
 
-    public void setGetSubBrand(String getSubBrand) {
-        this.subBrand = getSubBrand;
+    public void setSubBrand(String SubBrand) {
+        this.subBrand = SubBrand;
     }
 
     public int getUnitSize() {

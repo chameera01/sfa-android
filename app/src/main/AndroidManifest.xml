@@ -34,10 +34,17 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activities.DisplayProductTableActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" >
+
+        </activity>
+
         <activity
             android:name=".Activities.Home"
             android:windowSoftInputMode="stateHidden" />
+
+
+
+
         <activity
             android:name=".Activities.StockView"
             android:windowSoftInputMode="stateHidden" />
@@ -55,7 +62,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+            </activity>
+
+
+
+
     </application>
 
 </manifest>

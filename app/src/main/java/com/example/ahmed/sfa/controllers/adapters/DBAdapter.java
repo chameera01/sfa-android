@@ -5,10 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+/*for testing purpose link:http://www.sqlitetutorial.net/tryit/query/sqlite-replace-statement/#1*/
+//import controllers.database.DBHelper;
+import com.example.ahmed.sfa.controllers.database.DBHelper;
 
-import controllers.database.DBHelper;
+import com.example.ahmed.sfa.models.Mst_ProductMaster;
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 
 /**
@@ -199,16 +203,24 @@ public class DBAdapter{
     }
 
     public void setMst_ProductBrandManagement() {
+        openDB();
+        db.execSQL("INSERT OR REPLACE INTO Tr_NewCustomer (ID,NewCustomerID ,CustomerName ,Address ,Area ,Town,OwnerContactNo," +
+                " IsUpload ,ApproveStatus ) VALUES ((SELECT ID from Tr_NewCustomer where NewCustomerID='cus_007'),'cus_007','test2DBApt','testAdp ','BDAdp','kadawatha','071562895','uploaded','pending');");
+        closeDB();
     }
 
-    public void setMst_ProductMaster() {
+    public void setMst_ProductMaster(Mst_ProductMaster pro) {
+
         openDB();
-        db.execSQL("insert or replace into Book (ID, Name, TypeID, Level, Seen) values (\n" +
-                "   (select ID from Book where Name = \"SearchName\")," +
-                "   \"SearchName\"," +
-                "    5," +
-                "    6," +
-                "    (select Seen from Book where Name = \"SearchName\"));",null);
+
+
+        db.execSQL("INSERT OR REPLACE INTO Mst_ProductMaster (_ID,ItemCode, Description, PrincipleID, Principle, BrandID,Brand,SubBrandID," +
+                "SubBrand,UnitSize,UnitName,RetailPrice,BuyingPrice,Active,TargetAllow) values (" +
+                "   (select _ID from Mst_ProductMaster where ItemCode = \""+pro.getItemCode()+"\")," +
+                "   \""+pro.getItemCode()+"\",\""+pro.getDescription()+"\",\""+pro.getPrincipleId()+"\",\" "+pro.getPrinciple()+"\"," +
+                "\" "+ pro.getBrandId()+" \",  \" "+ pro.getBrand()+" \",  \""+pro.getSubBrandId()+"\",\""+pro.getSubBrand()+"\",\""+pro.getUnitSize()+"\"   ,         "+
+                "   \""+pro.getUnitName()+"\",\""+pro.getRetailPrice()+"\",\""+pro.getBuyingPrice()+"\"    ,\""+pro.getActive()+"\",\""+pro.getTargetAllow()+"\"       "+
+                " );",null);
 
         closeDB();
     }

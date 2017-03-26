@@ -29,6 +29,21 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         try{
+
+            /*create table ProductMAster*/
+            db.execSQL(
+                    "CREATE TABLE Mst_ProductMaster" +
+                            "(_ID integer primary key AUTOINCREMENT ,ItemCode text,Description text,PrincipleID text,Principle text," +
+                            "BrandID text,Brand text,SubBrandID text,SubBrand text,UnitSize integer,UnitName text,RetailPrice real," +
+                            "SellingPrice real,BuyingPrice real,Active integer,LastUpdateDate text,TargetAllow  integer)"
+            );
+            //insert data to Mst_ProductMaster
+            db.execSQL("INSERT INTO Mst_ProductMaster (ItemCode, Description, PrincipleID, Principle, BrandID,Brand,SubBrandID," +
+                    " SubBrand,UnitSize,UnitName,RetailPrice,SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) " +
+                    "VALUES ('cd003','desc','prinid1','newphama','brandid','belcosid','subb','subbname',456,'uname',123.4,124.2,562.3,1,'2017-03-26',0);");
+
+
+
             //creating the itinerarydetails table
             db.execSQL("CREATE TABLE Tr_ItineraryDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "ItineraryID TEXT,ItineraryDate TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,LastUpdateDate TEXT );");
@@ -185,12 +200,12 @@ public class DBHelper extends SQLiteOpenHelper {
              db.execSQL("INSERT INTO route VALUES (6,'f','a');");
              */
 
-            db.execSQL(
+            /*db.execSQL(
                     "create table mst_productmaster " +
                             "(_id integer primary key AUTOINCREMENT , itemcode text,description text,principleid text, principle text," +
                             "brandid text,brand text,subbrandid text,subbrand text,unitsize integer,unitname text,retailprice real," +
                             "sellingprice real,buyingprice real,active integer,lastupdatedate text,targetallow integer)"
-            );
+            );*/
 
 
             //only few columns were addesto Tr_NewCustome tables
@@ -210,12 +225,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (5,'cus_005','thilakawardhana','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
 
 
-            db.execSQL(
-                    "create table Mst_ProductMaster" +
-                            "(_ID integer primary key AUTOINCREMENT ,ItemCode text,Description text,PrincipleID text,Principle text," +
-                            "BrandID text,Brand text,SubBrandID text,SubBrand text,UnitSize integer,UnitName text,RetailPrice real," +
-                            "SellingPrice real,BuyingPrice real,Active integer,LastUpdateDate text,TargetAllow  integer)"
-            );
+
             db.execSQL(
                     "create table Tr_TabStock" +
                             "(_ID integer primary key AUTOINCREMENT ,ServerID  text,PrincipleID text,BrandID text,ItemCode text,BatchNumber text," +
@@ -245,25 +255,11 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public static final String DATABASE_NAME = "MyDBName.db";
-    public static final String PRODUCT_TABLE_NAME = "mst_productmaster";
-    public static final String PRODUCT_COLUMN_ID = "id";
-    public static final String PRODUCT_COLUMN_ITEMCODE = "itemcode";
-    public static final String PRODUCT_COLUMN_DESCRIPTION = "description";
-    public static final String PRODUCT_COLUMN_PRINCIPLEID = "principleid";
-    public static final String PRODUCT_COLUMN_PRINCIPLE = "principle";
-    public static final String PRODUCT_COLUMN_BRANDID = "brandid";
-    public static final String PRODUCT_COLUMN_BRAND = "brand";
-    public static final String PRODUCT_COLUMN_SUBBRAND_ID = "subbrandid";
-    public static final String PRODUCT_COLUMN_SUBBRAND = "subbrand";
-    public static final String PRODUCT_COLUMN_UNITSZIE = "unitsize";
-    public static final String PRODUCT_COLUMN_UNITNAME = "unitname";
-    public static final String PRODUCT_COLUMN_RETAILPRICE = "retailprice";
-    public static final String PRODUCT_COLUMN_SELLINGPRICE = "sellingprice";
-    public static final String PRODUCT_COLUMN_BUYING_PRICE = "buyingprice";
-    public static final String PRODUCT_COLUMN_ACTIVE = "active";
-    public static final String PRODUCT_COLUMN_LAST_UPDATE_DATE = "lastupdatedate";
-    public static final String PRODUCT_COLUMN_TARGET_ALLOW = "targetallow";
+
+    public static final String PRODUCT_TABLE_NAME = "Mst_ProductMaster";
+    public static final String PRODUCT_COLUMN_PRINCIPLE = "Principle";
+    public static final String PRODUCT_COLUMN_BRAND = "Brand";
+
 
     private HashMap hp;
 
@@ -279,28 +275,29 @@ public class DBHelper extends SQLiteOpenHelper {
         String result="failDBclass";
         try{
             SQLiteDatabase db = this.getWritableDatabase();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("itemcode", itemcode);
-            contentValues.put("description", description);
-            contentValues.put("principleid", principleid);
-            contentValues.put("principle", principle);
-            contentValues.put("brandid", brandid);
-            contentValues.put("brand", brand);
-            contentValues.put("subbrandid", subbrandid);
-            contentValues.put("subbrand", subbrand);
-            contentValues.put("unitsize", unitsize);
-            contentValues.put("unitname", unitname);
-            contentValues.put("retailprice", retailprice);
-            contentValues.put("sellingprice",sellingprice);
-            contentValues.put("buyingprice", buyingprice);
-            contentValues.put("active", active);
-            contentValues.put("lastupdatedate", lastupDate);
-            contentValues.put("targetallow", targetallow);
 
-            if(db.insert("mst_productmaster", null, contentValues)>0) {
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("ItemCode", itemcode);
+            contentValues.put("Description", description);
+            contentValues.put("PrincipleID", principleid);
+            contentValues.put("Principle", principle);
+            contentValues.put("BrandID", brandid);
+            contentValues.put("Brand", brand);
+            contentValues.put("SubBrandID", subbrandid);
+            contentValues.put("SubBrand", subbrand);
+            contentValues.put("UnitSize", unitsize);
+            contentValues.put("UnitName", unitname);
+            contentValues.put("RetailPrice", retailprice);
+            contentValues.put("SellingPrice",sellingprice);
+            contentValues.put("BuyingPrice", buyingprice);
+            contentValues.put("Active", active);
+            contentValues.put("LastUpdateDate", lastupDate);
+            contentValues.put("TargetAllow", targetallow);
+
+            if(db.insert("Mst_ProductMaster", null, contentValues)>0) {
                 result = "success";
             }else
-                result ="outer_if";
+                result ="outer_fail";
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -423,44 +420,56 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("email", email);
         contentValues.put("street", street);
         contentValues.put("place", place);
-        db.update("mst_productmaster", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
+        db.update("Mst_ProductMaster", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
         return true;
     }
 
     public Integer deleteContact (Integer id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("mst_productmaster",
+        return db.delete("Mst_ProductMaster",
                 "id = ? ",
                 new String[] { Integer.toString(id) });
     }
 
     public ArrayList<String> getAllbrands() {
+
         ArrayList<String> array_list = new ArrayList<String>();
 
         //hp = new HashMap();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "SELECT DISTINCT brand FROM mst_productmaster", null );
-        res.moveToFirst();
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor res = db.rawQuery("SELECT DISTINCT Brand FROM Mst_ProductMaster", null);
+            res.moveToFirst();
 
-        array_list.add("All");
-        while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_BRAND)));
-            res.moveToNext();
+            array_list.add("All");
+            while (res.isAfterLast() == false) {
+                array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_BRAND)));
+                res.moveToNext();
+            }
+            db.close();
+        }catch (Exception e){
+            array_list.add(e.getMessage());
         }
+
         return array_list;
     }
     public   ArrayList<String> getAllprinciples() {
         ArrayList<String> array_list = new ArrayList<String>();
 
         //hp = new HashMap();
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "SELECT DISTINCT principle FROM mst_productmaster", null );
-        res.moveToFirst();
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+            Cursor res = db.rawQuery("SELECT DISTINCT Principle FROM Mst_ProductMaster", null);
+            res.moveToFirst();
 
-        array_list.add("All");
-        while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_PRINCIPLE)));
-            res.moveToNext();
+            array_list.add("All");
+            while (res.isAfterLast() == false) {
+                array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_PRINCIPLE)));
+                res.moveToNext();
+            }
+            db.close();
+        }catch (Exception e){
+            array_list.add(e.getMessage());
         }
         return array_list;
     }
