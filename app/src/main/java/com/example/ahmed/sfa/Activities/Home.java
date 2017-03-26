@@ -154,13 +154,13 @@ public class Home extends AppCompatActivity {
         CustomerPopupFragment customerPopupFragment = (CustomerPopupFragment)getFragmentManager().findFragmentById(R.id.customermanagementfragment);
         //check whether fragment has to be replaced
 
-        if(customerPopupFragment==null || !customerPopupFragment.getCurrentCustomer().equals(itinerary.getCustomerNo())){
+        if(customerPopupFragment==null || !customerPopupFragment.getCurrentCustomer().equals(itinerary.getCustomerNo())) {
             //make new fragment to replace
             customerPopupFragment = CustomerPopupFragment.newInstance(itinerary);
             //Log.w("Fragment proble","here 0");
             //execute a transaction, replacing any existing fragment
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.customermanagementfragment,customerPopupFragment);
+            fragmentTransaction.replace(R.id.customermanagementfragment, customerPopupFragment);
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             fragmentTransaction.commit();
         }

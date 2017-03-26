@@ -45,7 +45,12 @@ public class CheckIn extends AppCompatActivity implements CheckInCheckOutActions
         final Spinner loc = (Spinner) findViewById(R.id.navigation_header_place);
         final TextView comment = (TextView) findViewById(R.id.navigation_header_comment);
         //CheckingDBAdapter man = new CheckingDBAdapter(getApplicationContext());
-
+        TextView date = (TextView) findViewById(R.id.navigation_header_date);
+        date.setText(DateManager.dayToday());
+        TextView day = (TextView) findViewById(R.id.navigation_header_day);
+        day.setText(DateManager.getDayOfWeek());
+        TextView time = (TextView)findViewById(R.id.navigation_header_time);
+        time.setText(DateManager.getTimeFull());
         loc.setAdapter(man.getLocationsArrayAdapter());
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override

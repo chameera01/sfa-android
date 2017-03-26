@@ -28,7 +28,7 @@
 
             <TextView
                 android:id="@+id/navigation_header_date"
-                android:text="11"
+
                 android:textSize="40dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

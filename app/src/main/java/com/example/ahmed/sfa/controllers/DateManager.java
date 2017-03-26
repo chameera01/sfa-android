@@ -12,7 +12,7 @@ import java.util.Calendar;
 
 public class DateManager {
     private static String[] days= {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
-
+    private static String DEVIDER = "/";
     Calendar cal= Calendar.getInstance();
 
 
@@ -24,7 +24,14 @@ public class DateManager {
         String year = ""+cal.get(Calendar.YEAR);
         String month = ""+(cal.get(Calendar.MONTH)+1);
         String day = ""+cal.get(Calendar.DAY_OF_MONTH);
-        date = year+"/"+month+"/"+day;
+        date = year+DEVIDER+month+DEVIDER+day;
+        return date;
+    }
+
+    //this will be used to create a date with the format applicaton require
+    //but using androids default values
+    public static String getDate(int year,int month,int dayOfMonth){
+         String date = year+DEVIDER+(month+1)+DEVIDER+dayOfMonth;
         return date;
     }
 

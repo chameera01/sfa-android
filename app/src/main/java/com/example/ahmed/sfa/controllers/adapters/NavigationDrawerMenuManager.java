@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.ahmed.sfa.activities.AddCustomer;
 import com.example.ahmed.sfa.R;
@@ -23,6 +24,7 @@ import com.example.ahmed.sfa.activities.AndroidDatabaseManager;
 import com.example.ahmed.sfa.activities.DisplayProductTableActivity;
 import com.example.ahmed.sfa.activities.Home;
 import com.example.ahmed.sfa.activities.PendingCustomer;
+import com.example.ahmed.sfa.activities.SalesInvoice;
 import com.example.ahmed.sfa.activities.StockView;
 import com.example.ahmed.sfa.controllers.CheckInOutManager;
 import com.example.ahmed.sfa.controllers.DateManager;
@@ -41,12 +43,14 @@ import static android.content.Context.LOCATION_SERVICE;
 public class NavigationDrawerMenuManager implements NavigationView.OnNavigationItemSelectedListener,CheckInCheckOutActions {
     private Activity activity;
     NavigationView navview;
+
     //String[] places ;
 
 
     public NavigationDrawerMenuManager(final Activity activity){
 
         this.activity = activity;
+
         init();
 
         ///activity.findViewById(R.id.
@@ -102,11 +106,7 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
         final CheckInOutManager man = new CheckInOutManager(activity.getApplicationContext(),this);//create an instance of the manager
         //to manage database operations
 
-        //Button checkInBtn = (Button) activity.findViewById(R.id.navigation_header_actionbutton);
-        //Button skipBtn = (Button) activity.findViewById(R.id.skipp_checkin);
-        //final Spinner loc = (Spinner) activity.findViewById(R.id.navigation_header_place);
-        //final TextView comment = (TextView) activity.findViewById(R.id.navigation_header_comment);
-        //CheckingDBAdapter man = new CheckingDBAdapter(getApplicationContext());
+
 
         //find the navigation view from the passed activities layout
         navview =(NavigationView)activity.findViewById(R.id.nav_view);
@@ -116,7 +116,12 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
         final EditText comment = (EditText)v.findViewById(R.id.navigation_header_comment);
         final Spinner loc = (Spinner) v.findViewById(R.id.navigation_header_place);
         loc.setAdapter(man.getLocationsArrayAdapter());//get locations from the databse
-
+        TextView date = (TextView) v.findViewById(R.id.navigation_header_date);
+        date.setText(DateManager.dayToday());
+        TextView day = (TextView) v.findViewById(R.id.navigation_header_day);
+        day.setText(DateManager.getDayOfWeek());
+        TextView time = (TextView)v.findViewById(R.id.navigation_header_time);
+        time.setText(DateManager.getTimeFull());
         if(man.isCheckedIn()) {//cheack whether the user already checked in
 
 
@@ -185,12 +190,12 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
                 break;
 
             case R.id.add_customer:
-                /**
+
                 if( !(activity instanceof AddCustomer)){
                     Intent intent = new Intent(activity, AddCustomer.class);
                     activity.startActivity(intent);
                     return true;
-                }*/
+                }
                 break;
 
             case R.id.product_details:
@@ -233,6 +238,15 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
                 if(!(activity instanceof AndroidDatabaseManager)){
                     //Intent intent = new Intent(activity,DisplayProductTableActivity.class);
                     Intent intent = new Intent(activity, AndroidDatabaseManager.class);
+                    activity.startActivity(intent);
+                    return true;
+                }
+                break;
+
+            case R.id.sales_invoice:
+                if(!(activity instanceof SalesInvoice)){
+                    //Intent intent = new Intent(activity,DisplayProductTableActivity.class);
+                    Intent intent = new Intent(activity, SalesInvoice.class);
                     activity.startActivity(intent);
                     return true;
                 }

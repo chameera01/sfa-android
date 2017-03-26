@@ -185,30 +185,23 @@ public class DBHelper extends SQLiteOpenHelper {
              db.execSQL("INSERT INTO route VALUES (6,'f','a');");
              */
 
-            db.execSQL(
-                    "create table mst_productmaster " +
-                            "(_id integer primary key AUTOINCREMENT , itemcode text,description text,principleid text, principle text," +
-                            "brandid text,brand text,subbrandid text,subbrand text,unitsize integer,unitname text,retailprice real," +
-                            "sellingprice real,buyingprice real,active integer,lastupdatedate text,targetallow integer)"
-            );
-
-
             //only few columns were addesto Tr_NewCustome tables
-            db.execSQL(
+            /**db.execSQL(
                     "create table Tr_NewCustomer" +
                             "(_ID integer primary key AUTOINCREMENT ,NewCustomerID text,CustomerName text,Address text,Area text,Town text,OwnerContactNo text," +
                             "IsUpload text,ApproveStatus text)"
-            );
+            );*/
 
 
 
             //adding datato  table 21 TrNewCustomer
+            /**
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (1,'cus_001','peachnet','addre ','area_dalugama','dalugama','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (2,'cus_002','healthycafe','addre is goes here','area_dalugama','bambalapitiya','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (3,'cus_003','thilakawardhana','addre ','area_kiribathgoda','kiribathgoda','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (4,'cus_004','kandy','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (5,'cus_005','thilakawardhana','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
-
+                */
 
             db.execSQL(
                     "create table Mst_ProductMaster" +
@@ -222,18 +215,75 @@ public class DBHelper extends SQLiteOpenHelper {
                             "ExpiryDate text,SellingPrice real,RetailPrice real," +
                             "Qty  integer,LastUpdateDate text)"
             );
-            db.execSQL("INSERT INTO Tr_TabStock VALUES (1,'server_id','principle_1','bran_1','cd001','bct_1','2017-10-25',45.50,60.5,895,'2017-02-25');");
+            //db.execSQL("INSERT INTO Tr_TabStock VALUES (1,'server_id','principle_1','bran_1','cd001','bct_1','2017-10-25',45.50,60.5,895,'2017-02-25');");
 
-            db.execSQL(
-                    "create table Mst_SupplierTable" +
-                            "(_ID integer primary key AUTOINCREMENT , PrincipleID  text,Principle text," +
-                            "Activate  integer,LastUpdateDate text)"
-            );
+            db.execSQL("CREATE TABLE Mst_SupplierTable(_id INTEGER PRIMARY KEY AUTOINCREMENT,PrincipleID TEXT, Principle TEXT, Activate INTEGER, LastUpdateDate TEXT)");
+
+            db.execSQL("INSERT INTO Mst_SupplierTable VALUES(1,'PRN1','Principle1',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_SupplierTable VALUES(2,'PRN2','Principle2',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_SupplierTable VALUES(3,'PRN3','Principle3',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_SupplierTable VALUES(4,'PRN4','Principle4',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_SupplierTable VALUES(5,'PRN5','Principle5',0,'2017/1/1')");
+
             db.execSQL(
                     "create table Mst_ProductBrandManagement" +
                             "(_ID integer primary key AUTOINCREMENT ,BrandID text, PrincipleID  text,Principle text," +
                             "MainBrand text,Activate integer,LastUpdateDate text)"
             );
+
+            db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(1,'BRND1','PRN1','Principle1','Brand1',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(2,'BRND2','PRN1','Principle1','Brand2',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(3,'BRND3','PRN2','Principle2','Brand3',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(4,'BRND4','PRN2','Principle2','Brand4',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(5,'BRND5','PRN3','Principle3','Brand5',1,'2017/1/1')");
+
+
+
+
+
+
+            db.execSQL("INSERT INTO Mst_ProductMaster(ItemCode,Description,PrincipleID,Principle," +
+                    "BrandID,Brand ,SubBrandID,SubBrand,UnitSize,UnitName,RetailPrice," +
+                    "SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) values ('ITM1','pro1','PRN1','Principle1','BRND1','brand','','',2,'sdas',10.2,8.4,6.2,0,'2017/06/13',15);");
+
+            db.execSQL("INSERT INTO Mst_ProductMaster(ItemCode,Description,PrincipleID,Principle," +
+                    "BrandID,Brand ,SubBrandID,SubBrand,UnitSize,UnitName,RetailPrice," +
+                    "SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) values ('ITM2','pro2','PRN2','Principle2','BRND2','brand2','','',2,'sdas',10.2,8.4,6.2,0,'2017/06/13',15);");
+            db.execSQL("INSERT INTO Mst_ProductMaster(ItemCode,Description,PrincipleID,Principle," +
+                    "BrandID,Brand ,SubBrandID,SubBrand,UnitSize,UnitName,RetailPrice," +
+                    "SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) values ('ITM2','pro3','PRN3','Principle3','BRND3','brand3','','',2,'sdas',10.2,8.4,6.2,0,'2017/06/13',15);");
+            db.execSQL("INSERT INTO Mst_ProductMaster(ItemCode,Description,PrincipleID,Principle," +
+                    "BrandID,Brand ,SubBrandID,SubBrand,UnitSize,UnitName,RetailPrice," +
+                    "SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) values ('ITM4','pro4','PRN3','Principle3','BRND4','brand5','','',2,'sdas',10.2,8.4,6.2,0,'2017/06/13',15);");
+
+            db.execSQL("INSERT INTO Tr_TabStock values(1,'S1','PRN1','BRND1','ITM1','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
+            db.execSQL("INSERT INTO Tr_TabStock values(2,'S2','PRN1','BRND2','ITM1','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
+            db.execSQL("INSERT INTO Tr_TabStock values(3,'S3','PRN2','BRND3','ITM2','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
+            db.execSQL("INSERT INTO Tr_TabStock values(4,'S4','PRN2','BRND4','ITM3','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
+            db.execSQL("INSERT INTO Tr_TabStock values(5,'S5','PRN3','BRND5','ITM4','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
+
+            //db.execSQL("INSERT INTO ");
+
+            db.execSQL("CREATE TABLE Mst_Banks (_id INTEGER PRIMARY KEY AUTOINCREMENT,BankNameID TEXT,BankName TEXT,IsActive INTEGER,LastUpdateDate TEXT)");
+
+            db.execSQL("INSERT INTO Mst_Banks (BankNameID,BankName ,IsActive ,LastUpdateDate)" +
+                    "VALUES ('BNK1','Sampath',0,'2017/3/16')");
+            db.execSQL("INSERT INTO Mst_Banks (BankNameID,BankName ,IsActive ,LastUpdateDate)" +
+                    "VALUES ('BNK2','commercial',0,'2017/3/16')");
+
+            /**
+            insertProduct("ITM1","pro1","PRN1","PRN1","brandid","brand","","",2,"sdas",10.2,8.4,6.2,0,"2017/06/13",15);
+            insertProduct("ITM2","pro2","PRN2","PRN2","brandid","brand","","",2,"sdas",10.2,8.4,6.2,0,"2017/06/13",15);
+            insertProduct("ITM3","pro3","PRN3","PRN3","brandid","brand","","",2,"sdas",10.2,8.4,6.2,0,"2017/06/13",15);
+            insertProduct("ITM4","pro4","PRN3","PRN4","brandid","brand","","",2,"sdas",10.2,8.4,6.2,0,"2017/06/13",15);
+
+
+            inserToStockView("S1","PRN1","brandid","ITM1","batch1","2017/1/16",10.2,8.2,20,"2016/7/1");
+            inserToStockView("S2","PRN1","brandid","ITM1","batch2","2017/1/17",10.2,8.2,20,"2016/7/1");
+            inserToStockView("S3","PRN2","brandid","ITM2","batch1","2017/1/16",10.2,8.2,20,"2016/7/1");
+            inserToStockView("S4","PRN3","brandid","ITM3","batch1","2017/1/16",10.2,8.2,20,"2016/7/1");
+            inserToStockView("S5","PRN4","brandid","ITM4","batch1","2017/1/16",10.2,8.2,20,"2016/7/1");
+             */
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -246,14 +296,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public static final String DATABASE_NAME = "MyDBName.db";
-    public static final String PRODUCT_TABLE_NAME = "mst_productmaster";
+    public static final String PRODUCT_TABLE_NAME = "Mst_ProductMaster";
     public static final String PRODUCT_COLUMN_ID = "id";
     public static final String PRODUCT_COLUMN_ITEMCODE = "itemcode";
     public static final String PRODUCT_COLUMN_DESCRIPTION = "description";
     public static final String PRODUCT_COLUMN_PRINCIPLEID = "principleid";
-    public static final String PRODUCT_COLUMN_PRINCIPLE = "principle";
+    public static final String PRODUCT_COLUMN_PRINCIPLE = "Principle";
     public static final String PRODUCT_COLUMN_BRANDID = "brandid";
-    public static final String PRODUCT_COLUMN_BRAND = "brand";
+    public static final String PRODUCT_COLUMN_BRAND = "Brand";
     public static final String PRODUCT_COLUMN_SUBBRAND_ID = "subbrandid";
     public static final String PRODUCT_COLUMN_SUBBRAND = "subbrand";
     public static final String PRODUCT_COLUMN_UNITSZIE = "unitsize";
@@ -439,7 +489,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "SELECT DISTINCT brand FROM mst_productmaster", null );
+        Cursor res =  db.rawQuery( "SELECT DISTINCT brand FROM Mst_ProductMaster", null );
         res.moveToFirst();
 
         array_list.add("All");

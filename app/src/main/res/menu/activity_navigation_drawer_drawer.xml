@@ -15,6 +15,10 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Display Product Details" />
         <item
+            android:id="@+id/sales_invoice"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Invoice" />
+        <item
             android:id="@+id/add_extra_customer"
             android:icon="@drawable/ic_menu_manage"
             android:title="Add Extra Customer" />
