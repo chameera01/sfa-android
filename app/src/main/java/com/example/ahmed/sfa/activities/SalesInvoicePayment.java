@@ -2,6 +2,9 @@ package com.example.ahmed.sfa.activities;
 
 import android.app.DialogFragment;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +13,17 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.activities.Dialogs.ChequeDialogFragment;
+import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.Cheque;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 import com.example.ahmed.sfa.models.SalesInvoiceSummary;
@@ -81,6 +87,9 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         returnQty = (TextView)findViewById(R.id.si_pay_return_qty);
 
         total = (TextView)findViewById(R.id.si_pay_tot);
+
+        Spinner creditDate = (Spinner)findViewById(R.id.pay_si_credit_dates);
+        creditDate.setAdapter(new DBAdapter(this).getCreditDewDates());
 
         data = this.getIntent().getParcelableArrayListExtra(SalesInvoice.DATAARRAYNAME);
         SalesInvoiceSummary sum = this.getIntent().getParcelableExtra(SalesInvoice.SUMMARYOBJECTNAME);
@@ -189,5 +198,24 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
     @Override
     public void onDialogNegativeClick() {
 
+    }
+
+    class DBAdapter extends BaseDBAdapter{
+        public DBAdapter(Context c){
+            super(c);
+        }
+
+        public ArrayAdapter<String> getCreditDewDates(){
+            ArrayList<String> dates = new ArrayList<>();
+            openDB();
+            Cursor cursor = db.rawQuery("SELECT CreditDays FROM Mst_CreditDays WHERE IsActive=0; ",null);
+            while(cursor.moveToNext()){
+                dates.add(cursor.getInt(0)+"");
+            }
+            closeDB();
+            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,dates);
+            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            return spinnerAdapter;
+        }
     }
 }

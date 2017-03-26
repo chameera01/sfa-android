@@ -271,6 +271,15 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Mst_Banks (BankNameID,BankName ,IsActive ,LastUpdateDate)" +
                     "VALUES ('BNK2','commercial',0,'2017/3/16')");
 
+            db.execSQL("CREATE TABLE Mst_CreditDays (_id INTEGER PRIMARY KEY AUTOINCREMENT,CreditDaysID TEXT,CreditDays INTEGER,IsActive INTEGER,LastUpdateDate TEXT)");
+
+            db.execSQL("INSERT INTO Mst_CreditDays(CreditDaysID,CreditDays,IsActive,LastUpdateDate) " +
+                    "VALUES('CRDT1',30,0,'2017/03/26')");
+            db.execSQL("INSERT INTO Mst_CreditDays(CreditDaysID,CreditDays,IsActive,LastUpdateDate) " +
+                    "VALUES('CRDT2',15,0,'2017/03/26')");
+            db.execSQL("INSERT INTO Mst_CreditDays(CreditDaysID,CreditDays,IsActive,LastUpdateDate) " +
+                    "VALUES('CRDT3',5,0,'2017/03/26')");
+
             /**
             insertProduct("ITM1","pro1","PRN1","PRN1","brandid","brand","","",2,"sdas",10.2,8.4,6.2,0,"2017/06/13",15);
             insertProduct("ITM2","pro2","PRN2","PRN2","brandid","brand","","",2,"sdas",10.2,8.4,6.2,0,"2017/06/13",15);
