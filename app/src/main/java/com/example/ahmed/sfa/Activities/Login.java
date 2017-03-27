@@ -37,8 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
-import com.example.ahmed.sfa.models.JsonHelper;
+import com.example.ahmed.sfa.service.JsonHelper;
 
 import static android.Manifest.permission.READ_CONTACTS;
 

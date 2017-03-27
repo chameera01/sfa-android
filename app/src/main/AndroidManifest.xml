@@ -51,18 +51,19 @@
         <activity
             android:name=".Activities.PendingCustomer"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Activities.ServiceTest">
 
-        </activity>
-        <activity
-            android:name=".Activities.Login"
-            android:label="@string/title_activity_login">
+        <activity android:name=".Activities.ServiceTest">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            </activity>
+        </activity>
+        <activity
+            android:name=".Activities.Login"
+            android:label="@string/title_activity_login"/>
+
+
 
 
 

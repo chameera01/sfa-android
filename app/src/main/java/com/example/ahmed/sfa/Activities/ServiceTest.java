@@ -1,25 +1,21 @@
 package com.example.ahmed.sfa.Activities;
 
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.models.JsonHelper;
-import com.example.ahmed.sfa.models.RestfulWebService;
+import com.example.ahmed.sfa.service.JsonFilter_Send;
+import com.example.ahmed.sfa.service.JsonHelper;
+import com.example.ahmed.sfa.service.JsonObjGenerate;
+import com.example.ahmed.sfa.service.JsonRequestListerner;
+import com.example.ahmed.sfa.service.SyncReturn;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-public class ServiceTest extends AppCompatActivity {
+public class ServiceTest extends AppCompatActivity implements JsonRequestListerner {
 TextView result_view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +26,39 @@ TextView result_view;
     }
 
     public void runJsonCLass(){
-        try {
+        /*try {
             JsonHelper jh = new JsonHelper(result_view);
             jh.sendInitialData("deviceid", "password");
+
         }catch (Exception e){
             Toast.makeText(this,"Error_found:"+e.getMessage(),Toast.LENGTH_LONG).show();
+        }*/
+
+        try {
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93", this);
+            SyncReturn io = new SyncReturn();
+            io.execute(jObjGen);
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
+    }
+/**/
+/**********************/
+    @Override
+    public void receiveData(Object result) {
+        try {
+            Toast.makeText(this, "result" + result.toString(), Toast.LENGTH_LONG).show();
+        }catch (Exception t) {
+            Toast.makeText(this,"toast:"+ t.getMessage(),Toast.LENGTH_LONG ).show();
+        }
+        try{
+            JsonFilter_Send josnFilter= new JsonFilter_Send(this);
+            josnFilter.filterJsonData(result.toString(),"ProductDetails");
+        }catch (Exception e) {
+            Toast.makeText(this,"RecieveData:"+ e.getMessage(),Toast.LENGTH_LONG ).show();
+        }
+
 
     }
 /*
@@ -78,4 +101,6 @@ TextView result_view;
 
         Volley.newRequestQueue(this).add(jsonRequest);
     }*/
+
+
 }
