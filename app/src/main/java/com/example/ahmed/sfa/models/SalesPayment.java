@@ -1,5 +1,7 @@
 package com.example.ahmed.sfa.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import java.text.DecimalFormat;
@@ -8,7 +10,7 @@ import java.text.DecimalFormat;
  * Created by Ahmed on 3/25/2017.
  */
 
-public class SalesPayment {
+public class SalesPayment implements Parcelable{
     private double fullInvDisc;//this is the total invoice descount rate
     private double discount;//this is the discount comes from the invoice
     private double totalDiscount;//this is the total of the discounts
@@ -55,6 +57,33 @@ public class SalesPayment {
         returnQty=0;
         calculateFields();
     }
+
+    protected SalesPayment(Parcel in) {
+        fullInvDisc = in.readDouble();
+        discount = in.readDouble();
+        totalDiscount = in.readDouble();
+        credit = in.readDouble();
+        cheque = in.readDouble();
+        cash = in.readDouble();
+        subTotal = in.readDouble();
+        invQty = in.readInt();
+        freeQty = in.readInt();
+        returnTot = in.readDouble();
+        returnQty = in.readInt();
+        total = in.readDouble();
+    }
+
+    public static final Creator<SalesPayment> CREATOR = new Creator<SalesPayment>() {
+        @Override
+        public SalesPayment createFromParcel(Parcel in) {
+            return new SalesPayment(in);
+        }
+
+        @Override
+        public SalesPayment[] newArray(int size) {
+            return new SalesPayment[size];
+        }
+    };
 
     private void calculateFields(){
 
@@ -164,5 +193,26 @@ public class SalesPayment {
 
     public void setTotalDiscount(double totalDiscount) {
         this.totalDiscount = totalDiscount;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(fullInvDisc);
+        dest.writeDouble(discount);
+        dest.writeDouble(totalDiscount);
+        dest.writeDouble(credit);
+        dest.writeDouble(cheque);
+        dest.writeDouble(cash);
+        dest.writeDouble(subTotal);
+        dest.writeInt(invQty);
+        dest.writeInt(freeQty);
+        dest.writeDouble(returnTot);
+        dest.writeInt(returnQty);
+        dest.writeDouble(total);
     }
 }

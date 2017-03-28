@@ -293,6 +293,18 @@ public class DBHelper extends SQLiteOpenHelper {
             inserToStockView("S4","PRN3","brandid","ITM3","batch1","2017/1/16",10.2,8.2,20,"2016/7/1");
             inserToStockView("S5","PRN4","brandid","ITM4","batch1","2017/1/16",10.2,8.2,20,"2016/7/1");
              */
+            db.execSQL("CREATE TABLE Tr_SalesDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,HeaderID TEXT,ItemCode TEXT,UnitPrice REAL" +
+                    ",BatchNumber TEXT,ExpiryDate TEXT,DiscountRate REAL,DiscountAmount REAL,IssueMode INTEGER,ShelfQty INTEGER" +
+                    ",RequestQty INTEGER,OrderQty INTEGER,FreeQty INTEGER,Total REAL,IsUpload INTEGER,UploadDate TEXT)");
+
+            db.execSQL("CREATE TABLE Tr_InvoiceOutstanding (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,InvoiceDate TEXT," +
+                    "InvoiceNo TEXT,CustomerNo TEXT,InvoiceTotalValue REAL,CreditValue REAL,CurrentCreditValue REAL,CreditDays,LastUpdateDate TEXT," +
+                    "LastUpdateAmount REAL,LastUpdateType INTEGER,InsertDate TEXT,IsUpload TEXT,IsUpdate TEXT);");
+
+            db.execSQL("CREATE TABLE ChequeDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,InvoiceDate TEXT,InvoiceNo TEXT,CustomerNo TEXT" +
+                    ",InvoiceTotalValue REAL,ChequeAmount REAL,ChequeNumber TEXT,BankName TEXT,CollectedDate TEXT,RealizedDate TEXT,IsUpload INTEGER" +
+                    ",IsUpdate INTEGER,Status TEXT,StatusUpdateDate TEXT)");
+
         }catch (SQLException e){
             e.printStackTrace();
         }

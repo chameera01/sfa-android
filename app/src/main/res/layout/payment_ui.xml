@@ -30,7 +30,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="wrap_content"/>
-                <TextView
+                <Spinner
+                    android:id="@+id/pay_si_credit_dates"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content" /><!-- this is used to align all the labels straight-->
@@ -259,10 +260,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/si_pay_return_to_si"
             android:text="Return"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
+            android:id="@+id/si_pay_gen_inv"
             android:text="Generate Invoice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

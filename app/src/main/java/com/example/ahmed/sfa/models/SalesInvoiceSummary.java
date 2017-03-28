@@ -14,6 +14,8 @@ public class SalesInvoiceSummary implements Parcelable{
     private double discount;
     private double subtotal;
     private double total;
+    private double returnVal;
+    private int returnQty;
     private int invoicedQty;
     private int freeQty;
 
@@ -23,6 +25,8 @@ public class SalesInvoiceSummary implements Parcelable{
         total = 0.0;
         invoicedQty = 0;
         freeQty = 0;
+        returnVal =0.0;
+        returnQty=0;
     }
 
     public SalesInvoiceSummary(double discount, double subtotal, double total, int invoicedQty,int freeQty) {
@@ -31,6 +35,8 @@ public class SalesInvoiceSummary implements Parcelable{
         this.total = total;
         this.invoicedQty = invoicedQty;
         this.freeQty = freeQty;
+        returnVal =0.0;
+        returnQty=0;
     }
 
     protected SalesInvoiceSummary(Parcel in) {
@@ -39,6 +45,8 @@ public class SalesInvoiceSummary implements Parcelable{
         total = in.readDouble();
         invoicedQty = in.readInt();
         freeQty = in.readInt();
+        returnVal = in.readDouble();
+        returnQty = in.readInt();
     }
 
     public static final Creator<SalesInvoiceSummary> CREATOR = new Creator<SalesInvoiceSummary>() {
@@ -109,5 +117,7 @@ public class SalesInvoiceSummary implements Parcelable{
         dest.writeDouble(total);
         dest.writeInt(invoicedQty);
         dest.writeInt(freeQty);
+        dest.writeDouble(returnVal);
+        dest.writeInt(returnQty);
     }
 }

@@ -3,6 +3,7 @@ package com.example.ahmed.sfa.activities;
 import android.app.DialogFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.activities.Dialogs.ChequeDialogFragment;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
@@ -91,10 +93,29 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         Spinner creditDate = (Spinner)findViewById(R.id.pay_si_credit_dates);
         creditDate.setAdapter(new DBAdapter(this).getCreditDewDates());
 
-        data = this.getIntent().getParcelableArrayListExtra(SalesInvoice.DATAARRAYNAME);
-        SalesInvoiceSummary sum = this.getIntent().getParcelableExtra(SalesInvoice.SUMMARYOBJECTNAME);
+        data = this.getIntent().getParcelableArrayListExtra(Constants.DATAARRAYNAME);
+        final SalesInvoiceSummary sum = this.getIntent().getParcelableExtra(Constants.SUMMARYOBJECTNAME);
         payment = new SalesPayment(sum);
 
+        Button back = (Button)findViewById(R.id.si_pay_return_to_si);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        Button generateInvoice = (Button)findViewById(R.id.si_pay_gen_inv);
+        generateInvoice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SalesInvoicePayment.this,SalesSummaryActivity.class);
+                intent.putParcelableArrayListExtra(Constants.DATAARRAYNAME,data);
+                intent.putExtra(Constants.SALESPAYMENTSUMMARY,payment);
+                intent.putExtra(Constants.CHEQUE,chequeModel);
+                startActivity(intent);
+            }
+        });
         fullInvDisc.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

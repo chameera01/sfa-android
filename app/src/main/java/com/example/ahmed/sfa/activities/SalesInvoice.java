@@ -42,8 +42,7 @@ import java.util.ArrayList;
  */
 
 public class SalesInvoice extends AppCompatActivity {
-    public static  final String DATAARRAYNAME= "DATAARRAY";
-    public static  final String SUMMARYOBJECTNAME= "SUMMARY";
+
 
     DBAdapter dbAdapter;
     SalesInvoiceProductsTableAdapter productSearchTableAdapter;
@@ -267,8 +266,8 @@ public class SalesInvoice extends AppCompatActivity {
 
     public void showSalesInvoiceSummary(){
         Intent intent = new Intent(this,SalesInvoicePayment.class);
-        intent.putParcelableArrayListExtra(SalesInvoice.DATAARRAYNAME,addedContentTableAdapter.getDataArray());
-        intent.putExtra(SalesInvoice.SUMMARYOBJECTNAME,addedContentTableAdapter.getSalesInvoiceSummary());
+        intent.putParcelableArrayListExtra(Constants.DATAARRAYNAME,addedContentTableAdapter.getDataArray());
+        intent.putExtra(Constants.SUMMARYOBJECTNAME,addedContentTableAdapter.getSalesInvoiceSummary());
         startActivity(intent);
     }
 

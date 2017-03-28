@@ -1,10 +1,13 @@
 package com.example.ahmed.sfa.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Ahmed on 3/26/2017.
  */
 
-public class Cheque {
+public class Cheque implements Parcelable{
     private double chequeVal;
     private String chequeNum;
     private String bank;
@@ -26,6 +29,26 @@ public class Cheque {
         this.collectionDate = "";
         this.realizedDate = "";
     }
+
+    protected Cheque(Parcel in) {
+        chequeVal = in.readDouble();
+        chequeNum = in.readString();
+        bank = in.readString();
+        collectionDate = in.readString();
+        realizedDate = in.readString();
+    }
+
+    public static final Creator<Cheque> CREATOR = new Creator<Cheque>() {
+        @Override
+        public Cheque createFromParcel(Parcel in) {
+            return new Cheque(in);
+        }
+
+        @Override
+        public Cheque[] newArray(int size) {
+            return new Cheque[size];
+        }
+    };
 
     public double getChequeVal() {
         return chequeVal;
@@ -65,5 +88,19 @@ public class Cheque {
 
     public void setRealizedDate(String realizedDate) {
         this.realizedDate = realizedDate;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(chequeVal);
+        dest.writeString(chequeNum);
+        dest.writeString(bank);
+        dest.writeString(collectionDate);
+        dest.writeString(realizedDate);
     }
 }
