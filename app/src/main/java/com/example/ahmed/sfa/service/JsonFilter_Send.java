@@ -16,8 +16,10 @@ import org.json.JSONObject;
 
 public class JsonFilter_Send {
     private  Context context;
-    public  JsonFilter_Send(Context context){
-        context=context;
+    public  JsonFilter_Send(Context c){
+
+
+        context=c;
     }
 
     public   void filterJsonData(String result,String filter) {
@@ -52,6 +54,7 @@ public class JsonFilter_Send {
 
                 case "ProductDetails":
                     Mst_ProductMaster productMst= new Mst_ProductMaster();
+                    DBAdapter adptr=new DBAdapter(context);
 
                     JSONArray jsonProductArray = new JSONArray(result);
                     for (int i = 0; i < jsonProductArray.length(); i++) {
@@ -72,7 +75,7 @@ public class JsonFilter_Send {
                         productMst.setActive( jsonProductObject.optInt("Active"));
                         productMst.setTargetAllow( jsonProductObject.optInt("TargetAllow"));
 
-                        DBAdapter adptr=new DBAdapter(context);
+
                         adptr.setMst_ProductMaster(productMst);
                         //jsonMyArray.add(productMst);
                         //Toast.makeText(this.context,productMst.getBrand(),Toast.LENGTH_LONG).show();

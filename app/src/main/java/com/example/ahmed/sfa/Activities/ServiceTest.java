@@ -47,17 +47,31 @@ TextView result_view;
 /**********************/
     @Override
     public void receiveData(Object result) {
+        if(result!=null){
+            String josnString=result.toString();
+            Toast.makeText(this, "result" + josnString, Toast.LENGTH_LONG).show();
+            try{
+                JsonFilter_Send josnFilter= new JsonFilter_Send(ServiceTest.this.getApplicationContext());
+                josnFilter.filterJsonData(josnString,"ProductDetails");
+            }catch (Exception e) {
+                Toast.makeText(this,"RecieveData:"+ e.getMessage(),Toast.LENGTH_LONG ).show();
+            }
+        }else{
+            Toast.makeText(this,"is nulllll",Toast.LENGTH_LONG ).show();
+        }
+        /**
+        String josnString=result.toString();
         try {
-            Toast.makeText(this, "result" + result.toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "result" + josnString, Toast.LENGTH_LONG).show();
         }catch (Exception t) {
             Toast.makeText(this,"toast:"+ t.getMessage(),Toast.LENGTH_LONG ).show();
         }
         try{
-            JsonFilter_Send josnFilter= new JsonFilter_Send(this);
-            josnFilter.filterJsonData(result.toString(),"ProductDetails");
+            JsonFilter_Send josnFilter= new JsonFilter_Send(ServiceTest.this.getApplicationContext());
+           // josnFilter.filterJsonData(josnString,"ProductDetails");
         }catch (Exception e) {
             Toast.makeText(this,"RecieveData:"+ e.getMessage(),Toast.LENGTH_LONG ).show();
-        }
+        }*/
 
 
     }
