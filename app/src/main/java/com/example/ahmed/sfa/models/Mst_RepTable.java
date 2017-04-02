@@ -14,6 +14,7 @@ public  class Mst_RepTable{
     private  String dealerName;
     private String dealerAdress;
     private String macAdress;
+    private String agentId;
     private int isActive;
     private String lastUpdateDae;
 
@@ -95,5 +96,13 @@ public  class Mst_RepTable{
 
     public void setLastUpdateDae(String lastUpdateDae) {
         this.lastUpdateDae = lastUpdateDae;
+    }
+
+    public String getAgentId() {
+        return agentId;
+    }
+
+    public void setAgentId(String agentId) {
+        this.agentId = agentId;
     }
 }

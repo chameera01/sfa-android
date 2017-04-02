@@ -10,9 +10,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 /*for testing purpose link:http://www.sqlitetutorial.net/tryit/query/sqlite-replace-statement/#1*/
 //import controllers.database.DBHelper;
+import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
+import com.example.ahmed.sfa.models.Mst_RepTable;
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 
 /**
@@ -215,11 +217,28 @@ public class DBAdapter{
 
 
         db.execSQL("INSERT OR REPLACE INTO Mst_ProductMaster (_ID,ItemCode, Description, PrincipleID, Principle, BrandID,Brand,SubBrandID," +
-                "SubBrand,UnitSize,UnitName,RetailPrice,BuyingPrice,Active,TargetAllow) values (" +
+                "SubBrand,UnitSize,UnitName,RetailPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) values (" +
                 "   (select _ID from Mst_ProductMaster where ItemCode = \""+pro.getItemCode()+"\")," +
                 "   \""+pro.getItemCode()+"\",\""+pro.getDescription()+"\",\""+pro.getPrincipleId()+"\",\" "+pro.getPrinciple()+"\"," +
                 "\" "+ pro.getBrandId()+" \",  \" "+ pro.getBrand()+" \",  \""+pro.getSubBrandId()+"\",\""+pro.getSubBrand()+"\",\""+pro.getUnitSize()+"\"   ,         "+
-                "   \""+pro.getUnitName()+"\",\""+pro.getRetailPrice()+"\",\""+pro.getBuyingPrice()+"\"    ,\""+pro.getActive()+"\",\""+pro.getTargetAllow()+"\"       "+
+                "   \""+pro.getUnitName()+"\",\""+pro.getRetailPrice()+"\",\""+pro.getBuyingPrice()+"\"    ,\""+pro.getActive()+"\", \" "+ DateManager.dateToday()+" \"  ,\""+pro.getTargetAllow()+"\"       "+
+                " );");
+
+        closeDB();
+    }
+
+    public void setMst_RepTable(Mst_RepTable rep) {
+
+        openDB();
+
+
+        db.execSQL("INSERT OR REPLACE INTO Mst_RepTable (_ID,RepID,DeviceName,RepName," +
+                "Address ,ContactNo,DealerName,DealerAddress ,MacAddress ,AgentID,IsActive,LastUpdateDate) values (" +
+                "   (select _ID from Mst_RepTable where RepID = \""+rep.getRepId()+"\")," +
+                "   \""+rep.getRepId()+"\",\""+rep.getDeviceName()+"\",\""+rep.getRepName()+"\",\" "+rep.getAddress()+"\"," +
+
+                "   \""+rep.getContactNo()+" \"  , \" "+rep.getDealerName()+" \" , \" "+rep.getDealerAdress()+" \"  , \" "+rep.getMacAdress()+" \"                       "+
+                "   \""+rep.getAgentId()+"\" ,  "+rep.getIsActive() +" , \" "+DateManager.dateToday()+"\"    "+
                 " );");
 
         closeDB();

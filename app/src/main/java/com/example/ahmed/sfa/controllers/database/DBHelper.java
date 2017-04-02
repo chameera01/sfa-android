@@ -30,6 +30,16 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         try{
 
+            /*create tanle to save Active Status*/
+            db.execSQL("CREATE TABLE DeviceCheckController (_ID integer primary key ,DeviceID text,Password text,ACTIVESTATUS text)");
+            /*create table to save login data*/
+            db.execSQL("CREATE TABLE Login (_ID integer primary key AUTOINCREMENT,UserName text,PassWord text)");
+            /*create table for sales rep*/
+            db.execSQL("CREATE TABLE Mst_RepTable " +
+                    "(_ID integer primary key AUTOINCREMENT,RepID text,DeviceName text,RepName text," +
+                    "Address text,ContactNo text,DealerName text,DealerAddress text,MacAddress text,AgentID text,IsActive integer,LastUpdateDate text )");
+
+
             /*create table ProductMAster*/
             db.execSQL(
                     "CREATE TABLE Mst_ProductMaster" +

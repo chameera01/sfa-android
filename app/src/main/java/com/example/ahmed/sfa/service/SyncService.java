@@ -22,9 +22,9 @@ public class SyncService extends Service implements JsonRequestListerner{
 
 
     @Override
-    public void receiveData(Object result) {
+    public void receiveData(String result) {
         if(result!=null){
-            String josnString=result.toString();
+            String josnString=result;
             Toast.makeText(this, "result" + josnString, Toast.LENGTH_LONG).show();
             try{
                 JsonFilter_Send josnFilter= new JsonFilter_Send(SyncService.this.getApplicationContext());
@@ -49,13 +49,17 @@ public class SyncService extends Service implements JsonRequestListerner{
             // Normally we would do some work here, like download a file.
             // For our sample, we just sleep for 5 seconds.
             try {
-                Thread.sleep(10000);
+                Thread.sleep(5000);
 
                 /*****************/
-                JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93",SyncService.this);
+                while (0<1){
+
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93", SyncService.this);
                 SyncReturn io = new SyncReturn();
                 io.execute(jObjGen);
-                Toast.makeText(SyncService.this.contxt,"SERVICE_runiing_10sec",Toast.LENGTH_LONG).show();
+                Toast.makeText(SyncService.this.contxt, "SERVICE_runiing_10sec", Toast.LENGTH_LONG).show();
+                    Thread.sleep(10000);
+                    }
                 /*****************/
 
 
