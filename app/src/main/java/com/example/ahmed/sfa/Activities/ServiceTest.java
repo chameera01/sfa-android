@@ -60,9 +60,9 @@ TextView result_view;
 /**/
 /**********************/
     @Override
-    public void receiveData(Object result) {
+    public void receiveData(String result) {
         if(result!=null){
-            String josnString=result.toString();
+            String josnString=result;
             Toast.makeText(this, "result" + josnString, Toast.LENGTH_LONG).show();
             try{
                 JsonFilter_Send josnFilter= new JsonFilter_Send(ServiceTest.this.getApplicationContext());

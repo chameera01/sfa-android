@@ -1,5 +1,6 @@
 package com.example.ahmed.sfa.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,12 +31,15 @@ ImageView ivProductSync;
 
     public  void setListeners(){
         final LinearLayout app_layer = (LinearLayout) findViewById (R.id.product_layout);
-        /*app_layer.setOnClickListener(new View.OnClickListener() {
+        app_layer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(ManualSync.this,AndroidDatabaseManager.class);
+                //Intent intent = new Intent(activity, AndroidDatabaseManager.class);
+                ManualSync.this.startActivity(intent);
                 Toast.makeText(ManualSync.this, "listenerSet", Toast.LENGTH_LONG).show();
             }
-        });*/
+        });
 
         /*app_layer.setOnHoverListener( new View.OnHoverListener(){
 

@@ -44,12 +44,10 @@
         <activity
             android:name=".Activities.PendingCustomer"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Activities.ServiceTest">
-
-        </activity>
+        <activity android:name=".Activities.ServiceTest"></activity>
         <activity
-            android:name=".Activities.Login"
-            android:label="@string/title_activity_login"></activity>
+            android:name=".Activities.InitialLogin"
+            android:label="@string/title_activity_login" />
 
         <service
             android:name=".service.SyncService"
@@ -63,6 +61,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.Login"></activity>
     </application>
 
 </manifest>

@@ -13,8 +13,10 @@ import java.util.ArrayList;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 
+import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 import com.example.ahmed.sfa.models.Mst_RepTable;
+import com.example.ahmed.sfa.models.Mst_SupplierTable;
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 
 /**
@@ -204,12 +206,7 @@ public class DBAdapter{
 
     }
 
-    public void setMst_ProductBrandManagement() {
-        openDB();
-        db.execSQL("INSERT OR REPLACE INTO Tr_NewCustomer (ID,NewCustomerID ,CustomerName ,Address ,Area ,Town,OwnerContactNo," +
-                " IsUpload ,ApproveStatus ) VALUES ((SELECT ID from Tr_NewCustomer where NewCustomerID='cus_007'),'cus_007','test2DBApt','testAdp ','BDAdp','kadawatha','071562895','uploaded','pending');");
-        closeDB();
-    }
+
 
     public void setMst_ProductMaster(Mst_ProductMaster pro) {
 
@@ -241,6 +238,24 @@ public class DBAdapter{
                 "   \""+rep.getAgentId()+"\" ,  "+rep.getIsActive() +" , \" "+DateManager.dateToday()+"\"    "+
                 " );");
 
+        closeDB();
+    }
+    public void insertMst_SupplierTable(Mst_SupplierTable sup){
+        openDB();
+        db.execSQL(
+                "INSERT OR REPLACE INTO Mst_SupplierTable (_ID,PrincipleID,Principle,Activate," +
+                        "LastUpdateDate) values (" +
+                        "   (select _ID from Mst_SupplierTable where PrincipleID = \""+sup.getPrincipleID()+"\")," +
+                        "   \""+sup.getPrincipleID()+"\",\""+sup.getPrinciple()+"\",\""+sup.getActive()+"\",\" "+DateManager.dateToday()+"\"," +
+                        " );"
+                    );
+        closeDB();
+
+    }
+    public void insertMst_ProductBrandManagement(Mst_ProductBrandManagement proBrand) {
+        openDB();
+        db.execSQL("INSERT OR REPLACE INTO Tr_NewCustomer (ID,NewCustomerID ,CustomerName ,Address ,Area ,Town,OwnerContactNo," +
+                " IsUpload ,ApproveStatus ) VALUES ((SELECT ID from Tr_NewCustomer where NewCustomerID='cus_007'),'cus_007','test2DBApt','testAdp ','BDAdp','kadawatha','071562895','uploaded','pending');");
         closeDB();
     }
 }

@@ -35,7 +35,8 @@
                     android:id="@+id/textView4"
 
                     android:layout_marginStart="179dp"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.02" />
 
                 <ImageView
                     android:layout_width="40dp"
@@ -58,22 +59,23 @@
                 android:background="#aad7f9">
 
                 <TextView
-                    android:text="Update Product Details"
+                    android:text="Update Rep Details"
                     android:layout_width="wrap_content"
                     android:layout_height="34dp"
-                    android:id="@+id/textView2"
+                    android:id="@+id/tv_updateRep"
 
                     android:layout_marginStart="179dp"
-                    android:layout_marginTop="20dp" />
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.12" />
 
                 <ImageView
                     app:srcCompat="@drawable/ico_sync"
-                    android:id="@+id/imageView2"
+                    android:id="@+id/iv_repSync"
                     android:layout_marginTop="0dp"
 
                     android:layout_toEndOf="@+id/textView4"
                     android:layout_marginStart="36dp"
-                    android:layout_weight="0.20"
+                    android:layout_weight="0.8"
                     android:scaleType="fitStart"
                     android:layout_height="40dp"
                     android:layout_width="40dp" />
@@ -88,20 +90,254 @@
                 android:background="#94cbf4">
 
                 <TextView
-                    android:text="Update Product Details"
+                    android:text="Update Suppler Details"
                     android:layout_width="wrap_content"
                     android:layout_height="34dp"
-                    android:id="@+id/textView3"
+                    android:id="@+id/tv_suppler"
+
+                    android:layout_marginStart="179dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.01" />
+
+                <ImageView
+                    app:srcCompat="@drawable/ico_sync"
+                    android:id="@+id/iv_SupplierSync"
+                    android:layout_marginTop="0dp"
+
+                    android:layout_toEndOf="@+id/textView4"
+                    android:layout_marginStart="36dp"
+                    android:layout_weight="0.08"
+                    android:scaleType="fitStart"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#94cbf4">
+
+                <TextView
+                    android:text="Update Product Brand Details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:id="@+id/tv_suppdfler"
 
                     android:layout_marginStart="179dp"
                     android:layout_marginTop="20dp" />
 
                 <ImageView
                     app:srcCompat="@drawable/ico_sync"
-                    android:id="@+id/imageView3"
+                    android:id="@+id/iv_ProductBradnSync"
                     android:layout_marginTop="0dp"
 
                     android:layout_toEndOf="@+id/textView4"
+                    android:layout_marginStart="36dp"
+                    android:layout_weight="0.20"
+                    android:scaleType="fitStart"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#94cbf4">
+
+                <TextView
+                    android:text="Update Customer Status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:id="@+id/tv_customer_status"
+
+                    android:layout_marginStart="179dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.02" />
+
+                <ImageView
+                    app:srcCompat="@drawable/ico_sync"
+                    android:id="@+id/iv_CustomerStatusSync"
+                    android:layout_marginTop="0dp"
+
+                    android:layout_toEndOf="@+id/textView4"
+                    android:layout_marginStart="36dp"
+                    android:layout_weight="0.20"
+                    android:scaleType="fitStart"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#94cbf4">
+
+                <TextView
+                    android:text="Update District Details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:id="@+id/tv_dristrict_details"
+
+                    android:layout_marginStart="179dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.02" />
+
+                <ImageView
+                    app:srcCompat="@drawable/ico_sync"
+                    android:id="@+id/iv_DistrictSync"
+                    android:layout_marginTop="0dp"
+
+                    android:layout_toEndOf="@+id/textView4"
+                    android:layout_marginStart="36dp"
+                    android:layout_weight="0.20"
+                    android:scaleType="fitStart"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#94cbf4">
+
+                <TextView
+                    android:text="Update Territory Details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:id="@+id/tv_territory_details"
+
+                    android:layout_marginStart="179dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.02" />
+
+                <ImageView
+                    app:srcCompat="@drawable/ico_sync"
+                    android:id="@+id/iv_TerritorySync"
+                    android:layout_marginTop="0dp"
+
+                    android:layout_toEndOf="@+id/textView4"
+                    android:layout_marginStart="36dp"
+                    android:layout_weight="0.20"
+                    android:scaleType="fitStart"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#94cbf4">
+
+                <TextView
+                    android:text="Update Route Details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:id="@+id/tv_routey_details"
+
+                    android:layout_marginStart="179dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.03" />
+
+                <ImageView
+                    app:srcCompat="@drawable/ico_sync"
+                    android:id="@+id/iv_RouteSync"
+                    android:layout_marginTop="0dp"
+
+
+                    android:layout_marginStart="36dp"
+                    android:layout_weight="0.20"
+                    android:scaleType="fitStart"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#94cbf4">
+
+                <TextView
+                    android:text="Update Reasons Details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:id="@+id/tv_reason_details"
+
+                    android:layout_marginStart="179dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="0.02" />
+
+                <ImageView
+                    app:srcCompat="@drawable/ico_sync"
+                    android:id="@+id/iv_ReasonSync"
+                    android:layout_marginTop="0dp"
+
+
+                    android:layout_marginStart="36dp"
+                    android:layout_weight="0.20"
+                    android:scaleType="fitStart"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#94cbf4">
+
+                <TextView
+                    android:text="Update CheckInOutPoints Details"
+                    android:layout_width="185dp"
+                    android:layout_height="34dp"
+                    android:id="@+id/tv_checkinOutPoints_details"
+
+                    android:layout_marginStart="179dp"
+                    android:layout_marginTop="20dp" />
+
+                <ImageView
+                    app:srcCompat="@drawable/ico_sync"
+                    android:id="@+id/iv_chechInOutPointsSync"
+                    android:layout_marginTop="0dp"
+
+
+                    android:layout_marginStart="36dp"
+                    android:layout_weight="0.20"
+                    android:scaleType="fitStart"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#94cbf4">
+
+                <TextView
+                    android:text="Update Customer Details"
+                    android:layout_width="185dp"
+                    android:layout_height="34dp"
+                    android:id="@+id/tv_customer_details"
+
+                    android:layout_marginStart="179dp"
+                    android:layout_marginTop="20dp" />
+
+                <ImageView
+                    app:srcCompat="@drawable/ico_sync"
+                    android:id="@+id/iv_CustomerSync"
+                    android:layout_marginTop="0dp"
+
+
                     android:layout_marginStart="36dp"
                     android:layout_weight="0.20"
                     android:scaleType="fitStart"
@@ -117,10 +353,10 @@
                 android:background="#aad7f9">
 
                 <TextView
-                    android:text="Update Product Details"
+                    android:text="Update Target Details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textView5"
+                    android:id="@+id/tv_target_details"
 
                     android:layout_marginStart="179dp"
                     android:layout_marginTop="20dp"

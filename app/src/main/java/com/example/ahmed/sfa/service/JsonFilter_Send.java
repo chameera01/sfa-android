@@ -6,6 +6,8 @@ import android.widget.Toast;
 import com.example.ahmed.sfa.Activities.ServiceTest;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
+import com.example.ahmed.sfa.models.Mst_RepTable;
+import com.example.ahmed.sfa.models.Mst_SupplierTable;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -82,6 +84,56 @@ public class JsonFilter_Send {
                        // result_view.setText(productMst.getBrand());
                     }
                     break;
+                case "RepDetails":
+                    Mst_RepTable rep= new Mst_RepTable();
+                    DBAdapter rep_adptr=new DBAdapter(context);
+
+                    JSONArray jsonRepArray = new JSONArray(result);
+                    for (int i = 0; i < jsonRepArray.length(); i++) {
+                        JSONObject jsonRepObject = jsonRepArray.getJSONObject(i);
+
+                        rep.setRepId( jsonRepObject.optString("RepID"));
+                        rep.setDeviceName(  jsonRepObject.optString("DeviceName"));
+                        rep.setRepName( jsonRepObject.optString("RepName"));
+                        rep.setAddress( jsonRepObject.optString("Address"));
+                        rep.setContactNo(  jsonRepObject.optString("ContactNo"));
+                        rep.setDealerName( jsonRepObject.optString("DealerName"));
+                        rep.setDealerAdress( jsonRepObject.optString("DealerAddress"));
+                        rep.setMacAdress( jsonRepObject.optString("MacAddress"));
+                        rep.setAgentId( jsonRepObject.optString("AgentID"));
+                        rep.setIsActive(  jsonRepObject.optInt("IsActive"));
+
+
+                        rep_adptr.setMst_RepTable(rep);
+                        //jsonMyArray.add(productMst);
+                        //Toast.makeText(this.context,productMst.getBrand(),Toast.LENGTH_LONG).show();
+                        // result_view.setText(productMst.getBrand());
+                    }
+
+                    break;
+
+                case  "SupplierTable":
+                    Mst_SupplierTable sup= new Mst_SupplierTable();
+                    DBAdapter sup_adptr=new DBAdapter(context);
+
+                    JSONArray jsonSupplierArray = new JSONArray(result);
+                    for (int i = 0; i < jsonSupplierArray.length(); i++) {
+                        JSONObject jsonSupObject = jsonSupplierArray.getJSONObject(i);
+
+                        sup.setPrincipleID( jsonSupObject.optString("PrincipleID"));
+                        sup.setPrinciple(  jsonSupObject.optString("Principle"));
+                        sup.setActive( jsonSupObject.optString("Activate"));
+
+
+
+                        sup_adptr.insertMst_SupplierTable(sup);
+                        //jsonMyArray.add(productMst);
+                        //Toast.makeText(this.context,productMst.getBrand(),Toast.LENGTH_LONG).show();
+                        // result_view.setText(productMst.getBrand());
+                    }
+                    break;
+
+
                 default:
                     break;
             }
