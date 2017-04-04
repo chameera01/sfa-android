@@ -38,7 +38,8 @@ public class DBHelper extends SQLiteOpenHelper {
                     "(_ID integer primary key AUTOINCREMENT,RepID text,DeviceName text,RepName text," +
                     "Address text,ContactNo text,DealerName text,DealerAddress text,MacAddress text,AgentID text,IsActive integer,LastUpdateDate text )");
 
-
+            /*insert data into Mst_RepTable*/
+            db.execSQL("INSERT INTO  Mst_RepTable (_ID,RepID,RepName) VALUES(1,'r1','malitnha'); ");
             /*create table ProductMAster*/
             db.execSQL(
                     "CREATE TABLE Mst_ProductMaster" +
@@ -51,7 +52,14 @@ public class DBHelper extends SQLiteOpenHelper {
                     " SubBrand,UnitSize,UnitName,RetailPrice,SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) " +
                     "VALUES ('cd003','desc','prinid1','newphama','brandid','belcosid','subb','subbname',456,'uname',123.4,124.2,562.3,1,'2017-03-26',0);");
 
-
+            /*create MSt_suppler table*/
+            db.execSQL(
+                    "create table Mst_SupplierTable" +
+                            "(_ID integer primary key AUTOINCREMENT , PrincipleID  text,Principle text," +
+                            "Activate  integer,LastUpdateDate text)"
+            );
+            /**Insert data into Mst_supplierTable**/
+            db.execSQL("INSERT INTO Mst_SupplierTable (PrincipleID,Principle) VALUES('Pid','PRINCIPLEnAME')");
 
             //creating the itinerarydetails table
             db.execSQL("CREATE TABLE Tr_ItineraryDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -243,11 +251,8 @@ public class DBHelper extends SQLiteOpenHelper {
             );
             db.execSQL("INSERT INTO Tr_TabStock VALUES (1,'server_id','principle_1','bran_1','cd001','bct_1','2017-10-25',45.50,60.5,895,'2017-02-25');");
 
-            db.execSQL(
-                    "create table Mst_SupplierTable" +
-                            "(_ID integer primary key AUTOINCREMENT , PrincipleID  text,Principle text," +
-                            "Activate  integer,LastUpdateDate text)"
-            );
+
+
             db.execSQL(
                     "create table Mst_ProductBrandManagement" +
                             "(_ID integer primary key AUTOINCREMENT ,BrandID text, PrincipleID  text,Principle text," +

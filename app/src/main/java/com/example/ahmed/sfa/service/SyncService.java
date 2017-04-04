@@ -22,7 +22,7 @@ public class SyncService extends Service implements JsonRequestListerner{
 
 
     @Override
-    public void receiveData(String result) {
+    public void receiveData(String result,String filter) {
         if(result!=null){
             String josnString=result;
             Toast.makeText(this, "result" + josnString, Toast.LENGTH_LONG).show();

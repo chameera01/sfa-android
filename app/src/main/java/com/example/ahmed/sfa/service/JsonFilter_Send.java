@@ -4,7 +4,9 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.ahmed.sfa.Activities.ServiceTest;
+import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
+import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 import com.example.ahmed.sfa.models.Mst_RepTable;
 import com.example.ahmed.sfa.models.Mst_SupplierTable;
@@ -122,7 +124,8 @@ public class JsonFilter_Send {
 
                         sup.setPrincipleID( jsonSupObject.optString("PrincipleID"));
                         sup.setPrinciple(  jsonSupObject.optString("Principle"));
-                        sup.setActive( jsonSupObject.optString("Activate"));
+                        sup.setActive( jsonSupObject.optInt("Activate"));
+
 
 
 
@@ -132,7 +135,30 @@ public class JsonFilter_Send {
                         // result_view.setText(productMst.getBrand());
                     }
                     break;
+                case "ProductBrandManagement":
+                    Mst_ProductBrandManagement brand= new Mst_ProductBrandManagement();
+                    DBAdapter brand_adptr=new DBAdapter(context);
 
+                    JSONArray jsonBrandArray = new JSONArray(result);
+                    for (int i = 0; i < jsonBrandArray.length(); i++) {
+                        JSONObject jsonSupObject = jsonBrandArray.getJSONObject(i);
+
+                        brand.setBrandID( jsonSupObject.optString("BrandID"));
+                        brand.setPrincipleID(  jsonSupObject.optString("PrincipleID"));
+                        brand.setPrinciple(jsonSupObject.optString("Principle"));
+                        brand.setMainBrand(jsonSupObject.optString("MainBrand"));
+                        brand.setActive( jsonSupObject.optInt("Activate"));
+                        brand.setLastUpdateDate(DateManager.dateToday());
+
+
+
+
+                        brand_adptr.insertMst_ProductBrandManagement(brand);
+                        //jsonMyArray.add(productMst);
+                        //Toast.makeText(this.context,productMst.getBrand(),Toast.LENGTH_LONG).show();
+                        // result_view.setText(productMst.getBrand());
+                    }
+                    break;
 
                 default:
                     break;

@@ -228,16 +228,17 @@ public class DBAdapter{
 
         openDB();
 
-
-        db.execSQL("INSERT OR REPLACE INTO Mst_RepTable (_ID,RepID,DeviceName,RepName," +
-                "Address ,ContactNo,DealerName,DealerAddress ,MacAddress ,AgentID,IsActive,LastUpdateDate) values (" +
-                "   (select _ID from Mst_RepTable where RepID = \""+rep.getRepId()+"\")," +
-                "   \""+rep.getRepId()+"\",\""+rep.getDeviceName()+"\",\""+rep.getRepName()+"\",\" "+rep.getAddress()+"\"," +
-
-                "   \""+rep.getContactNo()+" \"  , \" "+rep.getDealerName()+" \" , \" "+rep.getDealerAdress()+" \"  , \" "+rep.getMacAdress()+" \"                       "+
-                "   \""+rep.getAgentId()+"\" ,  "+rep.getIsActive() +" , \" "+DateManager.dateToday()+"\"    "+
-                " );");
-
+            try {
+                db.execSQL("INSERT OR REPLACE INTO Mst_RepTable (_ID,RepID,DeviceName,RepName," +
+                        "Address,ContactNo,DealerName,DealerAddress,MacAddress,AgentID,IsActive,LastUpdateDate) values (" +
+                        "   (select _ID from Mst_RepTable where RepID = \"" + rep.getRepId() + "\")," +
+                        "   \"" + rep.getRepId() + "\",\"" + rep.getDeviceName() + "\",\"" + rep.getRepName() + "\",\" " + rep.getAddress() + "\"," +
+                        "   \"" + rep.getContactNo() + " \"  , \" " + rep.getDealerName() + " \" , \" " + rep.getDealerAdress() + " \"  , \" " + rep.getMacAdress() + " \"                       " +
+                        "   \"" + rep.getAgentId() + "\" ,  " + rep.getIsActive() + " , \" " + DateManager.dateToday() + "\"    " +
+                        " );");
+            }catch (Exception e){
+                Toast.makeText(context,""+e.getMessage(),Toast.LENGTH_LONG).show();
+            }
         closeDB();
     }
     public void insertMst_SupplierTable(Mst_SupplierTable sup){
@@ -254,8 +255,10 @@ public class DBAdapter{
     }
     public void insertMst_ProductBrandManagement(Mst_ProductBrandManagement proBrand) {
         openDB();
-        db.execSQL("INSERT OR REPLACE INTO Tr_NewCustomer (ID,NewCustomerID ,CustomerName ,Address ,Area ,Town,OwnerContactNo," +
-                " IsUpload ,ApproveStatus ) VALUES ((SELECT ID from Tr_NewCustomer where NewCustomerID='cus_007'),'cus_007','test2DBApt','testAdp ','BDAdp','kadawatha','071562895','uploaded','pending');");
+        db.execSQL("INSERT OR REPLACE INTO Mst_ProductBrandManagement (_ID,BrandID ,PrincipleID ,Principle ," +
+                " MainBrand ,Active,LastUpdateDate) VALUES (" +
+                "(SELECT _ID from Mst_ProductBrandManagement where BrandID='"+proBrand.getBrandID()+"'),'"+proBrand.getBrandID()+"','"+proBrand.getPrincipleID()+"','"+proBrand.getPrinciple()+" '," +
+                " '"+proBrand.getMainBrand()+"','"+proBrand.getActive()+"','"+DateManager.dateToday()+"');");
         closeDB();
     }
 }

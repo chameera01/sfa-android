@@ -20,7 +20,7 @@ public class Login extends AppCompatActivity implements JsonRequestListerner {
     }
 
     @Override
-    public void receiveData(String result) {
+    public void receiveData(String result,String filter) {
 
     }
 }

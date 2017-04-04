@@ -7,7 +7,7 @@ public class Mst_SupplierTable {
     //ID | PrincipleID | Principle | Activate | LastUpdateDate
     private  String principleID;
     private  String principle;
-    private  String active;
+    private  int active;
     private  String lastUpdateDate;
 
 
@@ -27,11 +27,11 @@ public class Mst_SupplierTable {
         this.principle = principle;
     }
 
-    public String getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(String active) {
+    public void setActive(int active) {
         this.active = active;
     }
 

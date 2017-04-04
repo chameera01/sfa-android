@@ -60,7 +60,7 @@ TextView result_view;
 /**/
 /**********************/
     @Override
-    public void receiveData(String result) {
+    public void receiveData(String result,String filter) {
         if(result!=null){
             String josnString=result;
             Toast.makeText(this, "result" + josnString, Toast.LENGTH_LONG).show();
