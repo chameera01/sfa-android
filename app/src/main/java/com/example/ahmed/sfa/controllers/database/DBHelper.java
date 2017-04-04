@@ -29,7 +29,13 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         try{
-
+            /*Cretae table Tr_TabStock*/
+            db.execSQL(
+                    "create table Tr_TabStock" +
+                            "(_ID integer primary key AUTOINCREMENT ,ServerID  text,PrincipleID text,BrandID text,ItemCode text,BatchNumber text," +
+                            "ExpiryDate text,SellingPrice real,RetailPrice real," +
+                            "Qty  integer,LastUpdateDate text)"
+            );
             /*create tanle to save Active Status*/
             db.execSQL("CREATE TABLE DeviceCheckController (_ID integer primary key ,DeviceID text,Password text,ACTIVESTATUS text)");
 
@@ -59,11 +65,12 @@ public class DBHelper extends SQLiteOpenHelper {
                             "Activate  integer,LastUpdateDate text)"
             );
             /**Insert data into Mst_supplierTable**/
-            db.execSQL("INSERT INTO Mst_SupplierTable (PrincipleID,Principle) VALUES('Pid','PRINCIPLEnAME')");
+            //db.execSQL("INSERT INTO Mst_SupplierTable (PrincipleID,Principle) VALUES('Pid','PRINCIPLEnAME')");
 
             //creating the itinerarydetails table
             db.execSQL("CREATE TABLE Tr_ItineraryDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "ItineraryID TEXT,ItineraryDate TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,LastUpdateDate TEXT );");
+
 
             //creating the customer table
             db.execSQL("CREATE TABLE Mst_Customermaster (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -160,7 +167,7 @@ public class DBHelper extends SQLiteOpenHelper {
             //db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS5','CUS_IMG_5')");
 
             //INSERT VALUES TO THE ITINERARY DETAILS TABLE
-            db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
+            /*db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
                     ",IsPlanned,IsInvoiced) VALUES ('IT1','2017/3/17','CUS1',1,1);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
                     ",IsPlanned,IsInvoiced) VALUES ('IT2','2017/3/17','CUS2',1,1);");
@@ -179,11 +186,11 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
                     ",IsPlanned,IsInvoiced) VALUES ('IT9','2017/3/17','CUS9',1,1);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT10','2017/3/17','CUS10',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT10','2017/3/17','CUS10',1,0);");*/
 
 
             //adding data to customer table
-            db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
+            /*db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS1','aksa','Town1');");
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS2','barca','Town2');");
@@ -202,7 +209,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS10','palva','Town4');");
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
-                    "VALUES ('CUS5','rose','Town5');");
+                    "VALUES ('CUS5','rose','Town5');");*/
 
 
 
@@ -226,30 +233,24 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
             //only few columns were addesto Tr_NewCustome tables
-            db.execSQL(
+            /*db.execSQL(
                     "create table Tr_NewCustomer" +
                             "(_ID integer primary key AUTOINCREMENT ,NewCustomerID text,CustomerName text,Address text,Area text,Town text,OwnerContactNo text," +
                             "IsUpload text,ApproveStatus text)"
-            );
+            );*/
 
 
 
             //adding datato  table 21 TrNewCustomer
-            db.execSQL("INSERT INTO Tr_NewCustomer VALUES (1,'cus_001','peachnet','addre ','area_dalugama','dalugama','071562895','uploaded','pending');");
+           /* db.execSQL("INSERT INTO Tr_NewCustomer VALUES (1,'cus_001','peachnet','addre ','area_dalugama','dalugama','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (2,'cus_002','healthycafe','addre is goes here','area_dalugama','bambalapitiya','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (3,'cus_003','thilakawardhana','addre ','area_kiribathgoda','kiribathgoda','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (4,'cus_004','kandy','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
-            db.execSQL("INSERT INTO Tr_NewCustomer VALUES (5,'cus_005','thilakawardhana','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
+            db.execSQL("INSERT INTO Tr_NewCustomer VALUES (5,'cus_005','thilakawardhana','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");*/
 
 
 
-            db.execSQL(
-                    "create table Tr_TabStock" +
-                            "(_ID integer primary key AUTOINCREMENT ,ServerID  text,PrincipleID text,BrandID text,ItemCode text,BatchNumber text," +
-                            "ExpiryDate text,SellingPrice real,RetailPrice real," +
-                            "Qty  integer,LastUpdateDate text)"
-            );
-            db.execSQL("INSERT INTO Tr_TabStock VALUES (1,'server_id','principle_1','bran_1','cd001','bct_1','2017-10-25',45.50,60.5,895,'2017-02-25');");
+            /*db.execSQL("INSERT INTO Tr_TabStock VALUES (1,'server_id','principle_1','bran_1','cd001','bct_1','2017-10-25',45.50,60.5,895,'2017-02-25');");*/
 
 
 

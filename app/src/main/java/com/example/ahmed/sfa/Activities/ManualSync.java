@@ -21,6 +21,8 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
     ImageView ivrepSync;
     ImageView ivSupplierSync;
     ImageView ivProductBradnSync;
+    ImageView ivCustomerStatusSync;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivrepSync=(ImageView) findViewById(R.id.iv_repSync);
         ivSupplierSync=(ImageView) findViewById(R.id.iv_SupplierSync);
         ivProductBradnSync=(ImageView) findViewById(R.id.iv_ProductBradnSync);
+        ivCustomerStatusSync=(ImageView) findViewById(R.id.iv_CustomerStatusSync);
 
 
         setListeners();
@@ -103,6 +106,48 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
                 try {
                     JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_SupplierTable/SelectProductMst_SupplierTable?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("SupplierTable");
+
+                    SyncReturn io = new SyncReturn();
+                    io.execute(jObjGen);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(ManualSync.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+
+        /*Syncronize Product Brand Details*/
+        ivProductBradnSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ManualSync.this,"clckedSync",Toast.LENGTH_LONG).show();
+                try {
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93",ManualSync.this);
+                    jObjGen.setFilterType("ProductBrandManagement");
+
+                    SyncReturn io = new SyncReturn();
+                    io.execute(jObjGen);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(ManualSync.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+
+        /*Syncronize CustomerStatus*/
+        ivCustomerStatusSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ManualSync.this,"clckedSync",Toast.LENGTH_LONG).show();
+                try {
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93",ManualSync.this);
+                    jObjGen.setFilterType("ProductBrandManagement");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);

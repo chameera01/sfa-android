@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 
+import com.example.ahmed.sfa.models.Mst_CustomerStatus;
+import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 import com.example.ahmed.sfa.models.Mst_RepTable;
@@ -231,10 +234,10 @@ public class DBAdapter{
             try {
                 db.execSQL("INSERT OR REPLACE INTO Mst_RepTable (_ID,RepID,DeviceName,RepName," +
                         "Address,ContactNo,DealerName,DealerAddress,MacAddress,AgentID,IsActive,LastUpdateDate) values (" +
-                        "   (select _ID from Mst_RepTable where RepID = \"" + rep.getRepId() + "\")," +
-                        "   \"" + rep.getRepId() + "\",\"" + rep.getDeviceName() + "\",\"" + rep.getRepName() + "\",\" " + rep.getAddress() + "\"," +
-                        "   \"" + rep.getContactNo() + " \"  , \" " + rep.getDealerName() + " \" , \" " + rep.getDealerAdress() + " \"  , \" " + rep.getMacAdress() + " \"                       " +
-                        "   \"" + rep.getAgentId() + "\" ,  " + rep.getIsActive() + " , \" " + DateManager.dateToday() + "\"    " +
+                        "(select _ID from Mst_RepTable where RepID = '" + rep.getRepId() + "')," +
+                        "'" + rep.getRepId() + "','" + rep.getDeviceName() + "','" + rep.getRepName() + "','" + rep.getAddress() + "'," +
+                        "'" + rep.getContactNo() + "','" + rep.getDealerName() + "','" + rep.getDealerAdress() + "','" + rep.getMacAdress() + "'," +
+                        "'" + rep.getAgentId() + "'," + rep.getIsActive() + ",'" + DateManager.dateToday() + "'" +
                         " );");
             }catch (Exception e){
                 Toast.makeText(context,""+e.getMessage(),Toast.LENGTH_LONG).show();
@@ -246,8 +249,8 @@ public class DBAdapter{
         db.execSQL(
                 "INSERT OR REPLACE INTO Mst_SupplierTable (_ID,PrincipleID,Principle,Activate," +
                         "LastUpdateDate) values (" +
-                        "   (select _ID from Mst_SupplierTable where PrincipleID = \""+sup.getPrincipleID()+"\")," +
-                        "   \""+sup.getPrincipleID()+"\",\""+sup.getPrinciple()+"\",\""+sup.getActive()+"\",\" "+DateManager.dateToday()+"\"," +
+                        "(select _ID from Mst_SupplierTable where PrincipleID ='"+sup.getPrincipleID()+"')," +
+                        "'"+sup.getPrincipleID()+"','"+sup.getPrinciple()+"','"+sup.getActive()+"','"+DateManager.dateToday()+"'" +
                         " );"
                     );
         closeDB();
@@ -255,10 +258,29 @@ public class DBAdapter{
     }
     public void insertMst_ProductBrandManagement(Mst_ProductBrandManagement proBrand) {
         openDB();
-        db.execSQL("INSERT OR REPLACE INTO Mst_ProductBrandManagement (_ID,BrandID ,PrincipleID ,Principle ," +
-                " MainBrand ,Active,LastUpdateDate) VALUES (" +
-                "(SELECT _ID from Mst_ProductBrandManagement where BrandID='"+proBrand.getBrandID()+"'),'"+proBrand.getBrandID()+"','"+proBrand.getPrincipleID()+"','"+proBrand.getPrinciple()+" '," +
-                " '"+proBrand.getMainBrand()+"','"+proBrand.getActive()+"','"+DateManager.dateToday()+"');");
+
+        Log.w("line","came inside dbadapter");
+        db.execSQL("INSERT OR REPLACE INTO Mst_ProductBrandManagement(_ID,BrandID ,PrincipleID,Principle," +
+                " MainBrand,Active,LastUpdateDate)  values(" +
+                "(select _ID from Mst_ProductBrandManagement where BrandID='"+proBrand.getBrandID()+"'),'"+proBrand.getBrandID()+"','"+proBrand.getPrincipleID()+"','"+proBrand.getPrinciple()+"'," +
+                "'"+proBrand.getMainBrand()+"',"+proBrand.getActive()+",'"+DateManager.dateToday()+"');");
         closeDB();
+    }
+    public void insertCustomerStatus(Mst_CustomerStatus cusStatus){
+        openDB();
+        try{
+            //_id INTEGER PRIMARY KEY AUTOINCREMENT,StatusID TEXT,Status TEXT,isActive INTEGER,LastUpdateDate TEXT
+            db.execSQL(
+                    "INSERT OR REPLACE INTO Mst_CustomerStatus (_id ,StatusID,Status,isActive," +
+                            "LastUpdateDate) values (" +
+                            "(select _ID from Mst_CustomerStatus where StatusID='"+cusStatus.getStatusId()+"')," +
+                            "'"+cusStatus.getStatus()+"',"+cusStatus.getIsActive()+",'"+DateManager.dateToday()+"'" +
+                            " );"
+            );
+        }catch (Exception e){
+            e.getMessage();
+        }
+        closeDB();
+
     }
 }
