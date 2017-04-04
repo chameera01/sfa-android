@@ -2,6 +2,7 @@ package com.example.ahmed.sfa.activities.supportactivities;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -15,8 +16,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.activities.Home;
+import com.example.ahmed.sfa.activities.SalesInvoice;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.ImageManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
@@ -52,9 +55,9 @@ public class CustomerPopupFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState){
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState){
         this.onCreate(savedInstanceState);
-        String cusNo =getCurrentCustomer();
+        final String cusNo =getCurrentCustomer();
 
         final DBAdapter adapter = new DBAdapter(getActivity().getApplicationContext());
 
@@ -62,10 +65,19 @@ public class CustomerPopupFragment extends Fragment {
 
         Log.w("Cursor Check","is Not Empty");
         //Customer customer = new Customer(,,,,,,cursor.getString(6), cursor.getString(7));
-        ;;
         View customerView = inflater.inflate(R.layout.customerpopupforhomeui, container, false);
         reason = (Spinner)customerView.findViewById(R.id.reason_customer_skip);
         reason.setAdapter(adapter.getReasons());
+        Button generateInvBtn = (Button)customerView.findViewById(R.id.generateinvoice);
+        generateInvBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomerPopupFragment.this.getActivity(), SalesInvoice.class);
+                intent.putExtra(Constants.CUSTOMER_NO,cusNo);
+                intent.putExtra(Constants.ITINERARY,itineraryforCurrentCustomer);
+                startActivity(intent);
+            }
+        });
         Button dismissBtn = (Button) customerView.findViewById(R.id.close_popup);
         Button skipBtn = (Button) customerView.findViewById(R.id.skipp_customer);
         skipBtn.setOnClickListener(new View.OnClickListener() {
@@ -97,10 +109,6 @@ public class CustomerPopupFragment extends Fragment {
             ((ImageView) customerView.findViewById(R.id.customer_image)).setImageBitmap(bitmap);
 
         return customerView;
-
-        //Log.w("Cursor Check","is Empty");
-
-        //Customer  customer = new Customer("1","Ifhaam","Matale","124/d3 Kuriwela Ukuwela","0776699609","2017/3/1","2017/3/1");
 
     }
 

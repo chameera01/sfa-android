@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -342,6 +343,7 @@ public class SalesInvoiceAddedChoicesAdapter {
 
 
     public void addToList(SalesInvoiceModel model){
+        Log.w("adding model",model.getId());
         data.add(model);
         initTable();
     }

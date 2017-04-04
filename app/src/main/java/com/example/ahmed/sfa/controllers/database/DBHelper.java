@@ -60,7 +60,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     "ImageID TEXT,Latitude REAL,Longitude REAL,isUpload INTEGER,UploadDate TEXT,ApproveStatus INTEGER,LastUpdateDate TEXT);");
 
             //create Tr_DailyRouteDetails
-            db.execSQL("CREATE TABLE Tr_DailyRouteDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,Date TEXT,ItineraryID TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,InvoiceNo TEXT,Reasons TEXT,Comment TEXT,IsUpload TEXT,UploadDate TEXT)");
+            db.execSQL("CREATE TABLE Tr_DailyRouteDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,Date TEXT,ItineraryID TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,InvoiceNo INTEGER,Reasons TEXT,Comment TEXT,IsUpload TEXT,UploadDate TEXT)");
 
             //create table for check in check out points
             db.execSQL("CREATE TABLE Mst_CheckInOutPoints (_id INTEGER PRIMARY KEY AUTOINCREMENT,ServerID TEXT, Type TEXT," +
@@ -77,9 +77,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
             //create  Tr_SalesHeader table
             db.execSQL("CREATE TABLE Tr_SalesHeader(_id INTEGER PRIMARY KEY AUTOINCREMENT,ItineraryID TEXT,CustomerNo TEXT,InvoiceNo TEXT,InvoiceDate TEXT,PaymentTime TEXT" +
-                    "SubTotal REAL,InvoiceTotal REAL,FullDiscountRate REAL,DiscountAmount REAL,DiscountType REAL,IsOnInvoiceReturn INTEGER,OnInvoiceReturnNo TEXT" +
-                    "OnInvoiceReturnValue REAL,CreditAmount REAL,CashAmount REAL,ChequeAmount REAL,Isprint INTEGER,ProductCount INTEGER" +
-                    "InvoiceType TEXT,Latitude REAL,Longitude REAL,IsUpload INTEGER,UploadDate TEXT)");
+                    ",SubTotal REAL,InvoiceTotal REAL,FullDiscountRate REAL,DiscountAmount REAL,DiscountType REAL,IsOnInvoiceReturn INTEGER,OnInvoiceReturnNo TEXT" +
+                    ",OnInvoiceReturnValue REAL,CreditAmount REAL,CashAmount REAL,ChequeAmount REAL,Isprint INTEGER,ProductCount INTEGER" +
+                    ",InvoiceType TEXT,Latitude REAL,Longitude REAL,IsUpload INTEGER,UploadDate TEXT)");
 
             //insert data into reasons table
             db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN1','Reason 1',1);");
@@ -129,25 +129,25 @@ public class DBHelper extends SQLiteOpenHelper {
 
             //INSERT VALUES TO THE ITINERARY DETAILS TABLE
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT1','2017/3/17','CUS1',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT1','2017/4/2','CUS1',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT2','2017/3/17','CUS2',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT2','2017/4/2','CUS2',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT3','2017/3/17','CUS3',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT3','2017/4/2','CUS3',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT4','2017/3/17','CUS4',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT4','2017/4/2','CUS4',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT5','2017/3/17','CUS5',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT5','2017/4/2','CUS5',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT6','2017/3/17','CUS6',1,2);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT6','2017/4/2','CUS6',1,2);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT7','2017/3/17','CUS7',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT7','2017/4/1','CUS7',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT8','2017/3/17','CUS8',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT8','2017/4/1','CUS8',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT9','2017/3/17','CUS9',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT9','2017/4/1','CUS9',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT10','2017/3/17','CUS10',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT10','2017/4/1','CUS10',1,0);");
 
 
             //adding data to customer table
@@ -298,12 +298,21 @@ public class DBHelper extends SQLiteOpenHelper {
                     ",RequestQty INTEGER,OrderQty INTEGER,FreeQty INTEGER,Total REAL,IsUpload INTEGER,UploadDate TEXT)");
 
             db.execSQL("CREATE TABLE Tr_InvoiceOutstanding (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,InvoiceDate TEXT," +
-                    "InvoiceNo TEXT,CustomerNo TEXT,InvoiceTotalValue REAL,CreditValue REAL,CurrentCreditValue REAL,CreditDays,LastUpdateDate TEXT," +
+                    "InvoiceNo TEXT,CustomerNo TEXT,InvoiceTotalValue REAL,CreditValue REAL,CurrentCreditValue REAL,CreditDays INTEGER,LastUpdateDate TEXT," +
                     "LastUpdateAmount REAL,LastUpdateType INTEGER,InsertDate TEXT,IsUpload TEXT,IsUpdate TEXT);");
 
             db.execSQL("CREATE TABLE ChequeDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,InvoiceDate TEXT,InvoiceNo TEXT,CustomerNo TEXT" +
                     ",InvoiceTotalValue REAL,ChequeAmount REAL,ChequeNumber TEXT,BankName TEXT,CollectedDate TEXT,RealizedDate TEXT,IsUpload INTEGER" +
                     ",IsUpdate INTEGER,Status TEXT,StatusUpdateDate TEXT)");
+            db.execSQL("CREATE TABLE Mst_InvoiceNumbers_Management(_id INTEGER PRIMARY KEY AUTOINCREMENT,InvoiceNo INTEGER,InvoiceReturnNo INTEGER,CollectionNoteNo INTEGER,LastUpdateDate TEXT)");
+            db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management(InvoiceNo) VALUES (5);");
+
+            db.execSQL("CREATE TABLE Tr_TargetData (_id INTEGER PRIMARY KEY AUTOINCREMENT,ServerID TEXT,Date TEXT,Month TEXT,TargetValue INTEGER)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG1','2017/04/03','April',35000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG2','2017/04/02','April',20000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','2017/04/01','April',15000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG4','2017/03/31','March',50000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG5','2017/03/30','March',30000)");
 
         }catch (SQLException e){
             e.printStackTrace();

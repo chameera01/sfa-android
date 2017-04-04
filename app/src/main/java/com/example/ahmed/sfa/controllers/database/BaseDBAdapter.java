@@ -2,6 +2,7 @@ package com.example.ahmed.sfa.controllers.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.BaseAdapter;
 
 /**

@@ -1,7 +1,10 @@
 package com.example.ahmed.sfa.models;
 
+import android.location.LocationManager;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.example.ahmed.sfa.controllers.PermissionManager;
 
 import java.text.DecimalFormat;
 
@@ -18,6 +21,8 @@ public class SalesInvoiceSummary implements Parcelable{
     private int returnQty;
     private int invoicedQty;
     private int freeQty;
+
+
 
     public SalesInvoiceSummary() {
         discount = 0.0;
@@ -37,6 +42,8 @@ public class SalesInvoiceSummary implements Parcelable{
         this.freeQty = freeQty;
         returnVal =0.0;
         returnQty=0;
+
+
     }
 
     protected SalesInvoiceSummary(Parcel in) {
@@ -104,6 +111,8 @@ public class SalesInvoiceSummary implements Parcelable{
     public void setFreeQty(int freeQty) {
         this.freeQty = freeQty;
     }
+
+
 
     @Override
     public int describeContents() {

@@ -47,7 +47,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_alignParentStart="true"
                         android:layout_alignParentEnd="true"
-                        ></SearchView>
+                        />
                     <ListView
                         android:id="@+id/routelist"
                         android:paddingTop="10dp"
@@ -55,7 +55,7 @@
                         android:layout_height="match_parent"
                         android:choiceMode="singleChoice"
 
-                        android:layout_below="@+id/routesearch"></ListView>
+                        android:layout_below="@+id/routesearch"/>
 
                 </LinearLayout>
                 <ScrollView
@@ -87,7 +87,7 @@
                             android:layout_height="222dp"
                             android:background="@drawable/backshadow"
                             android:name="com.example.ahmed.sfa.activities.supportactivities.WeeklyGraphFragment"
-                            tools:layout="@layout/graph"></fragment>
+                            tools:layout="@layout/graph"/>
 
                         <fragment
                             android:id="@+id/monthlytargetfragment"
@@ -95,7 +95,7 @@
                             android:layout_height="222dp"
                             android:background="@drawable/backshadow"
                             android:name="com.example.ahmed.sfa.activities.supportactivities.WeeklyGraphFragment"
-                            tools:layout="@layout/graph"></fragment>
+                            tools:layout="@layout/graph"/>
 
                     </LinearLayout>
                 </ScrollView>

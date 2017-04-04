@@ -451,12 +451,13 @@ public class SalesInvoiceProductsTableAdapter {
         public ArrayList<SalesInvoiceModel> getAllData(){
             ArrayList<SalesInvoiceModel> data = new ArrayList<>();
             openDB();
-            Cursor cursor = db.rawQuery("SELECT b._id,a.ItemCode,a.Description,b.BatchNumber,b.ExpiryDate,b.SellingPrice,b.Qty" +
+            Cursor cursor = db.rawQuery("SELECT b.ServerID,a.ItemCode,a.Description,b.BatchNumber,b.ExpiryDate,b.SellingPrice,b.Qty" +
                     " FROM Mst_ProductMaster a inner join Tr_TabStock b " +
                     "on a.ItemCode  = b.ItemCode ;",null);
 
             while(cursor.moveToNext()){
                 data.add(new SalesInvoiceModel(cursor.getString(0),cursor.getString(1),cursor.getString(2),cursor.getString(3),cursor.getString(4),cursor.getDouble(5),cursor.getInt(6)));
+
             }
             closeDB();
 
@@ -467,7 +468,7 @@ public class SalesInvoiceProductsTableAdapter {
             ArrayList<SalesInvoiceModel> data = new ArrayList<>();
             openDB();
 
-            String sql = "SELECT b._id, a.ItemCode,a.Description,b.BatchNumber,b.ExpiryDate,b.SellingPrice,b.Qty" +
+            String sql = "SELECT b.ServerID, a.ItemCode,a.Description,b.BatchNumber,b.ExpiryDate,b.SellingPrice,b.Qty" +
                     " FROM Mst_ProductMaster a inner join Tr_TabStock b " +
                     "on a.ItemCode = b.ItemCode WHERE ";
 

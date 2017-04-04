@@ -30,6 +30,7 @@ import android.widget.Toast;
 
 
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.ImageManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
@@ -49,6 +50,8 @@ import java.util.List;
  */
 
 public class AddCustomer extends AppCompatActivity {
+    private Alert alert;
+
     ImageManager imgMan;
     DBAdapter dbAdapter;
 
@@ -116,7 +119,7 @@ public class AddCustomer extends AppCompatActivity {
 
         //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         //navigationView.setNavigationItemSelectedListener(nvMan);
-
+        alert = new Alert(this);
 
         savedInstance = savedInstanceState;
         init();
@@ -221,9 +224,9 @@ public class AddCustomer extends AppCompatActivity {
                     public void onClick(View v) {
                         //validate the input if valid proceed otherwise return error message
                         if(validateInputs())
-                            showAlert("Confirm","Are you sure to save this customer","Yes","No",confirmedAddingListener,null);
+                            alert.showAlert("Confirm","Are you sure to save this customer","Yes","No",confirmedAddingListener,null);
                         else
-                            showAlert("Input Invalid","Please check your inputs and try again!","OK","Back",null,null);
+                            alert.showAlert("Input Invalid","Please check your inputs and try again!","OK","Back",null,null);
 
                     }
                 });
@@ -305,29 +308,7 @@ public class AddCustomer extends AppCompatActivity {
         return true;
     }
 
-    void showAlert(String title , String message, String positiveButtonCaption, String negativeButtonCaption,
-                   DialogInterface.OnClickListener positiveButtonClickListener,DialogInterface.OnClickListener negativeButtonClickListener) {
 
-        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-        alertDialog.setTitle(title);
-        alertDialog.setMessage(message);
-
-        DialogInterface.OnClickListener nulllistener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-
-            }
-        };
-
-        if(positiveButtonClickListener==null)positiveButtonClickListener = nulllistener;
-        if(negativeButtonClickListener==null)negativeButtonClickListener = nulllistener;
-
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,negativeButtonCaption,negativeButtonClickListener);
-
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,positiveButtonCaption,positiveButtonClickListener);
-        alertDialog.show();
-    }
 
 
     //this method takes the image captured and initializes it to the instance variable

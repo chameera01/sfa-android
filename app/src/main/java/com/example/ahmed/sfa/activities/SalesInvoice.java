@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
@@ -27,6 +27,7 @@ import com.example.ahmed.sfa.controllers.adapters.SalesInvoiceAddedChoicesAdapte
 import com.example.ahmed.sfa.controllers.adapters.SalesInvoiceProductsTableAdapter;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.Brand;
+import com.example.ahmed.sfa.models.Itinerary;
 import com.example.ahmed.sfa.models.Principle;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 import com.example.ahmed.sfa.models.SalesInvoiceSummary;
@@ -59,6 +60,9 @@ public class SalesInvoice extends AppCompatActivity {
     TextView invTot;
     TextView tot;
 
+    String customerNo;
+    Itinerary itinerary;
+
     private boolean showInvoiced;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -80,6 +84,10 @@ public class SalesInvoice extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sales_invoice_layout);
 
+        customerNo = getIntent().getStringExtra(Constants.CUSTOMER_NO);
+        itinerary = getIntent().getParcelableExtra(Constants.ITINERARY);
+
+        //Toast.makeText(getApplicationContext(),"taken +"+customerNo+" -- "+itinerary.getId(),Toast.LENGTH_SHORT).show();
         showInvoiced(false);
 
 
@@ -141,6 +149,16 @@ public class SalesInvoice extends AppCompatActivity {
         invTot = (TextView)findViewById(R.id.inv_qty_si);
         discount = (TextView)findViewById(R.id.discount_si);
         tot = (TextView)findViewById(R.id.tot_si);
+
+        Button nextBtn = (Button) findViewById(R.id.next_si);
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent = new Intent(SalesInvoice.this, SalesInvoicePayment.class);
+                //startActivity(intent);
+                showSalesInvoiceSummary();
+            }
+        });
     }
 
     private void showHideInvoiced() {
@@ -217,15 +235,7 @@ public class SalesInvoice extends AppCompatActivity {
             }
         });
 
-        Button nextBtn = (Button) findViewById(R.id.next_si);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(SalesInvoice.this, SalesInvoicePayment.class);
-                //startActivity(intent);
-                showSalesInvoiceSummary();
-            }
-        });
+
     }
 
     /**
@@ -266,8 +276,10 @@ public class SalesInvoice extends AppCompatActivity {
 
     public void showSalesInvoiceSummary(){
         Intent intent = new Intent(this,SalesInvoicePayment.class);
-        intent.putParcelableArrayListExtra(Constants.DATAARRAYNAME,addedContentTableAdapter.getDataArray());
-        intent.putExtra(Constants.SUMMARYOBJECTNAME,addedContentTableAdapter.getSalesInvoiceSummary());
+        intent.putParcelableArrayListExtra(Constants.DATA_ARRAY_NAME,addedContentTableAdapter.getDataArray());
+        intent.putExtra(Constants.SUMMARY_OBJECT_NAME,addedContentTableAdapter.getSalesInvoiceSummary());
+        intent.putExtra(Constants.CUSTOMER_NO,customerNo);
+        intent.putExtra(Constants.ITINERARY,itinerary);
         startActivity(intent);
     }
 

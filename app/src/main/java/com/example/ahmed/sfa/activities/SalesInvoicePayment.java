@@ -5,28 +5,25 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.CursorIndexOutOfBoundsException;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.activities.Dialogs.ChequeDialogFragment;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.Cheque;
+import com.example.ahmed.sfa.models.Itinerary;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 import com.example.ahmed.sfa.models.SalesInvoiceSummary;
 import com.example.ahmed.sfa.models.SalesPayment;
@@ -60,6 +57,13 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
 
     Cheque chequeModel;
 
+    String customerNo;
+    Itinerary itinerary;
+
+    Spinner creditDays;
+
+    int selectCreditDatePosition;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,11 +94,26 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
 
         total = (TextView)findViewById(R.id.si_pay_tot);
 
-        Spinner creditDate = (Spinner)findViewById(R.id.pay_si_credit_dates);
-        creditDate.setAdapter(new DBAdapter(this).getCreditDewDates());
+        creditDays = (Spinner)findViewById(R.id.pay_si_credit_dates);
+        creditDays.setAdapter(new DBAdapter(this).getCreditDewDates());
+        creditDays.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectCreditDatePosition = position;
+                payment.setCreditDays(Integer.parseInt(creditDays.getSelectedItem().toString()));
+            }
 
-        data = this.getIntent().getParcelableArrayListExtra(Constants.DATAARRAYNAME);
-        final SalesInvoiceSummary sum = this.getIntent().getParcelableExtra(Constants.SUMMARYOBJECTNAME);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        data = this.getIntent().getParcelableArrayListExtra(Constants.DATA_ARRAY_NAME);
+        for(SalesInvoiceModel d :data){
+            Log.w("here id",d.getId());
+        }
+        final SalesInvoiceSummary sum = this.getIntent().getParcelableExtra(Constants.SUMMARY_OBJECT_NAME);
         payment = new SalesPayment(sum);
 
         Button back = (Button)findViewById(R.id.si_pay_return_to_si);
@@ -110,9 +129,11 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SalesInvoicePayment.this,SalesSummaryActivity.class);
-                intent.putParcelableArrayListExtra(Constants.DATAARRAYNAME,data);
-                intent.putExtra(Constants.SALESPAYMENTSUMMARY,payment);
+                intent.putParcelableArrayListExtra(Constants.DATA_ARRAY_NAME,data);
+                intent.putExtra(Constants.SALES_PAYMENT_SUMMARY,payment);
                 intent.putExtra(Constants.CHEQUE,chequeModel);
+                intent.putExtra(Constants.ITINERARY,itinerary);
+                intent.putExtra(Constants.CUSTOMER_NO,customerNo);
                 startActivity(intent);
             }
         });
@@ -178,6 +199,8 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         });
 
         //Toast.makeText(getApplicationContext(),"Size of the array"+data.size(),Toast.LENGTH_LONG).show();
+        customerNo = getIntent().getStringExtra(Constants.CUSTOMER_NO);
+        itinerary = getIntent().getParcelableExtra(Constants.ITINERARY);
 
         init(true);
     }
@@ -202,6 +225,8 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         returnQty.setText(payment.getReturnQty()+"");
 
         total.setText(payment.getTotal()+"");
+
+        if(!(payment.getCreditDays()==0))creditDays.setSelection(selectCreditDatePosition);
     }
 
     private void showChequeDialog(){

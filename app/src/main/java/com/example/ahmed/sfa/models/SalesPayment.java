@@ -23,6 +23,7 @@ public class SalesPayment implements Parcelable{
     private int invQty;
     private int freeQty;
 
+    private int creditDays;
 
     private double returnTot;
     private int returnQty;
@@ -55,6 +56,7 @@ public class SalesPayment implements Parcelable{
         cash=0;
         returnTot=0;
         returnQty=0;
+        creditDays=0;
         calculateFields();
     }
 
@@ -71,6 +73,15 @@ public class SalesPayment implements Parcelable{
         returnTot = in.readDouble();
         returnQty = in.readInt();
         total = in.readDouble();
+        creditDays = in.readInt();
+    }
+
+    public int getCreditDays() {
+        return creditDays;
+    }
+
+    public void setCreditDays(int creditDays) {
+        this.creditDays = creditDays;
     }
 
     public static final Creator<SalesPayment> CREATOR = new Creator<SalesPayment>() {
@@ -214,5 +225,6 @@ public class SalesPayment implements Parcelable{
         dest.writeDouble(returnTot);
         dest.writeInt(returnQty);
         dest.writeDouble(total);
+        dest.writeInt(creditDays);
     }
 }
