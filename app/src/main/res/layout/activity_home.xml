@@ -86,7 +86,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="222dp"
                             android:background="@drawable/backshadow"
-                            android:name="com.example.ahmed.sfa.activities.supportactivities.WeeklyGraphFragment"
+                            android:name="com.example.ahmed.sfa.activities.supportactivities.DailyGraphFragment"
                             tools:layout="@layout/graph"/>
 
                         <fragment
