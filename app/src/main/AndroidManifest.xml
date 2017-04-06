@@ -47,7 +47,9 @@
         <activity android:name=".Activities.ServiceTest"></activity>
         <activity
             android:name=".Activities.InitialLogin"
-            android:label="@string/title_activity_login" />
+            android:label="@string/title_activity_login" >
+
+        </activity>
 
         <service
             android:name=".service.SyncService"
@@ -55,13 +57,15 @@
             android:exported="true" />
 
         <activity android:name=".Activities.ManualSync">
+
+        </activity>
+        <activity android:name=".Activities.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.Login"></activity>
     </application>
 
 </manifest>

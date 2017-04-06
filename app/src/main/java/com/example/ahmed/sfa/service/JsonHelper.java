@@ -1,11 +1,16 @@
 package com.example.ahmed.sfa.service;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ahmed.sfa.Activities.InitialLogin;
+import com.example.ahmed.sfa.Activities.Login;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
+import com.example.ahmed.sfa.controllers.database.DBHelper;
+import com.example.ahmed.sfa.models.DeviceCheckController;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 
 import org.json.JSONArray;
@@ -46,9 +51,9 @@ public class JsonHelper {
 
 
     /*initial login y sending device Id n password to server*/
-    public  String initialLoging(String devideId,String pass){
+    public  DeviceCheckController initialLoging(final String deviceId, final String pass){
 
-        final String[] recieveData = new String[1];
+        final  DeviceCheckController  recieveData = new DeviceCheckController();
 
         new JsonDataCallback() {
             @Override
@@ -62,20 +67,48 @@ public class JsonHelper {
                 try {
                     JSONArray jsonArray = new JSONArray(tmpData);
                     JSONObject jsonObject=jsonArray.getJSONObject(0);
-                    recieveData[0] =jsonObject.optString("ACTIVESTATUS");
+
+                    /*recieveData.setStatus(jsonObject.optString("ACTIVESTATUS"));
+                    recieveData.setDevice_id(jsonObject.optString("DeviceID"));
+                    recieveData.setPass(jsonObject.optString("Password"));*/
+                    DeviceCheckController devCheck= new DeviceCheckController();
+                    devCheck.setDevice_id(deviceId);
+                    devCheck.setPass(pass);
+                    devCheck.setStatus(jsonObject.optString("ACTIVESTATUS"));
+
+                    Toast.makeText(context,jsonObject.toString()+"*",Toast.LENGTH_LONG).show();
                     result_view.setText(jsonObject.optString("ACTIVESTATUS"));
+
+                    DBAdapter adp=new DBAdapter(context);
+                    adp.insertDeviceCheckController(devCheck);
+
+                    if(jsonObject.optString("ACTIVESTATUS")=="YES") {
+                        Intent ui = new Intent(JsonHelper.this.context, Login.class);
+                        JsonHelper.this.context.startActivity(ui);
+                    }
                     setLonding(false);
-                    filterJsonData(tmpData,"deviceid_pass") ;
-                    getMstProductData("devideId","pass");
+                    //filterJsonData(tmpData,"deviceid_pass") ;
+
+                    //getMstProductData("devideId","pass");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
             }
-        }.execute("http://www.bizmapexpert.com/api/DeviceCheck/DeviceCheckController?DeviceID="+devideId+"&Password="+pass+"",null,null);
+        }.execute("http://www.bizmapexpert.com/api/DeviceCheck/DeviceCheckController?DeviceID="+deviceId+"&Password="+pass+"",null,null);
 
 
-         return recieveData[0];
+
+       /* DBAdapter adp=new DBAdapter(context);
+        adp.insertDeviceCheckController(recieveData);
+
+                    // launch login UI if Status is active
+        if(recieveData.getStatus()=="YES"){
+            Intent ui=new Intent(context,Login.class );
+            context.startActivity(ui);
+
+        }*/
+         return recieveData;
     }
         /*
         * Get data from webservice on Mst_Product * */
@@ -278,8 +311,17 @@ public class JsonHelper {
 
                     JSONArray jsonArray2 = new JSONArray(result);
                     JSONObject jsonObject = jsonArray2.getJSONObject(0);
-                    String status=jsonObject.optString("ACTIVESTATUS");
-                    activeStatus=status;
+
+                    DeviceCheckController devCheck= new DeviceCheckController();
+
+                    devCheck.setDevice_id(jsonObject.optString("DeviceID"));
+                    devCheck.setPass(jsonObject.optString("Password"));
+                    devCheck.setStatus(jsonObject.optString("ACTIVESTATUS"));
+
+                    Toast.makeText(context,"JsonHelper"+jsonObject.optString("DeviceID"),Toast.LENGTH_LONG).show();
+                    DBAdapter adp=new DBAdapter(context);
+                    adp.insertDeviceCheckController(devCheck);
+
                     break;
 
                 case "ProductDetails":

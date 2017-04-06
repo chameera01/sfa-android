@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 
+import com.example.ahmed.sfa.models.DeviceCheckController;
 import com.example.ahmed.sfa.models.Mst_CustomerStatus;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
@@ -282,5 +283,25 @@ public class DBAdapter{
         }
         closeDB();
 
+    }
+
+    public void insertDeviceCheckController(DeviceCheckController initialDetails) {
+        openDB();
+        try{//_ID integer primary key ,DeviceID text,Password text,ACTIVESTATUS text
+            db.execSQL(
+                   /* "INSERT OR REPLACE INTO DeviceCheckController (_ID,DeviceID,Password,ACTIVESTATUS)" +
+                            " values (" +
+                            "(select _ID from DeviceCheckController where DeviceID='"+initialDetails.getDevice_id()+"')," +
+                            "'"+initialDetails.getDevice_id()+"',"+initialDetails.getPass()+",'"+initialDetails.getStatus()+"'" +
+                            " );*/
+                    "INSERT OR REPLACE INTO DeviceCheckController (_ID,DeviceID,Password,ACTIVESTATUS) VALUES((select _ID from DeviceCheckController where DeviceID='"+initialDetails.getDevice_id()+"')" +
+                            ",'"+initialDetails.getDevice_id()+"','"+initialDetails.getPass()+"','"+initialDetails.getStatus()+"');"
+            );
+        }catch (Exception e){
+            Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(context,initialDetails.getDevice_id(),Toast.LENGTH_LONG).show();
+
+        }
+        closeDB();
     }
 }

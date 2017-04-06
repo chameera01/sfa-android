@@ -37,7 +37,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
+import com.example.ahmed.sfa.controllers.database.DBHelper;
+import com.example.ahmed.sfa.models.DeviceCheckController;
 import com.example.ahmed.sfa.service.JsonHelper;
+import com.example.ahmed.sfa.service.JsonObjGenerate;
+import com.example.ahmed.sfa.service.SyncReturn;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -325,12 +330,12 @@ public class InitialLogin extends AppCompatActivity implements LoaderCallbacks<C
 
         private final String mDevideID;
         private final String mPassword;
-        private  String statusStrg;
+        private DeviceCheckController initialDetails;
 
         UserLoginTask(String devid_id, String password) {
             mDevideID = devid_id;
             mPassword = password;
-            statusStrg="No";
+
         }
 
         @Override
@@ -344,24 +349,24 @@ public class InitialLogin extends AppCompatActivity implements LoaderCallbacks<C
                 try {
 
                     JsonHelper jh = new JsonHelper(contxt,result_view);
-                    statusStrg=jh.initialLoging(mDevideID, mPassword);
+                    initialDetails=jh.initialLoging(mDevideID, mPassword);
 
-                    /*for(;1>0;){
-                        if(jh.getisLonding()==false){
-                            break;
-                        }
+                    //Toast.makeText(InitialLogin.this,initialDetails.getDevice_id(),Toast.LENGTH_LONG).show();
+                   /* DBAdapter adp=new DBAdapter(InitialLogin.this);
+                    adp.insertDeviceCheckController(initialDetails);*/
 
-                        Toast.makeText(InitialLogin.this, "Aweoseme:"+statusStrg, Toast.LENGTH_SHORT).show();
+
+                    //launch login UI if Status is active
+                   /*if(initialDetails.getStatus()=="YES"){
+                        Intent ui=new Intent(InitialLogin.this,Login.class );
+                        InitialLogin.this.startActivity(ui);
+
                     }*/
 
 
 
-                    /*Json request form here*/
-
-                    /**/
-
                 }catch (Exception e){
-                    //Toast.makeText(this.getClass(,"Error_found:"+e.getMessage(),Toast.LENGTH_LONG).show();
+
                 }
             } catch (InterruptedException e) {
                 return false;

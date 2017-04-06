@@ -7,7 +7,7 @@ public class Mst_CustomerStatus {
     //_id INTEGER PRIMARY KEY AUTOINCREMENT,StatusID TEXT,Status TEXT,isActive INTEGER,LastUpdateDate TEXT
     private String statusId;
     private String status;
-    private String isActive;
+    private int isActive;
 
     public String getStatusId() {
         return statusId;
@@ -25,11 +25,11 @@ public class Mst_CustomerStatus {
         this.status = status;
     }
 
-    public String getIsActive() {
+    public int getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(String isActive) {
+    public void setIsActive(int  isActive) {
         this.isActive = isActive;
     }
 }

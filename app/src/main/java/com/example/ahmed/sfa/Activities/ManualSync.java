@@ -146,7 +146,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"clckedSync",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93",ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_CustomerStatus/SelectMst_CustomerStatus?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("ProductBrandManagement");
 
                     SyncReturn io = new SyncReturn();

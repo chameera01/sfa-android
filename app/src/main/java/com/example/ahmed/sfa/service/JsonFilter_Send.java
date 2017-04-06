@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.example.ahmed.sfa.Activities.ServiceTest;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
+import com.example.ahmed.sfa.models.Mst_CustomerStatus;
 import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 import com.example.ahmed.sfa.models.Mst_RepTable;
@@ -159,6 +160,23 @@ public class JsonFilter_Send {
                         // result_view.setText(productMst.getBrand());
                     }
                     break;
+                case "CustomerStatus":
+                    Mst_CustomerStatus cusStatus= new Mst_CustomerStatus();
+                    DBAdapter status_adptr=new DBAdapter(context);
+
+                    JSONArray jsonStatusArray = new JSONArray(result);
+                    for (int i = 0; i < jsonStatusArray.length(); i++) {
+                        JSONObject jsonSupObject = jsonStatusArray.getJSONObject(i);
+
+                        cusStatus.setStatusId(jsonSupObject.optString("StatusID"));
+                        cusStatus.setStatus(jsonSupObject.optString("Status"));
+                        cusStatus.setIsActive(jsonSupObject.optInt("IsActive"));
+
+                        //cusStatus.setLastUpdateDate(DateManager.dateToday());
+
+                        status_adptr.insertCustomerStatus(cusStatus);
+                    }
+                        break;
 
                 default:
                     break;
