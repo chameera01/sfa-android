@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -185,10 +186,14 @@ public class DBAdapter{
 
             if(db.insert("Tr_ItineraryDetails", null, contentValues)>0) {
                 result = "success";
-            }else
-                result ="outer_if";
+                Toast.makeText(context,"Succees",Toast.LENGTH_SHORT).show();
+            }else {
+                result = "outer_if";
+                Toast.makeText(context,"failed",Toast.LENGTH_SHORT).show();
+            }
 
         }catch (SQLException e){
+            Toast.makeText(context,"exception",Toast.LENGTH_SHORT).show();
             e.printStackTrace();
             result=e.getMessage();
         }

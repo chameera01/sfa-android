@@ -3,9 +3,12 @@ package com.example.ahmed.sfa.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.PermissionManager;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 import com.example.ahmed.sfa.controllers.adapters.SalesInvoiceAddedChoicesAdapter;
 import com.example.ahmed.sfa.controllers.adapters.SalesInvoiceProductsTableAdapter;
@@ -37,6 +41,7 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ahmed on 3/19/2017.
@@ -63,6 +68,8 @@ public class SalesInvoice extends AppCompatActivity {
     String customerNo;
     Itinerary itinerary;
 
+    Location lastKnownLocation;
+
     private boolean showInvoiced;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -82,17 +89,8 @@ public class SalesInvoice extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sales_invoice_layout);
 
-        customerNo = getIntent().getStringExtra(Constants.CUSTOMER_NO);
-        itinerary = getIntent().getParcelableExtra(Constants.ITINERARY);
-
-        //Toast.makeText(getApplicationContext(),"taken +"+customerNo+" -- "+itinerary.getId(),Toast.LENGTH_SHORT).show();
-        showInvoiced(false);
-
-
-        principleSpinner = (Spinner) findViewById(R.id.principleSpinner_si);
-        subBrandSpinner = (Spinner) findViewById(R.id.si_subbrand_spinner);
+        init();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -106,59 +104,116 @@ public class SalesInvoice extends AppCompatActivity {
         //NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
 
-        dbAdapter = new DBAdapter(this);
 
-        initPrincipleSpinner();
-
-
-        addedListLayout = (TableLayout) findViewById(R.id.added_content_si);
-        addedContentTableAdapter = new SalesInvoiceAddedChoicesAdapter(addedListLayout, this);
-
-        showHideInvoicedBtn = (Button) findViewById(R.id.show_invoiced_si);
-        showHideInvoicedBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showHideInvoiced();
-            }
-        });
-
-
-        TableLayout prdctsTable = (TableLayout) findViewById(R.id.product_details_si);
-        productSearchTableAdapter = new SalesInvoiceProductsTableAdapter(prdctsTable, this);
-
-
-        searchView = (SearchView) findViewById(R.id.search_query_si);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                productSearchTableAdapter.updateData(principleSpinner.getSelectedItem().toString()
-                        , subBrandSpinner.getSelectedItem().toString(), query);
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
-        subtotal = (TextView)findViewById(R.id.sub_tot_si);
-        invTot = (TextView)findViewById(R.id.inv_qty_si);
-        discount = (TextView)findViewById(R.id.discount_si);
-        tot = (TextView)findViewById(R.id.tot_si);
+    }
 
-        Button nextBtn = (Button) findViewById(R.id.next_si);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent intent = new Intent(SalesInvoice.this, SalesInvoicePayment.class);
-                //startActivity(intent);
-                showSalesInvoiceSummary();
+    @Override
+    public void onBackPressed(){
+        DrawerLayout drawer = (DrawerLayout )findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
+    }
+
+    private void init(){
+
+        PermissionManager pm = new PermissionManager(this);
+        if(pm.checkForLocationPermission()) {
+            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            List<String> providers = locationManager.getProviders(true);
+            for (String provider : providers) {
+                Location tempLoc = locationManager.getLastKnownLocation(provider);
+                if (tempLoc == null) continue;
+                if (lastKnownLocation == null || tempLoc.getAccuracy() > lastKnownLocation.getAccuracy()) {
+                    lastKnownLocation = tempLoc;
+                }
             }
-        });
+            //lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            /* -----------------------------------------------------------------------------------------------*/
+            lastKnownLocation = new Location(LocationManager.GPS_PROVIDER);//this line has to be removed
+            /* -----------------------------------------------------------------------------------------------*/
+            //this has been added since emmulator failed to send gps points
+
+            if (lastKnownLocation != null) {
+                setContentView(R.layout.sales_invoice_layout);
+
+                customerNo = getIntent().getStringExtra(Constants.CUSTOMER_NO);
+                itinerary = getIntent().getParcelableExtra(Constants.ITINERARY);
+
+                //Toast.makeText(getApplicationContext(),"taken +"+customerNo+" -- "+itinerary.getId(),Toast.LENGTH_SHORT).show();
+                showInvoiced(false);
+
+
+                principleSpinner = (Spinner) findViewById(R.id.principleSpinner_si);
+                subBrandSpinner = (Spinner) findViewById(R.id.si_subbrand_spinner);
+
+                dbAdapter = new DBAdapter(this);
+
+                initPrincipleSpinner();
+
+
+                addedListLayout = (TableLayout) findViewById(R.id.added_content_si);
+                addedContentTableAdapter = new SalesInvoiceAddedChoicesAdapter(addedListLayout, this);
+
+                showHideInvoicedBtn = (Button) findViewById(R.id.show_invoiced_si);
+                showHideInvoicedBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showHideInvoiced();
+                    }
+                });
+
+
+                TableLayout prdctsTable = (TableLayout) findViewById(R.id.product_details_si);
+                productSearchTableAdapter = new SalesInvoiceProductsTableAdapter(prdctsTable, this);
+
+
+                searchView = (SearchView) findViewById(R.id.search_query_si);
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        productSearchTableAdapter.updateData(principleSpinner.getSelectedItem().toString()
+                                , subBrandSpinner.getSelectedItem().toString(), query);
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        return false;
+                    }
+                });
+
+
+                subtotal = (TextView) findViewById(R.id.sub_tot_si);
+                invTot = (TextView) findViewById(R.id.inv_qty_si);
+                discount = (TextView) findViewById(R.id.discount_si);
+                tot = (TextView) findViewById(R.id.tot_si);
+
+                Button nextBtn = (Button) findViewById(R.id.next_si);
+                nextBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //Intent intent = new Intent(SalesInvoice.this, SalesInvoicePayment.class);
+                        //startActivity(intent);
+                        showSalesInvoiceSummary();
+                    }
+                });
+            }else{
+                Toast.makeText(this,"Location unavailable",Toast.LENGTH_SHORT).show();
+                setContentView(R.layout.location_not_found_error_layout);
+            }
+
+        }else{
+            Toast.makeText(this,"Permission Unavailable",Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.location_not_found_error_layout);
+
+        }
     }
 
     private void showHideInvoiced() {

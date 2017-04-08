@@ -1,7 +1,6 @@
 package com.example.ahmed.sfa.activities;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -150,7 +149,9 @@ public class AddCustomer extends AppCompatActivity {
                 }
             }
             //lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            /* -----------------------------------------------------------------------------------------------*/
             lastKnownLocation = new Location(LocationManager.GPS_PROVIDER);//this line has to be removed
+            /* -----------------------------------------------------------------------------------------------*/
             //this has been added since emmulator failed to send gps points
 
             if(lastKnownLocation!=null){
@@ -232,13 +233,13 @@ public class AddCustomer extends AppCompatActivity {
                 });
 
             }else{
-                Toast.makeText(this,"Here 0",Toast.LENGTH_SHORT).show();
-                setContentView(R.layout.addcustomer_errorlayout);
+                Toast.makeText(this,"Location unavailable",Toast.LENGTH_SHORT).show();
+                setContentView(R.layout.location_not_found_error_layout);
             }
 
         }else{
-            Toast.makeText(this,"Here 1",Toast.LENGTH_SHORT).show();
-            setContentView(R.layout.addcustomer_errorlayout);
+            Toast.makeText(this,"Permission Unavailable",Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.location_not_found_error_layout);
 
         }
     }

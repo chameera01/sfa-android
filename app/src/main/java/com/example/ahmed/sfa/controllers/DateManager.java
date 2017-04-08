@@ -1,9 +1,5 @@
 package com.example.ahmed.sfa.controllers;
 
-import android.widget.TextView;
-
-import com.example.ahmed.sfa.R;
-
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,8 +8,11 @@ import java.util.Date;
  */
 
 public class DateManager {
-    private static String[] days= {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
-    private static String DEVIDER = "/";
+    final private static String[] DAYS = {"Sunday","Monday","Tuesday","Wednesday","Thursday"
+            ,"Friday","Saturday"};
+    final private static String[] MONTHS = {"January","February","March","April","May","June",
+            "July","August","September","October","November","December"};
+    final private static String DIVIDER = "/";
 
     //MM/DD/YYYY
     Calendar cal= Calendar.getInstance();
@@ -23,11 +22,11 @@ public class DateManager {
     public static int[] breakApart(String date){
         int[] result = new int[3];
 
-        int index = date.indexOf(DEVIDER);//month
+        int index = date.indexOf(DIVIDER);//month
         result[0] = Integer.parseInt(date.substring(0,index));
         date = date.substring(index+1);
 
-        index = date.indexOf(DEVIDER);//day
+        index = date.indexOf(DIVIDER);//day
         result[1] = Integer.parseInt(date.substring(0,index));
         date = date.substring(index+1);
 
@@ -36,27 +35,54 @@ public class DateManager {
 
     }
 
+    public static String getMonthName(String date){
+        int[] re = breakApart(date);
+        return MONTHS[re[0]-1];
+    }
+
+    public static String getMonthName(int month){
+        month = month==0?1:month;
+        return MONTHS[month-1];
+    }
+
     public static Date getJavaDate(String date){
         int[] partedDate  = breakApart(date);
         Date dateObj = new Date(partedDate[2],partedDate[0],partedDate[1]);
+
         return dateObj;
     }
 
     public static String dayBefore(String date){
-        Date javaDate = getJavaDate(date);
+        int[] data = breakApart(date);
+        data[0]--;
         Calendar cal = Calendar.getInstance();
-        cal.setTime(javaDate);
+        cal.set(data[2],data[0],data[1]);
+        ///Log.w("Set date",cal.get(Calendar.DAY_OF_MONTH)+"/"+cal.get(Calendar.MONTH)+"/"+cal.get(Calendar.YEAR));
         cal.add(Calendar.DAY_OF_MONTH,-1);
+        String changedDate = getDate(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH)+1,cal.get(Calendar.DAY_OF_MONTH));
+        //Log.w("red date",cal.get(Calendar.DAY_OF_MONTH)+"/"+cal.get(Calendar.MONTH)+"/"+cal.get(Calendar.YEAR));
+        //Log.w("red date",changedDate);
+        return changedDate;
 
-        Date dt = cal.getTime();
-        return getDate(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH));
+    }
+
+    public static String monthbefore(String date){
+        int[] data = breakApart(date);
+        Calendar cal = Calendar.getInstance();
+        cal.set(data[2],data[0]-1,data[1]);
+        ///Log.w("Set date",cal.get(Calendar.DAY_OF_MONTH)+"/"+cal.get(Calendar.MONTH)+"/"+cal.get(Calendar.YEAR));
+        cal.add(Calendar.MONTH,-1);
+        String changedDate = getDate(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH)+1,cal.get(Calendar.DAY_OF_MONTH));
+        //Log.w("red date",cal.get(Calendar.DAY_OF_MONTH)+"/"+cal.get(Calendar.MONTH)+"/"+cal.get(Calendar.YEAR));
+        //Log.w("red date",changedDate);
+        return changedDate;
 
     }
 
     public static String dateToday(){
 
         Calendar cal  = Calendar.getInstance();
-        //String date="12/8/1993"; //intializing a value that doesnt exist to avoid null values
+        //String date="12/8/1993"; //intializing a value that doesn't exist to avoid null values
         String date;
 
         int yearInt = cal.get(Calendar.YEAR);
@@ -72,7 +98,6 @@ public class DateManager {
     public static String getDate(int year,int month,int dayOfMonth){
 
         String yearStr = "";
-        if(year<10)yearStr+="0";
         yearStr+=year;
 
         String monthStr = "";
@@ -84,7 +109,7 @@ public class DateManager {
         if(dayOfMonth<10)dayStr+="0";
         dayStr+=dayOfMonth;
 
-        String date = (month+1)+DEVIDER+monthStr+DEVIDER+yearStr;
+        String date = monthStr+ DIVIDER +dayStr+ DIVIDER +yearStr;
         return date;
     }
 
@@ -100,7 +125,7 @@ public class DateManager {
     }
 
     public static String getDayOfWeek(){
-        return days[Calendar.getInstance().get(Calendar.DAY_OF_WEEK)-1];
+        return DAYS[Calendar.getInstance().get(Calendar.DAY_OF_WEEK)-1];
     }
 
     public static String getTimeFull(){

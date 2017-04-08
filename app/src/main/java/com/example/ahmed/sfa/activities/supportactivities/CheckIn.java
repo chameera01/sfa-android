@@ -51,7 +51,7 @@ public class CheckIn extends AppCompatActivity implements CheckInCheckOutActions
         day.setText(DateManager.getDayOfWeek());
         TextView time = (TextView)findViewById(R.id.navigation_header_time);
         time.setText(DateManager.getTimeFull());
-        loc.setAdapter(man.getLocationsArrayAdapter());
+        loc.setAdapter(man.getLocationsArrayAdapter(man.isCheckedIn()));
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -115,7 +115,7 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
         Button checkInBtn = (Button) v.findViewById(R.id.navigation_header_actionbutton);
         final EditText comment = (EditText)v.findViewById(R.id.navigation_header_comment);
         final Spinner loc = (Spinner) v.findViewById(R.id.navigation_header_place);
-        loc.setAdapter(man.getLocationsArrayAdapter());//get locations from the databse
+        loc.setAdapter(man.getLocationsArrayAdapter(man.isCheckedIn()));//get locations from the databse
         TextView date = (TextView) v.findViewById(R.id.navigation_header_date);
         date.setText(DateManager.dayToday());
         TextView day = (TextView) v.findViewById(R.id.navigation_header_day);

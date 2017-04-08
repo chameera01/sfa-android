@@ -87,14 +87,22 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN3','Reason 3',0);");
 
             //insert data into sales header
-            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS1','INV1','2017/1/6',1200.00,500.00);");
-            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS2','INV2','2017/1/10',1202.02,500.01);");
-            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','2017/1/1',1203.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS1','INV1','04/08/2017',12000.00,500.00);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS2','INV2','04/08/2017',12020.02,500.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','04/08/2017',12030.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','04/08/2017',12030.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','04/07/2017',12030.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS1','INV3','04/07/2017',12030.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS2','INV3','04/07/2017',12030.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS4','INV3','04/07/2017',12030.02,530.01);");
+
 
             //insert data into mst_checkinoutpoints
-            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p1','DistributorPoint','WareHouse 1',0)");
-            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p2','DistributorPoint','WareHouse 2',0)");
-            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p3','DistributorPoint','WareHouse 1',1)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p1','IN','WareHouse 1',0)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p2','IN','WareHouse 2',0)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p3','IN','WareHouse 3',1)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p4','OUT','WareHouse 4',0)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p4','OUT','WareHouse 5',0)");
 
             //add data to the DailyRouteDetails
             //db.execSQL("INSERT INTO Tr_DailyRouteDetails (SerialCode ,Date,ItineraryID ,CustomerNo ,IsPlanned ,IsInvoiced ,InvoiceNo ,Reasons ,Comment ,IsUpload ,UploadDate) VALUES ('SER1','2017/3/10','IT1','CUS1',0,1) ");
@@ -129,25 +137,25 @@ public class DBHelper extends SQLiteOpenHelper {
 
             //INSERT VALUES TO THE ITINERARY DETAILS TABLE
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT1','2017/4/2','CUS1',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT1','04/08/2017','CUS1',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT2','2017/4/2','CUS2',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT2','04/08/2017','CUS2',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT3','2017/4/2','CUS3',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT3','04/08/2017','CUS3',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT4','2017/4/2','CUS4',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT4','04/08/2017','CUS4',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT5','2017/4/2','CUS5',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT5','04/08/2017','CUS5',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT6','2017/4/2','CUS6',1,2);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT6','04/09/2017','CUS6',1,2);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT7','2017/4/1','CUS7',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT7','04/09/2017','CUS7',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT8','2017/4/1','CUS8',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT8','04/09/2017','CUS8',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT9','2017/4/1','CUS9',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT9','04/09/2017','CUS9',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT10','2017/4/1','CUS10',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT10','04/09/2017','CUS10',1,0);");
 
 
             //adding data to customer table
@@ -308,11 +316,14 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management(InvoiceNo) VALUES (5);");
 
             db.execSQL("CREATE TABLE Tr_TargetData (_id INTEGER PRIMARY KEY AUTOINCREMENT,ServerID TEXT,Date TEXT,Month TEXT,TargetValue INTEGER)");
-            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG1','2017/04/03','April',35000)");
-            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG2','2017/04/02','April',20000)");
-            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','2017/04/01','April',15000)");
-            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG4','2017/03/31','March',50000)");
-            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG5','2017/03/30','March',30000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG1','04/09/2017','April',35000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG2','04/08/2017','April',20000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','04/07/2017','April',15000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','04/06/2017','April',15000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','04/05/2017','April',15000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','04/04/2017','April',15000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG4','03/05/2017','March',50000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG5','03/34/2017','March',30000)");
 
         }catch (SQLException e){
             e.printStackTrace();

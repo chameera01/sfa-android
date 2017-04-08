@@ -8,6 +8,7 @@
         android:layout_height="wrap_content">
         a<TextView
         android:text="Cheque Value"
+
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content" />
@@ -15,6 +16,7 @@
             android:id="@+id/chq_dlg_val"
         android:layout_width="0dp"
         android:layout_weight="1"
+            android:inputType="numberDecimal"
         android:layout_height="wrap_content" />
     </LinearLayout>
     <LinearLayout

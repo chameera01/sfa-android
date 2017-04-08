@@ -2,8 +2,13 @@ package com.example.ahmed.sfa.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +28,8 @@ import java.util.ArrayList;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import controllers.database.DBHelper;
+
+import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 import com.example.ahmed.sfa.models.Tr_NewCustomer;
 
 public class PendingCustomer extends AppCompatActivity {
@@ -40,12 +47,24 @@ public class PendingCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_customer);
 
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawer.setDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
+
         /**/
         Intent intent = getIntent();
 
         TextView textView = new TextView(this);
         textView.setTextSize(40);
-        textView.setText("SFA");
+        //textView.setText("SFA");
 
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_pending_customer);
         layout.addView(textView);
@@ -125,6 +144,17 @@ public class PendingCustomer extends AppCompatActivity {
         getdata("All", "All", "d");//call default search;
 
     }
+
+    @Override
+    public void onBackPressed(){
+        DrawerLayout drawer = (DrawerLayout )findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
+    }
+
     public  void setSpinner(){
 
         DBAdapter adapter = new DBAdapter(this);
