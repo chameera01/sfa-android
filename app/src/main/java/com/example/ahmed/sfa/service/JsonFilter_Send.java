@@ -7,6 +7,7 @@ import com.example.ahmed.sfa.Activities.ServiceTest;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.models.Mst_CustomerStatus;
+import com.example.ahmed.sfa.models.Mst_District;
 import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 import com.example.ahmed.sfa.models.Mst_RepTable;
@@ -177,6 +178,41 @@ public class JsonFilter_Send {
                         status_adptr.insertCustomerStatus(cusStatus);
                     }
                         break;
+                case "district":
+
+                    Mst_District district= new Mst_District();
+                    DBAdapter district_adptr=new DBAdapter(context);
+
+                    JSONArray jsonDistrictArray = new JSONArray(result);
+                    for (int i = 0; i < jsonDistrictArray.length(); i++) {
+                        JSONObject jsonSupObject = jsonDistrictArray.getJSONObject(i);
+
+                        district.setDistrictId(jsonSupObject.optString("DistrictId"));
+                        district.setDistrictName(jsonSupObject.optString("DistrictName"));
+                        district.setIsActive(jsonSupObject.optInt("IsActive"));
+
+                        //cusStatus.setLastUpdateDate(DateManager.dateToday());
+
+                        district_adptr.insertDistrict(district);
+                    }
+                    break;
+                case "territory":
+                   /* Mst_District district= new Mst_District();
+                    DBAdapter district_adptr=new DBAdapter(context);
+
+                    JSONArray jsonDistrictArray = new JSONArray(result);
+                    for (int i = 0; i < jsonDistrictArray.length(); i++) {
+                        JSONObject jsonSupObject = jsonDistrictArray.getJSONObject(i);
+
+                        district.setDistrictId(jsonSupObject.optString("DistrictId"));
+                        district.setDistrictName(jsonSupObject.optString("DistrictName"));
+                        district.setIsActive(jsonSupObject.optInt("IsActive"));
+
+                        //cusStatus.setLastUpdateDate(DateManager.dateToday());
+
+                        district_adptr.insertDistrict(district);
+                    }*/
+                    break;
 
                 default:
                     break;

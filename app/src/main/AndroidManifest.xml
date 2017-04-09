@@ -25,7 +25,9 @@
         <activity
             android:name=".Activities.AddExtraCustomer"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            </activity>
+
         <activity
             android:name=".Activities.AndroidDatabaseManager"
             android:windowSoftInputMode="stateHidden" />
@@ -57,14 +59,15 @@
             android:exported="true" />
 
         <activity android:name=".Activities.ManualSync">
-
-        </activity>
-        <activity android:name=".Activities.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".Activities.Login">
+
         </activity>
     </application>
 

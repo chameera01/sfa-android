@@ -1,5 +1,6 @@
 package com.example.ahmed.sfa.Activities;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +26,8 @@ import controllers.DateManager;
 
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
-import controllers.database.DBHelper;
+//import controllers.database.DBHelper;
+import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 
@@ -364,18 +366,29 @@ public class AddExtraCustomer extends AppCompatActivity {
 
 
     public  void getSelectedRows() {
+        Intent db=new Intent(this,AndroidDatabaseManager.class);
+        this.startActivity(db);
+
         TableLayout table = (TableLayout) findViewById(R.id.table_add_extra_customer);
         LinearLayout data_LinearLayout=(LinearLayout) findViewById(R.id.linear_layout_add_ec_data_row);
         DBAdapter adp=new DBAdapter(this);
 
+        /*display table row count*/
+        Toast.makeText(this,"row_count:"+data_LinearLayout.getChildCount(),Toast.LENGTH_LONG).show();
 
+        /*load customer id list*/
+        ArrayList<String> cusId=new ArrayList<String>();
+        try {
+            cusId = adp.getCusId("select CustomerNo " + qry);
+        }catch (Exception e){
+            Toast.makeText(this,e.getMessage()+"db_data_reading error",Toast.LENGTH_LONG).show();
+        }
 
         //get selected row;
         try {
             int count = 0;
             for (int i = 0; i < data_LinearLayout.getChildCount(); i++) {
-                ArrayList<String > cusId=new ArrayList<>();
-                cusId=adp.getCusId("select CustomerNo "+qry);
+
 
 
                 View parentRow = data_LinearLayout.getChildAt(i);//getTable rows
@@ -389,17 +402,33 @@ public class AddExtraCustomer extends AppCompatActivity {
                         View cbox=  ll.getChildAt(0);//access to column_1 checkbox inside LinearLayout
                         View tb=ll.getChildAt(0);//acess to column 2 cusName textBox;
 
+                        Toast.makeText(this,"line:_1",Toast.LENGTH_LONG).show();
                         if (cbox instanceof CheckBox) {
-
+                            Toast.makeText(this,"line:_2",Toast.LENGTH_LONG).show();
                             if(((CheckBox) cbox).isChecked()) {
                                 ((CheckBox) cbox).setText("Added");
 
-                                TableRow nametblrow= (TableRow) data_LinearLayout.getChildAt(i);
-                                LinearLayout namell= (LinearLayout) nametblrow.getChildAt(1);
-                                TextView nametv= (TextView) namell.getChildAt(0);
+                                Toast.makeText(this,"line:_3",Toast.LENGTH_LONG).show();
+                                try {
+                                    //cusId.get(i);
+                                    addToItinerary(cusId.get(i));
+                                    Toast.makeText(this, "id:"+cusId.get(i), Toast.LENGTH_SHORT).show();
+
+                                }catch (Exception  e){
+                                    Toast.makeText(this, "cusId error-"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+                                TableRow nametblrow=null;
+                                try {
+                                     nametblrow = (TableRow) data_LinearLayout.getChildAt(i);/*get  checked row*/
+                                }catch (Exception e ){
+                                    Toast.makeText(this, "converting_error"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                                LinearLayout namell= (LinearLayout) nametblrow.getChildAt(1);/*get second col in row which is checked*/
+                                TextView nametv= (TextView) namell.getChildAt(0);/*enter to the textview in second colum which is selected*/
 
                                 //add data to itirnararyDetails;nametv.setText(cusId.get(i));
-                                addToItinerary(cusId.get(i));
+                                //addToItinerary(cusId.get(i));
 
 
                             }else
@@ -420,18 +449,25 @@ public class AddExtraCustomer extends AppCompatActivity {
     }
     private void addToItinerary(String id){
 
+
+
         Tr_ItineraryDetails itinerary=new Tr_ItineraryDetails();
         DBAdapter adp=new DBAdapter(this);
+
+        Toast.makeText(this, "came inside addtoIternerary_method", Toast.LENGTH_LONG).show();
 
         itinerary.setCustomerNo(id);
         itinerary.setItineraryID("ITRY"+id);
         itinerary.setItineraryDate(DateManager.dateToday());
-        itinerary.setIsInvoiced(0);
-        itinerary.setIsPlaned(1);
+        itinerary.setIsInvoiced(0);/*default value*/
+        itinerary.setIsPlaned(0);/**default val*/
         itinerary.setLastUpdateDate(DateManager.dateToday());
 
         Toast.makeText(this, "added:"+id, Toast.LENGTH_LONG).show();
-        adp.itineraryDetails(itinerary);
+        String output=adp.itineraryDetails(itinerary);
+        Toast.makeText(this, "output"+output, Toast.LENGTH_SHORT).show();
+
+
 
     }
 }

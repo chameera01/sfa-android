@@ -9,6 +9,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,8 +23,10 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "sfa.db";//this is the name of the database created in the phone
     private static final int VERSION = 1;
 
+    Context c;
     public DBHelper (Context ctxt){
         super(ctxt,DB_NAME,null,VERSION);//error handler shld be implemented
+        c=ctxt;
     }
 
     @Override
@@ -68,8 +71,11 @@ public class DBHelper extends SQLiteOpenHelper {
             //db.execSQL("INSERT INTO Mst_SupplierTable (PrincipleID,Principle) VALUES('Pid','PRINCIPLEnAME')");
 
             //creating the itinerarydetails table
-            db.execSQL("CREATE TABLE Tr_ItineraryDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    "ItineraryID TEXT,ItineraryDate TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,LastUpdateDate TEXT );");
+            db.execSQL("CREATE TABLE Tr_ItineraryDetails (_id integer PRIMARY KEY AUTOINCREMENT," +
+                    "ItineraryID TEXT,ItineraryDate TEXT,CustomerNo TEXT,IsPlanned integer,IsInvoiced integer,LastUpdateDate TEXT )");
+            /*insert dummy data*/
+           /* db.execSQL("INSERT INTO Tr_ItineraryDetails (ItineraryID,ItineraryDate,CustomerNo ,IsPlanned ,IsInvoiced ,LastUpdateDate )" +
+                    "values ('iti_id','2017-05-02','cus_01',0,0,'2017-01-05');");*/
 
 
             //creating the customer table
@@ -79,6 +85,20 @@ public class DBHelper extends SQLiteOpenHelper {
                     "OwnerName TEXT,PhamacyRegNo TEXT,CreditLimit TEXT,CurrentCreditAmount TEXT,CustomerStatus TEXT" +
                     ",InsertDate TEXT,RouteID TEXT,RouteName TEXT,ImageID TEXT,Latitude TEXT,Longitude TEXT,CompanyCode TEXT," +
                     "IsActive INTEGER,LastUpdateDate TEXT);");
+
+            /*insert data to cistomermaster table*/
+            try {
+                db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Address,Area,Town,Telephone,RouteName,InsertDate)" +
+                        "VALUES ('CUS1','aksa','Dalugama Kelaniya','Kiribathgoda','Kelaniya','0715624895','route_name_kadawatha','2017-03-16');");
+                db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Address,Area,Town,Telephone,RouteName,InsertDate)" +
+                        "VALUES ('CUS2','DiscountStore','Dalugama Kelaniya','Kiribathgoda','Dalugama','0715685495','route_name_Kiribathgoda','2017-03-17');");
+                db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Address,Area,Town,Telephone,RouteName,InsertDate)" +
+                        "VALUES ('CUS3','peachNet','Dalugama Kelaniya','Kiribathgoda','Dalugama','0725685495','route_name_Kiribathgoda','2017-03-18');");
+                db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Address,Area,Town,Telephone,RouteName,InsertDate)" +
+                        "VALUES ('CUS4','Thilakawardhana','Dalugama Kelaniya','Kiribathgoda','Kiribathgoda','0725656235','route_name_kadawatha','2017-03-17');");
+            }catch (Exception e){
+                Toast.makeText(c, "dbCreation_error:"+e.getMessage(), Toast.LENGTH_LONG).show();
+            }
 
             //creating Customer status Table
             db.execSQL("CREATE TABLE Mst_CustomerStatus (_id INTEGER PRIMARY KEY AUTOINCREMENT,StatusID TEXT,Status TEXT,isActive INTEGER,LastUpdateDate TEXT);");
@@ -190,7 +210,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
             //adding data to customer table
-            /*db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
+           /* db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS1','aksa','Town1');");
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS2','barca','Town2');");
@@ -411,7 +431,8 @@ public class DBHelper extends SQLiteOpenHelper {
         try{
 
             SQLiteDatabase db = this.getReadableDatabase();
-            Cursor res =  db.rawQuery(qry, null);
+           Cursor res =  db.rawQuery(qry, null);
+            //Cursor res =  db.rawQuery(qry);
             return res;
 
         }catch (SQLException e){

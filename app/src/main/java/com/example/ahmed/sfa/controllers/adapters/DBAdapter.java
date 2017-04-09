@@ -17,6 +17,7 @@ import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.DeviceCheckController;
 import com.example.ahmed.sfa.models.Mst_CustomerStatus;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
+import com.example.ahmed.sfa.models.Mst_District;
 import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 import com.example.ahmed.sfa.models.Mst_RepTable;
@@ -146,7 +147,7 @@ public class DBAdapter{
         //hp = new HashMap();
         //SQLiteDatabase db = dbHelper.getReadableDatabase();
         openDB();
-        Cursor res =  db.rawQuery(qry, null );
+        Cursor res =  db.rawQuery(qry,null);
         res.moveToFirst();
 
 
@@ -190,15 +191,16 @@ public class DBAdapter{
             contentValues.put("ItineraryID", it_d.getItineraryID());
             contentValues.put("ItineraryDate",it_d.getItineraryDate());
             contentValues.put("CustomerNo",it_d.getCustomerNo());
-            contentValues.put("IsPlaned",it_d.getIsPlaned());
+            contentValues.put("IsPlanned",it_d.getIsPlaned());
             contentValues.put("IsInvoiced",it_d.getIsInvoiced());
             contentValues.put("LastUpdateDate",it_d.getLastUpdateDate());
 
 
             if(db.insert("Tr_ItineraryDetails", null, contentValues)>0) {
                 result = "success";
-            }else
-                result ="outer_if";
+            }else {
+                result = "outer_if";
+            }
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -262,7 +264,7 @@ public class DBAdapter{
 
         Log.w("line","came inside dbadapter");
         db.execSQL("INSERT OR REPLACE INTO Mst_ProductBrandManagement(_ID,BrandID ,PrincipleID,Principle," +
-                " MainBrand,Active,LastUpdateDate)  values(" +
+                " MainBrand,Activate,LastUpdateDate)  values(" +
                 "(select _ID from Mst_ProductBrandManagement where BrandID='"+proBrand.getBrandID()+"'),'"+proBrand.getBrandID()+"','"+proBrand.getPrincipleID()+"','"+proBrand.getPrinciple()+"'," +
                 "'"+proBrand.getMainBrand()+"',"+proBrand.getActive()+",'"+DateManager.dateToday()+"');");
         closeDB();
@@ -301,6 +303,17 @@ public class DBAdapter{
             Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
             Toast.makeText(context,initialDetails.getDevice_id(),Toast.LENGTH_LONG).show();
 
+        }
+        closeDB();
+    }
+
+    public void insertDistrict(Mst_District district) {
+        openDB();
+        try{//_id INTEGER PRIMARY KEY AUTOINCREMENT,DistrictId TEXT,DistrictName TEXT,isActive INTEGER,LastUpdateDate TEXT);");
+            db.execSQL( "INSERT OR REPLACE INTO Mst_District (_id,DistrictId ,DistrictName ,isActive ,LastUpdateDate) VALUES((select _id from Mst_District where DistrictId='"+district.getDistrictId()+"')" +
+                    ",'"+district.getDistrictId()+"','"+district.getDistrictName()+"',"+district.getIsActive()+",'"+DateManager.dateToday()+"');");
+        }catch (Exception e){
+            Toast.makeText(context, "insert_error"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
         closeDB();
     }
