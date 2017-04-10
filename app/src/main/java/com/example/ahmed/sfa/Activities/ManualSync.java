@@ -49,6 +49,11 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
     ImageView ivCustomerStatusSync;
     ImageView ivDistrictSync;
     ImageView ivTerritorySync;
+    ImageView ivRouteSync;
+    ImageView ivReasonSync;
+    ImageView ivchechInOutPointsSync;
+    ImageView ivCustomerSync;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +66,11 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivCustomerStatusSync=(ImageView) findViewById(R.id.iv_CustomerStatusSync);
         ivDistrictSync=(ImageView) findViewById (R.id.iv_DistrictSync);
         ivTerritorySync=(ImageView) findViewById (R.id.iv_TerritorySync);
+        ivRouteSync=(ImageView) findViewById (R.id.iv_RouteSync);
+        ivReasonSync=(ImageView) findViewById (R.id.iv_ReasonSync);
+        ivchechInOutPointsSync=(ImageView) findViewById (R.id.iv_chechInOutPointsSync);
+        ivCustomerSync=(ImageView) findViewById (R.id.iv_CustomerSync);
+
 
 
         setListeners();
@@ -216,6 +226,86 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
                 try {
                     JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_Territory/SelectMst_Territory?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("territory");
+
+                    SyncReturn io = new SyncReturn();
+                    io.execute(jObjGen);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(ManualSync.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+        /*sunc iv_RouteSync*/
+        ivRouteSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
+                try {
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_Route/SelectMst_Route?DeviceID=T1&RepID=93",ManualSync.this);
+                    jObjGen.setFilterType("route");
+
+                    SyncReturn io = new SyncReturn();
+                    io.execute(jObjGen);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(ManualSync.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+        /*sunc iv_Reasonync*/
+        ivReasonSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
+                try {
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_Reasons/SelectMst_Reasons?DeviceID=T1&RepID=93",ManualSync.this);
+                    jObjGen.setFilterType("Reason");
+
+                    SyncReturn io = new SyncReturn();
+                    io.execute(jObjGen);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(ManualSync.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+        /*sunc chechInOutPoints*/
+        ivchechInOutPointsSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
+                try {
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_CheckInOutPoints/SelectMst_CheckInOutPoints?DeviceID=T1&RepID=93",ManualSync.this);
+                    jObjGen.setFilterType("CheckInOutPoints");
+
+                    SyncReturn io = new SyncReturn();
+                    io.execute(jObjGen);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(ManualSync.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+        /*sunc Customer*/
+        ivCustomerSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
+                try {
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_Customermaster/SelectMst_Customermaster?DeviceID=T1&RepID=93",ManualSync.this);
+                    jObjGen.setFilterType("Customer");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);

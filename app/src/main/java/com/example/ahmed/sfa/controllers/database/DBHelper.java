@@ -32,6 +32,14 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db){
         try{
+            /**/
+            try {
+                db.execSQL("create table  Mst_Territory (_ID integer primary key AUTOINCREMENT,TerritoryID text,Territory text,IsActive integer,LastUpdateDate text)");
+
+            }catch (Exception e){
+                Toast.makeText(c, "creating error:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
             /*Cretae table Tr_TabStock*/
             db.execSQL(
                     "create table Tr_TabStock" +
@@ -130,7 +138,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     "isUpload INTEGER,LastUpdateDate TEXT, Latitude_CheckIn TEXT,Longitude_CheckIn TEXT,Latitude_CheckOut TEXT,Longitude_CheckOut TEXT);");
 
             //create reasons table for customer pop up
-            db.execSQL("CREATE TABLE Mst_Reasons (_id INTEGER PRIMARY KEY AUTOINCREMENT,ReasonsID TEXT,Reason TEXT,isActive INTEGER,LastUpdateDate TEXT);");
+            db.execSQL("CREATE TABLE Mst_Reasons (_id INTEGER PRIMARY KEY AUTOINCREMENT,ReasonsID TEXT,Reasons TEXT,isActive INTEGER,LastUpdateDate TEXT);");
 
 
 
@@ -279,6 +287,9 @@ public class DBHelper extends SQLiteOpenHelper {
                             "(_ID integer primary key AUTOINCREMENT ,BrandID text, PrincipleID  text,Principle text," +
                             "MainBrand text,Activate integer,LastUpdateDate text)"
             );
+            /*crreate table territory:ID | TerritoryID | Territory | IsActive | LastUpdateDate 	*/
+
+
         }catch (SQLException e){
             e.printStackTrace();
         }

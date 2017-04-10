@@ -6,12 +6,17 @@ import android.widget.Toast;
 import com.example.ahmed.sfa.Activities.ServiceTest;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
+import com.example.ahmed.sfa.models.Mst_CheckInOutPoints;
 import com.example.ahmed.sfa.models.Mst_CustomerStatus;
+import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Mst_District;
 import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
+import com.example.ahmed.sfa.models.Mst_Reasons;
 import com.example.ahmed.sfa.models.Mst_RepTable;
+import com.example.ahmed.sfa.models.Mst_Route;
 import com.example.ahmed.sfa.models.Mst_SupplierTable;
+import com.example.ahmed.sfa.models.Mst_Territory;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -197,21 +202,94 @@ public class JsonFilter_Send {
                     }
                     break;
                 case "territory":
-                   /* Mst_District district= new Mst_District();
-                    DBAdapter district_adptr=new DBAdapter(context);
+                    Mst_Territory terri= new Mst_Territory();
+                    DBAdapter territory_adptr=new DBAdapter(context);
 
-                    JSONArray jsonDistrictArray = new JSONArray(result);
-                    for (int i = 0; i < jsonDistrictArray.length(); i++) {
-                        JSONObject jsonSupObject = jsonDistrictArray.getJSONObject(i);
+                    JSONArray jsonTerriArray = new JSONArray(result);
+                    for (int i = 0; i < jsonTerriArray.length(); i++) {
+                        JSONObject jsonSupObject = jsonTerriArray.getJSONObject(i);
+                        /*ID | TerritoryID | Territory | IsActive | LastUpdateDate 	*/
+                        terri.setTerritory_id(jsonSupObject.optString("TerritoryID"));
+                        terri.setTerritory(jsonSupObject.optString("Territory"));
+                        terri.setIsActive(jsonSupObject.optInt("IsActive"));
+                        terri.setLastUpdateDate(DateManager.dateToday());
+                        territory_adptr.insertTerritory(terri);
+                    }
+                    break;
 
-                        district.setDistrictId(jsonSupObject.optString("DistrictId"));
-                        district.setDistrictName(jsonSupObject.optString("DistrictName"));
-                        district.setIsActive(jsonSupObject.optInt("IsActive"));
+                case "route":
 
-                        //cusStatus.setLastUpdateDate(DateManager.dateToday());
+                    Mst_Route route= new Mst_Route();
+                    DBAdapter route_adptr=new DBAdapter(context);
 
-                        district_adptr.insertDistrict(district);
-                    }*/
+                    JSONArray jsonRouteArray = new JSONArray(result);
+                    for (int i = 0; i < jsonRouteArray.length(); i++) {
+                        JSONObject jsonSupObject = jsonRouteArray.getJSONObject(i);
+
+                        route.setRouteID(jsonSupObject.optString("RouteID"));
+                        route.setTerritoryID(jsonSupObject.optString("TerritoryID"));
+                        route.setTerritory(jsonSupObject.optString("Territory"));
+                        route.setRoute(jsonSupObject.optString("Route"));
+                        route.setIsActive(jsonSupObject.optInt("isActive"));
+                        route.setLastUpdateDate(DateManager.dateToday());
+
+                        route_adptr.insertRoute(route);
+                    }
+                    break;
+                case "Reason":
+
+                    Mst_Reasons reason =new Mst_Reasons();
+                    DBAdapter reason_adptr=new DBAdapter(context);
+
+                    JSONArray jsonReasonArray = new JSONArray(result);
+                    for (int i = 0; i < jsonReasonArray.length(); i++) {
+                        JSONObject jsonSupObject = jsonReasonArray.getJSONObject(i);
+
+                        reason.setReasonId(jsonSupObject.optString("ReasonsID"));
+                        reason.setReason(jsonSupObject.optString("Reasons"));
+                        reason.setIsActive(jsonSupObject.optInt("isActive"));
+                        reason.setLastUpdateDate(DateManager.dateToday());
+
+                        reason_adptr.insertReason(reason);
+                    }
+                    break;
+                case  "CheckInOutPoints":
+                    ////ID | ServerID | Type | PointDescription | IsActive | LastUpdateDate
+                    Mst_CheckInOutPoints checkInOutPoints=new Mst_CheckInOutPoints();
+                    DBAdapter checkin_adptr=new DBAdapter(context);
+
+                    JSONArray jsonCheckInArray = new JSONArray(result);
+                    for (int i = 0; i < jsonCheckInArray.length(); i++) {
+                        JSONObject jsonSupObject = jsonCheckInArray.getJSONObject(i);
+
+                        checkInOutPoints.setServerId(jsonSupObject.optString("ServerID"));
+                        checkInOutPoints.setType(jsonSupObject.optString("Type"));
+                        checkInOutPoints.setPointDescription(jsonSupObject.optString("PointDescription"));
+                        checkInOutPoints.setIsActive(jsonSupObject.optInt("isActive"));
+                        checkInOutPoints.setLastUpdateDate(DateManager.dateToday());
+
+                        checkin_adptr.insertCheckInOutPoints(checkInOutPoints);
+                    }
+                    break;
+                case"Customer":
+                    Mst_Customermaster cus=new Mst_Customermaster();
+                    DBAdapter cus_adptr=new DBAdapter(context);
+
+                    JSONArray jsonCusInArray = new JSONArray(result);
+                    for (int i = 0; i < jsonCusInArray.length(); i++) {
+                        JSONObject jsonSupObject = jsonCusInArray.getJSONObject(i);
+
+                        cus.setServerId(jsonSupObject.optString("ServerID"));
+                        cus.setType(jsonSupObject.optString("Type"));
+                        cus.setPointDescription(jsonSupObject.optString("PointDescription"));
+                        cus.setIsActive(jsonSupObject.optInt("isActive"));
+                        cus.setLastUpdateDate(DateManager.dateToday());
+
+                        checkin_adptr.insertCheckInOutPoints(checkInOutPoints);
+                    }
+
+
+
                     break;
 
                 default:

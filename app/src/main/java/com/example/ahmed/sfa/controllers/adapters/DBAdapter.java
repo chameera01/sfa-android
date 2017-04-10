@@ -15,13 +15,17 @@ import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 
 import com.example.ahmed.sfa.models.DeviceCheckController;
+import com.example.ahmed.sfa.models.Mst_CheckInOutPoints;
 import com.example.ahmed.sfa.models.Mst_CustomerStatus;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Mst_District;
 import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
+import com.example.ahmed.sfa.models.Mst_Reasons;
 import com.example.ahmed.sfa.models.Mst_RepTable;
+import com.example.ahmed.sfa.models.Mst_Route;
 import com.example.ahmed.sfa.models.Mst_SupplierTable;
+import com.example.ahmed.sfa.models.Mst_Territory;
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 
 /**
@@ -314,6 +318,53 @@ public class DBAdapter{
                     ",'"+district.getDistrictId()+"','"+district.getDistrictName()+"',"+district.getIsActive()+",'"+DateManager.dateToday()+"');");
         }catch (Exception e){
             Toast.makeText(context, "insert_error"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+    }
+
+    public void insertTerritory(Mst_Territory terri) {
+        openDB();
+        //db.execSQL("CREATE TABLE  Mst_Territory (_ID integer PRIMARY KEY AUTOINCREMENT, TerritoryID text, Territory text, IsActive integer, LastUpdateDate text) ");
+        try{
+            db.execSQL("INSERT OR REPLACE INTO Mst_Territory (_ID,TerritoryID ,Territory,IsActive,LastUpdateDate) VALUES((select _id from Mst_Territory where TerritoryID='"+terri.getTerritory_id()+"')" +
+                    ",'"+terri.getTerritory_id()+"','"+terri.getTerritory()+"',"+terri.getIsActive()+",'"+terri.getLastUpdateDate()+"');");
+        }catch (Exception e){
+            Toast.makeText(context, "territoery:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+    }
+
+    public void insertRoute(Mst_Route route) {
+        openDB();
+        try{
+            ////db.execSQL("CREATE TABLE Mst_Route (_id INTEGER PRIMARY KEY AUTOINCREMENT,RouteID TEXT,TerritoryID TEXT,Territory TEXT,Route TEXT,isActive INTEGER,LastUpdateDate TEXT);");
+            db.execSQL("INSERT OR REPLACE INTO Mst_Route (_id,RouteID ,TerritoryID ,Territory ,Route ,isActive ,LastUpdateDate) VALUES((select _id from Mst_Route where RouteID='"+route.getRouteID()+"')" +
+                    ",'"+route.getRouteID()+"','"+route.getTerritoryID()+"','"+route.getTerritory()+"','"+route.getRoute()+"',"+route.getIsActive()+",'"+route.getLastUpdateDate()+"');");
+        }catch (Exception e){
+            Toast.makeText(context, "Route_insert_"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+    }
+
+    public void insertReason(Mst_Reasons reason) {
+        openDB();
+        try{//ID | ReasonsID | Reasons | IsActive | LastUpdateDate
+            db.execSQL("INSERT OR REPLACE INTO Mst_Reasons (_ID,ReasonsID,Reasons,IsActive,LastUpdateDate) VALUES((select _id from Mst_Reasons where ReasonsID='"+reason.getReasonId()+"')" +
+                    ",'"+reason.getReasonId()+"','"+reason.getReason()+"',"+reason.getIsActive()+",'"+reason.getLastUpdateDate()+"');");
+        }catch (Exception e){
+            Toast.makeText(context, "Reson_insert_:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+    }
+
+    public void insertCheckInOutPoints(Mst_CheckInOutPoints checkInOutPoints) {
+        openDB();
+        try{
+            /**Mst_CheckInOutPoints *ID | ServerID | Type | PointDescription | IsActive | LastUpdateDate */
+            db.execSQL("INSERT OR REPLACE INTO Mst_CheckInOutPoints  (_id,ServerID,Type,PointDescription,IsActive,LastUpdateDate) VALUES((select _id from Mst_CheckInOutPoints where ServerID='"+checkInOutPoints.getServerId()+"')" +
+                    ",'"+checkInOutPoints.getServerId()+"','"+checkInOutPoints.getType()+"','"+checkInOutPoints.getPointDescription()+"',"+checkInOutPoints.getIsActive()+",'"+checkInOutPoints.getLastUpdateDate()+"');");
+        }catch (Exception e){
+            Toast.makeText(context, "CheckINoutPonits:"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
         closeDB();
     }
