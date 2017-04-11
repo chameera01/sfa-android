@@ -139,7 +139,10 @@ public class DBAdapter{
 
         array_list.add("All");
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex("Town")));
+            String town=res.getString(res.getColumnIndex("Town"));
+            if(town!=null) {
+                array_list.add(town);
+            }
             res.moveToNext();
         }
         closeDB();
@@ -156,7 +159,10 @@ public class DBAdapter{
 
 
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex("CustomerNo")));
+            String cusNo=res.getString(res.getColumnIndex("CustomerNo"));
+            if(cusNo!=null){
+                array_list.add(cusNo);
+            }
             res.moveToNext();
         }
         closeDB();
@@ -178,7 +184,11 @@ public class DBAdapter{
 
             //array_list.add("All");/*removed for spinner bug fix*/
             while (res.isAfterLast() == false) {
-                array_list.add(res.getString(res.getColumnIndex(columnName)));
+                //handle null values;
+                String val=res.getString(res.getColumnIndex(columnName));
+                if(val!=null){
+                    array_list.add(val);
+                }
                 res.moveToNext();
             }
             closeDB();
