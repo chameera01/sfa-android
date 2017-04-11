@@ -6,34 +6,35 @@ package com.example.ahmed.sfa.models;
 
 public class Mst_Customermaster {
 
-    private  String CustomerNo;
-    private  String CustomerName;
-    private  String  Address;
-    private  String Town;
-    private  String Telephone;
-    private  String RouteName;
+    private  String CustomerNo="default";
+    private  String CustomerName="default";
+    private  String  Address="default";
+    private  String Town="default";
+    private  String Telephone="default";
+    private  String RouteName="default";
     ///*newly added when webservice is being done*/
-    private  String districtID;
-    private  String district;
-    private  String areaID;
-    private  String area;
-    private  String fax;
-    private  String email;
-    private  String brNo;
-    private  String ownerContactNo;
-    private  String ownerName;
-    private  String phamacyRegNo;
-    private  double creditLimit;
-    private  double currentCreditAmount;
-    private  String customerStatusID;
-    private  String customerStatus;
-    private  String insertDate;
-    private  String routeID;
-    private  String imageID;
-    private  String latitude;
-    private  String longitude;
-    private  String companyCode;
-    private  int isActive;
+    private  String districtID="test";
+    private  String district="test";
+    private  String areaID="test";
+    private  String area="test";
+    private  String fax="default";
+    private  String email="default";
+    private  String brNo="default";
+    private  String ownerContactNo="default";
+    private  String ownerName="default";
+    private  String phamacyRegNo="default";
+    private  double creditLimit=0.0;
+    private  double currentCreditAmount=0.0;
+    private  String customerStatusID="default";
+    private  String customerStatus="default";
+    private  String insertDate="default";
+    private  String routeID="default";
+    private  String imageID="default";
+    private  double latitude=0.0;
+    private  double longitude=0.0;
+    private  String companyCode="default";
+    private  int isActive=0;
+    private  String lastUpdateDate;
 
     public String getCustomerNo() {
         return CustomerNo;
@@ -219,19 +220,19 @@ public class Mst_Customermaster {
         this.imageID = imageID;
     }
 
-    public String getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
@@ -249,5 +250,13 @@ public class Mst_Customermaster {
 
     public void setIsActive(int isActive) {
         this.isActive = isActive;
+    }
+
+    public String getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(String lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
     }
 }

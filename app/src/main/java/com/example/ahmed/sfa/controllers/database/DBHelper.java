@@ -9,7 +9,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,90 +22,35 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "sfa.db";//this is the name of the database created in the phone
     private static final int VERSION = 1;
 
-    Context c;
     public DBHelper (Context ctxt){
         super(ctxt,DB_NAME,null,VERSION);//error handler shld be implemented
-        c=ctxt;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db){
         try{
-            /**/
-            try {
-                db.execSQL("create table  Mst_Territory (_ID integer primary key AUTOINCREMENT,TerritoryID text,Territory text,IsActive integer,LastUpdateDate text)");
-
-            }catch (Exception e){
-                Toast.makeText(c, "creating error:"+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-
-            /*Cretae table Tr_TabStock*/
-            db.execSQL(
-                    "create table Tr_TabStock" +
-                            "(_ID integer primary key AUTOINCREMENT ,ServerID  text,PrincipleID text,BrandID text,ItemCode text,BatchNumber text," +
-                            "ExpiryDate text,SellingPrice real,RetailPrice real," +
-                            "Qty  integer,LastUpdateDate text)"
-            );
-            /*create tanle to save Active Status*/
-            db.execSQL("CREATE TABLE DeviceCheckController (_ID integer primary key AUTOINCREMENT ,DeviceID text,Password text,ACTIVESTATUS text)");
-
-            /*create table for sales rep*/
-            db.execSQL("CREATE TABLE Mst_RepTable " +
+		/************Added by asanka*/
+		db.execSQL("create table  Mst_Territory (_ID integer primary key AUTOINCREMENT,TerritoryID text,Territory text,IsActive integer,LastUpdateDate text)");
+				/*create table to save Active Status*/
+        db.execSQL("CREATE TABLE DeviceCheckController (_ID integer primary key AUTOINCREMENT ,DeviceID text,Password text,ACTIVESTATUS text)");
+		/*create table for sales rep*/
+        db.execSQL("CREATE TABLE Mst_RepTable " +
                     "(_ID integer primary key AUTOINCREMENT,RepID text,DeviceName text,RepName text," +
                     "Address text,ContactNo text,DealerName text,DealerAddress text,MacAddress text,AgentID text,IsActive integer,LastUpdateDate text )");
-
-            /*insert data into Mst_RepTable*/
-            db.execSQL("INSERT INTO  Mst_RepTable (_ID,RepID,RepName) VALUES(1,'r1','malitnha'); ");
-            /*create table ProductMAster*/
-            db.execSQL(
-                    "CREATE TABLE Mst_ProductMaster" +
-                            "(_ID integer primary key AUTOINCREMENT ,ItemCode text,Description text,PrincipleID text,Principle text," +
-                            "BrandID text,Brand text,SubBrandID text,SubBrand text,UnitSize integer,UnitName text,RetailPrice real," +
-                            "SellingPrice real,BuyingPrice real,Active integer,LastUpdateDate text,TargetAllow  integer)"
-            );
-            //insert data to Mst_ProductMaster
-            db.execSQL("INSERT INTO Mst_ProductMaster (ItemCode, Description, PrincipleID, Principle, BrandID,Brand,SubBrandID," +
-                    " SubBrand,UnitSize,UnitName,RetailPrice,SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) " +
-                    "VALUES ('cd003','desc','prinid1','newphama','brandid','belcosid','subb','subbname',456,'uname',123.4,124.2,562.3,1,'2017-03-26',0);");
-
-            /*create MSt_suppler table*/
-            db.execSQL(
-                    "create table Mst_SupplierTable" +
-                            "(_ID integer primary key AUTOINCREMENT , PrincipleID  text,Principle text," +
-                            "Activate  integer,LastUpdateDate text)"
-            );
-            /**Insert data into Mst_supplierTable**/
-            //db.execSQL("INSERT INTO Mst_SupplierTable (PrincipleID,Principle) VALUES('Pid','PRINCIPLEnAME')");
-
+		
+					
+		/******************end new Add*/
             //creating the itinerarydetails table
-            db.execSQL("CREATE TABLE Tr_ItineraryDetails (_id integer PRIMARY KEY AUTOINCREMENT," +
-                    "ItineraryID TEXT,ItineraryDate TEXT,CustomerNo TEXT,IsPlanned integer,IsInvoiced integer,LastUpdateDate TEXT )");
-            /*insert dummy data*/
-           /* db.execSQL("INSERT INTO Tr_ItineraryDetails (ItineraryID,ItineraryDate,CustomerNo ,IsPlanned ,IsInvoiced ,LastUpdateDate )" +
-                    "values ('iti_id','2017-05-02','cus_01',0,0,'2017-01-05');");*/
-
+            db.execSQL("CREATE TABLE Tr_ItineraryDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "ItineraryID TEXT,ItineraryDate TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,LastUpdateDate TEXT );");
 
             //creating the customer table
             db.execSQL("CREATE TABLE Mst_Customermaster (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "CustomerNo TEXT,CustomerName TEXT,Address TEXT,DistrictID TEXT,District TEXT,AreaID TEXT," +
                     "Area TEXT,Town TEXT,Telephone TEXT,Fax TEXT,Email Text, BRno TEXT,OwnerContactNo TEXT," +
-                    "OwnerName TEXT,PhamacyRegNo TEXT,CreditLimit TEXT,CurrentCreditAmount TEXT,CustomerStatus TEXT" +
-                    ",InsertDate TEXT,RouteID TEXT,RouteName TEXT,ImageID TEXT,Latitude TEXT,Longitude TEXT,CompanyCode TEXT," +
+                    "OwnerName TEXT,PhamacyRegNo TEXT,CreditLimit real,CurrentCreditAmount real,CustomerStatus TEXT" +
+                    ",InsertDate TEXT,RouteID TEXT,RouteName TEXT,ImageID TEXT,Latitude real,Longitude real,CompanyCode TEXT," +
                     "IsActive INTEGER,LastUpdateDate TEXT);");
-
-            /*insert data to cistomermaster table*/
-            try {
-                db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Address,Area,Town,Telephone,RouteName,InsertDate)" +
-                        "VALUES ('CUS1','aksa','Dalugama Kelaniya','Kiribathgoda','Kelaniya','0715624895','route_name_kadawatha','2017-03-16');");
-                db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Address,Area,Town,Telephone,RouteName,InsertDate)" +
-                        "VALUES ('CUS2','DiscountStore','Dalugama Kelaniya','Kiribathgoda','Dalugama','0715685495','route_name_Kiribathgoda','2017-03-17');");
-                db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Address,Area,Town,Telephone,RouteName,InsertDate)" +
-                        "VALUES ('CUS3','peachNet','Dalugama Kelaniya','Kiribathgoda','Dalugama','0725685495','route_name_Kiribathgoda','2017-03-18');");
-                db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Address,Area,Town,Telephone,RouteName,InsertDate)" +
-                        "VALUES ('CUS4','Thilakawardhana','Dalugama Kelaniya','Kiribathgoda','Kiribathgoda','0725656235','route_name_kadawatha','2017-03-17');");
-            }catch (Exception e){
-                Toast.makeText(c, "dbCreation_error:"+e.getMessage(), Toast.LENGTH_LONG).show();
-            }
 
             //creating Customer status Table
             db.execSQL("CREATE TABLE Mst_CustomerStatus (_id INTEGER PRIMARY KEY AUTOINCREMENT,StatusID TEXT,Status TEXT,isActive INTEGER,LastUpdateDate TEXT);");
@@ -127,7 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     "ImageID TEXT,Latitude REAL,Longitude REAL,isUpload INTEGER,UploadDate TEXT,ApproveStatus INTEGER,LastUpdateDate TEXT);");
 
             //create Tr_DailyRouteDetails
-            db.execSQL("CREATE TABLE Tr_DailyRouteDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,Date TEXT,ItineraryID TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,InvoiceNo TEXT,Reasons TEXT,Comment TEXT,IsUpload TEXT,UploadDate TEXT)");
+            db.execSQL("CREATE TABLE Tr_DailyRouteDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,Date TEXT,ItineraryID TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,InvoiceNo INTEGER,Reasons TEXT,Comment TEXT,IsUpload TEXT,UploadDate TEXT)");
 
             //create table for check in check out points
             db.execSQL("CREATE TABLE Mst_CheckInOutPoints (_id INTEGER PRIMARY KEY AUTOINCREMENT,ServerID TEXT, Type TEXT," +
@@ -138,15 +82,15 @@ public class DBHelper extends SQLiteOpenHelper {
                     "isUpload INTEGER,LastUpdateDate TEXT, Latitude_CheckIn TEXT,Longitude_CheckIn TEXT,Latitude_CheckOut TEXT,Longitude_CheckOut TEXT);");
 
             //create reasons table for customer pop up
-            db.execSQL("CREATE TABLE Mst_Reasons (_id INTEGER PRIMARY KEY AUTOINCREMENT,ReasonsID TEXT,Reasons TEXT,isActive INTEGER,LastUpdateDate TEXT);");
+            db.execSQL("CREATE TABLE Mst_Reasons (_id INTEGER PRIMARY KEY AUTOINCREMENT,ReasonsID TEXT,Reason TEXT,isActive INTEGER,LastUpdateDate TEXT);");
 
 
 
             //create  Tr_SalesHeader table
             db.execSQL("CREATE TABLE Tr_SalesHeader(_id INTEGER PRIMARY KEY AUTOINCREMENT,ItineraryID TEXT,CustomerNo TEXT,InvoiceNo TEXT,InvoiceDate TEXT,PaymentTime TEXT" +
-                    "SubTotal REAL,InvoiceTotal REAL,FullDiscountRate REAL,DiscountAmount REAL,DiscountType REAL,IsOnInvoiceReturn INTEGER,OnInvoiceReturnNo TEXT" +
-                    "OnInvoiceReturnValue REAL,CreditAmount REAL,CashAmount REAL,ChequeAmount REAL,Isprint INTEGER,ProductCount INTEGER" +
-                    "InvoiceType TEXT,Latitude REAL,Longitude REAL,IsUpload INTEGER,UploadDate TEXT)");
+                    ",SubTotal REAL,InvoiceTotal REAL,FullDiscountRate REAL,DiscountAmount REAL,DiscountType REAL,IsOnInvoiceReturn INTEGER,OnInvoiceReturnNo TEXT" +
+                    ",OnInvoiceReturnValue REAL,CreditAmount REAL,CashAmount REAL,ChequeAmount REAL,Isprint INTEGER,ProductCount INTEGER" +
+                    ",InvoiceType TEXT,Latitude REAL,Longitude REAL,IsUpload INTEGER,UploadDate TEXT)");
 
             //insert data into reasons table
             db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN1','Reason 1',1);");
@@ -154,14 +98,22 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN3','Reason 3',0);");
 
             //insert data into sales header
-            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS1','INV1','2017/1/6',1200.00,500.00);");
-            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS2','INV2','2017/1/10',1202.02,500.01);");
-            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','2017/1/1',1203.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS1','INV1','04/08/2017',12000.00,500.00);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS2','INV2','04/08/2017',12020.02,500.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','04/08/2017',12030.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','04/08/2017',12030.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','04/07/2017',12030.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS1','INV3','04/07/2017',12030.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS2','INV3','04/07/2017',12030.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS4','INV3','04/07/2017',12030.02,530.01);");
+
 
             //insert data into mst_checkinoutpoints
-            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p1','DistributorPoint','WareHouse 1',0)");
-            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p2','DistributorPoint','WareHouse 2',0)");
-            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p3','DistributorPoint','WareHouse 1',1)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p1','IN','WareHouse 1',0)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p2','IN','WareHouse 2',0)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p3','IN','WareHouse 3',1)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p4','OUT','WareHouse 4',0)");
+            db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p4','OUT','WareHouse 5',0)");
 
             //add data to the DailyRouteDetails
             //db.execSQL("INSERT INTO Tr_DailyRouteDetails (SerialCode ,Date,ItineraryID ,CustomerNo ,IsPlanned ,IsInvoiced ,InvoiceNo ,Reasons ,Comment ,IsUpload ,UploadDate) VALUES ('SER1','2017/3/10','IT1','CUS1',0,1) ");
@@ -195,30 +147,30 @@ public class DBHelper extends SQLiteOpenHelper {
             //db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS5','CUS_IMG_5')");
 
             //INSERT VALUES TO THE ITINERARY DETAILS TABLE
-            /*db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT1','2017/3/17','CUS1',1,1);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT2','2017/3/17','CUS2',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT1','04/08/2017','CUS1',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT3','2017/3/17','CUS3',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT2','04/08/2017','CUS2',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT4','2017/3/17','CUS4',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT3','04/08/2017','CUS3',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT5','2017/3/17','CUS5',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT4','04/08/2017','CUS4',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT6','2017/3/17','CUS6',1,2);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT5','04/08/2017','CUS5',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT7','2017/3/17','CUS7',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT6','04/09/2017','CUS6',1,2);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT8','2017/3/17','CUS8',1,0);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT7','04/09/2017','CUS7',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT9','2017/3/17','CUS9',1,1);");
+                    ",IsPlanned,IsInvoiced) VALUES ('IT8','04/09/2017','CUS8',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-                    ",IsPlanned,IsInvoiced) VALUES ('IT10','2017/3/17','CUS10',1,0);");*/
+                    ",IsPlanned,IsInvoiced) VALUES ('IT9','04/09/2017','CUS9',1,0);");
+            db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
+                    ",IsPlanned,IsInvoiced) VALUES ('IT10','04/09/2017','CUS10',1,0);");
 
 
             //adding data to customer table
-           /* db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
+            db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS1','aksa','Town1');");
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS2','barca','Town2');");
@@ -237,7 +189,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS10','palva','Town4');");
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
-                    "VALUES ('CUS5','rose','Town5');");*/
+                    "VALUES ('CUS11','rose','Town5');");
+            db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
+                    "VALUES ('CUS12','rose','Town5');");
 
 
 
@@ -252,16 +206,8 @@ public class DBHelper extends SQLiteOpenHelper {
              db.execSQL("INSERT INTO route VALUES (6,'f','a');");
              */
 
-            /*db.execSQL(
-                    "create table mst_productmaster " +
-                            "(_id integer primary key AUTOINCREMENT , itemcode text,description text,principleid text, principle text," +
-                            "brandid text,brand text,subbrandid text,subbrand text,unitsize integer,unitname text,retailprice real," +
-                            "sellingprice real,buyingprice real,active integer,lastupdatedate text,targetallow integer)"
-            );*/
-
-
             //only few columns were addesto Tr_NewCustome tables
-            /*db.execSQL(
+            /**db.execSQL(
                     "create table Tr_NewCustomer" +
                             "(_ID integer primary key AUTOINCREMENT ,NewCustomerID text,CustomerName text,Address text,Area text,Town text,OwnerContactNo text," +
                             "IsUpload text,ApproveStatus text)"
@@ -270,25 +216,127 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
             //adding datato  table 21 TrNewCustomer
-           /* db.execSQL("INSERT INTO Tr_NewCustomer VALUES (1,'cus_001','peachnet','addre ','area_dalugama','dalugama','071562895','uploaded','pending');");
+            /**
+            db.execSQL("INSERT INTO Tr_NewCustomer VALUES (1,'cus_001','peachnet','addre ','area_dalugama','dalugama','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (2,'cus_002','healthycafe','addre is goes here','area_dalugama','bambalapitiya','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (3,'cus_003','thilakawardhana','addre ','area_kiribathgoda','kiribathgoda','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (4,'cus_004','kandy','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
-            db.execSQL("INSERT INTO Tr_NewCustomer VALUES (5,'cus_005','thilakawardhana','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");*/
+            db.execSQL("INSERT INTO Tr_NewCustomer VALUES (5,'cus_005','thilakawardhana','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
+                */
 
+            db.execSQL(
+                    "create table Mst_ProductMaster" +
+                            "(_ID integer primary key AUTOINCREMENT ,ItemCode text,Description text,PrincipleID text,Principle text," +
+                            "BrandID text,Brand text,SubBrandID text,SubBrand text,UnitSize integer,UnitName text,RetailPrice real," +
+                            "SellingPrice real,BuyingPrice real,Active integer,LastUpdateDate text,TargetAllow  integer)"
+            );
+            db.execSQL(
+                    "create table Tr_TabStock" +
+                            "(_ID integer primary key AUTOINCREMENT ,ServerID  text,PrincipleID text,BrandID text,ItemCode text,BatchNumber text," +
+                            "ExpiryDate text,SellingPrice real,RetailPrice real," +
+                            "Qty  integer,LastUpdateDate text)"
+            );
+            //db.execSQL("INSERT INTO Tr_TabStock VALUES (1,'server_id','principle_1','bran_1','cd001','bct_1','2017-10-25',45.50,60.5,895,'2017-02-25');");
 
+            db.execSQL("CREATE TABLE Mst_SupplierTable(_id INTEGER PRIMARY KEY AUTOINCREMENT,PrincipleID TEXT, Principle TEXT, Activate INTEGER, LastUpdateDate TEXT)");
 
-            /*db.execSQL("INSERT INTO Tr_TabStock VALUES (1,'server_id','principle_1','bran_1','cd001','bct_1','2017-10-25',45.50,60.5,895,'2017-02-25');");*/
-
-
+            db.execSQL("INSERT INTO Mst_SupplierTable VALUES(1,'PRN1','Principle1',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_SupplierTable VALUES(2,'PRN2','Principle2',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_SupplierTable VALUES(3,'PRN3','Principle3',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_SupplierTable VALUES(4,'PRN4','Principle4',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_SupplierTable VALUES(5,'PRN5','Principle5',0,'2017/1/1')");
 
             db.execSQL(
                     "create table Mst_ProductBrandManagement" +
                             "(_ID integer primary key AUTOINCREMENT ,BrandID text, PrincipleID  text,Principle text," +
                             "MainBrand text,Activate integer,LastUpdateDate text)"
             );
-            /*crreate table territory:ID | TerritoryID | Territory | IsActive | LastUpdateDate 	*/
 
+            db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(1,'BRND1','PRN1','Principle1','Brand1',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(2,'BRND2','PRN1','Principle1','Brand2',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(3,'BRND3','PRN2','Principle2','Brand3',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(4,'BRND4','PRN2','Principle2','Brand4',0,'2017/1/1')");
+            db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(5,'BRND5','PRN3','Principle3','Brand5',1,'2017/1/1')");
+
+
+
+
+
+
+            db.execSQL("INSERT INTO Mst_ProductMaster(ItemCode,Description,PrincipleID,Principle," +
+                    "BrandID,Brand ,SubBrandID,SubBrand,UnitSize,UnitName,RetailPrice," +
+                    "SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) values ('ITM1','pro1','PRN1','Principle1','BRND1','brand','','',2,'sdas',10.2,8.4,6.2,0,'2017/06/13',15);");
+
+            db.execSQL("INSERT INTO Mst_ProductMaster(ItemCode,Description,PrincipleID,Principle," +
+                    "BrandID,Brand ,SubBrandID,SubBrand,UnitSize,UnitName,RetailPrice," +
+                    "SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) values ('ITM2','pro2','PRN2','Principle2','BRND2','brand2','','',2,'sdas',10.2,8.4,6.2,0,'2017/06/13',15);");
+            db.execSQL("INSERT INTO Mst_ProductMaster(ItemCode,Description,PrincipleID,Principle," +
+                    "BrandID,Brand ,SubBrandID,SubBrand,UnitSize,UnitName,RetailPrice," +
+                    "SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) values ('ITM2','pro3','PRN3','Principle3','BRND3','brand3','','',2,'sdas',10.2,8.4,6.2,0,'2017/06/13',15);");
+            db.execSQL("INSERT INTO Mst_ProductMaster(ItemCode,Description,PrincipleID,Principle," +
+                    "BrandID,Brand ,SubBrandID,SubBrand,UnitSize,UnitName,RetailPrice," +
+                    "SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) values ('ITM4','pro4','PRN3','Principle3','BRND4','brand5','','',2,'sdas',10.2,8.4,6.2,0,'2017/06/13',15);");
+
+            db.execSQL("INSERT INTO Tr_TabStock values(1,'S1','PRN1','BRND1','ITM1','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
+            db.execSQL("INSERT INTO Tr_TabStock values(2,'S2','PRN1','BRND2','ITM1','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
+            db.execSQL("INSERT INTO Tr_TabStock values(3,'S3','PRN2','BRND3','ITM2','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
+            db.execSQL("INSERT INTO Tr_TabStock values(4,'S4','PRN2','BRND4','ITM3','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
+            db.execSQL("INSERT INTO Tr_TabStock values(5,'S5','PRN3','BRND5','ITM4','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
+
+            //db.execSQL("INSERT INTO ");
+
+            db.execSQL("CREATE TABLE Mst_Banks (_id INTEGER PRIMARY KEY AUTOINCREMENT,BankNameID TEXT,BankName TEXT,IsActive INTEGER,LastUpdateDate TEXT)");
+
+            db.execSQL("INSERT INTO Mst_Banks (BankNameID,BankName ,IsActive ,LastUpdateDate)" +
+                    "VALUES ('BNK1','Sampath',0,'2017/3/16')");
+            db.execSQL("INSERT INTO Mst_Banks (BankNameID,BankName ,IsActive ,LastUpdateDate)" +
+                    "VALUES ('BNK2','commercial',0,'2017/3/16')");
+
+            db.execSQL("CREATE TABLE Mst_CreditDays (_id INTEGER PRIMARY KEY AUTOINCREMENT,CreditDaysID TEXT,CreditDays INTEGER,IsActive INTEGER,LastUpdateDate TEXT)");
+
+            db.execSQL("INSERT INTO Mst_CreditDays(CreditDaysID,CreditDays,IsActive,LastUpdateDate) " +
+                    "VALUES('CRDT1',30,0,'2017/03/26')");
+            db.execSQL("INSERT INTO Mst_CreditDays(CreditDaysID,CreditDays,IsActive,LastUpdateDate) " +
+                    "VALUES('CRDT2',15,0,'2017/03/26')");
+            db.execSQL("INSERT INTO Mst_CreditDays(CreditDaysID,CreditDays,IsActive,LastUpdateDate) " +
+                    "VALUES('CRDT3',5,0,'2017/03/26')");
+
+            /**
+            insertProduct("ITM1","pro1","PRN1","PRN1","brandid","brand","","",2,"sdas",10.2,8.4,6.2,0,"2017/06/13",15);
+            insertProduct("ITM2","pro2","PRN2","PRN2","brandid","brand","","",2,"sdas",10.2,8.4,6.2,0,"2017/06/13",15);
+            insertProduct("ITM3","pro3","PRN3","PRN3","brandid","brand","","",2,"sdas",10.2,8.4,6.2,0,"2017/06/13",15);
+            insertProduct("ITM4","pro4","PRN3","PRN4","brandid","brand","","",2,"sdas",10.2,8.4,6.2,0,"2017/06/13",15);
+
+
+            inserToStockView("S1","PRN1","brandid","ITM1","batch1","2017/1/16",10.2,8.2,20,"2016/7/1");
+            inserToStockView("S2","PRN1","brandid","ITM1","batch2","2017/1/17",10.2,8.2,20,"2016/7/1");
+            inserToStockView("S3","PRN2","brandid","ITM2","batch1","2017/1/16",10.2,8.2,20,"2016/7/1");
+            inserToStockView("S4","PRN3","brandid","ITM3","batch1","2017/1/16",10.2,8.2,20,"2016/7/1");
+            inserToStockView("S5","PRN4","brandid","ITM4","batch1","2017/1/16",10.2,8.2,20,"2016/7/1");
+             */
+            db.execSQL("CREATE TABLE Tr_SalesDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,HeaderID TEXT,ItemCode TEXT,UnitPrice REAL" +
+                    ",BatchNumber TEXT,ExpiryDate TEXT,DiscountRate REAL,DiscountAmount REAL,IssueMode INTEGER,ShelfQty INTEGER" +
+                    ",RequestQty INTEGER,OrderQty INTEGER,FreeQty INTEGER,Total REAL,IsUpload INTEGER,UploadDate TEXT)");
+
+            db.execSQL("CREATE TABLE Tr_InvoiceOutstanding (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,InvoiceDate TEXT," +
+                    "InvoiceNo TEXT,CustomerNo TEXT,InvoiceTotalValue REAL,CreditValue REAL,CurrentCreditValue REAL,CreditDays INTEGER,LastUpdateDate TEXT," +
+                    "LastUpdateAmount REAL,LastUpdateType INTEGER,InsertDate TEXT,IsUpload TEXT,IsUpdate TEXT);");
+
+            db.execSQL("CREATE TABLE ChequeDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,InvoiceDate TEXT,InvoiceNo TEXT,CustomerNo TEXT" +
+                    ",InvoiceTotalValue REAL,ChequeAmount REAL,ChequeNumber TEXT,BankName TEXT,CollectedDate TEXT,RealizedDate TEXT,IsUpload INTEGER" +
+                    ",IsUpdate INTEGER,Status TEXT,StatusUpdateDate TEXT)");
+            db.execSQL("CREATE TABLE Mst_InvoiceNumbers_Management(_id INTEGER PRIMARY KEY AUTOINCREMENT,InvoiceNo INTEGER,InvoiceReturnNo INTEGER,CollectionNoteNo INTEGER,LastUpdateDate TEXT)");
+            db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management(InvoiceNo) VALUES (5);");
+
+            db.execSQL("CREATE TABLE Tr_TargetData (_id INTEGER PRIMARY KEY AUTOINCREMENT,ServerID TEXT,Date TEXT,Month TEXT,TargetValue INTEGER)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG1','04/09/2017','April',35000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG2','04/08/2017','April',20000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','04/07/2017','April',15000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','04/06/2017','April',15000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','04/05/2017','April',15000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','04/04/2017','April',15000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG4','03/05/2017','March',50000)");
+            db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG5','03/34/2017','March',30000)");
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -301,11 +349,25 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-
+    public static final String DATABASE_NAME = "MyDBName.db";
     public static final String PRODUCT_TABLE_NAME = "Mst_ProductMaster";
+    public static final String PRODUCT_COLUMN_ID = "id";
+    public static final String PRODUCT_COLUMN_ITEMCODE = "itemcode";
+    public static final String PRODUCT_COLUMN_DESCRIPTION = "description";
+    public static final String PRODUCT_COLUMN_PRINCIPLEID = "principleid";
     public static final String PRODUCT_COLUMN_PRINCIPLE = "Principle";
+    public static final String PRODUCT_COLUMN_BRANDID = "brandid";
     public static final String PRODUCT_COLUMN_BRAND = "Brand";
-
+    public static final String PRODUCT_COLUMN_SUBBRAND_ID = "subbrandid";
+    public static final String PRODUCT_COLUMN_SUBBRAND = "subbrand";
+    public static final String PRODUCT_COLUMN_UNITSZIE = "unitsize";
+    public static final String PRODUCT_COLUMN_UNITNAME = "unitname";
+    public static final String PRODUCT_COLUMN_RETAILPRICE = "retailprice";
+    public static final String PRODUCT_COLUMN_SELLINGPRICE = "sellingprice";
+    public static final String PRODUCT_COLUMN_BUYING_PRICE = "buyingprice";
+    public static final String PRODUCT_COLUMN_ACTIVE = "active";
+    public static final String PRODUCT_COLUMN_LAST_UPDATE_DATE = "lastupdatedate";
+    public static final String PRODUCT_COLUMN_TARGET_ALLOW = "targetallow";
 
     private HashMap hp;
 
@@ -321,29 +383,28 @@ public class DBHelper extends SQLiteOpenHelper {
         String result="failDBclass";
         try{
             SQLiteDatabase db = this.getWritableDatabase();
-
             ContentValues contentValues = new ContentValues();
-            contentValues.put("ItemCode", itemcode);
-            contentValues.put("Description", description);
-            contentValues.put("PrincipleID", principleid);
-            contentValues.put("Principle", principle);
-            contentValues.put("BrandID", brandid);
-            contentValues.put("Brand", brand);
-            contentValues.put("SubBrandID", subbrandid);
-            contentValues.put("SubBrand", subbrand);
-            contentValues.put("UnitSize", unitsize);
-            contentValues.put("UnitName", unitname);
-            contentValues.put("RetailPrice", retailprice);
-            contentValues.put("SellingPrice",sellingprice);
-            contentValues.put("BuyingPrice", buyingprice);
-            contentValues.put("Active", active);
-            contentValues.put("LastUpdateDate", lastupDate);
-            contentValues.put("TargetAllow", targetallow);
+            contentValues.put("itemcode", itemcode);
+            contentValues.put("description", description);
+            contentValues.put("principleid", principleid);
+            contentValues.put("principle", principle);
+            contentValues.put("brandid", brandid);
+            contentValues.put("brand", brand);
+            contentValues.put("subbrandid", subbrandid);
+            contentValues.put("subbrand", subbrand);
+            contentValues.put("unitsize", unitsize);
+            contentValues.put("unitname", unitname);
+            contentValues.put("retailprice", retailprice);
+            contentValues.put("sellingprice",sellingprice);
+            contentValues.put("buyingprice", buyingprice);
+            contentValues.put("active", active);
+            contentValues.put("lastupdatedate", lastupDate);
+            contentValues.put("targetallow", targetallow);
 
-            if(db.insert("Mst_ProductMaster", null, contentValues)>0) {
+            if(db.insert("mst_productmaster", null, contentValues)>0) {
                 result = "success";
             }else
-                result ="outer_fail";
+                result ="outer_if";
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -436,14 +497,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+
+
     public Cursor getData(String qry) {
         //String query=qry;
 
         try{
 
             SQLiteDatabase db = this.getReadableDatabase();
-           Cursor res =  db.rawQuery(qry, null);
-            //Cursor res =  db.rawQuery(qry);
+            Cursor res =  db.rawQuery(qry, null);
             return res;
 
         }catch (SQLException e){
@@ -453,73 +515,43 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public int numberOfRows(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        int numRows = (int) DatabaseUtils.queryNumEntries(db, PRODUCT_TABLE_NAME);
-        return numRows;
-    }
 
-    public boolean updateContact (Integer id, String name, String phone, String email, String street,String place) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("name", name);
-        contentValues.put("phone", phone);
-        contentValues.put("email", email);
-        contentValues.put("street", street);
-        contentValues.put("place", place);
-        db.update("Mst_ProductMaster", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
-        return true;
-    }
 
-    public Integer deleteContact (Integer id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("Mst_ProductMaster",
-                "id = ? ",
-                new String[] { Integer.toString(id) });
-    }
 
-    public ArrayList<String> getAllbrands() {
 
+
+    public   ArrayList<String> getAllbrands() {
         ArrayList<String> array_list = new ArrayList<String>();
 
         //hp = new HashMap();
-        try {
-            SQLiteDatabase db = this.getReadableDatabase();
-            Cursor res = db.rawQuery("SELECT DISTINCT Brand FROM Mst_ProductMaster", null);
-            res.moveToFirst();
+        SQLiteDatabase db = this.getReadableDatabase();
 
-            array_list.add("All");
-            while (res.isAfterLast() == false) {
-                array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_BRAND)));
-                res.moveToNext();
-            }
-            db.close();
-        }catch (Exception e){
-            array_list.add(e.getMessage());
+        Cursor res =  db.rawQuery("SELECT DISTINCT Brand FROM Mst_ProductMaster", null );
+        res.moveToFirst();
+
+        array_list.add("All");
+        while(res.isAfterLast() == false){
+            array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_BRAND)));
+            res.moveToNext();
         }
-
         return array_list;
     }
     public   ArrayList<String> getAllprinciples() {
         ArrayList<String> array_list = new ArrayList<String>();
 
         //hp = new HashMap();
-        try {
-            SQLiteDatabase db = this.getReadableDatabase();
-            Cursor res = db.rawQuery("SELECT DISTINCT Principle FROM Mst_ProductMaster", null);
-            res.moveToFirst();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery("SELECT DISTINCT Principle FROM Mst_ProductMaster", null );
+        res.moveToFirst();
 
-            array_list.add("All");
-            while (res.isAfterLast() == false) {
-                array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_PRINCIPLE)));
-                res.moveToNext();
-            }
-            db.close();
-        }catch (Exception e){
-            array_list.add(e.getMessage());
+        array_list.add("All");
+        while(res.isAfterLast() == false){
+            array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_PRINCIPLE)));
+            res.moveToNext();
         }
         return array_list;
     }
+
 
 
 }

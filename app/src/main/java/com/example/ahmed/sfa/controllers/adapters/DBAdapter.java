@@ -165,22 +165,29 @@ public class DBAdapter{
     //universal method to get data from db
 
     public ArrayList<String> getArryListUniMethod(String ...qry) {
-        String query=qry[0];
-        String columnName=qry[1];
-
         ArrayList<String> array_list = new ArrayList<String>();
+        try {
+            String query = qry[0];
+            String columnName = qry[1];
 
-        openDB();
-        Cursor res =  db.rawQuery(query, null );
-        res.moveToFirst();
 
-        array_list.add("All");
-        while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(columnName)));
-            res.moveToNext();
+
+            openDB();
+            Cursor res = db.rawQuery(query, null);
+            res.moveToFirst();
+
+            //array_list.add("All");/*removed for spinner bug fix*/
+            while (res.isAfterLast() == false) {
+                array_list.add(res.getString(res.getColumnIndex(columnName)));
+                res.moveToNext();
+            }
+            closeDB();
+            return array_list;
+        }catch (Exception e){
+            Toast.makeText(context, "DBAdptr_unimethod"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            //array_list.add("All");/*removed for spinner bug fix test */
+            return null;
         }
-        closeDB();
-        return array_list;
 
     }
 
@@ -254,9 +261,9 @@ public class DBAdapter{
     public void insertMst_SupplierTable(Mst_SupplierTable sup){
         openDB();
         db.execSQL(
-                "INSERT OR REPLACE INTO Mst_SupplierTable (_ID,PrincipleID,Principle,Activate," +
+                "INSERT OR REPLACE INTO Mst_SupplierTable (_id,PrincipleID,Principle,Activate," +
                         "LastUpdateDate) values (" +
-                        "(select _ID from Mst_SupplierTable where PrincipleID ='"+sup.getPrincipleID()+"')," +
+                        "(select _id from Mst_SupplierTable where PrincipleID ='"+sup.getPrincipleID()+"')," +
                         "'"+sup.getPrincipleID()+"','"+sup.getPrinciple()+"','"+sup.getActive()+"','"+DateManager.dateToday()+"'" +
                         " );"
                     );
@@ -280,7 +287,7 @@ public class DBAdapter{
             db.execSQL(
                     "INSERT OR REPLACE INTO Mst_CustomerStatus (_id ,StatusID,Status,isActive," +
                             "LastUpdateDate) values (" +
-                            "(select _ID from Mst_CustomerStatus where StatusID='"+cusStatus.getStatusId()+"')," +
+                            "(select _id from Mst_CustomerStatus where StatusID='"+cusStatus.getStatusId()+"')," +
                             "'"+cusStatus.getStatus()+"',"+cusStatus.getIsActive()+",'"+DateManager.dateToday()+"'" +
                             " );"
             );
@@ -349,7 +356,7 @@ public class DBAdapter{
     public void insertReason(Mst_Reasons reason) {
         openDB();
         try{//ID | ReasonsID | Reasons | IsActive | LastUpdateDate
-            db.execSQL("INSERT OR REPLACE INTO Mst_Reasons (_ID,ReasonsID,Reasons,IsActive,LastUpdateDate) VALUES((select _id from Mst_Reasons where ReasonsID='"+reason.getReasonId()+"')" +
+            db.execSQL("INSERT OR REPLACE INTO Mst_Reasons (_ID,ReasonsID,Reason,IsActive,LastUpdateDate) VALUES((select _id from Mst_Reasons where ReasonsID='"+reason.getReasonId()+"')" +
                     ",'"+reason.getReasonId()+"','"+reason.getReason()+"',"+reason.getIsActive()+",'"+reason.getLastUpdateDate()+"');");
         }catch (Exception e){
             Toast.makeText(context, "Reson_insert_:"+e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -367,5 +374,26 @@ public class DBAdapter{
             Toast.makeText(context, "CheckINoutPonits:"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
         closeDB();
+    }
+
+    public void insertCustomerData(Mst_Customermaster cus) {
+        openDB();
+        try{
+            db.execSQL("INSERT OR REPLACE INTO Mst_Customermaster (_id," +
+                    "CustomerNo,CustomerName ,Address,DistrictID ,District ,AreaID," +
+                    "Area,Town,Telephone,Fax,Email,BRno,OwnerContactNo," +
+                    "OwnerName,PhamacyRegNo ,CreditLimit,CurrentCreditAmount ,CustomerStatus" +
+                    ",InsertDate,RouteID ,RouteName,ImageID,Latitude ,Longitude ,CompanyCode ," +
+                    "IsActive ,LastUpdateDate) VALUES((select _id from  Mst_Customermaster where CustomerNo='"+cus.getCustomerNo()+"')" +
+                    ",'"+cus.getCustomerNo()+"','"+cus.getCustomerName()+"','"+cus.getAddress()+"','"+cus.getDistrictID()+"','"+cus.getDistrict()+"'," +
+                    "'"+cus.getAreaID()+"','"+cus.getArea()+"','"+cus.getTown()+"','"+cus.getTelephone()+"','"+cus.getFax()+"','"+cus.getEmail()+"'" +
+                    ",'"+cus.getBrNo()+"','"+cus.getOwnerContactNo()+"','"+cus.getOwnerName()+"','"+cus.getPhamacyRegNo()+"',"+cus.getCreditLimit()+","+cus.getCurrentCreditAmount()+"" +
+                    ",'"+cus.getCustomerStatus()+"','"+cus.getInsertDate()+"','"+cus.getRouteID()+"','"+cus.getRouteName()+"','"+cus.getImageID()+"',"+cus.getLatitude()+"" +
+                    ","+cus.getLongitude()+",'"+cus.getCompanyCode()+"',"+cus.getIsActive()+",'"+cus.getLastUpdateDate()+"');");
+        }catch (Exception e){
+            Toast.makeText(context, "Customermaster_insert:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+
     }
 }

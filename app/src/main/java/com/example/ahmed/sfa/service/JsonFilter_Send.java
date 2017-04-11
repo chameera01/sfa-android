@@ -255,6 +255,7 @@ public class JsonFilter_Send {
                     break;
                 case  "CheckInOutPoints":
                     ////ID | ServerID | Type | PointDescription | IsActive | LastUpdateDate
+
                     Mst_CheckInOutPoints checkInOutPoints=new Mst_CheckInOutPoints();
                     DBAdapter checkin_adptr=new DBAdapter(context);
 
@@ -272,20 +273,49 @@ public class JsonFilter_Send {
                     }
                     break;
                 case"Customer":
+
                     Mst_Customermaster cus=new Mst_Customermaster();
                     DBAdapter cus_adptr=new DBAdapter(context);
 
                     JSONArray jsonCusInArray = new JSONArray(result);
                     for (int i = 0; i < jsonCusInArray.length(); i++) {
                         JSONObject jsonSupObject = jsonCusInArray.getJSONObject(i);
+/*Mst_Customermaster (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "CustomerNo TEXT,CustomerName TEXT,Address TEXT,DistrictID TEXT,District TEXT,AreaID TEXT," +
+                    "Area TEXT,Town TEXT,Telephone TEXT,Fax TEXT,Email Text, BRno TEXT,OwnerContactNo TEXT," +
+                    "OwnerName TEXT,PhamacyRegNo TEXT,CreditLimit TEXT,CurrentCreditAmount TEXT,CustomerStatus TEXT" +
+                    ",InsertDate TEXT,RouteID TEXT,RouteName TEXT,ImageID TEXT,Latitude TEXT,Longitude TEXT,CompanyCode TEXT," +
+                    "IsActive INTEGER,LastUpdateDate TEXT);*/
 
-                        cus.setServerId(jsonSupObject.optString("ServerID"));
-                        cus.setType(jsonSupObject.optString("Type"));
-                        cus.setPointDescription(jsonSupObject.optString("PointDescription"));
+                        cus.setCustomerNo(jsonSupObject.optString("CustomerNo"));
+                        cus.setCustomerName(jsonSupObject.optString("CustomerName"));
+                        cus.setAddress(jsonSupObject.optString("Address"));
+                        cus.setDistrictID(jsonSupObject.optString("DistrictID"));
+                        cus.setDistrict(jsonSupObject.optString("District"));
+                        cus.setAreaID(jsonSupObject.optString("AreaID"));
+                        cus.setArea(jsonSupObject.optString("Area"));
+                        cus.setTown(jsonSupObject.optString("Town"));
+                        cus.setTelephone(jsonSupObject.optString("Telephone"));
+                        cus.setFax(jsonSupObject.optString("Fax"));
+                        cus.setEmail(jsonSupObject.optString("Email"));
+                        cus.setBrNo(jsonSupObject.optString("BRno"));
+                        cus.setOwnerContactNo(jsonSupObject.optString("OwnerContactNo"));
+                        cus.setOwnerName(jsonSupObject.optString("OwnerName"));
+                        cus.setPhamacyRegNo(jsonSupObject.optString("PhamacyRegNo"));
+                        cus.setCreditLimit(jsonSupObject.optDouble("CreditLimit"));
+                        cus.setCurrentCreditAmount(jsonSupObject.optDouble("CurrentCreditAmount"));
+                        cus.setCustomerStatus(jsonSupObject.optString("CustomerStatus"));
+                        cus.setInsertDate(jsonSupObject.optString("InsertDate"));
+                        cus.setRouteID(jsonSupObject.optString("RouteID"));
+                        cus.setRouteName(jsonSupObject.optString("RouteName"));
+                        /*cus.setImageID(jsonSupObject.optString("ImageID"));
+                        cus.setLatitude(jsonSupObject.optDouble("Latitude"));
+                        cus.setLongitude(jsonSupObject.optDouble("Longitude"));
+                        cus.setCompanyCode(jsonSupObject.optString("CompanyCode"));*/
                         cus.setIsActive(jsonSupObject.optInt("isActive"));
                         cus.setLastUpdateDate(DateManager.dateToday());
 
-                        checkin_adptr.insertCheckInOutPoints(checkInOutPoints);
+                        cus_adptr.insertCustomerData(cus);
                     }
 
 
