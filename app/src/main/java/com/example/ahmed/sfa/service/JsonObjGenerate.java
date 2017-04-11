@@ -17,6 +17,7 @@ public class JsonObjGenerate {
     HttpURLConnection httpUrlConnection;
     String link;
     private JsonRequestListerner mlistener;
+    private String filterType;
 
     public JsonObjGenerate(String webLink,JsonRequestListerner mListener){
         link=webLink;
@@ -61,4 +62,11 @@ public class JsonObjGenerate {
         return result;
     }
 
+    public String getFilterType() {
+        return filterType;
+    }
+
+    public void setFilterType(String filterType) {
+        this.filterType = filterType;
+    }
 }

@@ -2,6 +2,8 @@ package com.example.ahmed.sfa.Activities;
 
 
 
+
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import com.example.ahmed.sfa.service.JsonHelper;
 import com.example.ahmed.sfa.service.JsonObjGenerate;
 import com.example.ahmed.sfa.service.JsonRequestListerner;
 import com.example.ahmed.sfa.service.SyncReturn;
+import com.example.ahmed.sfa.service.SyncService;
 
 
 public class ServiceTest extends AppCompatActivity implements JsonRequestListerner {
@@ -22,7 +25,18 @@ TextView result_view;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_test);
         result_view=(TextView) findViewById(R.id.tv_service_result);
+        runService();
         runJsonCLass();
+
+    }
+
+    private void runService() {
+        Intent intent = new Intent(this, SyncService.class);
+        startService(intent);
+    }
+    private void stopServiec(){
+        Intent intent = new Intent(this, SyncService.class);
+        stopService(intent);
     }
 
     public void runJsonCLass(){
@@ -46,9 +60,9 @@ TextView result_view;
 /**/
 /**********************/
     @Override
-    public void receiveData(Object result) {
+    public void receiveData(String result,String filter) {
         if(result!=null){
-            String josnString=result.toString();
+            String josnString=result;
             Toast.makeText(this, "result" + josnString, Toast.LENGTH_LONG).show();
             try{
                 JsonFilter_Send josnFilter= new JsonFilter_Send(ServiceTest.this.getApplicationContext());

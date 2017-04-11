@@ -1,5 +1,6 @@
 package com.example.ahmed.sfa.Activities;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -25,7 +26,8 @@ import controllers.DateManager;
 
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
-import controllers.database.DBHelper;
+//import controllers.database.DBHelper;
+import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 
@@ -43,20 +45,27 @@ public class AddExtraCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_extra_customer);
 
-
-        spinner_area = (Spinner) findViewById(R.id.spinner_area_ec);
-        spinner_town = (Spinner) findViewById(R.id.spinner_town_ec);
-        cus_name =(SearchView) findViewById(R.id.search_txt_customer_ec);
-        btn_add_itinerary =(Button) findViewById(R.id.btn_add_itineraray);
+        try {
+            spinner_area = (Spinner) findViewById(R.id.spinner_area_ec);
+            spinner_town = (Spinner) findViewById(R.id.spinner_town_ec);
+            cus_name = (SearchView) findViewById(R.id.search_txt_customer_ec);
+            btn_add_itinerary = (Button) findViewById(R.id.btn_add_itineraray);
+        }catch (Exception e){
+            Toast.makeText(this, "setSpinners", Toast.LENGTH_SHORT).show();
+        }
 
         spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                area = spinner_area.getSelectedItem().toString();
-                town = spinner_town.getSelectedItem().toString();
-                customer_name = cus_name.getQuery().toString();
+                try {
+                    area = spinner_area.getSelectedItem().toString();
+                    town = spinner_town.getSelectedItem().toString();
+                    customer_name = cus_name.getQuery().toString();
 
-                getdata(town, area, customer_name);
+                    getdata(town, area, customer_name);
+                }catch(Exception e){
+                    Toast.makeText(AddExtraCustomer.this, "town_spinner_click"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
                 //sortBrandByPrinciple(town);
             }
 
@@ -69,10 +78,14 @@ public class AddExtraCustomer extends AppCompatActivity {
         spinner_area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                area = spinner_area.getSelectedItem().toString();
-                town = spinner_town.getSelectedItem().toString();
-                customer_name = cus_name.getQuery().toString();
-                getdata(town, area, customer_name);
+                try {
+                    area = spinner_area.getSelectedItem().toString();
+                    town = spinner_town.getSelectedItem().toString();
+                    customer_name = cus_name.getQuery().toString();
+                    getdata(town, area, customer_name);
+                }catch (Exception e){
+                    Toast.makeText(AddExtraCustomer.this, "Area_spinner_clcik"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -87,10 +100,18 @@ public class AddExtraCustomer extends AppCompatActivity {
         cus_name.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                area = spinner_area.getSelectedItem().toString();
-                town = spinner_town.getSelectedItem().toString();
-                customer_name = cus_name.getQuery().toString();
-                getdata(town, area, customer_name);
+                getdata("ALL", "ALL", "");
+                try {
+                    area = spinner_area.getSelectedItem().toString();
+                    town = spinner_town.getSelectedItem().toString();
+                    customer_name = cus_name.getQuery().toString();
+
+                }catch(Exception e){
+                    Toast.makeText(AddExtraCustomer.this, "getDataFromSpinners:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                //getdata(town, area, customer_name);
+                //testing
+               // getdata("ALL", "ALL", customer_name);
 
                 return true;
             }
@@ -119,8 +140,8 @@ public class AddExtraCustomer extends AppCompatActivity {
 
 
 
-        setSpinner();//aulto load values to dropdown boxes
-        getdata("All", "All", "d");//call default search;
+        //setSpinner();//aulto load values to dropdown boxes
+        //getdata("All", "All", "d");//call default search;
     }
 
     public  void setSpinner(){
@@ -129,8 +150,13 @@ public class AddExtraCustomer extends AppCompatActivity {
             DBAdapter adapter = new DBAdapter(this);
 
             ArrayList<String> arrayList1 = new ArrayList<String>();
-            arrayList1 = adapter.getArryListUniMethod("select DISTINCT Area from Mst_Customermaster","Area");//.getArryListUniMethod("select DISTINCT Area from Mst_Customermaster","Area");//getArea List
 
+            try {
+                arrayList1 = adapter.getArryListUniMethod("select DISTINCT Area from Mst_Customermaster", "Area");//.getArryListUniMethod("select DISTINCT Area from Mst_Customermaster","Area");//getArea List
+            }catch (Exception e){
+                Toast.makeText(this, "Area fetch from db:"+e.getMessage()   , Toast.LENGTH_SHORT).show();
+            }
+            arrayList1.add("ALL");/*newly addded for spinner bug fix*/
             ArrayAdapter<String> adp = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayList1);
             spinner_area.setAdapter(adp);
             spinner_area.setVisibility(View.VISIBLE);
@@ -138,9 +164,12 @@ public class AddExtraCustomer extends AppCompatActivity {
 
             //set Spinner values to principle dropdown menu;
             ArrayList<String> principleList = new ArrayList<String>();
-            principleList = adapter.getArryListUniMethod("select DISTINCT Town from Mst_Customermaster","Town");//adapter.getAllprinciples();
-
-
+            try {
+                principleList = adapter.getArryListUniMethod("select DISTINCT Town from Mst_Customermaster", "Town");//adapter.getAllprinciples();
+            }catch (Exception e){
+                Toast.makeText(this, "fetch Town datafrom db:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+            principleList.add("ALL");/*newly added fro spinner fug fix*/
             ArrayAdapter<String> adp2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, principleList);
             spinner_town.setAdapter(adp2);
             spinner_town.setVisibility(View.VISIBLE);
@@ -151,50 +180,54 @@ public class AddExtraCustomer extends AppCompatActivity {
 
 
     public void getdata(String ...filter){
+        Toast.makeText(this, "came inside gedData method", Toast.LENGTH_SHORT).show();
+try {
+    String town = filter[0];
+    String area = filter[1];
+    String cusName = filter[2];
 
-        String town=filter[0];
-        String area=filter[1];
-        String cusName=filter[2];
-
-        String query="select * from Mst_Customermaster ";
+    String query = "select * from Mst_Customermaster ";
         /*SELECT doctors.doctor_id,doctors.doctor_name,visits.patient_name
         FROM doctors
         INNER JOIN visits
         ON doctors.doctor_id=visits.doctor_id*/
 
 
-
-
-        if(town=="All" && area=="All"){
-            if(cusName!=""){
-                query+= " where CustomerName like'"+cusName+"%'";
-            }
-        }else if(town=="All" && area !="All"){
-            query+= " where Area='"+area+"' ";
-        }else if(town!="All" && area=="All"){
-            query+= " where Town='"+town+"' ";
-        }else{
-            query+= " where Area='"+area+"'  AND Town='"+town+"' ";
+    if (town == "All" && area == "All") {
+        if (cusName != "") {
+            query += " where CustomerName like'" + cusName + "%'";
         }
-        if(cusName!="" && !(town=="All" && area=="All") ){
-            query+=" AND CustomerName like'"+cusName+"%'";
-        }
+    } else if (town == "All" && area != "All") {
+        query += " where Area='" + area + "' ";
+    } else if (town != "All" && area == "All") {
+        query += " where Town='" + town + "' ";
+    } else {
+        query += " where Area='" + area + "'  AND Town='" + town + "' ";
+    }
+    if (cusName != "" && !(town == "All" && area == "All")) {
+        query += " AND CustomerName like'" + cusName + "%'";
+    }
         /*filter data which are not insert within one day*/
-        query+=" AND strftime('%d',strftime('%d',"+DateManager.dateToday()+")-strftime('%d',InsertDate)) NOT IN('0','1')";
+//testing
+    //query += " AND strftime('%d',strftime('%d'," + DateManager.dateToday() + ")-strftime('%d',InsertDate)) NOT IN('0','1')";
+
         /*set Global varible to takle qury to search customerNo in add Itinerary function;*/
-        qry=query.substring(9,query.length());
+
+    qry = query.substring(9, query.length());
 
 
-
-        //refresh the table;
-        TableLayout table = (TableLayout)findViewById(R.id.table_add_extra_customer);
-        //int n=table.getChildCount();
-        LinearLayout l=(LinearLayout)findViewById(R.id.linear_layout_add_ec_data_row);
-        int n=l.getChildCount();
-
+    //refresh the table;
+    TableLayout table = (TableLayout) findViewById(R.id.table_add_extra_customer);
+    //int n=table.getChildCount();
+    LinearLayout l = (LinearLayout) findViewById(R.id.linear_layout_add_ec_data_row);
+    int n = l.getChildCount();
 
 
+    try {
         l.removeAllViews();
+    } catch (Exception e) {
+        Toast.makeText(this, "remove_tables:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+    }
        /* table.removeViews(0,1);
                 for(int index=1;index < n;index++) {
                     //table.removeView(table.getChildAt(index));
@@ -205,23 +238,22 @@ public class AddExtraCustomer extends AppCompatActivity {
                 }*/
 
 
-        //end refresh
+    //end refresh
 
-        try {
-            Mst_Customermaster mst_customer = new Mst_Customermaster();
+    try {
+        Mst_Customermaster mst_customer = new Mst_Customermaster();
 
-            DBHelper db = new DBHelper(this);
-            Cursor res = db.getData(query);//return tupple id=1;
+        DBHelper db = new DBHelper(this);
+        Cursor res = db.getData(query);//return tupple id=1;
 
 
+        while (res.moveToNext()) {
 
-            while (res.moveToNext()) {
-
-                mst_customer.setCustomerNo(res.getString(res.getColumnIndex("CustomerNo")));
-                mst_customer.setCustomerName(res.getString(res.getColumnIndex("CustomerName")));
-                mst_customer.setAddress(res.getString(res.getColumnIndex("Address")));
-                mst_customer.setTown(res.getString(res.getColumnIndex("Town")));
-                mst_customer.setTelephone(res.getString(res.getColumnIndex("Telephone")));
+            mst_customer.setCustomerNo(res.getString(res.getColumnIndex("CustomerNo")));
+            mst_customer.setCustomerName(res.getString(res.getColumnIndex("CustomerName")));
+            mst_customer.setAddress(res.getString(res.getColumnIndex("Address")));
+            mst_customer.setTown(res.getString(res.getColumnIndex("Town")));
+            mst_customer.setTelephone(res.getString(res.getColumnIndex("Telephone")));
 
 
                /* pending_customer.setDescription(res.getString(res.getColumnIndex("Description")));//should be modified
@@ -230,20 +262,25 @@ public class AddExtraCustomer extends AppCompatActivity {
                 */
 
 
-                update(mst_customer);
-                //btnView_sv.setText(res.getCount());
-            }
-
-            db.close();
-            //return product;
-
-        }catch (Exception e){
-            Toast.makeText(this,"Exception in getdata:"+e.getMessage(),Toast.LENGTH_LONG).show();
+            update(mst_customer);
+            //testing
+            //btnView_sv.setText(res.getCount());
         }
+
+        db.close();
+        //return product;
+
+    } catch (Exception e) {
+        Toast.makeText(this, "Exception in getdata:" + e.getMessage(), Toast.LENGTH_LONG).show();
+    }
+}catch(Exception e){
+    Toast.makeText(this, "GetDataMethod_error:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+}
     }
 
 
     private void update(Mst_Customermaster cus) {
+        try{
         TableLayout table = (TableLayout)findViewById(R.id.table_add_extra_customer);
         LinearLayout linearLayout=(LinearLayout) findViewById(R.id.linear_layout_add_ec_data_row);
 
@@ -359,23 +396,38 @@ public class AddExtraCustomer extends AppCompatActivity {
 
         // table.addView(tr);
         linearLayout.addView(tr);
+        }catch (Exception e){
+            Toast.makeText(this, "TableUIerror", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
 
     public  void getSelectedRows() {
+
+        Intent db=new Intent(this,AndroidDatabaseManager.class);
+        this.startActivity(db);
+
         TableLayout table = (TableLayout) findViewById(R.id.table_add_extra_customer);
         LinearLayout data_LinearLayout=(LinearLayout) findViewById(R.id.linear_layout_add_ec_data_row);
         DBAdapter adp=new DBAdapter(this);
 
+        /*display table row count*/
+        Toast.makeText(this,"row_count:"+data_LinearLayout.getChildCount(),Toast.LENGTH_LONG).show();
 
+        /*load customer id list*/
+        ArrayList<String> cusId=new ArrayList<String>();
+        try {
+            cusId = adp.getCusId("select CustomerNo " + qry);
+        }catch (Exception e){
+            Toast.makeText(this,e.getMessage()+"db_data_reading error",Toast.LENGTH_LONG).show();
+        }
 
         //get selected row;
         try {
             int count = 0;
             for (int i = 0; i < data_LinearLayout.getChildCount(); i++) {
-                ArrayList<String > cusId=new ArrayList<>();
-                cusId=adp.getCusId("select CustomerNo "+qry);
+
 
 
                 View parentRow = data_LinearLayout.getChildAt(i);//getTable rows
@@ -389,17 +441,33 @@ public class AddExtraCustomer extends AppCompatActivity {
                         View cbox=  ll.getChildAt(0);//access to column_1 checkbox inside LinearLayout
                         View tb=ll.getChildAt(0);//acess to column 2 cusName textBox;
 
+                        Toast.makeText(this,"line:_1",Toast.LENGTH_LONG).show();
                         if (cbox instanceof CheckBox) {
-
+                            Toast.makeText(this,"line:_2",Toast.LENGTH_LONG).show();
                             if(((CheckBox) cbox).isChecked()) {
                                 ((CheckBox) cbox).setText("Added");
 
-                                TableRow nametblrow= (TableRow) data_LinearLayout.getChildAt(i);
-                                LinearLayout namell= (LinearLayout) nametblrow.getChildAt(1);
-                                TextView nametv= (TextView) namell.getChildAt(0);
+                                Toast.makeText(this,"line:_3",Toast.LENGTH_LONG).show();
+                                try {
+                                    //cusId.get(i);
+                                    addToItinerary(cusId.get(i));
+                                    Toast.makeText(this, "id:"+cusId.get(i), Toast.LENGTH_SHORT).show();
+
+                                }catch (Exception  e){
+                                    Toast.makeText(this, "cusId error-"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+
+                                TableRow nametblrow=null;
+                                try {
+                                     nametblrow = (TableRow) data_LinearLayout.getChildAt(i);/*get  checked row*/
+                                }catch (Exception e ){
+                                    Toast.makeText(this, "converting_error"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                                LinearLayout namell= (LinearLayout) nametblrow.getChildAt(1);/*get second col in row which is checked*/
+                                TextView nametv= (TextView) namell.getChildAt(0);/*enter to the textview in second colum which is selected*/
 
                                 //add data to itirnararyDetails;nametv.setText(cusId.get(i));
-                                addToItinerary(cusId.get(i));
+                                //addToItinerary(cusId.get(i));
 
 
                             }else
@@ -420,18 +488,27 @@ public class AddExtraCustomer extends AppCompatActivity {
     }
     private void addToItinerary(String id){
 
-        Tr_ItineraryDetails itinerary=new Tr_ItineraryDetails();
-        DBAdapter adp=new DBAdapter(this);
+        try {
 
-        itinerary.setCustomerNo(id);
-        itinerary.setItineraryID("ITRY"+id);
-        itinerary.setItineraryDate(DateManager.dateToday());
-        itinerary.setIsInvoiced(0);
-        itinerary.setIsPlaned(1);
-        itinerary.setLastUpdateDate(DateManager.dateToday());
+            Tr_ItineraryDetails itinerary = new Tr_ItineraryDetails();
+            DBAdapter adp = new DBAdapter(this);
 
-        Toast.makeText(this, "added:"+id, Toast.LENGTH_LONG).show();
-        adp.itineraryDetails(itinerary);
+            Toast.makeText(this, "came inside addtoIternerary_method", Toast.LENGTH_LONG).show();
+
+            itinerary.setCustomerNo(id);
+            itinerary.setItineraryID("ITRY" + id);
+            itinerary.setItineraryDate(DateManager.dateToday());
+            itinerary.setIsInvoiced(0);/*default value*/
+            itinerary.setIsPlaned(0);/**default val*/
+            itinerary.setLastUpdateDate(DateManager.dateToday());
+
+            Toast.makeText(this, "added:" + id, Toast.LENGTH_LONG).show();
+            String output = adp.itineraryDetails(itinerary);
+            Toast.makeText(this, "output" + output, Toast.LENGTH_SHORT).show();
+        }catch (Exception  e){
+            Toast.makeText(this, "addToImethod:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 }
