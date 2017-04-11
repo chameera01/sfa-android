@@ -31,7 +31,7 @@ import com.jjoe64.graphview.series.Series;
 
 public class WeeklyGraphFragment extends Fragment{
     GraphView gv ;
-    final private int NUMBEROFMONTHS = 5;
+    final private int NUMBEROFMONTHS = 2;
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);

@@ -29,9 +29,10 @@ import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 
 import java.util.ArrayList;
 
-import controllers.database.DBHelper;
+
 
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
+import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Tr_TabStock;
 
 public class StockView extends AppCompatActivity {

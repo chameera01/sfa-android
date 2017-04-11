@@ -9,7 +9,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import controllers.database.DBHelper;
+
+import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 
 /**
@@ -156,12 +157,12 @@ public class DBAdapter{
 
         openDB();
         Cursor res =  db.rawQuery(query, null );
-        res.moveToFirst();
+        //res.moveToFirst();
 
         array_list.add("All");
-        while(res.isAfterLast() == false){
+        while(res.moveToNext()){
             array_list.add(res.getString(res.getColumnIndex(columnName)));
-            res.moveToNext();
+            //res.moveToNext();
         }
         closeDB();
         return array_list;

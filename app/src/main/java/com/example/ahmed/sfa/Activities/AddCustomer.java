@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -81,7 +82,7 @@ public class AddCustomer extends AppCompatActivity {
     private Bundle savedInstance;
 
     private void enableControls(){
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         controlsEnabled = true;
 
         customerName.setEnabled(true);
@@ -104,22 +105,8 @@ public class AddCustomer extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState){
 
         super.onCreate(savedInstanceState);
-        //nvMan = new NavigationItemManager(this);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            //    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        //drawer.setDrawerListener(toggle);
-        //toggle.syncState();
-
-        //NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //navigationView.setNavigationItemSelectedListener(nvMan);
         alert = new Alert(this);
-
         savedInstance = savedInstanceState;
         init();
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);

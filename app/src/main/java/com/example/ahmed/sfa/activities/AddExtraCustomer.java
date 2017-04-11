@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,9 +31,10 @@ import controllers.DateManager;
 
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
-import controllers.database.DBHelper;
+
 
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
+import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 
@@ -59,11 +61,14 @@ public class AddExtraCustomer extends AppCompatActivity {
         spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
                 area = spinner_area.getSelectedItem().toString();
                 town = spinner_town.getSelectedItem().toString();
                 customer_name = cus_name.getQuery().toString();
 
                 getdata(town, area, customer_name);
+
+
                 //sortBrandByPrinciple(town);
             }
 
@@ -79,7 +84,9 @@ public class AddExtraCustomer extends AppCompatActivity {
                 area = spinner_area.getSelectedItem().toString();
                 town = spinner_town.getSelectedItem().toString();
                 customer_name = cus_name.getQuery().toString();
+                Log.w("point","spinner CHANGED");
                 getdata(town, area, customer_name);
+                Log.w("point","spinner UPDATED");
             }
 
             @Override
@@ -127,8 +134,9 @@ public class AddExtraCustomer extends AppCompatActivity {
 
 
         setSpinner();//aulto load values to dropdown boxes
+        Log.w("point","spinner set");
         getdata("All", "All", "d");//call default search;
-
+        Log.w("point","DATA LOADED");
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -165,7 +173,7 @@ public class AddExtraCustomer extends AppCompatActivity {
 
 
             //set Spinner values to principle dropdown menu;
-            ArrayList<String> principleList = new ArrayList<String>();
+            ArrayList<String> principleList = new ArrayList<>();
             principleList = adapter.getArryListUniMethod("select DISTINCT Town from Mst_Customermaster","Town");//adapter.getAllprinciples();
 
 

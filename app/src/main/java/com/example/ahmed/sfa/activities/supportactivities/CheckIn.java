@@ -1,6 +1,7 @@
 package com.example.ahmed.sfa.activities.supportactivities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class CheckIn extends AppCompatActivity implements CheckInCheckOutActions
     public void onCreate(Bundle savedInstanceState ){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkin_layout);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         final CheckInOutManager man = new CheckInOutManager(this,this);
         if(man.isCheckedIn()){
             onCheckedIn();

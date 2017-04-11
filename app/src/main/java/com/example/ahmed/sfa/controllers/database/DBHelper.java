@@ -178,7 +178,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS10','palva','Town4');");
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
-                    "VALUES ('CUS5','rose','Town5');");
+                    "VALUES ('CUS11','rose','Town5');");
+            db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
+                    "VALUES ('CUS12','rose','Town5');");
 
 
 
@@ -484,6 +486,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+
+
     public Cursor getData(String qry) {
         //String query=qry;
 
@@ -500,37 +504,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public int numberOfRows(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        int numRows = (int) DatabaseUtils.queryNumEntries(db, PRODUCT_TABLE_NAME);
-        return numRows;
-    }
 
-    public boolean updateContact (Integer id, String name, String phone, String email, String street,String place) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("name", name);
-        contentValues.put("phone", phone);
-        contentValues.put("email", email);
-        contentValues.put("street", street);
-        contentValues.put("place", place);
-        db.update("mst_productmaster", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
-        return true;
-    }
 
-    public Integer deleteContact (Integer id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete("mst_productmaster",
-                "id = ? ",
-                new String[] { Integer.toString(id) });
-    }
 
-    public ArrayList<String> getAllbrands() {
+
+
+    public   ArrayList<String> getAllbrands() {
         ArrayList<String> array_list = new ArrayList<String>();
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "SELECT DISTINCT brand FROM Mst_ProductMaster", null );
+
+        Cursor res =  db.rawQuery("SELECT DISTINCT Brand FROM Mst_ProductMaster", null );
         res.moveToFirst();
 
         array_list.add("All");
@@ -545,7 +530,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //hp = new HashMap();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery( "SELECT DISTINCT principle FROM mst_productmaster", null );
+        Cursor res =  db.rawQuery("SELECT DISTINCT Principle FROM Mst_ProductMaster", null );
         res.moveToFirst();
 
         array_list.add("All");
@@ -555,6 +540,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return array_list;
     }
+
 
 
 }

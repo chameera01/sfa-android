@@ -27,9 +27,10 @@ import java.util.ArrayList;
 
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
-import controllers.database.DBHelper;
+
 
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
+import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Tr_NewCustomer;
 
 public class PendingCustomer extends AppCompatActivity {
