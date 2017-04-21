@@ -30,7 +30,7 @@ import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
-
+/*remove testing parts if not working properly*/
 public class AddExtraCustomer extends AppCompatActivity {
     Spinner spinner_area;
     Spinner spinner_town;
@@ -62,6 +62,7 @@ public class AddExtraCustomer extends AppCompatActivity {
                     town = spinner_town.getSelectedItem().toString();
                     customer_name = cus_name.getQuery().toString();
 
+                    //testing
                     getdata(town, area, customer_name);
                 }catch(Exception e){
                     Toast.makeText(AddExtraCustomer.this, "town_spinner_click"+e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -82,7 +83,8 @@ public class AddExtraCustomer extends AppCompatActivity {
                     area = spinner_area.getSelectedItem().toString();
                     town = spinner_town.getSelectedItem().toString();
                     customer_name = cus_name.getQuery().toString();
-                    getdata(town, area, customer_name);
+                    //testing
+                     getdata(town, area, customer_name);
                 }catch (Exception e){
                     Toast.makeText(AddExtraCustomer.this, "Area_spinner_clcik"+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -100,11 +102,14 @@ public class AddExtraCustomer extends AppCompatActivity {
         cus_name.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                getdata("ALL", "ALL", "");
+               // getdata("All", "All", "");//testing code
                 try {
                     area = spinner_area.getSelectedItem().toString();
                     town = spinner_town.getSelectedItem().toString();
                     customer_name = cus_name.getQuery().toString();
+                    getdata(town,area, customer_name);
+                    //testting
+
 
                 }catch(Exception e){
                     Toast.makeText(AddExtraCustomer.this, "getDataFromSpinners:"+e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -133,6 +138,7 @@ public class AddExtraCustomer extends AppCompatActivity {
         btn_add_itinerary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 getSelectedRows();
             }
         });
@@ -140,11 +146,25 @@ public class AddExtraCustomer extends AppCompatActivity {
 
 
 
-        //setSpinner();//aulto load values to dropdown boxes
+        setSpinner();//aulto load values to dropdown boxes
         //getdata("All", "All", "d");//call default search;
     }
 
     public  void setSpinner(){
+        /*
+        DBAdapter adapter = new DBAdapter(this);
+
+        ArrayList<String> arrayList1 = new ArrayList<String>();
+        try {
+            arrayList1 = adapter.getArryListUniMethod("select DISTINCT Area from Mst_Customermaster", "Area");//.getArryListUniMethod("select DISTINCT Area from Mst_Customermaster","Area");//getArea List
+            arrayList1.add("All");//newly addded for spinner bug fix
+            ArrayAdapter<String> adp = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayList1);
+            spinner_area.setAdapter(adp);
+            spinner_area.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "ArrayList:"+arrayList1.get(1), Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Toast.makeText(this, "Area fetch from db:"+e.getMessage()   , Toast.LENGTH_SHORT).show();
+        }*/
         try {
 
             DBAdapter adapter = new DBAdapter(this);
@@ -156,11 +176,17 @@ public class AddExtraCustomer extends AppCompatActivity {
             }catch (Exception e){
                 Toast.makeText(this, "Area fetch from db:"+e.getMessage()   , Toast.LENGTH_SHORT).show();
             }
-            arrayList1.add("ALL");/*newly addded for spinner bug fix*/
+            arrayList1.add("All");//newly addded for spinner bug fix
             ArrayAdapter<String> adp = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayList1);
+
+            //int word_index=adp.getCount();
+            //spinner_area.setSelection(word_index);//set All as default val
             spinner_area.setAdapter(adp);
             spinner_area.setVisibility(View.VISIBLE);
-
+            //set defaul value as All
+            ArrayAdapter myAdap = (ArrayAdapter) spinner_area.getAdapter(); //cast to an ArrayAdapter
+            int spinnerPosition = myAdap.getPosition("All");
+            spinner_area.setSelection(spinnerPosition);
 
             //set Spinner values to principle dropdown menu;
             ArrayList<String> principleList = new ArrayList<String>();
@@ -169,24 +195,31 @@ public class AddExtraCustomer extends AppCompatActivity {
             }catch (Exception e){
                 Toast.makeText(this, "fetch Town datafrom db:"+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
-            principleList.add("ALL");/*newly added fro spinner fug fix*/
+            principleList.add("All");//newly added fro spinner fug fix
             ArrayAdapter<String> adp2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, principleList);
             spinner_town.setAdapter(adp2);
             spinner_town.setVisibility(View.VISIBLE);
+            //set defaul value as All
+            ArrayAdapter myAdap_town = (ArrayAdapter) spinner_town.getAdapter(); //cast to an ArrayAdapter
+            int spinnerPosition_town = myAdap_town.getPosition("All");
+            spinner_town.setSelection(spinnerPosition_town);
+
+
         }catch (Exception e){
             Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
+
     }
 
 
     public void getdata(String ...filter){
         Toast.makeText(this, "came inside gedData method", Toast.LENGTH_SHORT).show();
-try {
-    String town = filter[0];
-    String area = filter[1];
-    String cusName = filter[2];
+    try {
+            String town = filter[0];
+            String area = filter[1];
+            String cusName = filter[2];
 
-    String query = "select * from Mst_Customermaster ";
+        String query = "select * from Mst_Customermaster ";
         /*SELECT doctors.doctor_id,doctors.doctor_name,visits.patient_name
         FROM doctors
         INNER JOIN visits
@@ -273,9 +306,9 @@ try {
     } catch (Exception e) {
         Toast.makeText(this, "Exception in getdata:" + e.getMessage(), Toast.LENGTH_LONG).show();
     }
-}catch(Exception e){
-    Toast.makeText(this, "GetDataMethod_error:"+e.getMessage(), Toast.LENGTH_SHORT).show();
-}
+        }catch(Exception e){
+            Toast.makeText(this, "GetDataMethod_error:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 
