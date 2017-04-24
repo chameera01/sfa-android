@@ -111,7 +111,7 @@
                     android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
-                <TextView android:text="Order"
+                <TextView android:text="Return"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:inputType="number"
@@ -162,7 +162,7 @@
                 </ScrollView>
                 <Button
                     android:id="@+id/show_returned_sr"
-                    android:text="Show Invoiced"
+                    android:text="Show Returned"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <ScrollView

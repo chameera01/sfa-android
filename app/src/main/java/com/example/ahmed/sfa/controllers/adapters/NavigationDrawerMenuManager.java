@@ -25,6 +25,7 @@ import com.example.ahmed.sfa.activities.DisplayProductTableActivity;
 import com.example.ahmed.sfa.activities.Home;
 import com.example.ahmed.sfa.activities.PendingCustomer;
 import com.example.ahmed.sfa.activities.SalesInvoice;
+import com.example.ahmed.sfa.activities.SalesReturn;
 import com.example.ahmed.sfa.activities.StockView;
 import com.example.ahmed.sfa.controllers.CheckInOutManager;
 import com.example.ahmed.sfa.controllers.DateManager;
@@ -246,7 +247,7 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
             case R.id.sales_invoice:
                 if(!(activity instanceof SalesInvoice)){
                     //Intent intent = new Intent(activity,DisplayProductTableActivity.class);
-                    Intent intent = new Intent(activity, SalesInvoice.class);
+                    Intent intent = new Intent(activity, SalesReturn.class);
                     activity.startActivity(intent);
                     return true;
                 }

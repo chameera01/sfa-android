@@ -9,6 +9,8 @@ import java.text.DecimalFormat;
  * Created by Ahmed on 3/19/2017.
  */
 
+
+//same model will be used for sales return but order quantity will be return quantity;
 public class SalesInvoiceModel implements Parcelable {
     //private Customer customer;
     private String id;

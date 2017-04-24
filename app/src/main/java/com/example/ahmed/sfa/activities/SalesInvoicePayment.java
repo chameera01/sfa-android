@@ -27,6 +27,7 @@ import com.example.ahmed.sfa.models.Itinerary;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 import com.example.ahmed.sfa.models.SalesInvoiceSummary;
 import com.example.ahmed.sfa.models.SalesPayment;
+import com.example.ahmed.sfa.models.SalesReturnSummary;
 
 import java.util.ArrayList;
 
@@ -120,7 +121,12 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent(SalesInvoicePayment.this,SalesReturn.class);
+                intent.putExtra(Constants.CUSTOMER_NO,customerNo);
+                intent.putExtra(Constants.ITINERARY,itinerary);
+               // intent.putExtra(Constants.SALES_PAYMENT_SUMMARY,payment);//send this so the activity can return the object adding more data to it
+                startActivityForResult(intent,Constants.RETURN_REQUEST_RESULT);
+
             }
         });
 
@@ -145,6 +151,7 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                 if(!s.toString().equals(""))payment.setFullInvDisc(Double.parseDouble(s.toString()));
                 else payment.setFullInvDisc(0.0);
                 init(false);
@@ -244,6 +251,23 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
     @Override
     public void onDialogNegativeClick() {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode,Intent data){
+        Log.w("got","result");
+        if(requestCode == Constants.RETURN_REQUEST_RESULT){//check for which request we got result
+            Log.w("got","return request");
+            if(resultCode==RESULT_OK){//check whether we got result ok response
+                Log.w("got","return request ok");
+                SalesReturnSummary returnSummary =data.getParcelableExtra(Constants.SALES_RETURN_SUMMARY);
+                Log.w("return qty",returnSummary.getReturnQty()+"");
+                Log.w("return tot",returnSummary.getReturnTot()+"");
+                payment.setReturnTot(returnSummary.getReturnTot());
+                payment.setReturnQty(returnSummary.getReturnQty());
+                init(false);
+            }
+        }
     }
 
     class DBAdapter extends BaseDBAdapter{

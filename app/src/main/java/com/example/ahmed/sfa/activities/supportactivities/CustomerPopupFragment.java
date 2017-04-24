@@ -20,6 +20,7 @@ import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.activities.Home;
 import com.example.ahmed.sfa.activities.SalesInvoice;
+import com.example.ahmed.sfa.activities.SalesReturn;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.ImageManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
@@ -73,8 +74,19 @@ public class CustomerPopupFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CustomerPopupFragment.this.getActivity(), SalesInvoice.class);
-                intent.putExtra(Constants.CUSTOMER_NO,cusNo);
-                intent.putExtra(Constants.ITINERARY,itineraryforCurrentCustomer);
+                intent.putExtra(Constants.CUSTOMER_NO,cusNo);//this data will be passed on to the db insert step
+                intent.putExtra(Constants.ITINERARY,itineraryforCurrentCustomer);//this data will be passed on to the db insert step
+                startActivity(intent);
+            }
+        });
+
+        Button generateReturnBtn = (Button) customerView.findViewById(R.id.generatereturn);
+        generateReturnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CustomerPopupFragment.this.getActivity(), SalesReturn.class);
+                intent.putExtra(Constants.CUSTOMER_NO,cusNo);//this data will be passed on to the db insert step
+                intent.putExtra(Constants.ITINERARY,itineraryforCurrentCustomer);//this data will be passed on to the db insert step
                 startActivity(intent);
             }
         });

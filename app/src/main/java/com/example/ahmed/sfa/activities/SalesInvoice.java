@@ -2,6 +2,7 @@ package com.example.ahmed.sfa.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationManager;
@@ -90,7 +91,8 @@ public class SalesInvoice extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        init();
+        init();//we set the layout in this method to make sure user dont
+        //get to proceed without neccessory data
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -109,6 +111,21 @@ public class SalesInvoice extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] grantResults){
+        //Toast.makeText(this," permission Received",Toast.LENGTH_SHORT).show();
+        switch (requestCode){
+            case PermissionManager.MY_PERMISSIONS_REQUEST_LOCATION:
+                //Toast.makeText(this," Location",Toast.LENGTH_SHORT).show();
+                if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                    init();
+                    //Toast.makeText(this,"Location permission Received",Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+        }
     }
 
     @Override
@@ -161,7 +178,7 @@ public class SalesInvoice extends AppCompatActivity {
                 addedListLayout = (TableLayout) findViewById(R.id.added_content_si);
                 addedContentTableAdapter = new SalesInvoiceAddedChoicesAdapter(addedListLayout, this);
 
-                showHideInvoicedBtn = (Button) findViewById(R.id.show_invoiced_si);
+                showHideInvoicedBtn = (Button) findViewById(R.id.show_returned_sr);
                 showHideInvoicedBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

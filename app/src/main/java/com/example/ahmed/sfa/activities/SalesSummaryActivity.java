@@ -111,7 +111,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
 
                 DBAdapter dbAdapter = new DBAdapter(SalesSummaryActivity.this);
                 String serialCode = RandomNumberGenerator.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"SRL",14);
-                String invNum = RandomNumberGenerator.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"INV",14);
+                //String invNum = RandomNumberGenerator.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"INV",14);
 
                 //get invoice number from table -1 will be returned on error
                 int invNo = dbAdapter.getInvoiceNo();
@@ -129,7 +129,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
                                     if (dbAdapter.insertToInvoiceOutStanding(payment,invNo)){
                                           if(dbAdapter.insertToDailyRouteDetails(itinerary,customerNo,invNo)){
                                               if(dbAdapter.updateItineraryDetailsTable(itinerary.getId(),customerNo)){
-                                                    if(dbAdapter.insertChequeDetails(chequeModel,serialCode,invNum,customerNo,payment.getTotal())){
+                                                    if(dbAdapter.insertChequeDetails(chequeModel,serialCode,invNo,customerNo,payment.getTotal())){
                                                         if(dbAdapter.increaseInvoiceNo()){
                                                             alert.showAlert("Success","Invoice completed",null,successfull);
                                                         }else{
@@ -256,7 +256,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
             super(c);
         }
 
-        public boolean insertChequeDetails(Cheque chq,String serialCode,String invoiceNumber,String customerNo,double invTotal){
+        public boolean insertChequeDetails(Cheque chq,String serialCode,int invoiceNumber,String customerNo,double invTotal){
             openDB();
             ContentValues cv =new ContentValues();
 
@@ -316,6 +316,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
         }
 
 
+        //loop through the invoice details and add each item one by one by calling insertRowToSalesDetails method
         public int insertDataToSalesDetails(ArrayList<SalesInvoiceModel> data,int id){
             int completed = 0;
             for (SalesInvoiceModel model:data) {
@@ -324,6 +325,8 @@ public class SalesSummaryActivity extends AppCompatActivity {
             }
             return completed;
         }
+
+        //insert a single item details to the sales details
         private boolean insertRowToSalesDetails(SalesInvoiceModel rowModel,int id){
 
             openDB();
@@ -367,6 +370,8 @@ public class SalesSummaryActivity extends AppCompatActivity {
             }
         }
 
+
+        //this will incerase one value of the invoice num in the db
         private boolean increaseInvoiceNo(){
             int curVal = getInvoiceNo();
             openDB();
@@ -408,6 +413,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
 
         }
 
+        //reduce the stock from for each item in the db
         public int updateStock(ArrayList<SalesInvoiceModel> data){
             int val = 0;
             for (SalesInvoiceModel model :data) {
@@ -417,25 +423,26 @@ public class SalesSummaryActivity extends AppCompatActivity {
             return val;
         }
 
+        //this table details is for the transacetion payment details
         public boolean insertToInvoiceOutStanding(SalesPayment payment,int invNo){
 
             openDB();
             ContentValues cv = new ContentValues();
             String serialCode = RandomNumberGenerator.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"SER",13);
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[0],serialCode);
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[1],DateManager.dateToday());
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[2],invNo);
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[3],customerNo);
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[4],payment.getTotal());
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[5],payment.getCredit());
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[6],payment.getCredit());
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[7],payment.getCreditDays());
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[8],DateManager.dateToday());
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[0],serialCode);//auto genarated serialCode passed from caller
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[1],DateManager.dateToday());//Todays date created from DateManager
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[2],invNo);//invoice num passed from cller functions
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[3],customerNo);//customerNo of the selcted custoemr
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[4],payment.getTotal());//from sales payment
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[5],payment.getCredit());//from the sales payment
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[6],payment.getCredit());//from the asles payment
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[7],payment.getCreditDays());//from the sales payment
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[8],DateManager.dateToday());//Date created wiht date manager
             cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[9],0);//for this release this has been fixed as a 0
             //cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[10],);//last update type is unknown for now have to clarifiy
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[11],DateManager.dateToday());
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[12],Constants.INACTIVE);
-            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[13],Constants.ACTIVE);
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[11],DateManager.dateToday());//date today
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[12],Constants.INACTIVE);//making the column as inactive or negative
+            cv.put(Constants.INVOICE_OUTSTANDING_COLUMNS[13],Constants.ACTIVE);//marking the column as active or positive
 
             long val = db.insert(Constants.INVOICE_OUTSTANDING,null,cv);
             closeDB();
@@ -444,6 +451,8 @@ public class SalesSummaryActivity extends AppCompatActivity {
             else return false;
         }
 
+        //this is kind of a log table where we enter details about the
+        //itinerary and its type
         public boolean insertToDailyRouteDetails(Itinerary itinerary,String customrNo,int invNo){
             openDB();
             ContentValues cv = new ContentValues();
@@ -466,6 +475,8 @@ public class SalesSummaryActivity extends AppCompatActivity {
             else return false;
         }
 
+        //should update the itinereary details table about this customer
+        // about the transaction type
         public boolean updateItineraryDetailsTable(String itineraryId,String CustomerNo){
             openDB();
             ContentValues cv = new ContentValues();

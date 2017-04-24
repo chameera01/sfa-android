@@ -7,6 +7,8 @@ import java.util.HashMap;
  */
 
 public class Constants {
+    public static final int RETURN_REQUEST_RESULT = 147;
+
     public static final int ACTIVE = 0; //default value for active
     public static final int INACTIVE = 1;
 
@@ -17,6 +19,7 @@ public class Constants {
     public static  final String SALES_PAYMENT_SUMMARY= "SALESPAYMENTSUMMARY";//sales payment object passing tag
     public static final String ITINERARY ="ITINERARY"; //itinerary passing tag
     public static final String CUSTOMER_NO ="CUSTOMER_NO";// custoemr num passing tag
+    public static final String SALES_RETURN_SUMMARY = "SALES_RETURN";
 
     public static final int INVOICED = 1;
     public static final int RETURNED = 1;
@@ -57,5 +60,15 @@ public class Constants {
 
     public static final String ITINERARY_DETAILS_TABLE = "Tr_ItineraryDetails";
     public static final String[] ITINERARY_DETAILS_TABLE_COLUMNS =  {"ItineraryID","ItineraryDate","CustomerNo","IsPlanned","IsInvoiced","LastUpdateDate"};
+
+
+    public static final String SALES_RETURN_TABLE = "Tr_SalesReturn";
+    public static final String[] SALES_RETURN_TABLE_COLUMNS={"ItineraryID","CustomerNo","InvoiceNo","InvoiceDate",
+            "PaymentTime","SubTotal","InvoiceTotal","FullDiscountRate","DiscountAmount","DiscountType",
+            "IsOnInvoiceReturn","Isprint","ProductCount","InvoiceType","Latitude","Longitude"
+            ,"IsUpload","UploadDate"};
+
+    public static final String SALES_RETURN_DETAILS_TABLE = "Tr_SalesReturnDetails";
+    public static final String[] SALES_RETURN_DETAILS_TABLE_COLUMNS ={"HeaderID","ItemCode","UnitPrice","BatchNumber","ExpiryDate","DiscountRate","DiscountAmount","IssueMode","OrderQty","FreeQty","Total","IsUpload","UploadDate"};
 
 }
