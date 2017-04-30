@@ -292,7 +292,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 
         TableRow.LayoutParams  col_param=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
         col_param.weight=1.0f;
-        
+
 
         /*add layout */
         LinearLayout col_1=new LinearLayout(this);
