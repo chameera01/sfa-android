@@ -8,3 +8,5 @@ build/generated/mockable-android-25.jar
 .idea/misc.xml
 .idea/workspace.xml
 >>>>>>> Asanka
+.gradle/
+.idea/
