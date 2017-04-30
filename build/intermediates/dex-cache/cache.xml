@@ -3,6 +3,7 @@
 
     <item
         is-multidex="false"
+<<<<<<< HEAD
         jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.2.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -76,10 +77,68 @@
     <item
         is-multidex="false"
         jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.2.0\jars\classes.jar"
+=======
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.2.0_ff804722c41371eee2ffc517d6f60ac638307dcc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\design\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ea6a989b83d19b1b461281e0475a6cd6514897f8">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-design-25.2.0_255527eb76cbfe6210946a7a9e8cf2347633166a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\transition\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e51c2f662bb72419632af5192553c37e33890a99">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-transition-25.2.0_87dead0f7cdeb5638fca30d12a34004ea5037547.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="810f41e5b7fd99f196ebeabe865ba2c54e7e76dc">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-25.2.0_4b3b906b94c90b4d19261f903f4aaa4c13ef2f98.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.2.0_0741321c7b270406f7d27c7813bace728fa8966d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.2.0_93679f0e0a3ad2dc8b322cf679f639314b27829d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.2.0\jars\classes.jar"
+>>>>>>> Asanka
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="702d339bc0a81d21354cd7e2cf2b67225fa4a16c">
+<<<<<<< HEAD
         <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.2.0_f22c6598e6ee2da5860de9167ba1366cf983b9fc.jar" />
     </item>
     <item
@@ -112,10 +171,45 @@
     <item
         is-multidex="false"
         jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.2.0\jars\classes.jar"
+=======
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-25.2.0_ad685579dc3068ec33f9f1f007d8c9b05312ee1e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="152de8da301561dcb0946471697a420d8f7a68c5">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-25.2.0_335641bf03749b22663a78093ad6f40927c0e9a1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.2.0_f7affa9aacbac04be21fafd98f61016e4f7ceb23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.2.0_36311f6b3c3fb0c7bf4752326b2a81bd869dd8c9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.2.0\jars\classes.jar"
+>>>>>>> Asanka
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+<<<<<<< HEAD
         <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.2.0_e59b18691bcdc8971507cb4d538815fe0c805f38.jar" />
     </item>
     <item
@@ -162,6 +256,45 @@
         revision="25.0.2"
         sha1="ea6a989b83d19b1b461281e0475a6cd6514897f8">
         <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.android.support-design-25.2.0_e421322faa9b0fd3372099c2150a0c58e7f9df23.jar" />
+=======
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.2.0_c1fcf62aa5080110900fab899075604ea97c3ad1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\libs\GraphView-4.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3626a38455159707e355da96a61e598fbbc049e9">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\GraphView-4.2.1_f21955f05ed26ad5838cd65914293e2e0d43dc64.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\DELL\AppData\Local\Android\android-sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\support-annotations-25.2.0_3844fec522c74bf5e58c3eb42103fb5a4350649b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="cb454b52545859ed2f24a6c01366805b0fa04b22">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-25.2.0_6f809880ba381ac85a8bbb6ef203cafba0bbd085.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\run_android\git-SFA\app\build\intermediates\exploded-aar\com.android.volley\volley\1.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\com.android.volley-volley-1.0.0_d16dfc77144c7a3047afc59ce898cf2cfd303cce.jar" />
+>>>>>>> Asanka
     </item>
 
 </items>

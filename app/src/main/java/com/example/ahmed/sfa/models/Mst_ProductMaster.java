@@ -17,12 +17,12 @@ public class Mst_ProductMaster {
     private String subBrand;
     private int unitSize;
     private String unitName;
-    private float retailPrice;
-    private float sellingPrice;
-    private float buyingPrice;
-    private Boolean active;
+    private double retailPrice;
+    private double sellingPrice;
+    private double buyingPrice;
+    private int active;
     private Date lastupadateDate;
-    private Boolean targetAllow;
+    private int targetAllow;
 
 
     public String getId() {
@@ -57,11 +57,11 @@ public class Mst_ProductMaster {
         this.principleId = principleId;
     }
 
-    public String getGetPrinciple() {
+    public String getPrinciple() {
         return principle;
     }
 
-    public void setGetPrinciple(String getPrinciple) {
+    public void setPrinciple(String getPrinciple) {
         this.principle = getPrinciple;
     }
 
@@ -89,12 +89,12 @@ public class Mst_ProductMaster {
         this.subBrandId = subBrandId;
     }
 
-    public String getGetSubBrand() {
+    public String getSubBrand() {
         return subBrand;
     }
 
-    public void setGetSubBrand(String getSubBrand) {
-        this.subBrand = getSubBrand;
+    public void setSubBrand(String SubBrand) {
+        this.subBrand = SubBrand;
     }
 
     public int getUnitSize() {
@@ -113,15 +113,15 @@ public class Mst_ProductMaster {
         this.unitName = unitName;
     }
 
-    public float getRetailPrice() {
+    public double getRetailPrice() {
         return retailPrice;
     }
 
-    public void setRetailPrice(float retailPrice) {
+    public void setRetailPrice(double retailPrice) {
         this.retailPrice = retailPrice;
     }
 
-    public float getSellingPrice() {
+    public double getSellingPrice() {
         return sellingPrice;
     }
 
@@ -129,19 +129,19 @@ public class Mst_ProductMaster {
         this.sellingPrice = sellingPrice;
     }
 
-    public float getBuyingPrice() {
+    public double getBuyingPrice() {
         return buyingPrice;
     }
 
-    public void setBuyingPrice(float buyingPrice) {
+    public void setBuyingPrice(double buyingPrice) {
         this.buyingPrice = buyingPrice;
     }
 
-    public Boolean getActive() {
+    public int getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
@@ -153,11 +153,11 @@ public class Mst_ProductMaster {
         this.lastupadateDate = lastupadateDate;
     }
 
-    public Boolean getTargetAllow() {
+    public int getTargetAllow() {
         return targetAllow;
     }
 
-    public void setTargetAllow(Boolean targetAllow) {
+    public void setTargetAllow(int targetAllow) {
         this.targetAllow = targetAllow;
     }
 }

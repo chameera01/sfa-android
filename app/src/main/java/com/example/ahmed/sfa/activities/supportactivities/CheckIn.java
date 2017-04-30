@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.activities.supportactivities;
+package com.example.ahmed.sfa.Activities.supportactivities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -12,7 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.activities.Home;
+import com.example.ahmed.sfa.Activities.Home;
 import com.example.ahmed.sfa.controllers.CheckInOutManager;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;

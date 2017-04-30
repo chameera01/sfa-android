@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.activities;
+package com.example.ahmed.sfa.Activities;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -18,7 +18,8 @@ import android.widget.ListView;
 
 
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.activities.supportactivities.CustomerPopupFragment;
+
+import com.example.ahmed.sfa.Activities.supportactivities.CustomerPopupFragment;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.adapters.ItineraryAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;

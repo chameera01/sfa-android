@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.activities.supportactivities;
+package com.example.ahmed.sfa.Activities.supportactivities;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -18,9 +18,13 @@ import android.widget.TextView;
 
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
+<<<<<<< HEAD
 import com.example.ahmed.sfa.activities.Home;
 import com.example.ahmed.sfa.activities.SalesInvoice;
 import com.example.ahmed.sfa.activities.SalesReturn;
+=======
+import com.example.ahmed.sfa.Activities.Home;
+>>>>>>> Asanka
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.ImageManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;

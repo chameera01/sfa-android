@@ -153,7 +153,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "VALUES ('CUS3','peachNet','Dalugama Kelaniya','Kiribathgoda','Dalugama','0725685495','route_name_Kiribathgoda','2017-03-18');");
         db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Address,Area,Town,Telephone,RouteName,InsertDate)" +
                 "VALUES ('CUS4','Thilakawardhana','Dalugama Kelaniya','Kiribathgoda','Kiribathgoda','0725656235','route_name_kadawatha','2017-03-17');");
-
+//  add data to mst_ProductMaster
 
     }
 

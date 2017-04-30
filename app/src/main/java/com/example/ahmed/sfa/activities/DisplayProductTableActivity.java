@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.activities;
+package com.example.ahmed.sfa.Activities;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
@@ -207,21 +208,24 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
-    public int  dbtest(){
-        String result="ss";
-        DBHelper db=new DBHelper(this);
+    public int  dbtest() {
+        String result = "ss";
+        DBHelper db = new DBHelper(this);
 
         try {
-           result= db.insertProduct("cd001", "descrp_2", "principle_1", "phama", "bran_1", "belcocid", "subid", "sub_name", 45, "unitname", 50.2, 60.0, 30.0, 1, "2017-10-10", 1);
-        }catch (Exception e){
-            result ="failInsert";
+            result = db.insertProduct("cd001", "descrp_2", "principle_1", "phama", "bran_1", "belcocid", "subid", "sub_name", 45, "unitname", 50.2, 60.0, 30.0, 1, "2017-10-10", 1);
+        } catch (Exception e) {
+            result = "failInsert";
         }
         btnviewall.setText(result);
 
-        if(result=="success")
-            return   1;
-        else
+        if (result == "success"){
+            return 1;
+        }else{
+            Toast.makeText(this, result, Toast.LENGTH_LONG).show();
             return 0;
+        }
+
     }
     public void getdata(String ...filter){
 
@@ -229,24 +233,24 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         String brand=filter[1];
         String searchword=filter[2];
 		String searchQry="";
-        String query="select * from mst_productmaster ";
+        String query="select * from Mst_ProductMaster ";
 
 		
 
 		
             if(principle=="All" && brand=="All"){
                 if(searchword!=null){
-					query+= " where description like'"+searchword+"%'";
+					query+= " where Description like'"+searchword+"%'";
 				}
             }else if(principle=="All" && brand !="All"){
-                query+= " where brand='"+brand+"' ";
+                query+= " where Brand='"+brand+"' ";
             }else if(principle!="All" && brand=="All"){
-                query+= " where principle='"+principle+"' ";
+                query+= " where Principle='"+principle+"' ";
             }else{
-                query+= " where brand='"+brand+"'  AND principle='"+principle+"' ";
+                query+= " where Brand='"+brand+"'  AND Principle='"+principle+"' ";
             }
 		if(searchword!=null && !(principle=="All" && brand=="All") ){
-			query+=" AND description like'"+searchword+"%'";
+			query+=" AND Description like'"+searchword+"%'";
 		}
 
             //refresh the table;
@@ -275,11 +279,11 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 
             while (res.moveToNext()) {
 
-                product.setItemCode(res.getString(res.getColumnIndex("itemcode")) + "" + res.getCount());//res.getColumnIndex("itemcode")
-                product.setBrand(res.getString(1) + "" + res.getCount());
-                product.setUnitSize(res.getInt(res.getColumnIndex("unitsize")));
-                product.setSellingPrice(res.getFloat(res.getColumnIndex("sellingprice")) );
-                product.setRetailPrice(res.getFloat(res.getColumnIndex("retailprice")) );
+                product.setItemCode(res.getString(res.getColumnIndex("ItemCode")));//res.getColumnIndex("itemcode")
+                product.setBrand(res.getString(res.getColumnIndex("Brand")));
+                product.setUnitSize(res.getInt(res.getColumnIndex("UnitSize")));
+                product.setSellingPrice(res.getFloat(res.getColumnIndex("SellingPrice")) );
+                product.setRetailPrice(res.getFloat(res.getColumnIndex("RetailPrice")) );
                 update(product);
                 //btnviewall.setText(res.getCount());
             }
