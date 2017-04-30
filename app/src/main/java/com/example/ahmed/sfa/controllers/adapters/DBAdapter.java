@@ -121,7 +121,11 @@ public class DBAdapter{
 
         array_list.add("All");
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex("Area")));
+
+            String area=res.getString(res.getColumnIndex("Area"));
+            if(area!=null) {
+                array_list.add(area);
+            }
             res.moveToNext();
         }
         closeDB();

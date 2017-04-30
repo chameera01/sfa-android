@@ -100,7 +100,8 @@
                     android:paddingRight="20dp"
                     android:paddingTop="10dp"
                     android:background="#92C94a"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_1" />
 
                 <TextView
                     android:text="Product"
@@ -112,7 +113,8 @@
                     android:paddingRight="20dp"
                     android:paddingTop="10dp"
                     android:background="#92C94a"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_2" />
 
                 <TextView
                     android:text="UniteSize"
@@ -124,7 +126,8 @@
                     android:paddingTop="10dp"
                     android:background="#92C94a"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_3" />
 
                 <TextView
                     android:text="Selingprice"
@@ -136,7 +139,8 @@
                     android:paddingRight="20dp"
                     android:paddingTop="10dp"
                     android:background="#92C94a"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:id="@+id/lbl_4" />
 
                 <TextView
                     android:text="RetailPrice"
@@ -148,7 +152,8 @@
                     android:paddingRight="20dp"
                     android:paddingTop="10dp"
                     android:layout_weight="1"
-                    android:background="#92C94a"/>
+                    android:background="#92C94a"
+                    android:id="@+id/lbl_5" />
             </LinearLayout>
 
             <ScrollView

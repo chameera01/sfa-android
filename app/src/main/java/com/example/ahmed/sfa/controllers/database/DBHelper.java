@@ -65,10 +65,14 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE Customer_Images (_id INTEGER PRIMARY KEY AUTOINCREMENT,CustomerNo TEXT,CustomerImageName TEXT);");
 
             //create a table for temporary customer details
-            db.execSQL("CREATE TABLE Tr_NewCustomer (_id INTEGER PRIMARY KEY AUTOINCREMENT,NewCustomerID,CustomerName TEXT,Address TEXT,District TEXT,Area TEXT," +
+            db.execSQL("CREATE TABLE Tr_NewCustomer (_id INTEGER PRIMARY KEY AUTOINCREMENT,NewCustomerID TEXT,CustomerName TEXT,Address TEXT,District TEXT,Area TEXT," +
                     "Town TEXT,Telephone TEXT,Fax TEXT,Email TEXT,BRno TEXT,OwnerContactNo TEXT,OwnerName TEXT,PharmacyRegNo TEXT," +
                     "CreditLimit INTEGER,CustomerStatusID TEXT,CustomerStatus TEXT,InsertDate TEXT,RouteID TEXT,RouteName TEXT," +
                     "ImageID TEXT,Latitude REAL,Longitude REAL,isUpload INTEGER,UploadDate TEXT,ApproveStatus INTEGER,LastUpdateDate TEXT);");
+            //add data to Tr_newCustomer
+            db.execSQL("INSERT  INTO Tr_NewCustomer (NewCustomerID,CustomerName,Area,Town,OwnerContactNo,IsUpload,ApproveStatus,Address) values('cus_1_pend','cusName','area_1','kiribathgoda','0719632456',1,1,'dalugama,kelaniya');");
+            db.execSQL("INSERT  INTO Tr_NewCustomer (NewCustomerID,CustomerName,Area,Town,OwnerContactNo,IsUpload,ApproveStatus,Address) values('cus_2_pend','cusNameA','arfifiea_1','kadawatha','072565895',0,0,'Ragama');");
+            db.execSQL("INSERT  INTO Tr_NewCustomer (NewCustomerID,CustomerName,Area,Town,OwnerContactNo,IsUpload,ApproveStatus,Address) values('cus_3_pend','cusNameB','areaAmbalangoda_1','kelaniya','895123584',0,0,'No89 Kandy Rd Kadawatha');");
 
             //create Tr_DailyRouteDetails
             db.execSQL("CREATE TABLE Tr_DailyRouteDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,Date TEXT,ItineraryID TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,InvoiceNo INTEGER,Reasons TEXT,Comment TEXT,IsUpload TEXT,UploadDate TEXT)");
@@ -216,13 +220,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
             //adding datato  table 21 TrNewCustomer
-            /**
+/*
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (1,'cus_001','peachnet','addre ','area_dalugama','dalugama','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (2,'cus_002','healthycafe','addre is goes here','area_dalugama','bambalapitiya','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (3,'cus_003','thilakawardhana','addre ','area_kiribathgoda','kiribathgoda','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (4,'cus_004','kandy','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (5,'cus_005','thilakawardhana','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
-                */
+*/
+
 
             db.execSQL(
                     "create table Mst_ProductMaster" +
@@ -531,7 +536,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
         array_list.add("All");
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_BRAND)));
+            //array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_BRAND)));
+            String val=res.getString(res.getColumnIndex(PRODUCT_COLUMN_BRAND));
+            if(val!=null){
+                array_list.add(val);
+            }
             res.moveToNext();
         }
         return array_list;
@@ -546,7 +555,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
         array_list.add("All");
         while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_PRINCIPLE)));
+            //array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_PRINCIPLE)));
+            String val=res.getString(res.getColumnIndex(PRODUCT_COLUMN_PRINCIPLE));
+            if(val!=null){
+                array_list.add(val);
+            }
             res.moveToNext();
         }
         return array_list;

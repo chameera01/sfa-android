@@ -16,14 +16,17 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
 
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
-import controllers.database.DBHelper;
+import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Tr_NewCustomer;
+
+
 
 public class PendingCustomer extends AppCompatActivity {
     Spinner spinner_area;
@@ -40,12 +43,12 @@ public class PendingCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_customer);
 
-        /**/
+        /**//*
         Intent intent = getIntent();
 
         TextView textView = new TextView(this);
         textView.setTextSize(40);
-        textView.setText("SFA");
+        textView.setText("");
 
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_pending_customer);
         layout.addView(textView);
@@ -101,6 +104,8 @@ public class PendingCustomer extends AppCompatActivity {
                 customer_name = cus_name.getQuery().toString();
                 getdata(town, area, customer_name);
 
+                Intent db_ui=new Intent(PendingCustomer.this,AndroidDatabaseManager.class);
+                startActivity(db_ui);
                 return true;
             }
 
@@ -122,10 +127,11 @@ public class PendingCustomer extends AppCompatActivity {
 
 
         setSpinner();//aulto load values to dropdown boxes
-        getdata("All", "All", "d");//call default search;
+        //getdata("All", "All", "d");//call default search;
 
     }
     public  void setSpinner(){
+        Toast.makeText(this, "set spinner method", Toast.LENGTH_SHORT).show();
 
         DBAdapter adapter = new DBAdapter(this);
 
@@ -147,6 +153,7 @@ public class PendingCustomer extends AppCompatActivity {
         spinner_town.setVisibility(View.VISIBLE);
     }
     public void getdata(String ...filter){
+        Toast.makeText(this, "inside get data ethod", Toast.LENGTH_SHORT).show();
 
         String town=filter[0];
         String area=filter[1];
@@ -183,9 +190,10 @@ public class PendingCustomer extends AppCompatActivity {
         LinearLayout  l=(LinearLayout)findViewById(R.id.linear_layout_data_row);
         int n=l.getChildCount();
 
-
-
+        Toast.makeText(this, "inside get data method:beforeRemove", Toast.LENGTH_SHORT).show();
         l.removeAllViews();
+
+
        /* table.removeViews(0,1);
                 for(int index=1;index < n;index++) {
                     //table.removeView(table.getChildAt(index));
@@ -199,6 +207,7 @@ public class PendingCustomer extends AppCompatActivity {
         //end refresh
 
         try {
+            Toast.makeText(this, "inside get data ethod:try catch:2", Toast.LENGTH_SHORT).show();
             Tr_NewCustomer  pending_customer= new Tr_NewCustomer();
 
             DBHelper db = new DBHelper(this);
@@ -207,13 +216,30 @@ public class PendingCustomer extends AppCompatActivity {
 
 
             while (res.moveToNext()) {
+                Toast.makeText(this, "inside get data ethod:while:3", Toast.LENGTH_SHORT).show();
+
+                int upld=0;
+                int apprvl=0;
+                if(res.getInt(res.getColumnIndex("isUpload"))>0) {
+                     upld = res.getInt(res.getColumnIndex("isUpload"));
+                }
+                if(res.getInt(res.getColumnIndex("ApproveStatus"))>0) {
+                     apprvl = res.getInt(res.getColumnIndex("ApproveStatus"));
+                }
+                Toast.makeText(this, "isUp>>:"+upld, Toast.LENGTH_SHORT).show();
 
                 pending_customer.setNewCustomerID(res.getString(res.getColumnIndex("NewCustomerID")));
+                Toast.makeText(this, "inside get data ethod:4", Toast.LENGTH_LONG).show();
                 pending_customer.setCustomerName(res.getString(res.getColumnIndex("CustomerName")));
+                Toast.makeText(this, "inside get data ethod:5", Toast.LENGTH_LONG).show();
                 pending_customer.setAddress(res.getString(res.getColumnIndex("Address")));
+                Toast.makeText(this, "inside get data ethod:6", Toast.LENGTH_LONG).show();
                 pending_customer.setContactNo(res.getString(res.getColumnIndex("OwnerContactNo")));
-                pending_customer.setUploadedStatus(res.getString(res.getColumnIndex("IsUpload")));
-                pending_customer.setApprovedStatus(res.getString(res.getColumnIndex("ApproveStatus")));
+                Toast.makeText(this, "inside get data ethod:7", Toast.LENGTH_LONG).show();
+                pending_customer.setUploadedStatus(upld);
+                Toast.makeText(this, "inside get data ethod:8", Toast.LENGTH_LONG).show();
+                pending_customer.setApprovedStatus(apprvl);
+                Toast.makeText(this, "inside get data ethod:9", Toast.LENGTH_LONG).show();
 
                /* pending_customer.setDescription(res.getString(res.getColumnIndex("Description")));//should be modified
                 pending_customer.setBatchNumber(res.getString(res.getColumnIndex("BatchNumber")));
@@ -222,6 +248,7 @@ public class PendingCustomer extends AppCompatActivity {
 
 
                 update(pending_customer);
+                Toast.makeText(this, "inside get data ethod:10", Toast.LENGTH_LONG).show();
                 //btnView_sv.setText(res.getCount());
             }
 
@@ -236,6 +263,7 @@ public class PendingCustomer extends AppCompatActivity {
 
     //insert data to  table
     private void update(Tr_NewCustomer cus) {
+        Toast.makeText(this, "cameinside update method", Toast.LENGTH_SHORT).show();
         TableLayout table = (TableLayout)findViewById(R.id.table_pending_customer);
         LinearLayout linearLayout=(LinearLayout) findViewById(R.id.linear_layout_data_row);
 
@@ -281,11 +309,11 @@ public class PendingCustomer extends AppCompatActivity {
         tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
 
 
-
         //add coloum_cusname
         TextView tv_cusName = new TextView(wrappedContext,null,0);
         tv_cusName.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_cusName.setText(cus.getCustomerName());
+        Toast.makeText(this, ""+cus.getCustomerName(), Toast.LENGTH_SHORT).show();
 
 
 
@@ -303,12 +331,12 @@ public class PendingCustomer extends AppCompatActivity {
         //add coloum_uploadstatus
         TextView tv_uploadStatus = new TextView(wrappedContext,null,0);
         tv_uploadStatus.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-        tv_uploadStatus.setText(cus.getUploadedStatus());
+        tv_uploadStatus.setText(""+cus.getUploadedStatus());
 
         //add coloum_aprovedstatus
         TextView tv_approvedStatus = new TextView(wrappedContext,null,0);
         tv_approvedStatus.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-        tv_approvedStatus.setText(cus.getApprovedStatus());
+        tv_approvedStatus.setText(""+cus.getApprovedStatus());
 
 
 

@@ -335,7 +335,7 @@ public class AddExtraCustomer extends AppCompatActivity {
         col_4.setOrientation(LinearLayout.VERTICAL);
         col_5.setOrientation(LinearLayout.VERTICAL);
 
-        /*col_1.setWeightSum(1.0f);
+        /*col_1_lbl.setWeightSum(1.0f);
         col_2.setWeightSum(4.0f);
         col_3.setWeightSum(8.0f);
         col_4.setWeightSum(11.0f);

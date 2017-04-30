@@ -10,8 +10,8 @@ public class Tr_NewCustomer{
     private String customerName;
     private  String address;
     private  String contactNo;
-    private  String uploadedStatus;
-    private  String approvedStatus;
+    private  int uploadedStatus;
+    private  int approvedStatus;
 
 
     public String getNewCustomerID() {
@@ -46,19 +46,19 @@ public class Tr_NewCustomer{
         this.contactNo = contactNo;
     }
 
-    public String getUploadedStatus() {
+    public int getUploadedStatus() {
         return uploadedStatus;
     }
 
-    public void setUploadedStatus(String uploadedStatus) {
+    public void setUploadedStatus(int uploadedStatus) {
         this.uploadedStatus = uploadedStatus;
     }
 
-    public String getApprovedStatus() {
+    public int getApprovedStatus() {
         return approvedStatus;
     }
 
-    public void setApprovedStatus(String approvedStatus) {
+    public void setApprovedStatus(int approvedStatus) {
         this.approvedStatus = approvedStatus;
     }
 }

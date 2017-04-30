@@ -18,16 +18,23 @@ import java.net.URL;
  */
 
 public class SendDeviceDetails  extends AsyncTask<String, Void, String> {
-
-    private Context contxt;
+    Context contxt;
+    public SendDeviceDetails(Context c) {
+        contxt=c;
+    }
 
     @Override
     protected String doInBackground(String... params) {
 
         String data = "";
-//Toast.makeText(contxt,"line1",Toast.LENGTH_LONG).show();
+        try {
+            Toast.makeText(contxt, "line1", Toast.LENGTH_LONG).show();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         HttpURLConnection httpURLConnection = null;
         try {
+            Toast.makeText(contxt, "Came Inside doInBackGround", Toast.LENGTH_SHORT).show();
 
             httpURLConnection = (HttpURLConnection) new URL(params[0]).openConnection();
             httpURLConnection.setRequestMethod("POST");
@@ -50,7 +57,8 @@ public class SendDeviceDetails  extends AsyncTask<String, Void, String> {
                 data += current;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            Toast.makeText(contxt, "AsyncTask:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            // e.printStackTrace();
         } finally {
             if (httpURLConnection != null) {
                 httpURLConnection.disconnect();
@@ -64,7 +72,8 @@ public class SendDeviceDetails  extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         Log.e("TAG", result); // this is expecting a response code to be sent from your server upon receiving the POST data
-        //Toast.makeText(contxt,result,Toast.LENGTH_LONG).show();
+        Toast.makeText(contxt,result,Toast.LENGTH_LONG).show();
+
     }
 
 

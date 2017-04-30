@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -36,6 +37,12 @@ public class DisplayProductTableActivity extends AppCompatActivity {
     String principle;
     String keyword;
 
+    TextView col_1_lbl;
+    TextView col_2_lbl;
+    TextView col_3_lbl;
+    TextView col_4_lbl;
+    TextView col_5_lbl;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +61,13 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         spinner_principle = (Spinner) findViewById(R.id.spinner_principle);
         searchView=(SearchView) findViewById(R.id.search_txt);
         btnviewall=(Button)findViewById(R.id.button_view);
+
+
+        col_1_lbl =(TextView) findViewById(R.id.lbl_1);
+        col_2_lbl=(TextView) findViewById(R.id.lbl_2);
+        col_3_lbl=(TextView) findViewById(R.id.lbl_3);
+        col_4_lbl=(TextView) findViewById(R.id.lbl_4);
+        col_5_lbl=(TextView) findViewById(R.id.lbl_5);
 
         //onEventListenr for spinner principle
         spinner_principle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -274,52 +288,88 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 
         /*add style to table row*/
         ContextThemeWrapper wrappedContext = new ContextThemeWrapper(this, R.style.tableRow);
+        //Layput parametre
+
+        TableRow.LayoutParams  col_param=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+        col_param.weight=1.0f;
+        
+
+        /*add layout */
+        LinearLayout col_1=new LinearLayout(this);
+        LinearLayout col_2=new LinearLayout(this);
+        LinearLayout col_3=new LinearLayout(this);
+        LinearLayout col_4=new LinearLayout(this);
+        LinearLayout col_5=new LinearLayout(this);
+
+
+        col_1.setOrientation(LinearLayout.VERTICAL);
+        col_2.setOrientation(LinearLayout.VERTICAL);
+        col_3.setOrientation(LinearLayout.VERTICAL);
+        col_4.setOrientation(LinearLayout.VERTICAL);
+        col_5.setOrientation(LinearLayout.VERTICAL);
+
+        col_1.setLayoutParams(col_param);
+        col_2.setLayoutParams(col_param);
+        col_3.setLayoutParams(col_param);
+        col_4.setLayoutParams(col_param);
+        col_5.setLayoutParams(col_param);
+        /**/
 
         //add row
         TableRow tr = new TableRow(this);
-        tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+        tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
 
         //add coloum_item_code
         TextView tv = new TextView(wrappedContext,null,0);
-        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv.setLayoutParams(col_param/*new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT)*/);
         tv.setText(pm.getItemCode());
+        Toast.makeText(DisplayProductTableActivity.this, "pm_:"+pm.getItemCode(), Toast.LENGTH_SHORT).show();
 
         //add coloum_brand
         TextView tv_brand = new TextView(wrappedContext,null,0);
-        tv_brand.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_brand.setLayoutParams(col_param/*new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT)*/);
         tv_brand.setText(pm.getBrand());
-        //tv.setText("Entry-1");
+
 
         //add coloum_unitsize
         TextView tv_unitsize = new TextView(wrappedContext,null,0);
-        tv_unitsize.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tv_unitsize.setText(" "+pm.getUnitSize());
+        tv_unitsize.setLayoutParams(col_param/*-new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT)*/);
+        tv_unitsize.setText(""+pm.getUnitSize());
 
         //add coloum_sellingprice
         TextView tv_sellingprice = new TextView(wrappedContext,null,0);
-        tv_sellingprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tv_sellingprice.setText(" "+pm.getSellingPrice());
+        tv_sellingprice.setLayoutParams(col_param/*new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT)*/);
+        tv_sellingprice.setText(""+pm.getSellingPrice());
 
         //add coloum_sellingprice
         TextView tv_retailprice = new TextView(wrappedContext,null,0);
-        tv_retailprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_retailprice.setLayoutParams(col_param/*new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT)*/);
         tv_retailprice.setText(" " + pm.getRetailPrice());
 
 
-        TextView tv2 = new TextView(wrappedContext,null,0);
-        tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tv2.setText("Entry-2");
 
+
+        //
+        col_1.addView(tv);
+        col_2.addView(tv_brand);
+        col_3.addView(tv_unitsize);
+        col_4.addView(tv_sellingprice);
+        col_5.addView(tv_retailprice);
 
         //add coloums to row
-        tr.addView(tv);
-        tr.addView(tv2);
-        tr.addView(tv_brand);
-        tr.addView(tv_unitsize);
-        tr.addView(tv_sellingprice);
-        tr.addView(tv_retailprice);
+        tr.addView(col_1);
+        tr.addView(col_2);
+        tr.addView(col_3);
+        tr.addView(col_4);
+        tr.addView(col_5);
 
-
+        /*set table colum width to cloum width in data rows*//*
+        col_1_lbl.setWidth(tv.getWidth());
+        col_2_lbl.setWidth(tv_brand.getWidth());
+        col_3_lbl.setWidth(tv_unitsize.getWidth());
+        col_4_lbl.setWidth(tv_retailprice.getWidth());
+        col_5_lbl.setWidth(tv_retailprice.getWidth());
+*/
 
         table.addView(tr);
     }
