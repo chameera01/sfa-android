@@ -54,8 +54,20 @@ public class Home extends AppCompatActivity {
          NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
          //navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
 
+    }
 
+    @Override
+    public void onBackPressed(){
+        DrawerLayout drawer = (DrawerLayout )findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
+    }
 
+    public void onStart(){
+        super.onStart();
         selectedIndex=-1;
         listView = (ListView)findViewById(R.id.routelist);
         searchView = (SearchView)findViewById(R.id.routesearch);
@@ -89,17 +101,6 @@ public class Home extends AppCompatActivity {
         });
         getItinerary(null,false);//initially passing the search term as null so the getItineraries method will return all possible itineraries
         //listView.setAdapter(adapter);//set the adapter to the list view
-
-    }
-
-    @Override
-    public void onBackPressed(){
-        DrawerLayout drawer = (DrawerLayout )findViewById(R.id.drawer_layout);
-        if(drawer.isDrawerOpen(GravityCompat.START)){
-            drawer.closeDrawer(GravityCompat.START);
-        }else{
-            super.onBackPressed();
-        }
     }
 
     public void refresh(){

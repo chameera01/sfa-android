@@ -28,9 +28,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import controllers.DateManager;
+
 
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 

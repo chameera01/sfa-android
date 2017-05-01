@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 /*for testing purpose link:http://www.sqlitetutorial.net/tryit/query/sqlite-replace-statement/#1*/
-//import controllers.database.DBHelper;
+
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 
