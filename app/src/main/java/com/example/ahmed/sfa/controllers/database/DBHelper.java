@@ -65,10 +65,14 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE Customer_Images (_id INTEGER PRIMARY KEY AUTOINCREMENT,CustomerNo TEXT,CustomerImageName TEXT);");
 
             //create a table for temporary customer details
-            db.execSQL("CREATE TABLE Tr_NewCustomer (_id INTEGER PRIMARY KEY AUTOINCREMENT,NewCustomerID,CustomerName TEXT,Address TEXT,District TEXT,Area TEXT," +
+            db.execSQL("CREATE TABLE Tr_NewCustomer (_id INTEGER PRIMARY KEY AUTOINCREMENT,NewCustomerID text,CustomerName TEXT,Address TEXT,District TEXT,Area TEXT," +
                     "Town TEXT,Telephone TEXT,Fax TEXT,Email TEXT,BRno TEXT,OwnerContactNo TEXT,OwnerName TEXT,PharmacyRegNo TEXT," +
                     "CreditLimit INTEGER,CustomerStatusID TEXT,CustomerStatus TEXT,InsertDate TEXT,RouteID TEXT,RouteName TEXT," +
                     "ImageID TEXT,Latitude REAL,Longitude REAL,isUpload INTEGER,UploadDate TEXT,ApproveStatus INTEGER,LastUpdateDate TEXT);");
+
+            //insert into Tr_NewCustomer
+            db.execSQL("INSERT INTO Tr_NewCustomer(NewCustomerID,CustomerName,Town,Area) values('tmp_cus_1','tmp_cusname','mytown','area_51');");
+
 
             //create Tr_DailyRouteDetails
             db.execSQL("CREATE TABLE Tr_DailyRouteDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,Date TEXT,ItineraryID TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,InvoiceNo INTEGER,Reasons TEXT,Comment TEXT,IsUpload TEXT,UploadDate TEXT)");
@@ -155,7 +159,7 @@ public class DBHelper extends SQLiteOpenHelper {
             //db.execSQL("INSERT INTO Customer_Images(CustomerNo,CustomerImageName) VALUES ('CUS5','CUS_IMG_5')");
 
             //INSERT VALUES TO THE ITINERARY DETAILS TABLE
-            db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
+           /* db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
 
                     ",IsPlanned,IsInvoiced) VALUES ('IT1','04/25/2017','CUS1',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
@@ -196,7 +200,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     ",IsPlanned,IsInvoiced) VALUES ('IT9','04/09/2017','CUS9',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
                     ",IsPlanned,IsInvoiced) VALUES ('IT10','04/09/2017','CUS10',1,0);");
-
+*/
 
 
             //adding data to customer table
@@ -246,13 +250,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
             //adding datato  table 21 TrNewCustomer
-            /**
+            /*
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (1,'cus_001','peachnet','addre ','area_dalugama','dalugama','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (2,'cus_002','healthycafe','addre is goes here','area_dalugama','bambalapitiya','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (3,'cus_003','thilakawardhana','addre ','area_kiribathgoda','kiribathgoda','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (4,'cus_004','kandy','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
             db.execSQL("INSERT INTO Tr_NewCustomer VALUES (5,'cus_005','thilakawardhana','addre ','area_kadawatha','kadawatha','071562895','uploaded','pending');");
-                */
+            */
 
             db.execSQL(
                     "create table Mst_ProductMaster" +

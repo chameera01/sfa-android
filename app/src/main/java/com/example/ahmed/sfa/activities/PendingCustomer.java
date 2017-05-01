@@ -239,12 +239,14 @@ public class PendingCustomer extends AppCompatActivity {
 
             while (res.moveToNext()) {
 
+
+
                 pending_customer.setNewCustomerID(res.getString(res.getColumnIndex("NewCustomerID")));
                 pending_customer.setCustomerName(res.getString(res.getColumnIndex("CustomerName")));
                 pending_customer.setAddress(res.getString(res.getColumnIndex("Address")));
                 pending_customer.setContactNo(res.getString(res.getColumnIndex("OwnerContactNo")));
-                pending_customer.setUploadedStatus(res.getString(res.getColumnIndex("IsUpload")));
-                pending_customer.setApprovedStatus(res.getString(res.getColumnIndex("ApproveStatus")));
+                pending_customer.setUploadedStatus(res.getInt(res.getColumnIndex("IsUpload")));
+                pending_customer.setApprovedStatus(res.getInt(res.getColumnIndex("ApproveStatus")));
 
                /* pending_customer.setDescription(res.getString(res.getColumnIndex("Description")));//should be modified
                 pending_customer.setBatchNumber(res.getString(res.getColumnIndex("BatchNumber")));
