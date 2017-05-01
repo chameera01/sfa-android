@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.activities.Dialogs;
+package com.example.ahmed.sfa.Activities.Dialogs;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,11 +13,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.Cheque;
 

@@ -5,14 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-<<<<<<< HEAD
+
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 
 import com.example.ahmed.sfa.controllers.database.DBHelper;
-=======
+
 import android.util.Log;
 import android.widget.Toast;
 
@@ -34,7 +34,7 @@ import com.example.ahmed.sfa.models.Mst_RepTable;
 import com.example.ahmed.sfa.models.Mst_Route;
 import com.example.ahmed.sfa.models.Mst_SupplierTable;
 import com.example.ahmed.sfa.models.Mst_Territory;
->>>>>>> Asanka
+
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 
 /**
@@ -181,17 +181,10 @@ public class DBAdapter{
 
     public ArrayList<String> getArryListUniMethod(String ...qry) {
         ArrayList<String> array_list = new ArrayList<String>();
-<<<<<<< HEAD
 
-        openDB();
-        Cursor res =  db.rawQuery(query, null );
-        //res.moveToFirst();
 
-        array_list.add("All");
-        while(res.moveToNext()){
-            array_list.add(res.getString(res.getColumnIndex(columnName)));
-            //res.moveToNext();
-=======
+
+
         try {
             String query = qry[0];
             String columnName = qry[1];
@@ -217,7 +210,7 @@ public class DBAdapter{
             Toast.makeText(context, "DBAdptr_unimethod"+e.getMessage(), Toast.LENGTH_SHORT).show();
             //array_list.add("All");/*removed for spinner bug fix test */
             return null;
->>>>>>> Asanka
+
         }
 
     }
@@ -240,17 +233,13 @@ public class DBAdapter{
 
             if(db.insert("Tr_ItineraryDetails", null, contentValues)>0) {
                 result = "success";
-<<<<<<< HEAD
+
                 Toast.makeText(context,"Succees",Toast.LENGTH_SHORT).show();
             }else {
                 result = "outer_if";
                 Toast.makeText(context,"failed",Toast.LENGTH_SHORT).show();
-=======
-            }else {
-                result = "outer_if";
->>>>>>> Asanka
-            }
 
+            }
         }catch (SQLException e){
             Toast.makeText(context,"exception",Toast.LENGTH_SHORT).show();
             e.printStackTrace();

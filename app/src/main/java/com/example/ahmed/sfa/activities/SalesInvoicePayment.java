@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.activities;
+package com.example.ahmed.sfa.Activities;
 
 import android.app.DialogFragment;
 
@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.activities.Dialogs.ChequeDialogFragment;
+import com.example.ahmed.sfa.Activities.Dialogs.ChequeDialogFragment;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.Cheque;
 import com.example.ahmed.sfa.models.Itinerary;

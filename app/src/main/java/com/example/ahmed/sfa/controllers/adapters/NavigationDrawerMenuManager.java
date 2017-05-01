@@ -21,19 +21,14 @@ import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.Activities.AddExtraCustomer;
 import com.example.ahmed.sfa.Activities.AndroidDatabaseManager;
 
-<<<<<<< HEAD
-import com.example.ahmed.sfa.activities.DisplayProductTableActivity;
-import com.example.ahmed.sfa.activities.Home;
-import com.example.ahmed.sfa.activities.PendingCustomer;
-import com.example.ahmed.sfa.activities.SalesInvoice;
-import com.example.ahmed.sfa.activities.SalesReturn;
-import com.example.ahmed.sfa.activities.StockView;
-=======
+
 import com.example.ahmed.sfa.Activities.DisplayProductTableActivity;
 import com.example.ahmed.sfa.Activities.Home;
 import com.example.ahmed.sfa.Activities.PendingCustomer;
+import com.example.ahmed.sfa.Activities.SalesInvoice;
+import com.example.ahmed.sfa.Activities.SalesReturn;
 import com.example.ahmed.sfa.Activities.StockView;
->>>>>>> Asanka
+
 import com.example.ahmed.sfa.controllers.CheckInOutManager;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;

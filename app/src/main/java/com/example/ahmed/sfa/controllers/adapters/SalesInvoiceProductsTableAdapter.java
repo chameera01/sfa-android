@@ -2,7 +2,6 @@ package com.example.ahmed.sfa.controllers.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.activities.SalesInvoice;
+import com.example.ahmed.sfa.Activities.SalesInvoice;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 

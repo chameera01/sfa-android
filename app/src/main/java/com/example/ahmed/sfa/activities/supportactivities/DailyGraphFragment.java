@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.activities.supportactivities;
+package com.example.ahmed.sfa.Activities.supportactivities;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -15,27 +15,15 @@ import android.widget.Toast;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
-import com.example.charting.charts.BarChart;
-import com.example.charting.data.BarData;
-import com.example.charting.data.BarDataSet;
-import com.example.charting.data.BarEntry;
-import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.LabelFormatter;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.ValueDependentColor;
-import com.jjoe64.graphview.Viewport;
-import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Hashtable;
 
 /**
  * Created by Ahmed on 4/3/2017.

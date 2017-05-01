@@ -91,15 +91,14 @@ public class DBHelper extends SQLiteOpenHelper {
                     ",SubTotal REAL,InvoiceTotal REAL,FullDiscountRate REAL,DiscountAmount REAL,DiscountType REAL,IsOnInvoiceReturn INTEGER,OnInvoiceReturnNo TEXT" +
                     ",OnInvoiceReturnValue REAL,CreditAmount REAL,CashAmount REAL,ChequeAmount REAL,Isprint INTEGER,ProductCount INTEGER" +
                     ",InvoiceType TEXT,Latitude REAL,Longitude REAL,IsUpload INTEGER,UploadDate TEXT)");
-<<<<<<< HEAD
+
 
             db.execSQL("CREATE TABLE Tr_SalesReturn(_id INTEGER PRIMARY KEY AUTOINCREMENT, ItineraryID TEXT," +
                     "CustomerNo TEXT,InvoiceNo INTEGER,InvoiceDate TEXT,PaymentTime TEXT,SubTotal REAL," +
                     "InvoiceTotal REAL,FullDiscountRate REAL,DiscountAmount REAL,DiscountType TEXT," +
                     "IsOnInvoiceReturn INTEGER,Isprint INTEGER,ProductCount INTEGER,InvoiceType TEXT,Latitude REAL,Longitude " +
                     "REAL,IsUpload INTEGER,UploadDate TEXT)");
-=======
->>>>>>> Asanka
+
 
             //insert data into reasons table
             db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN1','Reason 1',1);");
@@ -157,7 +156,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
             //INSERT VALUES TO THE ITINERARY DETAILS TABLE
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
-<<<<<<< HEAD
+
                     ",IsPlanned,IsInvoiced) VALUES ('IT1','04/25/2017','CUS1',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
                     ",IsPlanned,IsInvoiced) VALUES ('IT2','04/25/2017','CUS2',1,0);");
@@ -177,8 +176,8 @@ public class DBHelper extends SQLiteOpenHelper {
                     ",IsPlanned,IsInvoiced) VALUES ('IT9','04/25/2017','CUS9',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
                     ",IsPlanned,IsInvoiced) VALUES ('IT10','04/25/2017','CUS10',1,0);");
-=======
-                    ",IsPlanned,IsInvoiced) VALUES ('IT1','04/08/2017','CUS1',1,0);");
+
+
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
                     ",IsPlanned,IsInvoiced) VALUES ('IT2','04/08/2017','CUS2',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
@@ -197,7 +196,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     ",IsPlanned,IsInvoiced) VALUES ('IT9','04/09/2017','CUS9',1,0);");
             db.execSQL("INSERT INTO Tr_ItineraryDetails(ItineraryID ,ItineraryDate ,CustomerNo " +
                     ",IsPlanned,IsInvoiced) VALUES ('IT10','04/09/2017','CUS10',1,0);");
->>>>>>> Asanka
+
 
 
             //adding data to customer table
@@ -357,11 +356,11 @@ public class DBHelper extends SQLiteOpenHelper {
                     ",InvoiceTotalValue REAL,ChequeAmount REAL,ChequeNumber TEXT,BankName TEXT,CollectedDate TEXT,RealizedDate TEXT,IsUpload INTEGER" +
                     ",IsUpdate INTEGER,Status TEXT,StatusUpdateDate TEXT)");
             db.execSQL("CREATE TABLE Mst_InvoiceNumbers_Management(_id INTEGER PRIMARY KEY AUTOINCREMENT,InvoiceNo INTEGER,InvoiceReturnNo INTEGER,CollectionNoteNo INTEGER,LastUpdateDate TEXT)");
-<<<<<<< HEAD
+
             db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management(InvoiceNo,InvoiceReturnNo) VALUES (5,8);");
-=======
+
             db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management(InvoiceNo) VALUES (5);");
->>>>>>> Asanka
+
 
             db.execSQL("CREATE TABLE Tr_TargetData (_id INTEGER PRIMARY KEY AUTOINCREMENT,ServerID TEXT,Date TEXT,Month TEXT,TargetValue INTEGER)");
             db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG1','04/09/2017','April',35000)");
@@ -373,13 +372,12 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG4','03/05/2017','March',50000)");
             db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG5','03/34/2017','March',30000)");
 
-<<<<<<< HEAD
+
             db.execSQL("CREATE TABLE Tr_SalesReturnDetails(_ID INTEGER  PRIMARY KEY AUTOINCREMENT,HeaderID INTEGER,ItemCode TEXT," +
                     "UnitPrice REAL,BatchNumber REAL,ExpiryDate TEXT,DiscountRate REAL,DiscountAmount REAL," +
                     "IssueMode TEXT,OrderQty INTEGER,FreeQty INTEGER,Total REAL,IsUpload INTEGER,UploadDate TEXT)");
 
-=======
->>>>>>> Asanka
+
         }catch (SQLException e){
             e.printStackTrace();
         }

@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.activities;
+package com.example.ahmed.sfa.Activities;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.activities.Dialogs.Alert;
+import com.example.ahmed.sfa.Activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
@@ -38,8 +38,6 @@ import com.example.ahmed.sfa.controllers.adapters.SalesReturnAddedChoicesAdapter
 import com.example.ahmed.sfa.controllers.adapters.SalesReturnProductsTableAdapter;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.Brand;
-import com.example.ahmed.sfa.models.Cheque;
-import com.example.ahmed.sfa.models.Customer;
 import com.example.ahmed.sfa.models.Itinerary;
 import com.example.ahmed.sfa.models.Principle;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;

@@ -32,13 +32,8 @@ import controllers.DateManager;
 
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
-<<<<<<< HEAD
-
-
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
-=======
-//import controllers.database.DBHelper;
->>>>>>> Asanka
+
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
@@ -69,7 +64,7 @@ public class AddExtraCustomer extends AppCompatActivity {
         spinner_town.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-<<<<<<< HEAD
+
 
                 area = spinner_area.getSelectedItem().toString();
                 town = spinner_town.getSelectedItem().toString();
@@ -78,7 +73,7 @@ public class AddExtraCustomer extends AppCompatActivity {
                 getdata(town, area, customer_name);
 
 
-=======
+
                 try {
                     area = spinner_area.getSelectedItem().toString();
                     town = spinner_town.getSelectedItem().toString();
@@ -89,7 +84,7 @@ public class AddExtraCustomer extends AppCompatActivity {
                 }catch(Exception e){
                     Toast.makeText(AddExtraCustomer.this, "town_spinner_click"+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
->>>>>>> Asanka
+
                 //sortBrandByPrinciple(town);
             }
 
@@ -102,14 +97,14 @@ public class AddExtraCustomer extends AppCompatActivity {
         spinner_area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-<<<<<<< HEAD
+
                 area = spinner_area.getSelectedItem().toString();
                 town = spinner_town.getSelectedItem().toString();
                 customer_name = cus_name.getQuery().toString();
                 Log.w("point","spinner CHANGED");
                 getdata(town, area, customer_name);
                 Log.w("point","spinner UPDATED");
-=======
+
                 try {
                     area = spinner_area.getSelectedItem().toString();
                     town = spinner_town.getSelectedItem().toString();
@@ -119,7 +114,6 @@ public class AddExtraCustomer extends AppCompatActivity {
                 }catch (Exception e){
                     Toast.makeText(AddExtraCustomer.this, "Area_spinner_clcik"+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
->>>>>>> Asanka
             }
 
             @Override
@@ -179,7 +173,7 @@ public class AddExtraCustomer extends AppCompatActivity {
 
 
         setSpinner();//aulto load values to dropdown boxes
-<<<<<<< HEAD
+
         Log.w("point","spinner set");
         getdata("All", "All", "d");//call default search;
         Log.w("point","DATA LOADED");
@@ -203,9 +197,9 @@ public class AddExtraCustomer extends AppCompatActivity {
         }else{
             super.onBackPressed();
         }
-=======
+
         //getdata("All", "All", "d");//call default search;
->>>>>>> Asanka
+
     }
 
     public  void setSpinner(){
@@ -247,20 +241,20 @@ public class AddExtraCustomer extends AppCompatActivity {
             spinner_area.setSelection(spinnerPosition);
 
             //set Spinner values to principle dropdown menu;
-<<<<<<< HEAD
+
             ArrayList<String> principleList = new ArrayList<>();
             principleList = adapter.getArryListUniMethod("select DISTINCT Town from Mst_Customermaster","Town");//adapter.getAllprinciples();
 
 
-=======
-            ArrayList<String> principleList = new ArrayList<String>();
+
+
             try {
                 principleList = adapter.getArryListUniMethod("select DISTINCT Town from Mst_Customermaster", "Town");//adapter.getAllprinciples();
             }catch (Exception e){
                 Toast.makeText(this, "fetch Town datafrom db:"+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
             principleList.add("All");//newly added fro spinner fug fix
->>>>>>> Asanka
+
             ArrayAdapter<String> adp2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, principleList);
             spinner_town.setAdapter(adp2);
             spinner_town.setVisibility(View.VISIBLE);

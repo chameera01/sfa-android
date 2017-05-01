@@ -30,7 +30,7 @@ import android.widget.Toast;
 
 
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.activities.Dialogs.Alert;
+import com.example.ahmed.sfa.Activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.ImageManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;

@@ -18,74 +18,49 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-<<<<<<< HEAD
+
         android:screenOrientation="landscape"
         android:theme="@style/AppTheme.NoActionBar">
         <supports-screens android:requiresSmallestWidthDp="600" />
 
-        <activity android:name=".activities.supportactivities.CheckIn" android:windowSoftInputMode="stateHidden">
-=======
-        android:theme="@style/AppTheme.NoActionBar">
-        <supports-screens android:requiresSmallestWidthDp="600" />
-
-        <activity android:name=".Activities.supportactivities.CheckIn" />
         <activity
-            android:name=".Activities.AddExtraCustomer"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
->>>>>>> Asanka
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            </activity>
-
-        <activity
-<<<<<<< HEAD
-            android:name="com.example.ahmed.sfa.activities.AddExtraCustomer"
+            android:name="com.example.ahmed.sfa.Activities.AddExtraCustomer"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <activity android:name=".activities.AndroidDatabaseManager" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.AddCustomer" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.DisplayProductTableActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.Home" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.StockView" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.PendingCustomer" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.SalesInvoice" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.SalesInvoicePayment" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.SalesSummaryActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".activities.SalesReturn" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.AndroidDatabaseManager" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.AddCustomer" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.DisplayProductTableActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.Home" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.StockView" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.PendingCustomer" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.SalesInvoice" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.SalesInvoicePayment" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.SalesSummaryActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".Activities.SalesReturn" android:windowSoftInputMode="stateHidden"/>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-=======
-            android:name=".Activities.AndroidDatabaseManager"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.AddCustomer"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.DisplayProductTableActivity"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.Home"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.StockView"
-            android:windowSoftInputMode="stateHidden" />
-        <activity
-            android:name=".Activities.PendingCustomer"
-            android:windowSoftInputMode="stateHidden" />
+
+
+
         <activity android:name=".Activities.ServiceTest"></activity>
         <activity
             android:name=".Activities.InitialLogin"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login"  android:windowSoftInputMode="stateHidden">
 
+        </activity>
+
+        <activity android:name=".Activities.supportactivities.CheckIn" android:windowSoftInputMode="stateHidden">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <service
@@ -94,13 +69,12 @@
             android:exported="true" />
 
         <activity android:name=".Activities.ManualSync">
-
-
         </activity>
+
         <activity android:name=".Activities.Login">
 
         </activity>
->>>>>>> Asanka
+
     </application>
 
 </manifest>

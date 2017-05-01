@@ -3,8 +3,6 @@ package com.example.ahmed.sfa.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.ahmed.sfa.activities.SalesInvoicePayment;
-
 /**
  * Created by Ahmed on 4/24/2017.
  */

@@ -1,10 +1,9 @@
-package com.example.ahmed.sfa.activities.Dialogs;
+package com.example.ahmed.sfa.Activities.Dialogs;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.controllers.DateManager;
