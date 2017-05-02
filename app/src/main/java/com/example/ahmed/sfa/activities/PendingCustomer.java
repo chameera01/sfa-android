@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -142,7 +143,7 @@ public class PendingCustomer extends AppCompatActivity {
 
 
         setSpinner();//aulto load values to dropdown boxes
-        getdata("All", "All", "d");//call default search;
+        //getdata("All", "All", "d");//call default search;
 
     }
 
@@ -178,6 +179,7 @@ public class PendingCustomer extends AppCompatActivity {
         spinner_town.setVisibility(View.VISIBLE);
     }
     public void getdata(String ...filter){
+        Toast.makeText(this, "inside__getData:", Toast.LENGTH_SHORT).show();
 
         String town=filter[0];
         String area=filter[1];
@@ -228,29 +230,51 @@ public class PendingCustomer extends AppCompatActivity {
 
 
         //end refresh
-
+            Toast.makeText(this, "before try:", Toast.LENGTH_SHORT).show();
         try {
+                Toast.makeText(this, "inside__try:", Toast.LENGTH_SHORT).show();
             Tr_NewCustomer  pending_customer= new Tr_NewCustomer();
 
             DBHelper db = new DBHelper(this);
             Cursor res = db.getData(query);//return tupple id=1;
 
-
+            Toast.makeText(this, "before while:", Toast.LENGTH_SHORT).show();
 
             while (res.moveToNext()) {
+                    Toast.makeText(this, "inside_while:", Toast.LENGTH_SHORT).show();
                 int uplwd=0;
-                if(res.getInt(res.getColumnIndex("IsUpload"))>0){
-                    uplwd=1;
-                }
                 int apprwl=0;
+                String  address="";
+                String  contact="0715624852";
+
+                Toast.makeText(this, "data;"+res.getString(res.getColumnIndexOrThrow("isUpload")), Toast.LENGTH_SHORT).show();
+                if(res.getInt(res.getColumnIndex("isUpload"))>0){
+                    uplwd=1;
+                    Toast.makeText(this, "inside_if1:", Toast.LENGTH_SHORT).show();
+                }
                 if(res.getInt(res.getColumnIndex("ApproveStatus"))>0){
                     apprwl=1;
+                    Toast.makeText(this, "inside_if2:", Toast.LENGTH_SHORT).show();
+                }
+                if(res.getString(res.getColumnIndex("Address"))!=null){
+                   address=res.getString(res.getColumnIndex("Address"));
+                    Toast.makeText(this, "inside_if3:"+address, Toast.LENGTH_SHORT).show();
+                }
+                if(res.getString(res.getColumnIndex("OwnerContactNo"))!=null){
+                   contact=res.getString(res.getColumnIndex("OwnerContactNo"));
+                    Toast.makeText(this, "inside_if4:"+contact, Toast.LENGTH_SHORT).show();
                 }
 
+                //Toast.makeText(this, "inside while_isUpload:"+res.getInt(res.getColumnIndex("isUpload"))+":"+res.getInt(res.getColumnIndex("ApproveStatus")), Toast.LENGTH_SHORT).show();
+
                 pending_customer.setNewCustomerID(res.getString(res.getColumnIndex("NewCustomerID")));
+                    Toast.makeText(this, "NewCus:"+res.getString(res.getColumnIndex("NewCustomerID")), Toast.LENGTH_SHORT).show();
                 pending_customer.setCustomerName(res.getString(res.getColumnIndex("CustomerName")));
-                pending_customer.setAddress(""+res.getString(res.getColumnIndex("Address")));
-                pending_customer.setContactNo(""+res.getString(res.getColumnIndex("OwnerContactNo")));
+                    Toast.makeText(this, "NewCusId:"+res.getString(res.getColumnIndex("CustomerName")), Toast.LENGTH_SHORT).show();
+                pending_customer.setAddress(address);
+                    Toast.makeText(this, "Adress:"+res.getString(res.getColumnIndex("Address")), Toast.LENGTH_LONG).show();
+                pending_customer.setContactNo(contact);
+                    Toast.makeText(this, ""+contact, Toast.LENGTH_SHORT).show();
                 pending_customer.setUploadedStatus(uplwd);
                 pending_customer.setApprovedStatus(apprwl);
 
@@ -275,6 +299,8 @@ public class PendingCustomer extends AppCompatActivity {
 
     //insert data to  table
     private void update(Tr_NewCustomer cus) {
+        Toast.makeText(this, "inside__update method:", Toast.LENGTH_SHORT).show();
+
         TableLayout table = (TableLayout)findViewById(R.id.table_pending_customer);
         LinearLayout linearLayout=(LinearLayout) findViewById(R.id.linear_layout_data_row);
 
@@ -319,14 +345,14 @@ public class PendingCustomer extends AppCompatActivity {
         TableRow tr = new TableRow(this);
         tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
 
-
+        Toast.makeText(PendingCustomer.this, "inside_update_before_cus", Toast.LENGTH_SHORT).show();
 
         //add coloum_cusname
         TextView tv_cusName = new TextView(wrappedContext,null,0);
         tv_cusName.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_cusName.setText(cus.getCustomerName());
 
-
+        Toast.makeText(PendingCustomer.this, "inside_update_before_address", Toast.LENGTH_SHORT).show();
 
         //add coloum_adress
         TextView tv_address = new TextView(wrappedContext,null,0);
@@ -334,20 +360,23 @@ public class PendingCustomer extends AppCompatActivity {
         tv_address.setText(cus.getAddress());
         //tv_description.setWidth(0);
 
+        Toast.makeText(PendingCustomer.this, "inside_update_beforcontactus", Toast.LENGTH_SHORT).show();
         //add coloum_contact
         TextView tv_contact = new TextView(wrappedContext,null,0);
         tv_contact.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_contact.setText(cus.getContactNo());
 
+        Toast.makeText(PendingCustomer.this, "inside_update_before_uploadstatus", Toast.LENGTH_SHORT).show();
         //add coloum_uploadstatus
         TextView tv_uploadStatus = new TextView(wrappedContext,null,0);
         tv_uploadStatus.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-        tv_uploadStatus.setText(cus.getUploadedStatus());
+        tv_uploadStatus.setText(""+cus.getUploadedStatus());
 
+        Toast.makeText(PendingCustomer.this, "inside_update_before approval", Toast.LENGTH_SHORT).show();
         //add coloum_aprovedstatus
         TextView tv_approvedStatus = new TextView(wrappedContext,null,0);
         tv_approvedStatus.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-        tv_approvedStatus.setText(cus.getApprovedStatus());
+        tv_approvedStatus.setText(""+cus.getApprovedStatus());
 
 
 

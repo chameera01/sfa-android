@@ -71,7 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     "ImageID TEXT,Latitude REAL,Longitude REAL,isUpload INTEGER,UploadDate TEXT,ApproveStatus INTEGER,LastUpdateDate TEXT);");
 
             //insert into Tr_NewCustomer
-            db.execSQL("INSERT INTO Tr_NewCustomer(NewCustomerID,CustomerName,Town,Area) values('tmp_cus_1','tmp_cusname','mytown','area_51');");
+            db.execSQL("INSERT INTO Tr_NewCustomer(NewCustomerID,CustomerName,Address,Town,Area,isUpload,ApproveStatus) values('tmp_cus_1','tmp_cusname','myadd','mytown','area_51',0,0);");
 
 
             //create Tr_DailyRouteDetails
