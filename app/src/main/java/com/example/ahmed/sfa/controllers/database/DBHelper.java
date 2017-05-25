@@ -33,6 +33,8 @@ public class DBHelper extends SQLiteOpenHelper {
 		db.execSQL("create table  Mst_Territory (_ID integer primary key AUTOINCREMENT,TerritoryID text,Territory text,IsActive integer,LastUpdateDate text)");
 				/*create table to save Active Status*/
         db.execSQL("CREATE TABLE DeviceCheckController (_ID integer primary key AUTOINCREMENT ,DeviceID text,Password text,ACTIVESTATUS text)");
+            //add data DeviceCheckController
+            db.execSQL("insert into DeviceCheckController (DeviceID,Password,ACTIVESTATUS) values('T1','123456','YES')");
 		/*create table for sales rep*/
         db.execSQL("CREATE TABLE Mst_RepTable " +
                     "(_ID integer primary key AUTOINCREMENT,RepID text,DeviceName text,RepName text," +

@@ -59,7 +59,9 @@ public class Login extends AppCompatActivity implements JsonRequestListerner {
 
             public void onClick(View view) {
                /**/
-                final String passWord=pass.getText().toString();
+                Toast.makeText(Login.this, "OnCLick detected", Toast.LENGTH_SHORT).show();
+                String passWord;
+                passWord=pass.getText().toString();
                 String rep_id=repID.getText().toString();
                 Toast.makeText(Login.this,">"+passWord,Toast.LENGTH_LONG).show();
 
@@ -69,7 +71,7 @@ public class Login extends AppCompatActivity implements JsonRequestListerner {
                 String isActive="NO";
                 String isPassCorrect="notcorrect";
                 if(res!=null) {
-                    Toast.makeText(Login.this,":"+res.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(Login.this,":"+res.getString(res.getColumnIndex("DeviceID")),Toast.LENGTH_LONG).show();
 
                     while (res.moveToNext()) {
                         isActive=res.getString(res.getColumnIndex("ACTIVESTATUS"));
