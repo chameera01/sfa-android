@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.ahmed.sfa.Activities.supportactivities.CheckIn;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
@@ -45,12 +46,12 @@ public class Login extends AppCompatActivity implements JsonRequestListerner {
 
     private void setListeners(){
         /*upload_btn listener*/
-        logBtn.setOnClickListener(new View.OnClickListener() {
+        /*logBtn.setOnClickListener(new View.OnClickListener() {
             @Override
              public void onClick(View view) {
                 jsonSendToWeb();
             }
-         });
+         });*/
         /*end listenr*/
 
         /*loginbutton listener*/
@@ -58,47 +59,47 @@ public class Login extends AppCompatActivity implements JsonRequestListerner {
             @Override
 
             public void onClick(View view) {
-               /**/
+
                 Toast.makeText(Login.this, "OnCLick detected", Toast.LENGTH_SHORT).show();
                 String passWord;
                 passWord=pass.getText().toString();
                 String rep_id=repID.getText().toString();
                 Toast.makeText(Login.this,">"+passWord,Toast.LENGTH_LONG).show();
 
-                Toast.makeText(Login.this,"not null cursor",Toast.LENGTH_LONG).show();
-                DBHelper db= new DBHelper(Login.this);
-                Cursor res=db.getData("select * from DeviceCheckController where Password='"+passWord+"'");
-                String isActive="NO";
-                String isPassCorrect="notcorrect";
-                if(res!=null) {
-                    Toast.makeText(Login.this,":"+res.getString(res.getColumnIndex("DeviceID")),Toast.LENGTH_LONG).show();
 
-                    while (res.moveToNext()) {
-                        isActive=res.getString(res.getColumnIndex("ACTIVESTATUS"));
-                        isPassCorrect=res.getString(res.getColumnIndex("Password"));
+                try {
+                    DBHelper db = new DBHelper(Login.this);
+                    Cursor res = db.getData("select * from DeviceCheckController where Password='"+passWord+"'");
+                    String isActive = "NO";
+                    String isPassCorrect = "notcorrect";
 
-                        if(isPassCorrect.toString()==passWord.toString()) {
-                           /* Intent ui=new Intent(Login.this,ManualSync.class );
-                            Login.this.startActivity(ui);*/
-                            Toast.makeText(Login.this,"isActive:"+isActive+"-password:"+isPassCorrect,Toast.LENGTH_LONG).show();
+
+                        while (res.moveToNext()) {
+                            isActive = res.getString(res.getColumnIndex("ACTIVESTATUS"));
+                            isPassCorrect = res.getString(res.getColumnIndex("Password"));
 
                         }
+
+//                        Toast.makeText(Login.this, ":" + isActive, Toast.LENGTH_LONG).show();
+//                        Toast.makeText(Login.this, ":" + isPassCorrect, Toast.LENGTH_LONG).show();
+
+                        if (isActive !="NO") {
+                                Intent ui=new Intent(Login.this,CheckIn.class);
+                                Login.this.startActivity(ui);
+                                Toast.makeText(Login.this, "<>"+isActive+"??"+isPassCorrect, Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(Login.this, "User Not Yet Activated", Toast.LENGTH_SHORT).show();
+                        }
+                    if(isPassCorrect.equals(passWord)){
+                        Toast.makeText(Login.this, "password check", Toast.LENGTH_SHORT).show();
                     }
 
-                    Toast.makeText(Login.this,":"+isActive,Toast.LENGTH_LONG).show();
-                    Toast.makeText(Login.this,":"+isPassCorrect,Toast.LENGTH_LONG).show();
 
-                    if(isActive!="NO"  && isPassCorrect==passWord) {
-                        Intent ui=new Intent(Login.this,ManualSync.class );
-                        Login.this.startActivity(ui);
-
-                    }
-                }else{
-                    Toast.makeText(Login.this,"null cursor",Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    Intent ui=new Intent(Login.this,InitialLogin.class);
+                    Login.this.startActivity(ui);
+                    Toast.makeText(Login.this, "err:"+e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-
-
-
             }
         });
     }
