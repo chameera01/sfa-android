@@ -55,47 +55,50 @@ public class JsonHelper {
 
         final  DeviceCheckController  recieveData = new DeviceCheckController();
 
-        new JsonDataCallback() {
-            @Override
-            public void receiveData(Object object) {
-                String tmpData = (String)object;
-                result_view.setText(tmpData);
+    new JsonDataCallback() {
+        @Override
+        public void receiveData(Object object) {
+            String tmpData = (String) object;
+            result_view.setText(tmpData);
                 /*universal metho to filter Json Data from Json Array*/
-                ///filterType="deviceid_pass";
+            ///filterType="deviceid_pass";
 
                 /*end unit methos*/
-                try {
-                    JSONArray jsonArray = new JSONArray(tmpData);
-                    JSONObject jsonObject=jsonArray.getJSONObject(0);
+            try {
+                JSONArray jsonArray = new JSONArray(tmpData);
+                JSONObject jsonObject = jsonArray.getJSONObject(0);
 
                     /*recieveData.setStatus(jsonObject.optString("ACTIVESTATUS"));
                     recieveData.setDevice_id(jsonObject.optString("DeviceID"));
                     recieveData.setPass(jsonObject.optString("Password"));*/
-                    DeviceCheckController devCheck= new DeviceCheckController();
-                    devCheck.setDevice_id(deviceId);
-                    devCheck.setPass(pass);
-                    devCheck.setStatus(jsonObject.optString("ACTIVESTATUS"));
+                DeviceCheckController devCheck = new DeviceCheckController();
+                devCheck.setDevice_id(deviceId);
+                devCheck.setPass(pass);
+                devCheck.setStatus(jsonObject.optString("ACTIVESTATUS"));
 
-                    Toast.makeText(context,jsonObject.toString()+"*",Toast.LENGTH_LONG).show();
-                    result_view.setText(jsonObject.optString("ACTIVESTATUS"));
+                Toast.makeText(context, jsonObject.toString() + "*", Toast.LENGTH_LONG).show();
+                result_view.setText(jsonObject.optString("ACTIVESTATUS"));
 
-                    DBAdapter adp=new DBAdapter(context);
-                    adp.insertDeviceCheckController(devCheck);
+                DBAdapter adp = new DBAdapter(context);
+                adp.insertDeviceCheckController(devCheck);
 
-                    if(jsonObject.optString("ACTIVESTATUS")=="YES") {
-                        Intent ui = new Intent(JsonHelper.this.context, Login.class);
-                        JsonHelper.this.context.startActivity(ui);
-                    }
-                    setLonding(false);
-                    //filterJsonData(tmpData,"deviceid_pass") ;
 
-                    //getMstProductData("devideId","pass");
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if (jsonObject.optString("ACTIVESTATUS").equals("YES")) {
+                    Toast.makeText(context, "Activated", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(context, "Device ID or password is incorrect. Please check and tryagain", Toast.LENGTH_SHORT).show();
                 }
+                setLonding(false);
+                //filterJsonData(tmpData,"deviceid_pass") ;
 
+                //getMstProductData("devideId","pass");
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }.execute("http://www.bizmapexpert.com/api/DeviceCheck/DeviceCheckController?DeviceID="+deviceId+"&Password="+pass+"",null,null);
+
+        }
+    }.execute("http://www.bizmapexpert.com/api/DeviceCheck/DeviceCheckController?DeviceID=" + deviceId + "&Password=" + pass + "", null, null);
 
 
 
@@ -110,6 +113,19 @@ public class JsonHelper {
         }*/
          return recieveData;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
         /*
         * Get data from webservice on Mst_Product * */
         public  String getMstProductData(String devideId,String pass){
@@ -247,7 +263,7 @@ public class JsonHelper {
         return  jsonMyArray;
     }
 
-    public String GET(String txtUrl){
+    public static String GET(String txtUrl){
         InputStream inputStream = null;
         String result = "";
         HttpURLConnection httpUrlConnection;
@@ -425,7 +441,7 @@ public class JsonHelper {
     }
 
     //abstract class to check dara return
-    public abstract class JsonDataCallback extends AsyncTask<String, String, String> implements CallbackReceiver {
+    public static abstract class JsonDataCallback extends AsyncTask<String, String, String> implements CallbackReceiver {
         /*private ProgressDialog mProgressDialog;
         Handler handler;
         Runnable callback;
@@ -443,7 +459,7 @@ public class JsonHelper {
             mProgressDialog.setCancelable(true);
         }*/
 
-        public abstract void receiveData(Object object);
+        //public abstract void receiveData(Object object);
         @Override
         protected void onPreExecute() {
             //mProgressDialog =ProgressDialog.show(activity, "", "Please Wait",true,false);
