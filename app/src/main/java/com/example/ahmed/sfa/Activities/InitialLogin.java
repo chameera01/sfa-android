@@ -37,6 +37,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.ahmed.sfa.Activities.supportactivities.CheckIn;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.models.DeviceCheckController;
@@ -259,7 +260,10 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
                         if (jsonObject.optString("ACTIVESTATUS").equals("YES")) {
                             Toast.makeText(InitialLogin.this, "Activated", Toast.LENGTH_SHORT).show();
-                            
+
+
+
+
                             repDetails_update();//download rep deatials table
                             supplet_tbl_update();//download suppler table
                             productBrand_tbl_update();//download brand table
@@ -270,6 +274,10 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                             reason_tbl_download();
                             check_incheck_out_tbl_download();
                             customer_master_tbl_download();
+
+                            //open app
+                            Intent appUI=new Intent(InitialLogin.this,CheckIn.class);
+                            InitialLogin.this.startActivity(appUI);
 
                         } else {
                             Toast.makeText(InitialLogin.this, "Device ID or password is incorrect. Please check and tryagain", Toast.LENGTH_SHORT).show();

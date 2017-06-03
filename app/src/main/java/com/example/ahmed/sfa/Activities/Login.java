@@ -40,9 +40,34 @@ public class Login extends AppCompatActivity implements JsonRequestListerner {
 
         pass=(EditText) findViewById(R.id.input_password);
         repID=(EditText) findViewById(R.id.input_repID);
+        checkInitial_login();
         setListeners();
     }
 
+    private void checkInitial_login() {
+        int active=0;
+        try{
+            DBHelper db = new DBHelper(Login.this);
+            Cursor res = db.getData("select * from DeviceCheckController ");
+
+
+
+
+            while (res.moveToNext()) {
+                String isActive = res.getString(res.getColumnIndex("ACTIVESTATUS"));
+                if (isActive.equals("YES")){
+                    active=1;
+                }
+
+            }
+        }catch (Exception e){
+            Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        if(active<1){
+            Intent initiallogin=new Intent(Login.this,InitialLogin.class);
+            Login.this.startActivity(initiallogin);
+        }
+    }
 
     private void setListeners(){
         /*upload_btn listener*/
