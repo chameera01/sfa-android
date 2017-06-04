@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--tools:openDrawer="start"-->
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +7,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    >
+
     <include
         layout="@layout/app_bar_navigation_drawer"
         android:layout_width="match_parent"
@@ -30,7 +33,8 @@
             android:id="@+id/button"
             android:onClick="selfDestruct"
             android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/button_view" />
+            android:layout_toStartOf="@+id/button_view"
+            android:visibility="gone"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -39,58 +43,16 @@
             android:onClick="viewallbtnClick"
             android:id="@+id/button_view"
             android:layout_alignTop="@+id/button"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:visibility="gone"/>
 
         <RelativeLayout
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/relativeLayout"
-            android:layout_below="@+id/button"
-            android:layout_alignParentEnd="true">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/linear_layout"
-                >
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Principle"
-                    android:id="@+id/textView2" />
-
-                <Spinner
-                    android:layout_width="192dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/spinner_principle" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Brand"
-                    android:id="@+id/textView3" />
-
-                <Spinner
-                    android:layout_width="249dp"
-                    android:layout_height="65dp"
-                    android:id="@+id/spinner_brand"
-                    android:layout_row="2"
-                    android:layout_column="0"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginTop="0dp" />
-
-                <SearchView
-                    android:layout_width="176dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/search_txt"
-                    android:queryHint="Search" />
-
-            </LinearLayout>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true">
 
             <LinearLayout
 
@@ -99,21 +61,20 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
 
-                android:layout_below="@+id/linear_layout"
-                >
+                android:layout_below="@+id/linear_layout">
 
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_width="644dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/scrollView"
-                    android:layout_alignEnd="@+id/scrollView"
-                    >
+                    android:layout_alignEnd="@+id/scrollView">
 
 
                     <TextView
                         android:text="ItemCode"
-                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_column="1"
                         android:paddingBottom="10dp"
@@ -124,12 +85,13 @@
                         android:paddingRight="20dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
-                        android:layout_weight="1"/>
+                        />
 
 
                     <TextView
                         android:text="Product"
-                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_column="2"
                         android:paddingBottom="10dp"
@@ -139,20 +101,14 @@
                         android:paddingTop="10dp"
                         android:background="#92C94a"/>
 
-                    <TextView
-                        android:text="UniteSize"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="20dp"
-                        android:paddingTop="10dp"
-                        android:background="#92C94a"
-                        android:layout_weight="1"/>
+
 
                     <TextView
                         android:text="UniteSize"
-
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_column="3"
+                        android:layout_column="4"
                         android:paddingBottom="10dp"
                         android:paddingLeft="0dp"
 
@@ -160,14 +116,13 @@
 
                         android:paddingRight="20dp"
                         android:paddingTop="10dp"
-                        android:background="#92C94a"
-                        android:layout_width="wrap_content"
-                        android:layout_weight="1"/>
+                        android:background="#92C94a" />
 
 
                     <TextView
                         android:text="Selingprice"
-                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_column="4"
                         android:paddingBottom="10dp"
@@ -178,12 +133,13 @@
                         android:paddingRight="20dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
-                        android:layout_weight="1"/>
+                        />
 
 
                     <TextView
                         android:text="RetailPrice"
-                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_column="5"
                         android:paddingBottom="10dp"
@@ -193,8 +149,6 @@
 
                         android:paddingRight="20dp"
                         android:paddingTop="10dp"
-                        android:layout_weight="1"
-
                         android:background="#92C94a"/>
                 </LinearLayout>
 
@@ -209,7 +163,7 @@
                     android:layout_below="@+id/linearLayout_stockview"
                     android:layout_alignEnd="@+id/linearLayout_stockview"
 
-                    android:layout_marginEnd="62dp">
+                    android:layout_marginEnd="0dp">
 
                     <TableLayout
                         android:layout_width="match_parent"
@@ -225,32 +179,19 @@
                         android:layout_alignParentLeft="true">
 
 
-                        android:layout_row="10"
-                        android:layout_column="5"
-                        android:layout_below="@+id/linearLayout_stockview"
-                        android:layout_alignParentStart="true"
-
-                        android:layout_alignParentLeft="true"
-                        android:orientation="horizontal">
 
 
 
                         <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
 
                             android:textSize="16sp"
-                            android:background="#93f184"
+                            android:background="#9cf9be"
                             android:layout_margin="1dp"
                             android:layout_marginLeft="2dp"
                             android:paddingRight="0dp"
-
-                            android:layout_alignParentLeft="true">
-
-
-
-                            android:layout_alignParentLeft="true"
-                            android:orientation="horizontal">
+                            android:layout_alignParentRight="true">
 
 
                             <CheckBox
@@ -262,6 +203,62 @@
                         </TableRow>
                     </TableLayout>
                 </ScrollView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/linear_layout"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Principle"
+                    android:id="@+id/textView2"
+                    android:paddingTop="15dp"/>
+
+                <Spinner
+                    android:layout_width="192dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinner_principle" />
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Brand"
+                    android:id="@+id/textView3"
+                    android:paddingTop="15dp"/>
+
+                <Spinner
+                    android:layout_width="164dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/spinner_brand"
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="0dp" />
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"/>
+
+                <SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/search_txt"
+                    android:queryHint="Search" />
+
+
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"/>
             </LinearLayout>
 
         </RelativeLayout>

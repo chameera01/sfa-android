@@ -140,15 +140,18 @@ public class DisplayProductTableActivity extends AppCompatActivity {
             }
 
         });
-        spinner_brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*spinner_brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                // Your code here
+                brand = spinner_brand.getSelectedItem().toString();
+                principle = spinner_principle.getSelectedItem().toString();
+                keyword = searchView.getQuery().toString();
+                getdata(principle, brand, keyword);
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
                 return;
             }
-        });
+        });*/
 		
 		
         setSpinner();//aulto load values to dropdown boxes
@@ -342,7 +345,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 
         //add coloums to row
         tr.addView(tv);
-        tr.addView(tv2);
+        //tr.addView(tv2);
         tr.addView(tv_brand);
         tr.addView(tv_unitsize);
         tr.addView(tv_sellingprice);
