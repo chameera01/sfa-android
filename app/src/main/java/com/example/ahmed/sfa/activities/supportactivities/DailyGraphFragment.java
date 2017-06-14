@@ -12,12 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
-import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
@@ -25,13 +25,15 @@ import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
 
+import static com.example.ahmed.sfa.Constants.GRAPH_NUMBEROFDAYS;
+
 /**
  * Created by Ahmed on 4/3/2017.
  */
 
 public class DailyGraphFragment extends Fragment {
     GraphView gv;
-    final private int NUMBEROFDAYS = 5;
+
 
 
 
@@ -52,11 +54,11 @@ public class DailyGraphFragment extends Fragment {
 
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState){
-        String[] dates = new String[NUMBEROFDAYS+2];
+        String[] dates = new String[GRAPH_NUMBEROFDAYS +2];
         View view =layoutInflater.inflate(R.layout.graph,container,false);
         gv = (GraphView)view.findViewById(R.id.chart);
         gv.setTitle("Daily Sales Vs Target");
-        dates[0] = dates[NUMBEROFDAYS+1] = "";
+        dates[0] = dates[GRAPH_NUMBEROFDAYS +1] = "";
         /**
         gv.getGridLabelRenderer().setHumanRounding(false);
         gv.getLegendRenderer().setVisible(true);
@@ -90,8 +92,8 @@ public class DailyGraphFragment extends Fragment {
         arra[0] = new DataPoint(1,dbAdapter.getSales("2017/1/1"));
         arra[1] = new DataPoint(2,dbAdapter.getTarget("2017/04/01"));
         */
-        DataPoint[] arra = new DataPoint[NUMBEROFDAYS];
-        DataPoint[] arra2 = new DataPoint[NUMBEROFDAYS];
+        DataPoint[] arra = new DataPoint[GRAPH_NUMBEROFDAYS];
+        DataPoint[] arra2 = new DataPoint[GRAPH_NUMBEROFDAYS];
         DBAdapter dbAdapter = new DBAdapter(this.getActivity());
 
         String date = DateManager.dateToday();
@@ -107,7 +109,7 @@ public class DailyGraphFragment extends Fragment {
             Log.w("changed Date",date);
         }*/
         //int j=1;
-        for(int i=0;i<NUMBEROFDAYS;i++){
+        for(int i = 0; i< GRAPH_NUMBEROFDAYS; i++){
             arra[i]=new DataPoint(i+1,dbAdapter.getSales(date));
             arra2[i]=new DataPoint(i+1,dbAdapter.getTarget(date));
             dates[i+1]=date;
@@ -122,13 +124,14 @@ public class DailyGraphFragment extends Fragment {
 
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
-        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+        /*series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
             @Override
             public int get(DataPoint dataPoint) {
                 return Color.BLUE;
 
             }
-        });
+        });*/
+        series.setColor(Color.parseColor(Constants.GRAPH_COLOR_ONE));
         series.setSpacing(20);
         series.setTitle("Sales");
         series.setDrawValuesOnTop(true);
@@ -143,7 +146,7 @@ public class DailyGraphFragment extends Fragment {
         gv.addSeries(series);
 
 
-        series2.setColor(Color.GREEN);
+        series2.setColor(Color.parseColor(Constants.GRAPH_COLOR_TWO));
         series2.setSpacing(20);
         series2.setTitle("Target");
         series2.setDrawValuesOnTop(true);
@@ -160,9 +163,9 @@ public class DailyGraphFragment extends Fragment {
         staticLabelsFormatter.setHorizontalLabels(dates);
 
         gv.getViewport().setMinX(0);
-        gv.getViewport().setMaxX(NUMBEROFDAYS+1);
+        gv.getViewport().setMaxX(GRAPH_NUMBEROFDAYS +1);
         gv.getViewport().setXAxisBoundsManual(true);
-        gv.getGridLabelRenderer().setNumHorizontalLabels(NUMBEROFDAYS);
+        gv.getGridLabelRenderer().setNumHorizontalLabels(GRAPH_NUMBEROFDAYS);
         gv.getGridLabelRenderer().setTextSize(14f);
         gv.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
         gv.getGridLabelRenderer().setHumanRounding(true);
@@ -171,7 +174,7 @@ public class DailyGraphFragment extends Fragment {
 
         gv.getLegendRenderer().setVisible(true);
         gv.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
-
+        gv.getGridLabelRenderer().setVerticalAxisTitle("Sales (Rs)");
 
         return view;
     }

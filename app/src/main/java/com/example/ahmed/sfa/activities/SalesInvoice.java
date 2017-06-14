@@ -3,17 +3,23 @@ package com.example.ahmed.sfa.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -103,6 +109,8 @@ public class SalesInvoice extends AppCompatActivity {
         drawerToggle.syncState();
 
 
+
+
         //NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
 
@@ -190,8 +198,14 @@ public class SalesInvoice extends AppCompatActivity {
                 TableLayout prdctsTable = (TableLayout) findViewById(R.id.product_details_si);
                 productSearchTableAdapter = new SalesInvoiceProductsTableAdapter(prdctsTable, this);
 
-
                 searchView = (SearchView) findViewById(R.id.search_query_si);
+                //ImageView searchIcon = (ImageView)searchView.findViewById(android.support.v7.appcompat.R.id.search_button);
+                //Drawable icon = searchIcon.getDrawable();
+                //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                  //  icon.setTint(Color.RED);
+                //}
+                //searchIcon.setImageDrawable(icon);
+
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {

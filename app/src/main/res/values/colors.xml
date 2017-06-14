@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#00635C</color>
+    <color name="colorPrimaryDark">#004D40</color>
+    <color name="colorAccent">#009688</color>
+    <color name="lightprimary">#E1BEE7</color>
+    <color name="textPrimary">#FFFFFF</color>
+    <color name="primaryText">#212121</color>
+    <color name="secondoryText">#757575</color>
+    <color name="divider">#BDBDBD</color>
+
+    <color name="listSelected">#000000</color>
+    <color name="listSelectedText">#FFFFFF</color>
+
+    <color name="listDone">#607D8B</color>
+    <color name="listUnDone">#B2DFDB</color>
+    <color name="listUnselectedText">#000000</color>
+    <color name="bg">#46f4e0</color>
+    <color name="btn">#f2750f</color>
+
+   <!-- Graph colors are declared in the 'Constants' Class "-->
 </resources>

@@ -45,6 +45,10 @@ public class DateManager {
         return MONTHS[month-1];
     }
 
+    public static String getMonthName(){
+        return getMonthName(dateToday());
+    }
+
     public static Date getJavaDate(String date){
         int[] partedDate  = breakApart(date);
         Date dateObj = new Date(partedDate[2],partedDate[0],partedDate[1]);
@@ -134,6 +138,15 @@ public class DateManager {
         time+=cal.get(Calendar.HOUR)+" : ";
         time+=cal.get(Calendar.MINUTE) + " : ";
         time+=cal.get(Calendar.SECOND)+" ";
+        time+=cal.get(Calendar.AM_PM);
+        return time;
+    }
+
+    public static String getTime(){
+        String time="";
+        Calendar cal = Calendar.getInstance();
+        time+=cal.get(Calendar.HOUR)+" : ";
+        time+=cal.get(Calendar.MINUTE) + " : ";
         time+=cal.get(Calendar.AM_PM);
         return time;
     }

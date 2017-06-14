@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+
     tools:openDrawer="start">
 
     <include
@@ -21,7 +22,7 @@
             android:gravity="top"
             android:id="@+id/search_para_si"
             android:paddingTop="80dp"
-            android:paddingLeft="50dp"
+
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -44,6 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_gravity="center"
+
                 android:layout_height="wrap_content"></SearchView>
         </LinearLayout>
         <TableLayout
@@ -55,35 +57,41 @@
             android:paddingRight="50dp"
             >
             <TableRow android:background="@drawable/backshadow"
-                android:textAlignment="center"
+                android:backgroundTint="@color/secondoryText"
+                android:textColor="@color/textPrimary"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp">
                 <TextView
                     android:text="Code"
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView android:text="Product"
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:layout_weight="3"
                     android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView android:text="Batch Number"
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView android:text="Expiry Date"
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView android:text="Unit Price"
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:inputType="numberDecimal"
                     android:layout_weight="1"
@@ -91,6 +99,7 @@
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView android:text="Stock"
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:inputType="numberDecimal"
                     android:layout_weight="1"
@@ -98,6 +107,7 @@
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView android:text="Shelf"
+                    android:textStyle="bold"
                     android:inputType="number"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -105,6 +115,7 @@
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView android:text="Request"
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:inputType="number"
@@ -112,6 +123,7 @@
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView android:text="Order"
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:inputType="number"
@@ -119,18 +131,21 @@
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView android:text="Free"
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView android:text="Disc%"
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textAlignment="center"
                     android:layout_gravity="center"
                     android:layout_height="wrap_content"/>
                 <TextView android:text="Line Value"
+                    android:textStyle="bold"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textAlignment="center"
@@ -233,12 +248,14 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" />
+
             <Button
                 android:id="@+id/next_si"
-                android:text="Next"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                android:text="Next" />
 
         </LinearLayout>
 

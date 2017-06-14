@@ -13,503 +13,580 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
 
-        >
-        <LinearLayout
-            android:orientation="horizontal"
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            android:weightSum="1">
+
             <LinearLayout
-                android:orientation="vertical"
-                android:padding="20dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_marginTop="50dp"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/addcustomer$customerpic"
-                    android:background="@drawable/photo_placeholder"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="256dp"
-                    android:layout_height="160dp"
-
-                    android:layout_marginBottom="25dp"/>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Customer Name"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"/>
-                    <TextView
-                        android:text="*"
-                        android:gravity="center"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                    <EditText
-                        android:id="@+id/addcustomer$customername"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:enabled="false"
-                        android:maxLines="1"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Address"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"/>
-                    <TextView
-                        android:text="*"
-                        android:gravity="center"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                    <EditText
-                        android:id="@+id/addcustomer$address"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:inputType="textPostalAddress"
-                        android:enabled="false"
-                        android:maxLines="1"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="District"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"/>
-                    <TextView
-                        android:text="*"
-                        android:gravity="center"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                    <Spinner
-                        android:id="@+id/addcustomer$district"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:enabled="false"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Area"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"/>
-                    <TextView
-                        android:text="*"
-                        android:gravity="center"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                    <EditText
-                        android:id="@+id/addcustomer$area"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:maxLines="1"
-                        android:enabled="false"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Town"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"/>
-                    <TextView
-                        android:text="*"
-                        android:gravity="center"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-
-                    <EditText
-                        android:id="@+id/addcustomer$town"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:maxLines="1"
-                        android:enabled="false"
-                        android:layout_height="match_parent" />
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Route"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"/>
-                    <TextView
-                        android:text="*"
-                        android:gravity="center"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                    <Spinner
-                        android:id="@+id/addcustomer$route"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:enabled="false"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Customer Status"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"/>
-                    <TextView
-                        android:text="*"
-                        android:gravity="center"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                    <Spinner
-                        android:id="@+id/addcustomer$customerstatus"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:enabled="false"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:paddingTop="50dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="20dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="40dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.72"
+                android:orientation="horizontal"
+                >
 
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Contact No"
-                        android:layout_width="0dp"
-
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_weight="3"/>
-
-                    <EditText
-                        android:id="@+id/addcustomer$contactno"
-                        android:layout_width="0dp"
-                        android:maxLines="1"
-                        android:maxLength="10"
-                        android:inputType="phone"
-                        android:enabled="false"
-                        android:layout_weight="5"
-                        android:layout_height="match_parent" />
-                    <TextView
-                        android:text="*"
-                        android:gravity="center"
-                        android:textColor="@android:color/holo_red_dark"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Fax"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"/>
-                    <EditText
-                        android:id="@+id/addcustomer$fax"
-                        android:layout_width="0dp"
-                        android:enabled="false"
-                        android:maxLength="10"
-                        android:layout_weight="5"
-                        android:inputType="phone"
-                        android:maxLines="1"
-                        android:layout_height="match_parent" />
-                    <ImageView
-
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Email"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"/>
-                    <EditText
-                        android:id="@+id/addcustomer$email"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:enabled="false"
-                        android:inputType="textEmailAddress"
-                        android:maxLines="1"
-                        android:layout_height="match_parent" />
-                    <ImageView
-
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="50dp"
                     android:layout_weight="1"
-                    >
-                    <TextView
-                        android:text="BR No"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"/>
-                    <EditText
-                        android:id="@+id/addcustomer$brno"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:maxLines="1"
-                        android:enabled="false"
-                        android:layout_height="match_parent" />
-                    <ImageView
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:paddingBottom="10dp">
 
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Owner's Name"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"/>
-                    <EditText
-                        android:id="@+id/addcustomer$ownersname"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:enabled="false"
-                        android:maxLines="1"
-                        android:layout_height="match_parent" />
                     <ImageView
+                        android:id="@+id/addcustomer$customerpic"
+                        android:layout_width="200dp"
+                        android:layout_height="120dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="25dp"
 
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Owners Contact No"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"/>
-                    <EditText
-                        android:id="@+id/addcustomer$ownerscontactno"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:maxLines="1"
-                        android:maxLength="10"
-                        android:inputType="phone"
-                        android:enabled="false"
-                        android:layout_height="match_parent" />
-                    <ImageView
+                        android:background="@drawable/photo_placeholder" />
 
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Reg No"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"/>
-                    <EditText
-                        android:id="@+id/addcustomer$regno"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:maxLines="1"
-                        android:enabled="false"
-                        android:layout_height="match_parent" />
-                    <ImageView
-
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Latitude"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"/>
-                    <EditText
-                        android:id="@+id/addcustomer$latitude"
-                        android:layout_width="0dp"
-                        android:layout_weight="5"
-                        android:inputType="numberDecimal"
-                        android:maxLines="1"
-                        android:enabled="false"
-                        android:layout_height="match_parent" />
-                    <ImageView
-
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <TextView
-                        android:text="Longitude"
-                        android:layout_width="0dp"
-                        android:gravity="center_vertical"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"/>
-                    <EditText
-                        android:id="@+id/addcustomer$longitude"
-                        android:layout_width="0dp"
-                        android:enabled="false"
-                        android:inputType="numberDecimal"
-                        android:maxLines="1"
-                        android:layout_weight="5"
-                        android:layout_height="match_parent" />
-                    <ImageView
-
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-                    <RelativeLayout
-                        android:orientation="horizontal"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
 
-                        android:paddingRight="60dp">
-                        <Button
-                            android:id="@+id/addcustomer$dismiss"
-                            android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Dismiss"
-                            android:layout_toLeftOf="@+id/addcustomer$submitandsend"/>
-                        <Button
-                            android:id="@+id/addcustomer$submitandsend"
-                            android:layout_width="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
+                            android:text="Customer Name" />
+
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Submit and send"
-                            android:layout_alignParentRight="true"/>
-                    </RelativeLayout>
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="*"
+                            android:textColor="@android:color/holo_red_dark" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$customername"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:maxLines="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
+                            android:text="Address" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="*"
+                            android:textColor="@android:color/holo_red_dark" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$address"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:inputType="textPostalAddress"
+                            android:maxLines="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
+                            android:text="District" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="*"
+                            android:textColor="@android:color/holo_red_dark" />
+
+                        <Spinner
+                            android:id="@+id/addcustomer$district"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
+                            android:text="Area" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="*"
+                            android:textColor="@android:color/holo_red_dark" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$area"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:maxLines="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
+                            android:text="Town" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="*"
+                            android:textColor="@android:color/holo_red_dark" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$town"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:maxLines="1" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
+                            android:text="Route" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="*"
+                            android:textColor="@android:color/holo_red_dark" />
+
+                        <Spinner
+                            android:id="@+id/addcustomer$route"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:gravity="center_vertical"
+                            android:text="Customer Status" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="*"
+                            android:textColor="@android:color/holo_red_dark" />
+
+                        <Spinner
+                            android:id="@+id/addcustomer$customerstatus"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="50dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight="3"
+                            android:gravity="center_vertical"
+                            android:text="Contact No" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$contactno"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:maxLines="1" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="*"
+                            android:textColor="@android:color/holo_red_dark" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:gravity="center_vertical"
+                            android:text="Fax" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$fax"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:maxLines="1" />
+
+                        <ImageView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:gravity="center_vertical"
+                            android:text="Email" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$email"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:inputType="textEmailAddress"
+                            android:maxLines="1" />
+
+                        <ImageView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:gravity="center_vertical"
+                            android:text="BR No" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$brno"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:maxLines="1" />
+
+                        <ImageView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:gravity="center_vertical"
+                            android:text="Owner's Name" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$ownersname"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:maxLines="1" />
+
+                        <ImageView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:gravity="center_vertical"
+                            android:text="Owners Contact No" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$ownerscontactno"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:maxLines="1" />
+
+                        <ImageView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:gravity="center_vertical"
+                            android:text="Reg No" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$regno"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:maxLines="1" />
+
+                        <ImageView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:gravity="center_vertical"
+                            android:text="Latitude" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$latitude"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1" />
+
+                        <ImageView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:gravity="center_vertical"
+                            android:text="Longitude" />
+
+                        <EditText
+                            android:id="@+id/addcustomer$longitude"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="5"
+                            android:enabled="false"
+                            android:inputType="numberDecimal"
+                            android:maxLines="1" />
+
+                        <ImageView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+
+                            android:paddingRight="60dp">
+
+                            <Button
+                                android:id="@+id/addcustomer$dismiss"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/addcustomer$submitandsend"
+                                android:text="Dismiss" />
+
+                            <Button
+                                android:id="@+id/addcustomer$submitandsend"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="Submit and send" />
+                        </RelativeLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
+
         </LinearLayout>
 
 
-    </LinearLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

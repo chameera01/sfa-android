@@ -12,18 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LegendRenderer;
-import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.DataPointInterface;
 import com.jjoe64.graphview.series.OnDataPointTapListener;
 import com.jjoe64.graphview.series.Series;
+import com.example.ahmed.sfa.Constants;
+
+import static com.example.ahmed.sfa.Constants.GRAPH_NUMBEROFMONTHS;
 
 /**
  * Created by Ahmed on 3/1/2017.
@@ -31,7 +34,7 @@ import com.jjoe64.graphview.series.Series;
 
 public class WeeklyGraphFragment extends Fragment{
     GraphView gv ;
-    final private int NUMBEROFMONTHS = 2;
+
 
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -40,19 +43,19 @@ public class WeeklyGraphFragment extends Fragment{
     }
 
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup container, Bundle savedInstanceState){
-        String[] XAxisLabels = new String[NUMBEROFMONTHS +2];
+        String[] XAxisLabels = new String[GRAPH_NUMBEROFMONTHS +2];
         View view =layoutInflater.inflate(R.layout.graph,container,false);
         gv = (GraphView)view.findViewById(R.id.chart);
         gv.setTitle("Monthly Sales Vs Target");
-        XAxisLabels[0] = XAxisLabels[NUMBEROFMONTHS +1] = "";
+        XAxisLabels[0] = XAxisLabels[GRAPH_NUMBEROFMONTHS +1] = "";
 
-        DataPoint[] arra = new DataPoint[NUMBEROFMONTHS];
-        DataPoint[] arra2 = new DataPoint[NUMBEROFMONTHS];
+        DataPoint[] arra = new DataPoint[GRAPH_NUMBEROFMONTHS];
+        DataPoint[] arra2 = new DataPoint[GRAPH_NUMBEROFMONTHS];
         DBAdapter dbAdapter = new DBAdapter(this.getActivity());
 
         String date = DateManager.dateToday();
 
-        for(int i = 0; i< NUMBEROFMONTHS; i++){
+        for(int i = 0; i< GRAPH_NUMBEROFMONTHS; i++){
             Log.w("w qryDate",date);
             arra[i]=new DataPoint(i+1,dbAdapter.getSales(date));
             arra2[i]=new DataPoint(i+1,dbAdapter.getTarget(date));
@@ -68,13 +71,7 @@ public class WeeklyGraphFragment extends Fragment{
 
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
-        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
-            @Override
-            public int get(DataPoint dataPoint) {
-                return Color.BLUE;
-
-            }
-        });
+        series.setColor(Color.parseColor(Constants.GRAPH_COLOR_ONE));
         series.setSpacing(20);
         series.setTitle("Sales");
         series.setDrawValuesOnTop(true);
@@ -89,7 +86,7 @@ public class WeeklyGraphFragment extends Fragment{
         gv.addSeries(series);
 
 
-        series2.setColor(Color.GREEN);
+        series2.setColor(Color.parseColor(Constants.GRAPH_COLOR_TWO));
         series2.setSpacing(20);
         series2.setTitle("Target");
         series2.setDrawValuesOnTop(true);
@@ -106,9 +103,9 @@ public class WeeklyGraphFragment extends Fragment{
         staticLabelsFormatter.setHorizontalLabels(XAxisLabels);
 
         gv.getViewport().setMinX(0);
-        gv.getViewport().setMaxX(NUMBEROFMONTHS +1);
+        gv.getViewport().setMaxX(GRAPH_NUMBEROFMONTHS +1);
         gv.getViewport().setXAxisBoundsManual(true);
-        gv.getGridLabelRenderer().setNumHorizontalLabels(NUMBEROFMONTHS);
+        gv.getGridLabelRenderer().setNumHorizontalLabels(GRAPH_NUMBEROFMONTHS);
         gv.getGridLabelRenderer().setTextSize(14f);
         gv.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
         gv.getGridLabelRenderer().setHumanRounding(true);
@@ -117,7 +114,7 @@ public class WeeklyGraphFragment extends Fragment{
 
         gv.getLegendRenderer().setVisible(true);
         gv.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
-
+        gv.getGridLabelRenderer().setVerticalAxisTitle("Sales (Rs)");
 
         return view;
     }

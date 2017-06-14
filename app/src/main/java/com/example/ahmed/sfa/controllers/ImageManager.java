@@ -2,9 +2,11 @@ package com.example.ahmed.sfa.controllers;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
@@ -187,6 +189,7 @@ public class ImageManager {
     */
     private void openCamera() {
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         activity.startActivityForResult(intent,CAMERA_REQUEST);
     }
 
