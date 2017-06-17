@@ -7,8 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    >
 
     <include
         layout="@layout/app_bar_navigation_drawer"
@@ -97,10 +97,10 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:background="#2c8e52"
-                    android:layout_weight="1" >
+                    android:layout_weight="0" >
 
                     <TextView
-                        android:text="Select"
+                        android:text=""
                         android:layout_gravity="right"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="#2c8e52"
-                    android:layout_weight="1" >
+                    android:layout_weight="2" >
 
                     <TextView
                         android:text="CustomerName"
@@ -134,7 +134,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="#2c8e52"
-                    android:layout_weight="1" >
+                    android:layout_weight="2" >
 
                     <TextView
                         android:text="Address"

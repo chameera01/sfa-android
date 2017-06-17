@@ -28,7 +28,10 @@
             android:name="com.example.ahmed.sfa.Activities.AddExtraCustomer"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
 
         <activity android:name=".Activities.AndroidDatabaseManager" android:windowSoftInputMode="stateHidden"/>
         <activity android:name=".Activities.AddCustomer" android:windowSoftInputMode="stateHidden"/>
@@ -57,10 +60,10 @@
 
         <activity android:name=".Activities.supportactivities.CheckIn" android:windowSoftInputMode="stateHidden">
 
-            <intent-filter>
+            <!--intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter-->
         </activity>
 
         <service
@@ -72,7 +75,10 @@
         </activity>
 
         <activity android:name=".Activities.Login">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
     </application>

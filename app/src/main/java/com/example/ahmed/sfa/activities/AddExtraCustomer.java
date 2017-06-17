@@ -52,6 +52,7 @@ public class AddExtraCustomer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_extra_customer);
+        //getSupportActionBar().hide();
 
         try {
             spinner_area = (Spinner) findViewById(R.id.spinner_area_ec);
@@ -157,7 +158,17 @@ public class AddExtraCustomer extends AppCompatActivity {
             }
 
             public void callSearch(String query) {
-                //Do searching
+                try {
+                    area = spinner_area.getSelectedItem().toString();
+                    town = spinner_town.getSelectedItem().toString();
+                    customer_name = cus_name.getQuery().toString();
+                    getdata(town,area, customer_name);
+                    //testting
+
+
+                }catch(Exception e){
+                    Toast.makeText(AddExtraCustomer.this, "getDataFromSpinners:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
 
         });
@@ -279,16 +290,16 @@ public class AddExtraCustomer extends AppCompatActivity {
             String area = filter[1];
             String cusName = filter[2];
 
-        String query = "select * from Mst_Customermaster ";
-        /*SELECT doctors.doctor_id,doctors.doctor_name,visits.patient_name
-        FROM doctors
-        INNER JOIN visits
+            String query = "SELECT * FROM Mst_Customermaster  ";
+        /*SELECT * FROM Mst_Customermaster
+        INNER JOIN Tr_ItineraryDetails
         ON doctors.doctor_id=visits.doctor_id*/
+        /*SELECT * FROM Mst_Customermaster where CustomerNo not in (select CustomerNo from Tr_ItineraryDetails)*/
 
 
     if (town == "All" && area == "All") {
         if (cusName != "") {
-            query += " where CustomerName like'" + cusName + "%'";
+            query += " where CustomerName like '%" + cusName + "%'";
         }
     } else if (town == "All" && area != "All") {
         query += " where Area='" + area + "' ";
@@ -300,6 +311,7 @@ public class AddExtraCustomer extends AppCompatActivity {
     if (cusName != "" && !(town == "All" && area == "All")) {
         query += " AND CustomerName like'" + cusName + "%'";
     }
+        query += " AND CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where strftime('%d',strftime('%d'," + DateManager.dateToday() + ")-strftime('%d',InsertDate)) NOT IN('0','1'))";
         /*filter data which are not insert within one day*/
 //testing
     //query += " AND strftime('%d',strftime('%d'," + DateManager.dateToday() + ")-strftime('%d',InsertDate)) NOT IN('0','1')";
@@ -371,22 +383,24 @@ public class AddExtraCustomer extends AppCompatActivity {
         }
     }
 
-
+    static int  row_count=0;
     private void update(Mst_Customermaster cus) {
+
         try{
         TableLayout table = (TableLayout)findViewById(R.id.table_add_extra_customer);
         LinearLayout linearLayout=(LinearLayout) findViewById(R.id.linear_layout_add_ec_data_row);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
         params.weight = 1.0f;
+            params.width=10;
 
 
 
-        LinearLayout col_1=new LinearLayout(this);
-        LinearLayout col_2=new LinearLayout(this);
-        LinearLayout col_3=new LinearLayout(this);
-        LinearLayout col_4=new LinearLayout(this);
-        LinearLayout col_5=new LinearLayout(this);
+            LinearLayout col_1=new LinearLayout(this);
+            LinearLayout col_2=new LinearLayout(this);
+            LinearLayout col_3=new LinearLayout(this);
+            LinearLayout col_4=new LinearLayout(this);
+            LinearLayout col_5=new LinearLayout(this);
 
 
         col_1.setOrientation(LinearLayout.VERTICAL);
@@ -395,6 +409,7 @@ public class AddExtraCustomer extends AppCompatActivity {
         col_4.setOrientation(LinearLayout.VERTICAL);
         col_5.setOrientation(LinearLayout.VERTICAL);
 
+
         /*col_1.setWeightSum(1.0f);
         col_2.setWeightSum(4.0f);
         col_3.setWeightSum(8.0f);
@@ -402,20 +417,30 @@ public class AddExtraCustomer extends AppCompatActivity {
         col_5.setWeightSum(14.0f);*/
 
         TableRow.LayoutParams  col_param=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
-        col_param.weight=1.0f;
+        //col_param.weight=0.1f;
+            col_param.width=220;
         TableRow.LayoutParams  col_param2=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
-        col_param2.weight=1.0f;
+            col_param2.height=75;
+            col_param2.width=320;
 
-        col_1.setLayoutParams(col_param);
-        col_2.setLayoutParams(col_param);
+            TableRow.LayoutParams  col_param_check_box=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+            col_param_check_box.width=50;
+
+        col_1.setLayoutParams(col_param2);
+        col_2.setLayoutParams(col_param2);
         col_3.setLayoutParams(col_param);
         col_4.setLayoutParams(col_param);
-        col_5.setLayoutParams(col_param2);
+        col_5.setLayoutParams(col_param_check_box);
 
         //new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT)
 
         /*add style to table row*/
-        ContextThemeWrapper wrappedContext = new ContextThemeWrapper(this, R.style.pending_customer_row);
+            row_count++;
+            ContextThemeWrapper wrappedContext = new ContextThemeWrapper(this, R.style.pending_customer_row);
+
+            if(row_count%2!=0) {
+                wrappedContext = new ContextThemeWrapper(this, R.style.pending_customer_odd_row);
+            }
 
         //add row
         TableRow tr = new TableRow(this);
@@ -448,13 +473,13 @@ public class AddExtraCustomer extends AppCompatActivity {
         //add coloum_adress
         TextView tv_address = new TextView(wrappedContext,null,0);
         tv_address.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-        tv_address.setText(cus.getAddress()+"....");
+        tv_address.setText(cus.getAddress()+"");
         //tv_description.setWidth(0);
 
         //add coloum_contact
         TextView tv_contact = new TextView(wrappedContext,null,0);
         tv_contact.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-        tv_contact.setText(cus.getTelephone()+",,,,");
+        tv_contact.setText(cus.getTelephone()+"");
 
         //add coloum_town
         TextView tv_town = new TextView(wrappedContext,null,0);

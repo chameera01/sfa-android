@@ -26,7 +26,7 @@
     <style name="radioButtonStyle" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">64dp</item>
-        <item name="android:background">#000</item>
+        <item name="android:background">#fff</item>
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
         <item name="android:saveEnabled">false</item>
@@ -54,7 +54,7 @@
     <item name="android:textSize">15sp</item>
     <item name="android:background">@drawable/cellborder</item>
     <item name="android:gravity">center</item>
-    <item name="android:textColor">#659ae4</item>
+    <item name="android:textColor">#cedff5</item>
     <item name="android:layout_column">1</item>
     <item name="android:layout_weight">1</item>
 
@@ -62,6 +62,8 @@
     <item name="android:paddingRight">30dp</item>
 
     </style>
+
+
     <style name="pending_customer_row" >
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
@@ -69,6 +71,20 @@
         <item name="android:background">@drawable/cellborder</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">#659ae4</item>
+        <item name="android:layout_column">1</item>
+        <item name="android:layout_weight">1</item>
+
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+
+    </style>
+    <style name="pending_customer_odd_row" >
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">@drawable/odd_row</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#e0e2e6</item>
         <item name="android:layout_column">1</item>
         <item name="android:layout_weight">1</item>
 
