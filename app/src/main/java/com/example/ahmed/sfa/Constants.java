@@ -7,6 +7,12 @@ import java.util.HashMap;
  */
 
 public class Constants {
+    public static final String GRAPH_COLOR_ONE = "#E65100";
+    public static final String GRAPH_COLOR_TWO = "#795548";
+
+    public static final int GRAPH_NUMBEROFMONTHS = 2;
+    public static final int GRAPH_NUMBEROFDAYS = 5;
+
     public static final int RETURN_REQUEST_RESULT = 147;
 
     public static final int ACTIVE = 0; //default value for active
@@ -25,6 +31,7 @@ public class Constants {
     public static final int RETURNED = 1;
     public static final int DISMISSED = 2;
     public static final int DEFAULT_VAL = 0;
+
 
 
     public static final String[] CHEQUE_TABLE_COLUMNS ={"SerialCode","InvoiceDate","InvoiceNo","CustomerNo",

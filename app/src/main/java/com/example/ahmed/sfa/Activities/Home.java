@@ -44,16 +44,16 @@ public class Home extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+         //navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
         DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
 
-         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
-         NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
-         //navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
-
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
     }
 
     @Override

@@ -10,7 +10,7 @@
     android:paddingLeft="25dp"
     android:paddingRight="15dp"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    >
 
 
     <LinearLayout
@@ -25,10 +25,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             >
+            <TextView
+                android:id="@+id/month"
+                android:text="January"
+                android:textSize="26dp"
+                android:textColor="@color/primaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/navigation_header_date"
-
+                android:textColor="@color/primaryText"
                 android:textSize="40dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -37,12 +44,15 @@
                 android:id="@+id/navigation_header_day"
                 android:text="Saturday"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/primaryText"/>
+
 
             <TextView
                 android:id="@+id/navigation_header_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/primaryText"
                 android:text="09.15 p.m"/>
 
 
@@ -70,19 +80,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <Button
                     android:id="@+id/skipp_checkin"
-                    android:text="Skipp"
-                    android:visibility="invisible"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+
+                    android:text="Skipp"
+                    android:visibility="invisible" />
+
                 <Button
                     android:id="@+id/navigation_header_actionbutton"
-                    android:text="Check Out"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
                     android:layout_weight="3"
-                    android:layout_height="wrap_content" />
+                    android:text="Check Out" />
             </LinearLayout>
 
 

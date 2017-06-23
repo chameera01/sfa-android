@@ -24,25 +24,22 @@
         <supports-screens android:requiresSmallestWidthDp="600" />
 
         <activity
-
+            android:screenOrientation="landscape"
             android:name="com.example.ahmed.sfa.Activities.AddExtraCustomer"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"/>
 
-
-        </activity>
-
-        <activity android:name=".Activities.AndroidDatabaseManager" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Activities.AddCustomer" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Activities.DisplayProductTableActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Activities.Home" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Activities.StockView" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Activities.PendingCustomer" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Activities.SalesInvoice" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Activities.SalesInvoicePayment" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Activities.SalesSummaryActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Activities.SalesReturn" android:windowSoftInputMode="stateHidden"/>
+        <activity android:screenOrientation="landscape" android:name=".Activities.AndroidDatabaseManager" android:windowSoftInputMode="stateHidden"/>
+        <activity android:screenOrientation="landscape" android:name=".Activities.AddCustomer" android:windowSoftInputMode="stateHidden"/>
+        <activity android:screenOrientation="landscape" android:name=".Activities.DisplayProductTableActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:screenOrientation="landscape" android:name=".Activities.Home" android:windowSoftInputMode="stateHidden"/>
+        <activity android:screenOrientation="landscape" android:name=".Activities.StockView" android:windowSoftInputMode="stateHidden"/>
+        <activity android:screenOrientation="landscape" android:name=".Activities.PendingCustomer" android:windowSoftInputMode="stateHidden"/>
+        <activity android:screenOrientation="landscape" android:name=".Activities.SalesInvoice" android:windowSoftInputMode="stateHidden"/>
+        <activity android:screenOrientation="landscape" android:name=".Activities.SalesInvoicePayment" android:windowSoftInputMode="stateHidden"/>
+        <activity android:screenOrientation="landscape" android:name=".Activities.SalesSummaryActivity" android:windowSoftInputMode="stateHidden"/>
+        <activity android:screenOrientation="landscape" android:name=".Activities.SalesReturn" android:windowSoftInputMode="stateHidden"/>
         <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
@@ -51,19 +48,16 @@
 
 
 
-        <activity android:name=".Activities.ServiceTest"></activity>
+        <activity android:screenOrientation="landscape" android:name=".Activities.ServiceTest"></activity>
         <activity
             android:name=".Activities.InitialLogin"
             android:label="@string/title_activity_login"  android:windowSoftInputMode="stateHidden">
 
         </activity>
 
-        <activity android:name=".Activities.supportactivities.CheckIn" android:windowSoftInputMode="stateHidden">
+        <activity android:screenOrientation="landscape" android:name=".Activities.supportactivities.CheckIn" android:windowSoftInputMode="stateHidden">
 
-            <!--intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter-->
+
         </activity>
 
         <service
@@ -71,10 +65,10 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".Activities.ManualSync">
+        <activity android:screenOrientation="landscape" android:name=".Activities.ManualSync">
         </activity>
 
-        <activity android:name=".Activities.Login">
+        <activity android:screenOrientation="landscape" android:name=".Activities.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
