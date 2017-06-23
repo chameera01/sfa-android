@@ -6,6 +6,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -90,6 +91,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//fixed landscape screan;
         // Set up the login form.
         mDeviceId = (AutoCompleteTextView) findViewById(R.id.email);
         result_view=(TextView) findViewById(R.id.result_Json);
@@ -274,6 +276,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                             reason_tbl_download();
                             check_incheck_out_tbl_download();
                             customer_master_tbl_download();
+                            customerMaster_tbl_dwnoad();
 
                             //open app
                             Intent appUI=new Intent(InitialLogin.this,CheckIn.class);
@@ -297,6 +300,8 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
         }
     }
+
+
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -627,8 +632,8 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 //
 //    }
     //initial update of data tables;
-    public void product_update(){
-        try {
+    public void customerMaster_tbl_dwnoad() {
+     try {
             JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93",InitialLogin.this);
             jObjGen.setFilterType("ProductDetails");
             SyncReturn io = new SyncReturn();

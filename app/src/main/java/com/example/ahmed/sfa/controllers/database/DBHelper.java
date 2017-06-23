@@ -551,6 +551,9 @@ public class DBHelper extends SQLiteOpenHelper {
         try{
 
             SQLiteDatabase db = this.getReadableDatabase();
+            //Cursor res =  db.rawQuery(qry, null);
+            //update because of not working nested query;
+            //https://stackoverflow.com/questions/18912830/how-to-add-sub-query-in-sqlite-android-along-with-in
             Cursor res =  db.rawQuery(qry, null);
             return res;
 

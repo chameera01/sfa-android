@@ -1,14 +1,19 @@
 package com.example.ahmed.sfa.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.ahmed.sfa.Activities.supportactivities.CheckIn;
@@ -34,14 +39,76 @@ public class Login extends AppCompatActivity implements JsonRequestListerner {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_login);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//fixed landscape screan;
 
         logBtn=(AppCompatButton) findViewById(R.id.btn_login);
         upload_btn=(AppCompatButton) findViewById(R.id.btn_upload);
 
         pass=(EditText) findViewById(R.id.input_password);
         repID=(EditText) findViewById(R.id.input_repID);
+
+        //hide login form
+        final LinearLayout LoginBox = (LinearLayout) findViewById(R.id.LoginBox);
+        LoginBox.setVisibility(View.GONE);
+
         checkInitial_login();
         setListeners();
+        sleepthread();
+    }
+
+
+    //wait 5 seconds before animation
+    private void sleepthread() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //pic.get(0).setImageDrawable(getResources().getDrawable(R.drawable.coin));
+                        animation();
+                    }
+                });
+            }
+        }).start();
+    }
+    //animation method
+    public  void animation(){
+        final LinearLayout LoginBox = (LinearLayout) findViewById(R.id.LoginBox);
+        try {
+
+        }catch (Exception e){
+            Toast.makeText(this, "ani_exception"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        Animation animTranslate  = AnimationUtils.loadAnimation(Login.this, R.anim.translate);
+        animTranslate.setAnimationListener(new Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation arg0) {
+                ImageView img = (ImageView) findViewById(R.id.imageView);
+                img.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation arg0) { }
+
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                LoginBox.setVisibility(View.VISIBLE);
+                Animation animFade  = AnimationUtils.loadAnimation(Login.this, R.anim.fade);
+                LoginBox.startAnimation(animFade);
+            }
+        });
+        ImageView imgLogo = (ImageView) findViewById(R.id.imageView);
+        imgLogo.setVisibility(View.VISIBLE);
+        imgLogo.startAnimation(animTranslate);
+        //end animation method;
     }
 
     private void checkInitial_login() {

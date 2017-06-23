@@ -11,55 +11,67 @@
     android:background="@drawable/bg_blue"
     tools:context="com.example.ahmed.sfa.Activities.Login">
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageView"
+
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/logo" />
+
     <LinearLayout
+        android:id="@+id/LoginBox"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="56dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+        android:paddingLeft="240dp"
+        android:paddingRight="24dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true">
 
-        <ImageView android:src="@drawable/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="72dp"
-            android:layout_marginBottom="24dp"
-            android:layout_gravity="center_horizontal" />
-    </LinearLayout>
 
-    <!-- Email Label -->
+        <!-- Email Label -->
 
     <!-- Password Label -->
 
 
+        <EditText android:id="@+id/input_password"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:singleLine="false"
+            android:selectAllOnFocus="false"
+            android:layout_above="@+id/input_repID"
+            android:layout_alignStart="@+id/input_repID"
+            android:paddingLeft="20dp"
+            android:layout_marginLeft="150dp"
+            android:background="@drawable/textbox" />
 
-    <EditText android:id="@+id/input_password"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="Password"
-        android:singleLine="false"
-        android:selectAllOnFocus="false"
-        android:layout_above="@+id/input_repID"
-        android:layout_alignStart="@+id/input_repID" />
+        <EditText android:id="@+id/input_repID"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="RepID"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="150dp"
+            android:background="@drawable/textbox" />
 
-    <EditText android:id="@+id/input_repID"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="RepID"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <android.support.v7.widget.AppCompatButton
+        <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_login"
-        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="12dp"
         android:text="Login"
         android:layout_below="@+id/input_repID"
         android:layout_alignStart="@+id/input_repID"
         android:layout_marginTop="33dp"
-        android:layout_alignEnd="@+id/input_repID" />
+        android:layout_alignEnd="@+id/input_repID"
+        android:layout_width="120dp"
+        android:layout_marginLeft="200dp"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_upload"
@@ -73,5 +85,6 @@
         android:visibility="gone"
          />
 
+    </LinearLayout>
 
 </RelativeLayout>

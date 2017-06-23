@@ -39,7 +39,7 @@
     <item name="android:textSize">16sp</item>
     <item name="android:background">@drawable/cellborder</item>
     <item name="android:gravity">center</item>
-    <item name="android:textColor">#659ae4</item>
+    <item name="android:textColor">#63676f</item>
     <item name="android:layout_weight">1</item>
     <item name="android:layout_span">10</item>
     <item name="android:paddingLeft">40dp</item>
@@ -67,10 +67,10 @@
     <style name="pending_customer_row" >
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:background">@drawable/cellborder</item>
         <item name="android:gravity">center</item>
-        <item name="android:textColor">#659ae4</item>
+        <item name="android:textColor">#646870</item>
         <item name="android:layout_column">1</item>
         <item name="android:layout_weight">1</item>
 
@@ -78,7 +78,35 @@
         <item name="android:paddingRight">30dp</item>
 
     </style>
+    <style name="stock_view_row" >
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:background">@drawable/cellborder</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#63676f</item>
+        <item name="android:layout_column">1</item>
+        <item name="android:layout_weight">1</item>
+
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+
+    </style>
     <style name="pending_customer_odd_row" >
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:background">@drawable/odd_row</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">#62666e</item>
+        <item name="android:layout_column">1</item>
+        <item name="android:layout_weight">1</item>
+
+        <item name="android:paddingLeft">30dp</item>
+        <item name="android:paddingRight">30dp</item>
+
+    </style>
+    <style name="stockview_odd_row" >
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textSize">15sp</item>
@@ -88,8 +116,8 @@
         <item name="android:layout_column">1</item>
         <item name="android:layout_weight">1</item>
 
-        <item name="android:paddingLeft">30dp</item>
-        <item name="android:paddingRight">30dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
 
     </style>
 

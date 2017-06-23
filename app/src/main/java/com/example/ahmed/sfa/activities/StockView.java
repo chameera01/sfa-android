@@ -1,6 +1,7 @@
 package com.example.ahmed.sfa.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -51,6 +53,7 @@ public class StockView extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_view);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//fixed landscape screan;
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,7 +79,7 @@ public class StockView extends AppCompatActivity {
         spinner_brand_sv = (Spinner) findViewById(R.id.spinner_brand_stock_view);
         spinner_principle_sv = (Spinner) findViewById(R.id.spinner_principle_stockview);
         searchView_sv =(SearchView) findViewById(R.id.search_txt_stockview);
-        btnView_sv =(Button)findViewById(R.id.btn_add);
+        //btnView_sv =(Button)findViewById(R.id.btn_add);
 
         //onEventListenr for spinner principle
         spinner_principle_sv.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -322,6 +325,7 @@ public class StockView extends AppCompatActivity {
 
 
             while (res.moveToNext()) {
+                row_count++;
                 product_sv.setPrinciple(res.getString(res.getColumnIndex("PrincipleID")));//should be modified
                 product_sv.setBrand(res.getString(res.getColumnIndex("BrandID")));//should be modified
                 product_sv.setItemCode(res.getString(res.getColumnIndex("ItemCode")));//res.getColumnIndex("itemcode")
@@ -337,6 +341,13 @@ public class StockView extends AppCompatActivity {
                 update(product_sv);
                 //btnView_sv.setText(res.getCount());
             }
+            if(row_count<1){
+                Toast.makeText(StockView.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
+                TextView tr_emty_msg=new TextView(this);
+                tr_emty_msg.setText("No result to preview");
+                table.addView(tr_emty_msg);
+            }
+            row_count=0;
 
 
             //return product;
@@ -346,86 +357,132 @@ public class StockView extends AppCompatActivity {
         }
     }
     //insert data to  table
+    int row_count=0;
+
+
     private void update(Tr_TabStock pm) {
         TableLayout table = (TableLayout)findViewById(R.id.table_stockview);
-
-
-
         /*add style to table row*/
-        ContextThemeWrapper wrappedContext = new ContextThemeWrapper(this, R.style.tableStockView_row);
+        ContextThemeWrapper wrappedContext = new ContextThemeWrapper(this, R.style.stock_view_row);
+        if(row_count%2!=0) {
+            wrappedContext = new ContextThemeWrapper(this, R.style.stockview_odd_row);
+        }
+        LinearLayout col_1=new LinearLayout(this);
+        LinearLayout col_2=new LinearLayout(this);
+        LinearLayout col_3=new LinearLayout(this);
+        LinearLayout col_4=new LinearLayout(this);
+        LinearLayout col_5=new LinearLayout(this);
+        LinearLayout col_6=new LinearLayout(this);
+        LinearLayout col_7=new LinearLayout(this);
+        LinearLayout col_8=new LinearLayout(this);
+
+        col_1.setOrientation(LinearLayout.VERTICAL);
+        col_2.setOrientation(LinearLayout.VERTICAL);
+        col_3.setOrientation(LinearLayout.VERTICAL);
+        col_4.setOrientation(LinearLayout.VERTICAL);
+        col_5.setOrientation(LinearLayout.VERTICAL);
+        col_6.setOrientation(LinearLayout.VERTICAL);
+        col_7.setOrientation(LinearLayout.VERTICAL);
+        col_8.setOrientation(LinearLayout.VERTICAL);
+
+
+        TableRow.LayoutParams  col_param=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+        TableRow.LayoutParams  col_param_wide=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+        //col_param.weight=1f;
+        //col_param_wide.weight=1.2f;
+        col_param.width=145;
+        col_param_wide.width=270;
+
+        col_1.setLayoutParams(col_param);
+        col_2.setLayoutParams(col_param_wide);
+        col_3.setLayoutParams(col_param);
+        col_4.setLayoutParams(col_param);
+        col_5.setLayoutParams(col_param);
+        col_5.setLayoutParams(col_param);
+        col_6.setLayoutParams(col_param);
+        col_7.setLayoutParams(col_param);
+        col_8.setLayoutParams(col_param);
+
+
+
+
+
+
 
         //add row
         TableRow tr = new TableRow(this);
-        tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
-
+        tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
         //add coloum_item_code
         TextView tv_principle = new TextView(wrappedContext,null,0);
-        tv_principle.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_principle.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_principle.setText(pm.getPrinciple());
-
         //add coloum_brand
         TextView tv_brand = new TextView(wrappedContext,null,0);
-        tv_brand.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_brand.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_brand.setText(pm.getBrand());
         //tv.setText("Entry-1");
-
         //add coloum_itemcode
         TextView tv_itemcode = new TextView(wrappedContext,null,0);
-        tv_itemcode.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_itemcode.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_itemcode.setText(" "+pm.getItemCode());
 
-
-
-        //add coloum_description
+         //add coloum_description
         TextView tv_description = new TextView(wrappedContext,null,0);
-        tv_description.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_description.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_description.setText(" "+pm.getDescription());
         //tv_description.setWidth(0);
 
         //add coloum_batchnumber
         TextView tv_batchnumber = new TextView(wrappedContext,null,0);
-        tv_batchnumber.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_batchnumber.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_batchnumber.setText(" "+pm.getBatchNumber());
 
         //add coloum_exp_date
         TextView tv_exp = new TextView(wrappedContext,null,0);
-        tv_exp.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_exp.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_exp.setText(" "+pm.getExpireyDate());
 
         //add coloum_sellingprice
         TextView tv_sellingprice = new TextView(wrappedContext,null,0);
-        tv_sellingprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_sellingprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_sellingprice.setText(" "+pm.getSellingPrice());
 
         //add coloum_sellingprice
         TextView tv_retailprice = new TextView(wrappedContext,null,0);
-        tv_retailprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_retailprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_retailprice.setText(" " + pm.getRetailPrice());
 
         //add coloum_quantity
         TextView tv_qnt = new TextView(wrappedContext,null,0);
-        tv_qnt.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_qnt.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_qnt.setText(" "+pm.getQuantity());
 
         //add coloum_lastupdate_date
         TextView tv_lupdate = new TextView(wrappedContext,null,0);
-        tv_lupdate.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_lupdate.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_lupdate.setText(" "+pm.getLastupadateDate());
 
-
+        col_1.addView(tv_itemcode);
+        col_2.addView(tv_description);
+        col_3.addView(tv_batchnumber);
+        col_4.addView(tv_exp);
+        col_5.addView(tv_sellingprice);
+        col_6.addView(tv_retailprice);
+        col_7.addView(tv_qnt);
+        col_8.addView(tv_lupdate);
 
 
                 //add coloums to row
         //tr.addView(tv_principle);
         //tr.addView(tv_brand);
-        tr.addView(tv_itemcode);
-        tr.addView(tv_description);
-        tr.addView(tv_batchnumber);
-        tr.addView(tv_exp);
-        tr.addView(tv_sellingprice);
-        tr.addView(tv_retailprice);
-        tr.addView(tv_qnt);
-        tr.addView(tv_lupdate);
+        tr.addView(col_1);
+        tr.addView(col_2);
+        tr.addView(col_3);
+        tr.addView(col_4);
+        tr.addView(col_5);
+        tr.addView(col_6);
+        tr.addView(col_7);
+        tr.addView(col_8);
 
 
 

@@ -1,6 +1,7 @@
 package com.example.ahmed.sfa.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -29,8 +31,10 @@ import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 
 
-import java.util.ArrayList;
+import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.text.DecimalFormat;
 public class DisplayProductTableActivity extends AppCompatActivity {
     Button btnviewall;
     Spinner spinner_brand;
@@ -46,6 +50,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//fixed landscape screan;
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -136,7 +141,10 @@ public class DisplayProductTableActivity extends AppCompatActivity {
             }
 
             public void callSearch(String query) {
-                //Do searching
+                brand = spinner_brand.getSelectedItem().toString();
+                principle = spinner_principle.getSelectedItem().toString();
+                keyword = searchView.getQuery().toString();
+                getdata(principle, brand, keyword);
             }
 
         });
@@ -155,7 +163,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 		
 		
         setSpinner();//aulto load values to dropdown boxes
-        getdata("All", "All", "cd001");//call default search;
+        //getdata("All", "All", "cd001");//call default search;
 
 
 
@@ -243,7 +251,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 		
             if(principle=="All" && brand=="All"){
                 if(searchword!=null){
-					query+= " where Description like'"+searchword+"%'";
+					query+= " where Description like'%"+searchword+"%'";
 				}
             }else if(principle=="All" && brand !="All"){
                 query+= " where Brand='"+brand+"' ";
@@ -253,7 +261,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
                 query+= " where Brand='"+brand+"'  AND Principle='"+principle+"' ";
             }
 		if(searchword!=null && !(principle=="All" && brand=="All") ){
-			query+=" AND Description like'"+searchword+"%'";
+			query+=" AND Description like'%"+searchword+"%'";
 		}
 
             //refresh the table;
@@ -281,7 +289,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 			
 
             while (res.moveToNext()) {
-
+                row_count++;
                 product.setItemCode(res.getString(res.getColumnIndex("ItemCode")));//res.getColumnIndex("itemcode")
                 product.setBrand(res.getString(res.getColumnIndex("Brand")));
                 product.setUnitSize(res.getInt(res.getColumnIndex("UnitSize")));
@@ -290,6 +298,14 @@ public class DisplayProductTableActivity extends AppCompatActivity {
                 update(product);
                 //btnviewall.setText(res.getCount());
             }
+            ///Toast.makeText(DisplayProductTableActivity.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
+            if(row_count<1){
+                Toast.makeText(DisplayProductTableActivity.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
+                TextView tr_emty_msg=new TextView(this);
+                tr_emty_msg.setText("No result to preview");
+                table.addView(tr_emty_msg);
+            }
+            row_count=0;
 
 
            //return product;
@@ -298,62 +314,103 @@ public class DisplayProductTableActivity extends AppCompatActivity {
             //btnviewall.setText(e.getMessage());
         }
     }
+    int row_count=0;
     //insert data to  table
+
     private void update(Mst_ProductMaster pm) {
         TableLayout table = (TableLayout)findViewById(R.id.table_product);
-
-        
-
         /*add style to table row*/
-        ContextThemeWrapper wrappedContext = new ContextThemeWrapper(this, R.style.tableRow);
-
+        ContextThemeWrapper wrappedContext = new ContextThemeWrapper(this, R.style.pending_customer_row);
         //add row
         TableRow tr = new TableRow(this);
-        tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT));
+        tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
+        /*add style to table row*/
+
+        if(row_count%2!=0) {
+            wrappedContext = new ContextThemeWrapper(this, R.style.pending_customer_odd_row);
+        }
+
+        //tv.setLayoutParams(param);
+        /*add extra cutomer method*/
+        LinearLayout col_1=new LinearLayout(this);
+        LinearLayout col_2=new LinearLayout(this);
+        LinearLayout col_3=new LinearLayout(this);
+        LinearLayout col_4=new LinearLayout(this);
+        LinearLayout col_5=new LinearLayout(this);
+
+        col_1.setOrientation(LinearLayout.VERTICAL);
+        col_2.setOrientation(LinearLayout.VERTICAL);
+        col_3.setOrientation(LinearLayout.VERTICAL);
+        col_4.setOrientation(LinearLayout.VERTICAL);
+        col_5.setOrientation(LinearLayout.VERTICAL);
+
+        TableRow.LayoutParams  col_param=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT,0.1f);
+        TableRow.LayoutParams  col_param_wide=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT,0.2f);
+        //col_param.weight=1f;
+        col_param.width=200;
+        col_param_wide.width=300;
+
+        col_1.setLayoutParams(col_param);
+        col_2.setLayoutParams(col_param_wide);
+        col_3.setLayoutParams(col_param);
+        col_4.setLayoutParams(col_param);
+        col_5.setLayoutParams(col_param);
+        /*end addextra customer method*/
 
         //add coloum_item_code
         TextView tv = new TextView(wrappedContext,null,0);
-        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv.setText(pm.getItemCode());
-
         //add coloum_brand
         TextView tv_brand = new TextView(wrappedContext,null,0);
-        tv_brand.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_brand.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_brand.setText(pm.getBrand());
+
+        TextView th_prdct=(TextView) findViewById(R.id.tv_product_col_title);
+        //tv.setWidth(th_prdct.getWidth());
         //tv.setText("Entry-1");
 
         //add coloum_unitsize
         TextView tv_unitsize = new TextView(wrappedContext,null,0);
-        tv_unitsize.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
+        tv_unitsize.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_unitsize.setText(" "+pm.getUnitSize());
+
 
         //add coloum_sellingprice
         TextView tv_sellingprice = new TextView(wrappedContext,null,0);
-        tv_sellingprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tv_sellingprice.setText(" "+pm.getSellingPrice());
+        tv_sellingprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
+        String  sp= ""+pm.getSellingPrice();
+        //String[] sellp_str=sp.split(".");
+        //String[] decimal_sp=sellp_str[1].split("");
+        double sellp = Double.parseDouble(new DecimalFormat("##.##").format(pm.getSellingPrice()));
+        tv_sellingprice.setText(""+sellp);
 
         //add coloum_sellingprice
         TextView tv_retailprice = new TextView(wrappedContext,null,0);
-        tv_retailprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tv_retailprice.setText(" " + pm.getRetailPrice());
+        tv_retailprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
+        double retailp = Double.parseDouble(new DecimalFormat("##.##").format(pm.getRetailPrice()));
+        tv_retailprice.setText(" " + retailp);
 
 
-        TextView tv2 = new TextView(wrappedContext,null,0);
+        /*TextView tv2 = new TextView(wrappedContext,null,0);
         tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
-        tv2.setText("Entry-2");
+        tv2.setText("Entry-2");*/
 
+        col_1.addView(tv);
+        col_2.addView(tv_brand);
+        col_3.addView(tv_unitsize);
+        col_4.addView(tv_sellingprice);
+        col_5.addView(tv_retailprice);
 
         //add coloums to row
-        tr.addView(tv);
-        //tr.addView(tv2);
-        tr.addView(tv_brand);
-        tr.addView(tv_unitsize);
-        tr.addView(tv_sellingprice);
-        tr.addView(tv_retailprice);
-
-
+        tr.addView(col_1);
+        tr.addView(col_2);
+        tr.addView(col_3);
+        tr.addView(col_4);
+        tr.addView(col_5);
 
         table.addView(tr);
+
     }
    /* private void cleanTable(TableLayout table) {
 

@@ -1,6 +1,7 @@
 package com.example.ahmed.sfa.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -48,10 +49,31 @@ public class AddExtraCustomer extends AppCompatActivity {
     String customer_name;
     Button btn_add_itinerary;
     String qry;
+
+   /*
+    // effor to run singleton ui
+    private static Intent  objLogger;
+    public  AddExtraCustomer(){
+       Intent ui=getInstance();
+        this.startActivity(ui);
+    }
+    public  Intent getInstance()
+    {
+        if (objLogger == null)
+        {
+            objLogger = this.getInstance();
+        }else {
+            objLogger=new Intent(this.getIntent());
+        }
+        return objLogger;
+    }*/
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_extra_customer);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);// to set screan landscape;
         //getSupportActionBar().hide();
 
         try {
@@ -290,28 +312,45 @@ public class AddExtraCustomer extends AppCompatActivity {
             String area = filter[1];
             String cusName = filter[2];
 
-            String query = "SELECT * FROM Mst_Customermaster  ";
+            String query = "SELECT * FROM Mst_Customermaster where CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
         /*SELECT * FROM Mst_Customermaster
         INNER JOIN Tr_ItineraryDetails
         ON doctors.doctor_id=visits.doctor_id*/
         /*SELECT * FROM Mst_Customermaster where CustomerNo not in (select CustomerNo from Tr_ItineraryDetails)*/
 
+    String cus_name_filtr="";
+        if (cusName != "") {
+            cus_name_filtr = " CustomerName like '%" + cusName + "%' AND ";
+        }
 
     if (town == "All" && area == "All") {
-        if (cusName != "") {
-            query += " where CustomerName like '%" + cusName + "%'";
-        }
+        //if (cusName != "") {
+            //query += " where CustomerName like '%" + cusName + "%'";
+            query = "SELECT * FROM Mst_Customermaster where "+cus_name_filtr+"  CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
+        //}
+        Toast.makeText(this, "town all area all", Toast.LENGTH_SHORT).show();
     } else if (town == "All" && area != "All") {
-        query += " where Area='" + area + "' ";
+        //query += " where Area='" + area + "' ";
+        Toast.makeText(this, "town all area not all", Toast.LENGTH_SHORT).show();
+        query = "SELECT * FROM Mst_Customermaster where "+cus_name_filtr+" Area='"+area+"' AND CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
     } else if (town != "All" && area == "All") {
-        query += " where Town='" + town + "' ";
+        //query += " where Town='" + town + "' ";
+        Toast.makeText(this, "town not all area all", Toast.LENGTH_SHORT).show();
+        query = "SELECT * FROM Mst_Customermaster where "+cus_name_filtr+"  Town='"+town+"' AND CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
     } else {
-        query += " where Area='" + area + "'  AND Town='" + town + "' ";
+        //query += " where Area='" + area + "'  AND Town='" + town + "' ";
+        Toast.makeText(this, "town not all area not all", Toast.LENGTH_SHORT).show();
+        query = "SELECT * FROM Mst_Customermaster where "+cus_name_filtr+" Area='"+area+"' AND Town='"+town+"' AND  CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
     }
-    if (cusName != "" && !(town == "All" && area == "All")) {
-        query += " AND CustomerName like'" + cusName + "%'";
-    }
-        query += " AND CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where strftime('%d',strftime('%d'," + DateManager.dateToday() + ")-strftime('%d',InsertDate)) NOT IN('0','1'))";
+
+        //query += " AND CustomerNo  not in (select CustomerNo from Tr_ItineraryDetails where  0  in (strftime('%d','now')-substr(ItinerarytDate,4,5))) ";
+    /*if (cusName != "" && !(town == "All" && area == "All")) {
+       // query += " AND CustomerName like'" + cusName + "%'";
+        query = "SELECT * FROM Mst_Customermaster where Area='"+area+"' AND Town='"+town+"' AND  CustomerName like '%" + cusName + "%' AND  CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
+    }*/
+
+        //old query
+        //query += " AND CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where strftime('%d',strftime('%d'," + DateManager.dateToday() + ")-strftime('%d',InsertDate)) NOT IN('0','1'))";
         /*filter data which are not insert within one day*/
 //testing
     //query += " AND strftime('%d',strftime('%d'," + DateManager.dateToday() + ")-strftime('%d',InsertDate)) NOT IN('0','1')";
@@ -418,10 +457,10 @@ public class AddExtraCustomer extends AppCompatActivity {
 
         TableRow.LayoutParams  col_param=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
         //col_param.weight=0.1f;
-            col_param.width=220;
+            col_param.width=275;
         TableRow.LayoutParams  col_param2=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
-            col_param2.height=75;
-            col_param2.width=320;
+            //col_param2.height=75;
+            col_param2.width=375;
 
             TableRow.LayoutParams  col_param_check_box=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
             col_param_check_box.width=50;

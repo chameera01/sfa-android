@@ -1,6 +1,7 @@
 package com.example.ahmed.sfa.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
@@ -58,6 +59,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_sync);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//fixed landscape screan;
 
         ivProductSync=(ImageView) findViewById(R.id.iv_productSync);
         ivrepSync=(ImageView) findViewById(R.id.iv_repSync);

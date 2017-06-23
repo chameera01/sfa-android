@@ -1,6 +1,7 @@
 package com.example.ahmed.sfa.Activities;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -48,6 +49,7 @@ public class PendingCustomer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pending_customer);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//fixed landscape screan;
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -134,7 +136,10 @@ public class PendingCustomer extends AppCompatActivity {
             }
 
             public void callSearch(String query) {
-                //Do searching
+                area = spinner_area.getSelectedItem().toString();
+                town = spinner_town.getSelectedItem().toString();
+                customer_name = cus_name.getQuery().toString();
+                getdata(town, area, customer_name);
             }
 
         });
@@ -241,7 +246,8 @@ public class PendingCustomer extends AppCompatActivity {
             Toast.makeText(this, "before while:", Toast.LENGTH_SHORT).show();
 
             while (res.moveToNext()) {
-                    Toast.makeText(this, "inside_while:", Toast.LENGTH_SHORT).show();
+                row_count++;
+                    //Toast.makeText(this, "inside_while:", Toast.LENGTH_SHORT).show();
                 int uplwd=0;
                 int apprwl=0;
                 String  address="";
@@ -250,31 +256,31 @@ public class PendingCustomer extends AppCompatActivity {
                 Toast.makeText(this, "data;"+res.getString(res.getColumnIndexOrThrow("isUpload")), Toast.LENGTH_SHORT).show();
                 if(res.getInt(res.getColumnIndex("isUpload"))>0){
                     uplwd=1;
-                    Toast.makeText(this, "inside_if1:", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "inside_if1:", Toast.LENGTH_SHORT).show();
                 }
                 if(res.getInt(res.getColumnIndex("ApproveStatus"))>0){
                     apprwl=1;
-                    Toast.makeText(this, "inside_if2:", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "inside_if2:", Toast.LENGTH_SHORT).show();
                 }
                 if(res.getString(res.getColumnIndex("Address"))!=null){
                    address=res.getString(res.getColumnIndex("Address"));
-                    Toast.makeText(this, "inside_if3:"+address, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "inside_if3:"+address, Toast.LENGTH_SHORT).show();
                 }
                 if(res.getString(res.getColumnIndex("OwnerContactNo"))!=null){
                    contact=res.getString(res.getColumnIndex("OwnerContactNo"));
-                    Toast.makeText(this, "inside_if4:"+contact, Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "inside_if4:"+contact, Toast.LENGTH_SHORT).show();
                 }
 
                 //Toast.makeText(this, "inside while_isUpload:"+res.getInt(res.getColumnIndex("isUpload"))+":"+res.getInt(res.getColumnIndex("ApproveStatus")), Toast.LENGTH_SHORT).show();
 
                 pending_customer.setNewCustomerID(res.getString(res.getColumnIndex("NewCustomerID")));
-                    Toast.makeText(this, "NewCus:"+res.getString(res.getColumnIndex("NewCustomerID")), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "NewCus:"+res.getString(res.getColumnIndex("NewCustomerID")), Toast.LENGTH_SHORT).show();
                 pending_customer.setCustomerName(res.getString(res.getColumnIndex("CustomerName")));
-                    Toast.makeText(this, "NewCusId:"+res.getString(res.getColumnIndex("CustomerName")), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "NewCusId:"+res.getString(res.getColumnIndex("CustomerName")), Toast.LENGTH_SHORT).show();
                 pending_customer.setAddress(address);
-                    Toast.makeText(this, "Adress:"+res.getString(res.getColumnIndex("Address")), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, "Adress:"+res.getString(res.getColumnIndex("Address")), Toast.LENGTH_LONG).show();
                 pending_customer.setContactNo(contact);
-                    Toast.makeText(this, ""+contact, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, ""+contact, Toast.LENGTH_SHORT).show();
                 pending_customer.setUploadedStatus(uplwd);
                 pending_customer.setApprovedStatus(apprwl);
 
@@ -287,6 +293,14 @@ public class PendingCustomer extends AppCompatActivity {
                 update(pending_customer);
                 //btnView_sv.setText(res.getCount());
             }
+            Toast.makeText(PendingCustomer.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
+            if(row_count<1){
+                //Toast.makeText(DisplayProductTableActivity.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
+                TextView tr_emty_msg=new TextView(this);
+                tr_emty_msg.setText("No result to preview");
+                table.addView(tr_emty_msg);
+            }
+            row_count=0;
 
             db.close();
             //return product;
@@ -296,7 +310,7 @@ public class PendingCustomer extends AppCompatActivity {
         }
     }
 
-
+    int row_count=0;
     //insert data to  table
     private void update(Tr_NewCustomer cus) {
         Toast.makeText(this, "inside__update method:", Toast.LENGTH_SHORT).show();
@@ -329,10 +343,12 @@ public class PendingCustomer extends AppCompatActivity {
         col_5.setWeightSum(5.0f);*/
 
         TableRow.LayoutParams  col_param=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
-        col_param.weight=1.0f;
+        col_param.width=213;
+        TableRow.LayoutParams  col_param_wide=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+        col_param_wide.width=438;
 
         col_1.setLayoutParams(col_param);
-        col_2.setLayoutParams(col_param);
+        col_2.setLayoutParams(col_param_wide);
         col_3.setLayoutParams(col_param);
         col_4.setLayoutParams(col_param);
         col_5.setLayoutParams(col_param);
@@ -340,7 +356,9 @@ public class PendingCustomer extends AppCompatActivity {
 
         /*add style to table row*/
         ContextThemeWrapper wrappedContext = new ContextThemeWrapper(this, R.style.pending_customer_row);
-
+        if(row_count%2!=0) {
+            wrappedContext = new ContextThemeWrapper(this, R.style.pending_customer_odd_row);
+        }
         //add row
         TableRow tr = new TableRow(this);
         tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
