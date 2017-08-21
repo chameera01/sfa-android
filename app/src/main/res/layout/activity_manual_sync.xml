@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:launchMode="singleTop"
+
+    android:fitsSystemWindows="true">
+    <include
+        layout="@layout/app_bar_navigation_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
+
+
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -155,7 +172,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:background="#94cbf4">
+                android:background="#aad7f9">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -238,7 +255,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:background="#94cbf4">
+                android:background="#aad7f9">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -318,7 +335,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:background="#94cbf4">
+                android:background="#aad7f9">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -398,7 +415,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:background="#94cbf4">
+                android:background="#aad7f9">
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -527,3 +544,14 @@
     </ScrollView>
 
 </RelativeLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_navigation_drawer"
+        app:menu="@menu/activity_navigation_drawer_drawer" />
+
+
+</android.support.v4.widget.DrawerLayout>

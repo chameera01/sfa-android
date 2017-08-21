@@ -423,6 +423,8 @@ public class AddExtraCustomer extends AppCompatActivity {
     }
 
     static int  row_count=0;
+
+
     private void update(Mst_Customermaster cus) {
 
         try{
@@ -430,8 +432,8 @@ public class AddExtraCustomer extends AppCompatActivity {
         LinearLayout linearLayout=(LinearLayout) findViewById(R.id.linear_layout_add_ec_data_row);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        params.weight = 1.0f;
-            params.width=10;
+       // params.weight = 1.0f;
+         //   params.width=10;
 
 
 
@@ -456,14 +458,14 @@ public class AddExtraCustomer extends AppCompatActivity {
         col_5.setWeightSum(14.0f);*/
 
         TableRow.LayoutParams  col_param=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
-        //col_param.weight=0.1f;
-            col_param.width=275;
+        col_param.weight=0.12f;
+            //col_param.width=100;//275
         TableRow.LayoutParams  col_param2=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
-            //col_param2.height=75;
-            col_param2.width=375;
+            col_param2.weight=0.1f;
+           // col_param2.width=150;//375
 
             TableRow.LayoutParams  col_param_check_box=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
-            col_param_check_box.width=50;
+            col_param_check_box.weight=0.13f;
 
         col_1.setLayoutParams(col_param2);
         col_2.setLayoutParams(col_param2);
