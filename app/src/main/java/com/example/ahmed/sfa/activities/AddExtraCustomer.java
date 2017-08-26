@@ -465,7 +465,7 @@ public class AddExtraCustomer extends AppCompatActivity {
            // col_param2.width=150;//375
 
             TableRow.LayoutParams  col_param_check_box=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
-            col_param_check_box.weight=0.13f;
+            col_param_check_box.weight=0.14f;
 
         col_1.setLayoutParams(col_param2);
         col_2.setLayoutParams(col_param2);

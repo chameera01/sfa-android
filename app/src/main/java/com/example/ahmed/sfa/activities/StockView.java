@@ -143,7 +143,10 @@ public class StockView extends AppCompatActivity {
             }
 
             public void callSearch(String query) {
-                //Do searching
+                brand = spinner_brand_sv.getSelectedItem().toString();
+                principle = spinner_principle_sv.getSelectedItem().toString();
+                keyword = searchView_sv.getQuery().toString();
+                getdata(principle, brand, keyword);
             }
 
         });

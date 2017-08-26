@@ -61,7 +61,11 @@
                 android:layout_height="match_parent"
 
                 android:layout_below="@+id/linear_layout">
-
+                <ListView
+                    android:id="@+id/list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    />
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -75,7 +79,6 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_column="1"
                         android:paddingBottom="10dp"
                         android:paddingLeft="50dp"
 
@@ -92,11 +95,10 @@
                         android:layout_weight="2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_column="2"
                         android:paddingBottom="10dp"
-                        android:paddingLeft="100dp"
+                        android:gravity="left"
 
-                        android:paddingRight="50dp"
+                        android:paddingLeft="100dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
                         android:id="@+id/tv_product_col_title" />
@@ -108,13 +110,11 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_column="4"
                         android:paddingBottom="10dp"
-                        android:paddingLeft="0dp"
+                        android:paddingLeft="30dp"
+                        android:gravity="center"
 
-
-
-                        android:paddingRight="20dp"
+                        android:paddingRight="0dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a" />
 
@@ -124,9 +124,8 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_column="4"
                         android:paddingBottom="10dp"
-                        android:paddingLeft="0dp"
+                        android:paddingLeft="50dp"
 
 
 
@@ -141,13 +140,9 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_column="5"
                         android:paddingBottom="10dp"
-                        android:paddingLeft="0dp"
+                        android:paddingLeft="50dp"
 
-
-
-                        android:paddingRight="20dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"/>
                 </LinearLayout>

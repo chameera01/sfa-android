@@ -6,13 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:launchMode="singleTop"
-
     android:fitsSystemWindows="true">
     <include
         layout="@layout/app_bar_navigation_drawer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible" />
+        android:visibility="visible"/>
 
 
 
@@ -493,7 +492,8 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="54dp"
-                android:background="#aad7f9">
+                android:background="#aad7f9"
+                android:visibility="visible">
 
                 <TextView
                     android:text="Update Target Details"
@@ -518,7 +518,8 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="57dp"
-                android:background="#6db8f1">
+                android:background="#6db8f1"
+                android:visibility="invisible">
 
                 <TextView
                     android:text="Update Product Details"

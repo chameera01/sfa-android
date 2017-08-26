@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.Activities.AddCustomer;
+import com.example.ahmed.sfa.Activities.ManualSync;
 import com.example.ahmed.sfa.R;
 
 import com.example.ahmed.sfa.Activities.AddExtraCustomer;
@@ -254,7 +255,14 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
                     return true;
                 }
                 break;
-
+            case R.id.activity_manual_sync:
+                if(!(activity instanceof SalesInvoice)){
+                    //Intent intent = new Intent(activity,DisplayProductTableActivity.class);
+                    Intent intent = new Intent(activity, ManualSync.class);
+                    activity.startActivity(intent);
+                    return true;
+                }
+                break;
 
         }
 

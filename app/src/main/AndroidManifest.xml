@@ -57,7 +57,10 @@
         </activity>
 
         <activity android:screenOrientation="landscape" android:name=".Activities.supportactivities.CheckIn" android:windowSoftInputMode="stateHidden">
-
+            <!--intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter-->
 
         </activity>
 
