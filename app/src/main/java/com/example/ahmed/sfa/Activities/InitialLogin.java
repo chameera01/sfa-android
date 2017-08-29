@@ -27,11 +27,15 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -95,7 +99,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
         // Set up the login form.
         mDeviceId = (AutoCompleteTextView) findViewById(R.id.email);
         result_view=(TextView) findViewById(R.id.result_Json);
-        populateAutoComplete();
+        //populateAutoComplete();
 
 
         contxt=this;
@@ -123,16 +127,77 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
             @Override
             public void onClick(View view) {
                 attemptLogin();
+
+                /* any UI starts when signIn button click
                 Intent intent = new Intent(activity,AndroidDatabaseManager.class);
                 //Intent intent = new Intent(activity, AndroidDatabaseManager.class);
-                activity.startActivity(intent);
+                activity.startActivity(intent);*/
             }
         });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        final LinearLayout LoginBox = (LinearLayout) findViewById(R.id.email_login_form);
+        LoginBox.setVisibility(View.GONE);
+        ImageView img = (ImageView) findViewById(R.id.initialLogo);
+        img.setVisibility(View.GONE);
+
+        sleepthread();
     }
 
+    private void sleepthread() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //pic.get(0).setImageDrawable(getResources().getDrawable(R.drawable.coin));
+                        animation();
+                    }
+                });
+            }
+        }).start();
+    }
+    //animation method
+    public  void animation(){
+        final LinearLayout LoginBox = (LinearLayout) findViewById(R.id.email_login_form);
+        try {
+
+        }catch (Exception e){
+            Toast.makeText(this, "ani_exception"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        Animation animTranslate  = AnimationUtils.loadAnimation(InitialLogin.this, R.anim.initiallogin);
+        animTranslate.setAnimationListener(new Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation arg0) {
+                ImageView img = (ImageView) findViewById(R.id.initialLogo);
+                img.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation arg0) { }
+
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                LoginBox.setVisibility(View.VISIBLE);
+                Animation animFade  = AnimationUtils.loadAnimation(InitialLogin.this, R.anim.fade);
+                LoginBox.startAnimation(animFade);
+            }
+        });
+        ImageView imgLogo = (ImageView) findViewById(R.id.initialLogo);
+        imgLogo.setVisibility(View.VISIBLE);
+        imgLogo.startAnimation(animTranslate);
+        //end animation method;
+    }
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
@@ -171,7 +236,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                                            @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                populateAutoComplete();
+                //populateAutoComplete();
             }
         }
     }
@@ -310,7 +375,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 1;
     }
 
     /**
@@ -452,21 +517,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                 JsonHelper jh = new JsonHelper(contxt,result_view);
                 initialDetails=jh.initialLoging(mDevideID, mPassword);
 
-
-               /* DBAdapter adp=new DBAdapter(InitialLogin.this);
-                adp.insertDeviceCheckController(initialDetails);*/
-
-
-                //launch login UI if Status is active
-               /*if(initialDetails.getStatus()=="YES"){
-                    Intent ui=new Intent(InitialLogin.this,Login.class );
-                    InitialLogin.this.startActivity(ui);
-
-                }*/
-
-
-
-            }catch (Exception e){
+             }catch (Exception e){
                 Toast.makeText(activity, "err"+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 

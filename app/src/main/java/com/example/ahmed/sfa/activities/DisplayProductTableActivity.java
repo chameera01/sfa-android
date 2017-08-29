@@ -56,7 +56,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//fixed landscape screan;
 
 
-        setListView();
+
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -66,17 +66,19 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         drawerToggle.syncState();
 
 
-        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        /*NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
+        */
+        //Intent intent = getIntent();
 
-        Intent intent = getIntent();
-
+       /*add initial message com from intent starter
         TextView textView = new TextView(this);
         textView.setTextSize(40);
+        textView.setText("sssssssssssssss");
         //textView.setText(message);
 
         ViewGroup layout = (ViewGroup) findViewById(R.id.activity_display_message);
-        layout.addView(textView);
+        layout.addView(textView);*/
 
         spinner_brand = (Spinner) findViewById(R.id.spinner_brand);
         spinner_principle = (Spinner) findViewById(R.id.spinner_principle);
@@ -125,6 +127,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 			keyword=searchView.getQuery().toString();
             }
         });*/
+
 		//searchView event
 		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -178,7 +181,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
     public void setListView(){
         ListView lv= (ListView) findViewById(R.id.list_view);
         TableLayout tbl= (TableLayout) findViewById(R.id.table_product);
-        TableThread tt = new TableThread(this,lv,tbl);
+        TableThread tt = new TableThread(this,this,lv,tbl,"");
         tt.start();
     }
     public void onBackPressed(){
@@ -211,7 +214,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         spinner_principle.setVisibility(View.VISIBLE);
     }
 
-    public void viewallbtnClick(View view){
+    /*public void viewallbtnClick(View view){
 		brand=spinner_brand.getSelectedItem().toString();
 		principle=spinner_principle.getSelectedItem().toString();
 		keyword=searchView.getQuery().toString();
@@ -220,10 +223,10 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         //String val=getdata();
         int result=dbtest();
 
-        Snackbar.make(view, ""+result+"", Snackbar.LENGTH_LONG)
+        Snackbar.make(view, "number of result"+result+"", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
         getdata(principle, brand, keyword);
-    }
+    }*/
 
 
     public void selfDestruct(View view) {
@@ -241,10 +244,11 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         }
         btnviewall.setText(result);
 
+        db.close();
         if (result == "success"){
             return 1;
         }else{
-            Toast.makeText(this, result, Toast.LENGTH_LONG).show();
+           // Toast.makeText(this, "here toast"+result, Toast.LENGTH_LONG).show();
             return 0;
         }
 
@@ -280,19 +284,14 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 			int n=table.getChildCount();
 
 
-            table.removeAllViews();
-                /*for(int index=1;index < n;index++) {
-                    table.removeView(table.getChildAt(index));
-                        /*View view = table.getChildAt(index);
-                        TableRow row = (TableRow) view;
-                        table.removeView(row);
+           table.removeAllViews();
+            //Thread
+        ListView lv= (ListView) findViewById(R.id.list_view);
+        TableLayout tbl= (TableLayout) findViewById(R.id.table_product);
+        TableThread tt = new TableThread(this,this,lv,tbl,query);
+        tt.start();
 
-                }*/
-
-
-            //end refresh
-				
-        try {
+        /*try {
             Mst_ProductMaster product= new Mst_ProductMaster();
             DBHelper db = new DBHelper(this);
             Cursor res = db.getData(query);//return tupple id=1;
@@ -310,10 +309,11 @@ public class DisplayProductTableActivity extends AppCompatActivity {
                 update(product);
                 //btnviewall.setText(res.getCount());
             }
-
+            db.close();
+           // setListView();
             ///Toast.makeText(DisplayProductTableActivity.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
             if(row_count<1){
-                Toast.makeText(DisplayProductTableActivity.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(DisplayProductTableActivity.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
                 TextView tr_emty_msg=new TextView(this);
                 tr_emty_msg.setText("No result to preview");
                 table.addView(tr_emty_msg);
@@ -324,8 +324,9 @@ public class DisplayProductTableActivity extends AppCompatActivity {
            //return product;
 
         }catch (Exception e){
+            e.printStackTrace();
             //btnviewall.setText(e.getMessage());
-        }
+        }*/
     }
     int row_count=0;
     //insert data to  table

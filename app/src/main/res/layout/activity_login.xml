@@ -1,4 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,16 +13,22 @@
     android:background="@color/bg">
 
     <!-- InitialLogin progress -->
+    <ImageView
+        android:layout_width="match_parent"
+        app:srcCompat="@drawable/logo"
+        android:id="@+id/initialLogo"
+        android:layout_height="200dp" />
+
     <ScrollView
         android:id="@+id/login_form"
-        android:layout_width="match_parent"
+        android:layout_width="400dp"
         android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/email_login_form"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_width="match_parent">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -34,7 +41,8 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:background="@android:drawable/editbox_background_normal" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -52,10 +60,11 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:background="@android:drawable/editbox_background_normal" />
 
                 <TextView
-                    android:text="TextView"
+                    android:text=""
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/result_Json"
@@ -68,7 +77,12 @@
                 style="?android:textAppearanceSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:paddingLeft="30dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"
                 android:background="@color/btn"/>

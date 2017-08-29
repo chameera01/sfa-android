@@ -152,11 +152,11 @@ public class Login extends AppCompatActivity implements JsonRequestListerner {
 
             public void onClick(View view) {
 
-                Toast.makeText(Login.this, "OnCLick detected", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Login.this, "OnCLick detected", Toast.LENGTH_SHORT).show();
                 String passWord;
                 passWord=pass.getText().toString();
                 String rep_id=repID.getText().toString();
-                Toast.makeText(Login.this,">"+passWord,Toast.LENGTH_LONG).show();
+                //Toast.makeText(Login.this,">"+passWord,Toast.LENGTH_LONG).show();
 
 
                 try {
@@ -178,12 +178,12 @@ public class Login extends AppCompatActivity implements JsonRequestListerner {
                         if (isActive !="NO") {
                                 Intent ui=new Intent(Login.this,CheckIn.class);
                                 Login.this.startActivity(ui);
-                                Toast.makeText(Login.this, "<>"+isActive+"??"+isPassCorrect, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(Login.this, "<>"+isActive+"??"+isPassCorrect, Toast.LENGTH_SHORT).show();
                         }else{
                             Toast.makeText(Login.this, "User Not Yet Activated", Toast.LENGTH_SHORT).show();
                         }
                     if(isPassCorrect.equals(passWord)){
-                        Toast.makeText(Login.this, "password check", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Login.this, "password check", Toast.LENGTH_SHORT).show();
                     }
 
 
