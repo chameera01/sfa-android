@@ -15,10 +15,10 @@
 
     <!-- InitialLogin progress -->
     <ImageView
-        android:layout_width="match_parent"
         app:srcCompat="@drawable/logo"
         android:id="@+id/initialLogo"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:layout_width="500dp" />
 
     <ScrollView
         android:id="@+id/login_form"
@@ -38,12 +38,15 @@
                 <AutoCompleteTextView
                     android:id="@+id/email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:background="@android:drawable/editbox_background_normal" />
+                    android:background="@android:drawable/editbox_background_normal"
+                    android:layout_height="40dp"
+                    android:imeOptions="actionNext"
+
+                    />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -54,14 +57,15 @@
                 <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:hint="@string/prompt_password"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
-                    android:imeOptions="actionUnspecified"
+
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
+                    android:imeOptions="actionDone"
                     android:background="@android:drawable/editbox_background_normal" />
 
                 <TextView
@@ -88,7 +92,8 @@
                 android:layout_gravity="center"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"
-                android:background="@color/btn"/>
+                android:background="@color/btn"
+                android:textSize="18sp" />
 
 
 

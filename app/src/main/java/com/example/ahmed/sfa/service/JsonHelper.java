@@ -38,7 +38,7 @@ public class JsonHelper {
     private  boolean isRequesting=false;
     //private  String filterType="deviceid_pass";
     private  String  activeStatus="no";
-    Context context;
+    static Context context;
 
     public JsonHelper(TextView tv){
         result_view=tv;
@@ -59,7 +59,7 @@ public class JsonHelper {
         @Override
         public void receiveData(Object object) {
             String tmpData = (String) object;
-            result_view.setText(tmpData);
+            //result_view.setText(tmpData);
                 /*universal metho to filter Json Data from Json Array*/
             ///filterType="deviceid_pass";
 
@@ -77,7 +77,7 @@ public class JsonHelper {
                 devCheck.setStatus(jsonObject.optString("ACTIVESTATUS"));
 
                 Toast.makeText(context, jsonObject.toString() + "*", Toast.LENGTH_LONG).show();
-                result_view.setText(jsonObject.optString("ACTIVESTATUS"));
+                //result_view.setText(jsonObject.optString("ACTIVESTATUS"));
 
                 DBAdapter adp = new DBAdapter(context);
                 adp.insertDeviceCheckController(devCheck);
@@ -136,7 +136,7 @@ public class JsonHelper {
                 @Override
                 public void receiveData(Object object) {
                     String tmpData = (String)object;
-                    result_view.setText("inside Method getMstProductData");
+                    //result_view.setText("inside Method getMstProductData");
                 /*universal metho to filter Json Data from Json Array*/
                     //filterType="ProductDetails";
 
@@ -147,12 +147,12 @@ public class JsonHelper {
                         recieveData[0] =jsonObject.optString("ACTIVESTATUS");
                         result_view.setText(jsonObject.optString("ACTIVESTATUS"));
                         */
-                        result_view.setText("inside try catch");
+                        //result_view.setText("inside try catch");
                         setLonding(false);
                         filterJsonData(tmpData,"ProductDetails") ;
                     } catch (Exception e) {
                         e.printStackTrace();
-                        result_view.setText("exception on trycatch "+e.getMessage());
+                        //result_view.setText("exception on trycatch "+e.getMessage());
                     }
 
                 }
@@ -161,6 +161,7 @@ public class JsonHelper {
 
             return recieveData[0];
         }
+
 
         /**/
     public  void sendInitialData(String devideId,String pass){
@@ -264,9 +265,9 @@ public class JsonHelper {
     }
 
     public static String GET(String txtUrl){
-        InputStream inputStream = null;
+        InputStream in = null;
         String result = "";
-        HttpURLConnection httpUrlConnection;
+        HttpURLConnection httpUrlConnection = null;
         try{
             //create HttpClient
 
@@ -276,8 +277,13 @@ public class JsonHelper {
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-            httpUrlConnection = (HttpURLConnection) url.openConnection();
-            InputStream in = httpUrlConnection.getInputStream();
+            try {
+                httpUrlConnection = (HttpURLConnection) url.openConnection();
+                in = httpUrlConnection.getInputStream();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
 
             if(in!=null) {
                 result = convertInputStreamToString(in);
@@ -293,9 +299,11 @@ public class JsonHelper {
             }
             httpUrlConnection.disconnect();
         }catch (MalformedURLException ex){
-            Toast.makeText(null, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            ex.printStackTrace();
         }catch (IOException ex){
-            Toast.makeText(null, ex.getMessage(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
+            ex.printStackTrace();
         }
 
         return result;

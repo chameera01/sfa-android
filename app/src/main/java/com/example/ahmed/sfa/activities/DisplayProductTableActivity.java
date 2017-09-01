@@ -66,9 +66,9 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         drawerToggle.syncState();
 
 
-        /*NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
-        */
+
         //Intent intent = getIntent();
 
        /*add initial message com from intent starter

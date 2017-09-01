@@ -10,7 +10,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -89,6 +88,8 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
     private  TextView result_view;
     private Activity activity;
     Context contxt;
+    static int initialDwnloadCount =0;
+    Button mEmailSignInButton;
 
 
     @Override
@@ -122,10 +123,12 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                mEmailSignInButton.setEnabled(false);
                 attemptLogin();
 
                 /* any UI starts when signIn button click
@@ -287,6 +290,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
+            mEmailSignInButton.setEnabled(true);
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
@@ -301,7 +305,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                 @Override
                 public void receiveData(Object object) {
                     String tmpData = (String) object;
-                    result_view.setText(tmpData);
+                    //result_view.setText(tmpData);
                 /*universal metho to filter Json Data from Json Array*/
                     ///filterType="deviceid_pass";
 
@@ -318,8 +322,8 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                         devCheck.setPass(password);
                         devCheck.setStatus(jsonObject.optString("ACTIVESTATUS"));
 
-                        Toast.makeText(InitialLogin.this, jsonObject.toString() + "*", Toast.LENGTH_LONG).show();
-                        result_view.setText(jsonObject.optString("ACTIVESTATUS"));
+                        //Toast.makeText(InitialLogin.this, jsonObject.toString() + "*", Toast.LENGTH_LONG).show();
+                        //result_view.setText(jsonObject.optString("ACTIVESTATUS"));
 
                         DBAdapter adp = new DBAdapter(InitialLogin.this);
                         adp.insertDeviceCheckController(devCheck);
@@ -343,18 +347,26 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                             customer_master_tbl_download();
                             customerMaster_tbl_dwnoad();
 
-                            //open app
-                            Intent appUI=new Intent(InitialLogin.this,CheckIn.class);
-                            InitialLogin.this.startActivity(appUI);
+                            //download complete here
+                            //previoesly CheckIn ui launched from here
 
                         } else {
+                            initialDwnloadCount=0;
+                            mEmailSignInButton.setEnabled(true);
                             Toast.makeText(InitialLogin.this, "Device ID or password is incorrect. Please check and tryagain", Toast.LENGTH_SHORT).show();
+                            showProgress(false);
                         }
                         //setLonding(false);
                         //filterJsonData(tmpData,"deviceid_pass") ;
 
                         //getMstProductData("devideId","pass");
                     } catch (JSONException e) {
+                        if(tmpData=="did not work"){
+                            initialDwnloadCount=0;
+                            Toast.makeText(activity, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                            mEmailSignInButton.setEnabled(true);
+                            showProgress(false);
+                        }
                         e.printStackTrace();
                     }
 
@@ -459,22 +471,34 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     @Override
     public void receiveData(String result, String filter) {
+        initialDwnloadCount++;//count downloaded table count;
         //-----------------------------------------receive data
-        Toast.makeText(this, "came inside recieve data", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Try to Fetch Data from Table:"+filter, Toast.LENGTH_LONG).show();
         if(result!=null){
+
             String josnString=result;
-            Toast.makeText(this, "result:" + josnString, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "result:" + josnString, Toast.LENGTH_LONG).show();
             try{
                 JsonFilter_Send josnFilter= new JsonFilter_Send(InitialLogin.this.getApplicationContext());
                 josnFilter.filterJsonData(josnString,filter);
 
             }catch (Exception e) {
-                Toast.makeText(this,"RecieveData:"+ e.getMessage(),Toast.LENGTH_LONG ).show();
+                Toast.makeText(this,"RecieveData Error:"+ e.getMessage(),Toast.LENGTH_LONG ).show();
             }
+
         }else{
-            Toast.makeText(this,"is nulllll",Toast.LENGTH_LONG ).show();
+            Toast.makeText(this,"is null",Toast.LENGTH_LONG ).show();
         }
-        Toast.makeText(InitialLogin.this,"method_complete",Toast.LENGTH_LONG).show();
+        //Toast.makeText(InitialLogin.this,"method_complete",Toast.LENGTH_LONG).show();
+        if(initialDwnloadCount>10){
+            //open app
+            showProgress(false);
+            Intent appUI=new Intent(InitialLogin.this,CheckIn.class);
+            InitialLogin.this.startActivity(appUI);
+            finish();
+
+        }
+        showProgress(true);
     }
     //-----------------------------------------------------------------------------------
 
@@ -538,8 +562,8 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
-            Toast.makeText(InitialLogin.this, "initialDetails_Status:"+initialDetails.getStatus(), Toast.LENGTH_SHORT).show();
+
+            //Toast.makeText(InitialLogin.this, "initialDetails_ Active Status:"+initialDetails.getStatus()+"Please Check DeviceId and Password", Toast.LENGTH_SHORT).show();
             if (success) {
                // finish();
                 //result_view.setText(statusStrg+"working");
@@ -705,7 +729,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+            //Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
         }
     }
     public  void supplet_tbl_update(){
@@ -718,7 +742,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+            //Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
         }
     }
     public  void productBrand_tbl_update(){
@@ -731,7 +755,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+            //Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
         }
     }
 }
