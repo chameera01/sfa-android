@@ -310,6 +310,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
                 //btnviewall.setText(res.getCount());
             }
             db.close();
+
            // setListView();
             ///Toast.makeText(DisplayProductTableActivity.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
             if(row_count<1){

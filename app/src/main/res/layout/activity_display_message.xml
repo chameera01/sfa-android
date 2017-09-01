@@ -61,10 +61,7 @@
                 android:layout_height="match_parent"
 
                 android:layout_below="@+id/linear_layout">
-                <ListView
-                    android:id="@+id/list_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp" />
+
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -144,8 +141,14 @@
 
                         android:paddingTop="10dp"
                         android:background="#92C94a"/>
-                </LinearLayout>
 
+                </LinearLayout>
+                <ListView
+                    android:id="@+id/list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:shrinkColumns="*"
+                    />
                 <ScrollView
 
                     android:id="@+id/scrollView"
@@ -158,6 +161,8 @@
                     android:layout_alignEnd="@+id/linearLayout_stockview"
 
                     android:layout_marginEnd="0dp">
+
+
 
                     <TableLayout
                         android:layout_width="match_parent"

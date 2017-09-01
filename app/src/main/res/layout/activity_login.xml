@@ -10,7 +10,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.ahmed.sfa.Activities.InitialLogin"
-    android:background="@color/bg">
+    android:background="@drawable/bg_blue">
+    <!--android:background="@color/bg"-->
 
     <!-- InitialLogin progress -->
     <ImageView
@@ -80,9 +81,11 @@
 
                 android:layout_marginTop="16dp"
                 android:gravity="center"
-                android:paddingLeft="30dp"
+
+
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
+                android:layout_gravity="center"
                 android:text="@string/action_sign_in"
                 android:textStyle="bold"
                 android:background="@color/btn"/>

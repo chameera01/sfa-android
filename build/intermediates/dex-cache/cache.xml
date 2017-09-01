@@ -16,7 +16,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="a5f7ebcf2c57420f2ca4f0f15c5542cab4cf3c9b">
+        sha1="c828a66cc0bad6fa13db966be541ec948560c643">
         <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\instant-run_98f4f2fabfd373912e62da5446c270e1347e238c.jar" />
     </item>
     <item
@@ -88,7 +88,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="5481208f60c55db65a8f8604eb591fcc85bf8fdc">
+        sha1="aed4d3b8974701742f1f3c2427b03616c5c72ca3">
         <dex dex="F:\run_android\git-SFA\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_4f64f585745817ad8bf934370c953e8bf4109b13.jar" />
     </item>
     <item

@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.ahmed.sfa.Activities.DisplayProductTableActivity;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
+import com.example.ahmed.sfa.models.ListViewAdapter;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 
 import java.text.DecimalFormat;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.EmptyStackException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -45,10 +47,17 @@ public class TableThread extends Thread {
     TableLayout table ;
     static int row_count = 0;
     Activity activity;
-    LinkListProductQueue queue = new LinkListProductQueue();
+    static LinkListProductQueue queue;
     ArrayList<Mst_ProductMaster> prdList = new ArrayList<>();
 
-    private class LinkListProductQueue{
+    private ArrayList<HashMap<String, String>> list;
+    public static final String FIRST_COLUMN="First";
+    public static final String SECOND_COLUMN="Second";
+    public static final String THIRD_COLUMN="Third";
+    public static final String FOURTH_COLUMN="Fourth";
+    public static final String Fifth_COLUMN="Fifth";
+
+    private static  class LinkListProductQueue{
 
         private LinkedList<Mst_ProductMaster> data = new LinkedList<Mst_ProductMaster>();
 
@@ -89,22 +98,25 @@ public class TableThread extends Thread {
 
         activity.runOnUiThread(new Runnable() {
                           public void run() {
+
                               ArrayList<String> values = new ArrayList<>() ;
-
-
-
 
                               for (int i=0;i<1000;i++){
                                   values.add( i+"add");
-                                 // queue.enqueue(i+"-queue");
+                                 //queue.enqueue(i+"-queue");
                               }
 
 
-                              ArrayAdapter<String> adapter = new ArrayAdapter<String>(c,
-                                      android.R.layout.simple_list_item_1, android.R.id.text1, values);
-                              //listView.setAdapter(adapter);
+                              /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(c,
+                                      android.R.layout.simple_list_item_1, android.R.id.text1, values);*/
+
+
+                              //v.setAdapter(adapter);
+
+
+
                               // table.removeAllViews();
-                              ContextThemeWrapper wrappedContext = new ContextThemeWrapper(c, R.style.pending_customer_row);
+                              //ContextThemeWrapper wrappedContext = new ContextThemeWrapper(c, R.style.pending_customer_row);
 
 
 
@@ -124,11 +136,13 @@ public class TableThread extends Thread {
                               }*/
 
                               try {
+                                  queue = new LinkListProductQueue();
                                   Mst_ProductMaster product= new Mst_ProductMaster();
                                   DBHelper db = new DBHelper(activity.getBaseContext());
                                   Cursor res = db.getData(query);//return tupple id=1;
 
 
+                                  list = new ArrayList<HashMap<String, String>>();
                                   while (res.moveToNext()) {
                                       row_count++;
                                       product.setItemCode(res.getString(res.getColumnIndex("ItemCode")));//res.getColumnIndex("itemcode")
@@ -137,14 +151,32 @@ public class TableThread extends Thread {
                                       product.setSellingPrice(res.getFloat(res.getColumnIndex("SellingPrice")) );
                                       product.setRetailPrice(res.getFloat(res.getColumnIndex("RetailPrice")) );
 
-                                      queue.enqueue(product);
-                                      prdList.add(product);
-                                      if(row_count<200)
-                                      update(product);
+                                      //populateList(product);
+                                      double sellp = Double.parseDouble(new DecimalFormat("##.##").format(product.getSellingPrice()));
+                                      double retailp = Double.parseDouble(new DecimalFormat("##.##").format(product.getRetailPrice()));
+
+                                      HashMap<String, String> hashmap = new HashMap<String, String>();
+                                      hashmap.put(FIRST_COLUMN, product.getItemCode());
+                                      hashmap.put(SECOND_COLUMN, product.getBrand());
+                                      hashmap.put(THIRD_COLUMN, ""+product.getUnitSize());
+                                      hashmap.put(FOURTH_COLUMN, ""+sellp);
+                                      hashmap.put(Fifth_COLUMN, ""+retailp);
+                                      list.add(hashmap);
+
+                                      //queue.enqueue(product);
+                                      //prdList.add(product);
+                                     // if(row_count<200)
+                                      //update(product,v);
 
 
                                   }
                                   db.close();
+
+                                  ListView listView=v;
+                                  //populateList();
+                                  ListViewAdapter adapter=new ListViewAdapter(activity,list);
+                                  listView.setAdapter(adapter);
+
                                  /* Toast.makeText(c, "Size"+queue.size(), Toast.LENGTH_SHORT).show();
                                   String sb = null;
                                     while (!prdList.isEmpty()){
@@ -159,7 +191,7 @@ public class TableThread extends Thread {
                                       tr_emty_msg.setText("No result to preview");
                                       table.addView(tr_emty_msg);
                                   }
-                                  row_count=0;
+                                  //row_count=0;
 
 
                                   //return product;
@@ -178,20 +210,40 @@ public class TableThread extends Thread {
                                   }
                               });*/
                           }
+
+
                       });
 
 
 
     }
-    TableRow tr;
-    private void update(Mst_ProductMaster pm) {
+    private void populateList(Mst_ProductMaster pm) {
 
+        list = new ArrayList<HashMap<String, String>>();
+
+        Toast.makeText(c, "QueueSize"+queue.dequeue().getItemCode(), Toast.LENGTH_SHORT).show();
+        // while(!queue.isEmpty()) {
+
+
+        HashMap<String, String> hashmap = new HashMap<String, String>();
+        hashmap.put(FIRST_COLUMN, "" + pm.getItemCode());
+        hashmap.put(SECOND_COLUMN, pm.getBrand());
+        hashmap.put(THIRD_COLUMN, pm.getUnitName());
+        hashmap.put(FOURTH_COLUMN, "" + pm.getSellingPrice());
+        hashmap.put(Fifth_COLUMN, "" + pm.getRetailPrice());
+        list.add(hashmap);
+        //}
+
+    }
+
+    private  void  update(Mst_ProductMaster pm,ListView v) {
+        ListView listView =  v;
        // TableLayout table = (TableLayout) v.findViewById(R.id.table_product);
 
         /*add style to table row*/
         ContextThemeWrapper wrappedContext = new ContextThemeWrapper(c, R.style.pending_customer_row);
         //add row
-        tr = new TableRow(c);
+        TableRow tr = new TableRow(c);
         tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
         /*add style to table row*/
 
@@ -289,7 +341,7 @@ public class TableThread extends Thread {
         tr.addView(col_5);
 
         table.addView(tr);
-
+      // listView.addView(tr);
 
 
     }
