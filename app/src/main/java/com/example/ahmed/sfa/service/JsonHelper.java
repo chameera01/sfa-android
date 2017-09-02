@@ -76,7 +76,7 @@ public class JsonHelper {
                 devCheck.setPass(pass);
                 devCheck.setStatus(jsonObject.optString("ACTIVESTATUS"));
 
-                Toast.makeText(context, jsonObject.toString() + "*", Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, jsonObject.toString() + "*", Toast.LENGTH_LONG).show();
                 //result_view.setText(jsonObject.optString("ACTIVESTATUS"));
 
                 DBAdapter adp = new DBAdapter(context);

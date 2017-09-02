@@ -1,5 +1,6 @@
 package com.example.ahmed.sfa.Activities;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,8 +13,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 
+import android.service.notification.StatusBarNotification;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,6 +25,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.ahmed.sfa.Activities.supportactivities.NavigationDrawer;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.Activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.DateManager;
@@ -78,6 +84,24 @@ public class AddCustomer extends AppCompatActivity {
     Button saveandsubmitbtn;
     Location lastKnownLocation;
 
+    public void resetTextFields(){
+        customerName.setText("");
+        address.setText("");
+        address.setText("");
+        area.setText("");
+        town.setText("");
+        ContactNo.setText("");
+        fax.setText("");
+        email.setText("");
+        brNo.setText("");
+        ownersName.setText("");
+        ownersContactNo.setText("");
+        registrationNo.setText("");
+        latitude.setText("");
+        longitude.setText("");
+
+
+    }
     private boolean controlsEnabled=false;
 
     private Bundle savedInstance;
@@ -104,19 +128,32 @@ public class AddCustomer extends AppCompatActivity {
     }
 
     public void onCreate(Bundle savedInstanceState){
-
         super.onCreate(savedInstanceState);
 
+        /**
+        try {
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            //ActionBar actionBar = //
+                     this.getActionBar().hide();
+
+            getSupportActionBar().hide();
+        }catch (Exception e){
+            Toast.makeText(this, "hide__:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        **/
+        init();
         alert = new Alert(this);
         savedInstance = savedInstanceState;
-        init();
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+       /* Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setVisibility(View.INVISIBLE);*/
+
+        /*DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.setDrawerListener(drawerToggle);
-        drawerToggle.syncState();
+        drawerToggle.syncState();*/
 
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
@@ -177,26 +214,44 @@ public class AddCustomer extends AppCompatActivity {
                 longitude=(TextView)findViewById(R.id.addcustomer$longitude);
 
                 List<District> districts = dbAdapter.getDistricts();
+                /*newly added by Asanka*/
+                districts.add(new District("0","Select District"));
+                /* end of new added*/
                 ArrayAdapter<District> districtArrayAdapter = new ArrayAdapter<District>(this,android.R.layout.simple_spinner_item,districts);
-
                 districtArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
                 district.setAdapter(districtArrayAdapter);
                 district.setEnabled(false);
 
-                List<CustomerStatus> customerStatuses = dbAdapter.getCustomerStatus();
-                ArrayAdapter<CustomerStatus> customerStatusArrayAdapter = new ArrayAdapter<CustomerStatus>(this,android.R.layout.simple_spinner_item,customerStatuses);
+                //set the default according to value
+                int spinnerPosition =districtArrayAdapter.getCount();
+                district.setSelection(spinnerPosition);
 
+                List<CustomerStatus> customerStatuses = dbAdapter.getCustomerStatus();
+                /*newly added by Asanka*/
+                customerStatuses.add(new CustomerStatus("0","Select Status"));
+                /* end of new added*/
+                ArrayAdapter<CustomerStatus> customerStatusArrayAdapter = new ArrayAdapter<CustomerStatus>(this,android.R.layout.simple_spinner_item,customerStatuses);
                 customerStatusArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 customerStatus.setAdapter(customerStatusArrayAdapter);
                 customerStatus.setEnabled(false);
+                //set the default according to value
+                int statusSpinnerPosition =customerStatusArrayAdapter.getCount();
+                customerStatus.setSelection(statusSpinnerPosition);
 
 
                 List<Route> routes = dbAdapter.getRoutes();
+                /*newly added by Asanka*/
+                routes.add(new Route("0","Select Route"));
+                /* end of new added*/
                 ArrayAdapter<Route> routeArrayAdapter = new ArrayAdapter<Route>(this,android.R.layout.simple_spinner_item,routes);
-
                 routeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 route.setAdapter(routeArrayAdapter);
                 route.setEnabled(false);
+                //set the default according to value
+                int routeSpinnerPosition =routeArrayAdapter.getCount();
+                route.setSelection(routeSpinnerPosition);
+
 
                 latitude.setText(lastKnownLocation.getLatitude()+"");
                 longitude.setText(lastKnownLocation.getLongitude()+"");
