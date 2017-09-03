@@ -10,7 +10,8 @@
         android:layout_weight="1"
         android:paddingBottom="10dp"
         android:paddingLeft="50dp"
-        android:text="First"/>
+        android:text="First"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/TextSecond"
@@ -20,7 +21,8 @@
         android:layout_gravity="center"
         android:paddingBottom="10dp"
         android:paddingLeft="50dp"
-        android:text="Second"/>
+        android:text="Second"
+        android:textSize="18sp" />
     <TextView
         android:id="@+id/TextThird"
         android:layout_height="wrap_content"
@@ -28,7 +30,8 @@
         android:layout_weight="1"
         android:paddingBottom="10dp"
         android:paddingLeft="50dp"
-        android:text="Third"/>
+        android:text="Third"
+        android:textSize="18sp" />
     <TextView
         android:id="@+id/TextFourth"
         android:layout_height="wrap_content"
@@ -37,7 +40,8 @@
         android:paddingBottom="10dp"
         android:paddingLeft="50dp"
         android:layout_gravity="right"
-        android:text="Fourth"/>
+        android:text="Fourth"
+        android:textSize="18sp" />
     <TextView
         android:id="@+id/TextFifth"
         android:layout_height="wrap_content"
@@ -46,6 +50,7 @@
         android:layout_gravity="right"
         android:paddingBottom="10dp"
         android:paddingLeft="50dp"
-        android:text="Fifth"/>
+        android:text="Fifth"
+        android:textSize="18sp" />
 
 </LinearLayout>

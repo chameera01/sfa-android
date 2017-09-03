@@ -260,7 +260,7 @@ public class AddExtraCustomer extends AppCompatActivity {
             try {
                 arrayList1 = adapter.getArryListUniMethod("select DISTINCT Area from Mst_Customermaster", "Area");//.getArryListUniMethod("select DISTINCT Area from Mst_Customermaster","Area");//getArea List
             }catch (Exception e){
-                Toast.makeText(this, "Area fetch from db:"+e.getMessage()   , Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Area fetch from db:"+e.getMessage()  , Toast.LENGTH_SHORT).show();
             }
             arrayList1.add("All");//newly addded for spinner bug fix
             ArrayAdapter<String> adp = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayList1);

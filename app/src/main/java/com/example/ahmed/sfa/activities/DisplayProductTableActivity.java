@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import com.example.ahmed.sfa.Activities.supportactivities.TableThread;
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
@@ -89,11 +90,16 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         spinner_principle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                brand = spinner_brand.getSelectedItem().toString();
+
                 principle = spinner_principle.getSelectedItem().toString();
+                brand = spinner_brand.getSelectedItem().toString();
                 keyword = searchView.getQuery().toString();
                 getdata(principle, brand, keyword);
+                sortBrandByPrinciple(principle);
+
             }
+
+
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -104,6 +110,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         spinner_brand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
                 brand = spinner_brand.getSelectedItem().toString();
                 principle = spinner_principle.getSelectedItem().toString();
                 keyword = searchView.getQuery().toString();
@@ -177,6 +184,25 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 
 
     }
+    private void sortBrandByPrinciple(String principle) {
+        try{
+            //set brand spinner values accordingt o principle
+            DBAdapter adapter = new DBAdapter(this);
+
+            String qry="select DISTINCT Brand from Mst_ProductMaster where Principle='"+principle+"'";
+            ArrayList<String> brandList = adapter.getArryListUniMethod(qry,"Brand");
+            if(brandList.isEmpty()){
+                brandList.add("All");
+            }
+
+            ArrayAdapter<String> adp = new ArrayAdapter<String> (this,android.R.layout.simple_spinner_dropdown_item,brandList);
+            spinner_brand.setAdapter(adp);
+            spinner_brand.setVisibility(View.VISIBLE);
+        }catch (Exception e){
+            Toast.makeText(this, "ee"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
 
     public void setListView(){
         ListView lv= (ListView) findViewById(R.id.list_view);
@@ -195,6 +221,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 
     public  void setSpinner(){
         DBHelper dbbrand=new DBHelper(this);
+
 
         ArrayList<String> arrayList1 = new ArrayList<String>();
         arrayList1=dbbrand.getAllbrands();

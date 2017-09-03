@@ -101,6 +101,7 @@ public class TableThread extends Thread {
                           public void run() {
 
                               ArrayList<String> values = new ArrayList<>() ;
+                              values.add("No Results To Preview");
 
                               //for (int i=0;i<1000;i++){
                                  // values.add( i+"add");
@@ -181,11 +182,20 @@ public class TableThread extends Thread {
                                   ///Toast.makeText(DisplayProductTableActivity.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
                                   if(row_count<1){
                                       //Toast.makeText(DisplayProductTableActivity.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
+
                                       TextView tr_emty_msg=new TextView(c);
                                       tr_emty_msg.setText("No result to preview");
-                                    listView.addView(tr_emty_msg);
+
+                                      /*ArrayList<HashMap<String, String>> msgList = null;
+                                      HashMap hm = new HashMap<String, String>();
+                                      hm.put("Msg","No Result To View");
+                                      msgList.add(hm);
+                                      ListViewAdapter msgAdapter=new ListViewAdapter(activity,msgList);*/
+                                      ArrayAdapter<String> msgAdapter = new ArrayAdapter<String>(c,
+                                              android.R.layout.simple_list_item_1, android.R.id.text1, values);
+                                      listView.setAdapter(msgAdapter);
                                   }
-                                  //row_count=0;
+                                  row_count=0;
 
 
                                   //return product;

@@ -127,6 +127,7 @@ public class AddCustomer extends AppCompatActivity {
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(AddCustomer.this, "Test Dismis button", Toast.LENGTH_LONG).show();
                 customerName.setText("");
                 customerName.setEnabled(false);
                 address.setText("");

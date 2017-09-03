@@ -73,14 +73,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
-                        android:paddingLeft="50dp"
+                        android:paddingLeft="20dp"
 
-
-
-                        android:paddingRight="20dp"
+                        android:layout_gravity="center"
+                        android:paddingRight="0dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
-                        />
+                        android:textSize="18sp" />
 
 
                     <TextView
@@ -91,10 +90,11 @@
                         android:paddingBottom="10dp"
                         android:gravity="left"
 
-                        android:paddingLeft="100dp"
+                        android:paddingLeft="50dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
-                        android:id="@+id/tv_product_col_title" />
+                        android:id="@+id/tv_product_col_title"
+                        android:textSize="18sp" />
 
 
 
@@ -104,12 +104,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
-                        android:paddingLeft="30dp"
+                        android:paddingLeft="0dp"
                         android:gravity="center"
 
                         android:paddingRight="0dp"
                         android:paddingTop="10dp"
-                        android:background="#92C94a" />
+                        android:background="#92C94a"
+                        android:textSize="18sp" />
 
 
                     <TextView
@@ -118,14 +119,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
-                        android:paddingLeft="50dp"
+                        android:paddingLeft="0dp"
 
 
 
                         android:paddingRight="20dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
-                        />
+                        android:textSize="18sp" />
 
 
                     <TextView
@@ -134,10 +135,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
-                        android:paddingLeft="50dp"
-
+                        android:paddingLeft="0dp"
+                        android:layout_gravity="right"
                         android:paddingTop="10dp"
-                        android:background="#92C94a"/>
+                        android:background="#92C94a"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
                 <ListView
@@ -217,7 +219,8 @@
                     android:text="       Principle      "
                     android:id="@+id/textView2"
                     android:paddingTop="15dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18sp" />
 
                 <Spinner
                     android:layout_width="164dp"
@@ -232,7 +235,8 @@
                     android:layout_height="match_parent"
                     android:text="Brand        "
                     android:id="@+id/textView3"
-                    android:paddingTop="15dp"/>
+                    android:paddingTop="15dp"
+                    android:textSize="18sp" />
 
                 <Spinner
                     android:layout_width="164dp"
