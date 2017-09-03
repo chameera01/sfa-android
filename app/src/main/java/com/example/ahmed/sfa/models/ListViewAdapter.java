@@ -1,6 +1,7 @@
 package com.example.ahmed.sfa.models;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class ListViewAdapter extends BaseAdapter{
 
     public ArrayList<HashMap<String, String>> list;
     Activity activity;
+    public  static int rowCount = 0;
     public static final String FIRST_COLUMN="First";
     public static final String SECOND_COLUMN="Second";
     public static final String THIRD_COLUMN="Third";
@@ -61,7 +63,7 @@ public class ListViewAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
-
+        rowCount++;
         ViewHolder holder;
 
         LayoutInflater inflater=activity.getLayoutInflater();
@@ -88,7 +90,21 @@ public class ListViewAdapter extends BaseAdapter{
         holder.txtSecond.setText(map.get(SECOND_COLUMN));
         holder.txtThird.setText(map.get(THIRD_COLUMN));
         holder.txtFourth.setText(map.get(FOURTH_COLUMN));
-       holder.txtFifth.setText(map.get(FIFTH_COLUMN));
+        holder.txtFifth.setText(map.get(FIFTH_COLUMN));
+
+        if (rowCount%2==0) {
+            holder.txtFirst.setBackgroundColor(Color.LTGRAY);
+            holder.txtSecond.setBackgroundColor(Color.LTGRAY);
+            holder.txtThird.setBackgroundColor(Color.LTGRAY);
+            holder.txtFourth.setBackgroundColor(Color.LTGRAY);
+            holder.txtFifth.setBackgroundColor(Color.LTGRAY);
+        }else{
+            holder.txtFirst.setBackgroundColor(Color.WHITE);
+            holder.txtSecond.setBackgroundColor(Color.WHITE);
+            holder.txtThird.setBackgroundColor(Color.WHITE);
+            holder.txtFourth.setBackgroundColor(Color.WHITE);
+            holder.txtFifth.setBackgroundColor(Color.WHITE);
+        }
 
         return convertView;
     }

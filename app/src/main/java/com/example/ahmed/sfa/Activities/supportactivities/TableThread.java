@@ -3,6 +3,7 @@ package com.example.ahmed.sfa.Activities.supportactivities;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -101,27 +102,18 @@ public class TableThread extends Thread {
 
                               ArrayList<String> values = new ArrayList<>() ;
 
-                              for (int i=0;i<1000;i++){
-                                  values.add( i+"add");
+                              //for (int i=0;i<1000;i++){
+                                 // values.add( i+"add");
                                  //queue.enqueue(i+"-queue");
-                              }
+                              //}
 
 
                               /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(c,
                                       android.R.layout.simple_list_item_1, android.R.id.text1, values);*/
-
-
                               //v.setAdapter(adapter);
-
-
-
                               // table.removeAllViews();
                               //ContextThemeWrapper wrappedContext = new ContextThemeWrapper(c, R.style.pending_customer_row);
-
-
-
-
-                              /*try {
+                             /*try {
                                   while (!queue.isEmpty()){
                                       TextView tv = new TextView(wrappedContext,null,0);
                                       tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
@@ -163,6 +155,7 @@ public class TableThread extends Thread {
                                       hashmap.put(Fifth_COLUMN, ""+retailp);
                                       list.add(hashmap);
 
+
                                       //queue.enqueue(product);
                                       //prdList.add(product);
                                      // if(row_count<200)
@@ -176,6 +169,7 @@ public class TableThread extends Thread {
                                   //populateList();
                                   ListViewAdapter adapter=new ListViewAdapter(activity,list);
                                   listView.setAdapter(adapter);
+                                  //listView.getAdapter().getView(1,null,null).setBackgroundColor(Color.GRAY);
 
                                  /* Toast.makeText(c, "Size"+queue.size(), Toast.LENGTH_SHORT).show();
                                   String sb = null;
@@ -189,7 +183,7 @@ public class TableThread extends Thread {
                                       //Toast.makeText(DisplayProductTableActivity.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
                                       TextView tr_emty_msg=new TextView(c);
                                       tr_emty_msg.setText("No result to preview");
-                                      table.addView(tr_emty_msg);
+                                    listView.addView(tr_emty_msg);
                                   }
                                   //row_count=0;
 
@@ -200,7 +194,7 @@ public class TableThread extends Thread {
                                   //btnviewall.setText(e.getMessage());
                               }
 
-                              final ScrollView sv = (ScrollView) activity.findViewById(R.id.scrollView);
+                              //final ScrollView sv = (ScrollView) activity.findViewById(R.id.scrollView);
                              /*sv.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
                                  @Override
                                   public void onScrollChanged() {

@@ -314,8 +314,8 @@ public class DBAdapter{
             //_id INTEGER PRIMARY KEY AUTOINCREMENT,StatusID TEXT,Status TEXT,isActive INTEGER,LastUpdateDate TEXT
             db.execSQL(
                     "INSERT OR REPLACE INTO Mst_CustomerStatus (_id ,StatusID,Status,isActive," +
-                            "LastUpdateDate) values ((select _id from Mst_CustomerStatus where StatusID='"+cusStatus.getStatusId()+"')," +
-                            "'"+cusStatus.getStatus()+"',"+cusStatus.getIsActive()+",'"+DateManager.dateToday()+"'" +
+                            "LastUpdateDate) values ((select _id from Mst_CustomerStatus where StatusID ='"+cusStatus.getStatusId()+"'  )," +
+                            "'"+cusStatus.getStatusId()+"','"+cusStatus.getStatus()+"',"+cusStatus.getIsActive()+",'"+DateManager.dateToday()+"'" +
                             " );"
             );
         }catch (Exception e){

@@ -441,6 +441,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 
 
     }
+
    /* private void cleanTable(TableLayout table) {
 
         int childCount = table.getChildCount();

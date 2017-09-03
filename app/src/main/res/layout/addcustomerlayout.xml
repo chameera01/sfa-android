@@ -577,21 +577,25 @@
                             android:paddingRight="60dp">
 
                             <Button
-                                android:id="@+id/addcustomer$dismiss"
-                                android:layout_width="wrap_content"
-                                android:layout_toLeftOf="@+id/addcustomer$submitandsend"
-                                android:text="Dismiss"
-                                android:layout_height="100dp"
-                                android:backgroundTint="@color/btn"
-                                android:backgroundTintMode="screen" />
-
-                            <Button
                                 android:id="@+id/addcustomer$submitandsend"
                                 style="@style/Widget.AppCompat.Button.Colored"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
+                                android:layout_height="100dp"
                                 android:layout_alignParentRight="true"
                                 android:text="Submit and send" />
+
+                            <Button
+                                android:id="@+id/addcustomer$dismiss"
+                                style="@style/Widget.AppCompat.Button.Colored"
+                                android:layout_width="wrap_content"
+                                android:text="Dismiss"
+
+                                android:background="@color/btn"
+                                android:backgroundTint="@color/btn"
+                                android:layout_marginTop="5dp"
+                                android:layout_alignParentTop="false"
+                                android:layout_toStartOf="@+id/addcustomer$submitandsend"
+                                android:layout_height="40dp" />
                         </RelativeLayout>
                     </LinearLayout>
                 </LinearLayout>
