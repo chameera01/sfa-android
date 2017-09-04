@@ -1,5 +1,6 @@
 package com.example.ahmed.sfa.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
@@ -7,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -28,19 +31,31 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.DateManager;
+import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
+//import com.example.ahmed.sfa.controllers.adapters.AddExtraCusListViewAdp;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 
 import com.example.ahmed.sfa.controllers.database.DBHelper;
+import com.example.ahmed.sfa.models.AddExtraCusListViewAdp;
+import com.example.ahmed.sfa.models.ListViewAdapter;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 /*remove testing parts if not working properly*/
 public class AddExtraCustomer extends AppCompatActivity {
+
+    private ArrayList<HashMap<String, String>> list;
+    public static final String FIRST_COLUMN="First";
+    public static final String SECOND_COLUMN="Second";
+    public static final String THIRD_COLUMN="Third";
+    public static final String FOURTH_COLUMN="Fourth";
+    public static final String Fifth_COLUMN="Fifth";
+
     Spinner spinner_area;
     Spinner spinner_town;
     SearchView cus_name;
@@ -49,6 +64,10 @@ public class AddExtraCustomer extends AppCompatActivity {
     String customer_name;
     Button btn_add_itinerary;
     String qry;
+
+    ListView addExCusLV;
+
+
 
    /*
     // effor to run singleton ui
@@ -74,6 +93,7 @@ public class AddExtraCustomer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_extra_customer);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);// to set screan landscape;
+        //addExCusLV = (ListView) findViewById(R.id.add_extra_customer_listview);
         //getSupportActionBar().hide();
 
         try {
@@ -198,8 +218,35 @@ public class AddExtraCustomer extends AppCompatActivity {
         btn_add_itinerary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddExtraCustomer.this);
+                builder
+                        .setTitle("Add Customers To Itinery")
+                        .setMessage("Are you sure?")
+                        .setIcon(null)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        {
+                            public void onClick(DialogInterface dialog, int which)
+                            {
+                                getSelectedRows();
+                                area = spinner_area.getSelectedItem().toString();
+                                town = spinner_town.getSelectedItem().toString();
+                                customer_name = cus_name.getQuery().toString();
 
-                getSelectedRows();
+                                getdata(town, area, customer_name);
+                            }
+                        });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+
+
+
             }
         });
 
@@ -306,13 +353,14 @@ public class AddExtraCustomer extends AppCompatActivity {
 
 
     public void getdata(String ...filter){
-        Toast.makeText(this, "came inside gedData method", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "came inside gedData method", Toast.LENGTH_SHORT).show();
     try {
             String town = filter[0];
             String area = filter[1];
             String cusName = filter[2];
 
             String query = "SELECT * FROM Mst_Customermaster where CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
+
         /*SELECT * FROM Mst_Customermaster
         INNER JOIN Tr_ItineraryDetails
         ON doctors.doctor_id=visits.doctor_id*/
@@ -328,20 +376,22 @@ public class AddExtraCustomer extends AppCompatActivity {
             //query += " where CustomerName like '%" + cusName + "%'";
             query = "SELECT * FROM Mst_Customermaster where "+cus_name_filtr+"  CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
         //}
-        Toast.makeText(this, "town all area all", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "town all area all", Toast.LENGTH_SHORT).show();
     } else if (town == "All" && area != "All") {
         //query += " where Area='" + area + "' ";
-        Toast.makeText(this, "town all area not all", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "town all area not all", Toast.LENGTH_SHORT).show();
         query = "SELECT * FROM Mst_Customermaster where "+cus_name_filtr+" Area='"+area+"' AND CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
     } else if (town != "All" && area == "All") {
         //query += " where Town='" + town + "' ";
-        Toast.makeText(this, "town not all area all", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "town not all area all", Toast.LENGTH_SHORT).show();
         query = "SELECT * FROM Mst_Customermaster where "+cus_name_filtr+"  Town='"+town+"' AND CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
     } else {
         //query += " where Area='" + area + "'  AND Town='" + town + "' ";
-        Toast.makeText(this, "town not all area not all", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "town not all area not all", Toast.LENGTH_SHORT).show();
         query = "SELECT * FROM Mst_Customermaster where "+cus_name_filtr+" Area='"+area+"' AND Town='"+town+"' AND  CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
     }
+        //limit data to 100 rows
+        query += " ORDER BY _id limit 100";
 
         //query += " AND CustomerNo  not in (select CustomerNo from Tr_ItineraryDetails where  0  in (strftime('%d','now')-substr(ItinerarytDate,4,5))) ";
     /*if (cusName != "" && !(town == "All" && area == "All")) {
@@ -384,41 +434,64 @@ public class AddExtraCustomer extends AppCompatActivity {
 
     //end refresh
 
-    try {
-        Mst_Customermaster mst_customer = new Mst_Customermaster();
+            try {
+                Mst_Customermaster mst_customer = new Mst_Customermaster();
 
-        DBHelper db = new DBHelper(this);
-        Cursor res = db.getData(query);//return tupple id=1;
+                DBHelper db = new DBHelper(this);
+                Cursor res = db.getData(query);//return tupple id=1;
+
+                list = new ArrayList<HashMap<String, String>>();
+                while (res.moveToNext()) {
+
+                    mst_customer.setCustomerNo(res.getString(res.getColumnIndex("CustomerNo")));
+                    mst_customer.setCustomerName(res.getString(res.getColumnIndex("CustomerName")));
+                    mst_customer.setAddress(res.getString(res.getColumnIndex("Address")));
+                    mst_customer.setTown(res.getString(res.getColumnIndex("Town")));
+                    mst_customer.setTelephone(res.getString(res.getColumnIndex("Telephone")));
+
+                    try {
+                        HashMap<String, String> hashmap = new HashMap<String, String>();
+                        hashmap.put(FIRST_COLUMN, "mst_customer.getTown()");
+                        hashmap.put(SECOND_COLUMN, mst_customer.getCustomerName());
+                        hashmap.put(THIRD_COLUMN,mst_customer.getAddress());
+                        hashmap.put(FOURTH_COLUMN, mst_customer.getTown());
+                        hashmap.put(Fifth_COLUMN, mst_customer.getTelephone());
+                        list.add(hashmap);
+
+                    }catch (Exception e){
+                        Log.i("hashMaPUT",e.getMessage());
+                    }
 
 
-        while (res.moveToNext()) {
 
-            mst_customer.setCustomerNo(res.getString(res.getColumnIndex("CustomerNo")));
-            mst_customer.setCustomerName(res.getString(res.getColumnIndex("CustomerName")));
-            mst_customer.setAddress(res.getString(res.getColumnIndex("Address")));
-            mst_customer.setTown(res.getString(res.getColumnIndex("Town")));
-            mst_customer.setTelephone(res.getString(res.getColumnIndex("Telephone")));
+                       /* pending_customer.setDescription(res.getString(res.getColumnIndex("Description")));//should be modified
+                        pending_customer.setBatchNumber(res.getString(res.getColumnIndex("BatchNumber")));
+                        pending_customer.setExpireyDate(res.getString(res.getColumnIndex("ExpiryDate")));
+                        */
 
 
-               /* pending_customer.setDescription(res.getString(res.getColumnIndex("Description")));//should be modified
-                pending_customer.setBatchNumber(res.getString(res.getColumnIndex("BatchNumber")));
-                pending_customer.setExpireyDate(res.getString(res.getColumnIndex("ExpiryDate")));
-                */
+                    update(mst_customer);
+                    //testing
+                    //btnView_sv.setText(res.getCount());
+                }
 
 
-            update(mst_customer);
-            //testing
-            //btnView_sv.setText(res.getCount());
-        }
+                db.close();
+                //return product;
 
-        db.close();
-        //return product;
-
-    } catch (Exception e) {
-        Toast.makeText(this, "Exception in getdata:" + e.getMessage(), Toast.LENGTH_LONG).show();
-    }
+                } catch (Exception e) {
+                    Toast.makeText(this, "Exception in getdata:" + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
         }catch(Exception e){
             Toast.makeText(this, "GetDataMethod_error:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        try {
+           /* ListView listView = (ListView) findViewById(R.id.add_extra_customer_listview);
+            AddExtraCusListViewAdp adapter=new AddExtraCusListViewAdp(this,list);
+            listView.setAdapter(adapter);*/
+        }catch (Exception e){
+            Toast.makeText(this, "AdapterError:"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -564,15 +637,15 @@ public class AddExtraCustomer extends AppCompatActivity {
 
     public  void getSelectedRows() {
 
-        Intent db=new Intent(this,AndroidDatabaseManager.class);
-        this.startActivity(db);
+        /*Intent db=new Intent(this,AndroidDatabaseManager.class);
+        this.startActivity(db);*/
 
         TableLayout table = (TableLayout) findViewById(R.id.table_add_extra_customer);
         LinearLayout data_LinearLayout=(LinearLayout) findViewById(R.id.linear_layout_add_ec_data_row);
         DBAdapter adp=new DBAdapter(this);
 
         /*display table row count*/
-        Toast.makeText(this,"row_count:"+data_LinearLayout.getChildCount(),Toast.LENGTH_LONG).show();
+       // Toast.makeText(this,"row_count:"+data_LinearLayout.getChildCount(),Toast.LENGTH_LONG).show();
 
         /*load customer id list*/
         ArrayList<String> cusId=new ArrayList<String>();
@@ -600,17 +673,17 @@ public class AddExtraCustomer extends AppCompatActivity {
                         View cbox=  ll.getChildAt(0);//access to column_1 checkbox inside LinearLayout
                         View tb=ll.getChildAt(0);//acess to column 2 cusName textBox;
 
-                        Toast.makeText(this,"line:_1",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(this,"line:_1",Toast.LENGTH_LONG).show();
                         if (cbox instanceof CheckBox) {
-                            Toast.makeText(this,"line:_2",Toast.LENGTH_LONG).show();
+                            //Toast.makeText(this,"line:_2",Toast.LENGTH_LONG).show();
                             if(((CheckBox) cbox).isChecked()) {
-                                ((CheckBox) cbox).setText("Added");
+                                ((CheckBox) cbox).setText("");
 
-                                Toast.makeText(this,"line:_3",Toast.LENGTH_LONG).show();
+                              //  Toast.makeText(this,"line:_3",Toast.LENGTH_LONG).show();
                                 try {
                                     //cusId.get(i);
                                     addToItinerary(cusId.get(i));
-                                    Toast.makeText(this, "id:"+cusId.get(i), Toast.LENGTH_SHORT).show();
+                                //    Toast.makeText(this, "id:"+cusId.get(i), Toast.LENGTH_SHORT).show();
 
                                 }catch (Exception  e){
                                     Toast.makeText(this, "cusId error-"+e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -648,22 +721,22 @@ public class AddExtraCustomer extends AppCompatActivity {
     private void addToItinerary(String id){
 
         try {
-
+            RandomNumberGenerator rg = new RandomNumberGenerator();
             Tr_ItineraryDetails itinerary = new Tr_ItineraryDetails();
             DBAdapter adp = new DBAdapter(this);
 
-            Toast.makeText(this, "came inside addtoIternerary_method", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "came inside addtoIternerary_method", Toast.LENGTH_LONG).show();
 
             itinerary.setCustomerNo(id);
-            itinerary.setItineraryID("ITRY" + id);
+            itinerary.setItineraryID(rg.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"ITRY_",5));
             itinerary.setItineraryDate(DateManager.dateToday());
             itinerary.setIsInvoiced(0);/*default value*/
             itinerary.setIsPlaned(0);/**default val*/
             itinerary.setLastUpdateDate(DateManager.dateToday());
 
-            Toast.makeText(this, "added:" + id, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "added:" + id, Toast.LENGTH_LONG).show();
             String output = adp.itineraryDetails(itinerary);
-            Toast.makeText(this, "output" + output, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "output" + output, Toast.LENGTH_SHORT).show();
         }catch (Exception  e){
             Toast.makeText(this, "addToImethod:"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }

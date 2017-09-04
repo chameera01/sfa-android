@@ -121,9 +121,8 @@
                         android:paddingBottom="10dp"
                         android:paddingLeft="0dp"
 
-
-
-                        android:paddingRight="20dp"
+                        android:gravity="right"
+                        android:paddingRight="0dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
                         android:textSize="18sp" />
@@ -136,7 +135,7 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
                         android:paddingLeft="0dp"
-                        android:layout_gravity="right"
+                        android:gravity="right"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
                         android:textSize="18sp" />
@@ -145,8 +144,8 @@
                 <ListView
                     android:id="@+id/list_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:shrinkColumns="*"
+                    android:layout_height="match_parent"
+
                     />
                 <ScrollView
 
@@ -154,12 +153,12 @@
 
 
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
 
                     android:layout_below="@+id/linearLayout_stockview"
                     android:layout_alignEnd="@+id/linearLayout_stockview"
 
-                    android:layout_marginEnd="0dp">
+                    android:layout_marginEnd="0dp"
+                    android:layout_height="300dp">
 
 
 
@@ -182,7 +181,7 @@
 
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
 
                             android:textSize="16sp"
                             android:background="#9cf9be"

@@ -10,11 +10,11 @@
 
     android:fitsSystemWindows="true">
 
-    <include
+    <!--include
         layout="@layout/app_bar_navigation_drawer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible" />
+        android:visibility="visible" /-->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -24,7 +24,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="80dp"
+    android:paddingTop="10dp"
     tools:context=".activities.AddExtraCustomer">
     <LinearLayout
         android:orientation="vertical"
@@ -36,7 +36,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="50dp"
             android:id="@+id/linearLayout_addextracutomer">
 
             <TextView
@@ -99,14 +99,15 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="#2c8e52"
-                    android:layout_weight="0" >
+                    android:background="#92C94a"
 
+                    android:layout_weight="0" >
+<!--color:#92C94a,#2c8e52-->
                     <TextView
                         android:text=""
                         android:layout_gravity="right"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
                         android:textColor="#fff"
                         android:textAlignment="center"
                         android:layout_weight="1" />
@@ -116,7 +117,7 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="#2c8e52"
+                    android:background="#92C94a"
                     android:layout_weight="2"
                     android:paddingTop="10dp">
 
@@ -128,8 +129,10 @@
                         android:inputType="number"
                         android:ems="10"
                         android:textColor="#fff"
+
                         android:textAlignment="center"
-                        android:background="#2c8e52"
+                        android:background="#92C94a"
+                        android:paddingBottom="10dp"
                         />
                 </LinearLayout>
 
@@ -137,7 +140,7 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="#2c8e52"
+                    android:background="#92C94a"
                     android:layout_weight="2"
                     android:paddingTop="10dp">
 
@@ -148,6 +151,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#fff"
                         android:textAlignment="center"
+                        android:paddingBottom="10dp"
                         android:layout_weight="1" />
 
                 </LinearLayout>
@@ -155,7 +159,7 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="#2c8e52"
+                    android:background="#92C94a"
                     android:layout_weight="1"
                     android:paddingTop="10dp">
 
@@ -166,6 +170,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:textColor="#fff"
+                        android:paddingBottom="10dp"
                         android:textAlignment="center"
                         android:layout_weight="1" />
                 </LinearLayout>
@@ -174,7 +179,7 @@
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="#2c8e52"
+                    android:background="#92C94a"
                     android:layout_weight="1"
                     android:paddingTop="10dp">
 
@@ -185,23 +190,34 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:paddingBottom="10dp"
                         android:text="telephone No" />
 
                 </LinearLayout>
 
 
             </TableRow>
+            <!--ListView
+                android:id="@+id/add_extra_customer_listview"
+                android:layout_width="match_parent"
+                android:shrinkColumns="*"
+                android:layout_height="0dp" /-->
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="300dp">
+                android:layout_height="375dp">
+
+
                 <LinearLayout
+
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:id="@+id/linear_layout_add_ec_data_row">
 
                 </LinearLayout>
+
             </ScrollView>
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -213,7 +229,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Add to Itinerary"
-                    android:id="@+id/btn_add_itineraray" />
+                    android:layout_marginTop="10dp"
+                    android:paddingRight="30dp"
+                    android:paddingLeft="30dp"
+                    android:id="@+id/btn_add_itineraray"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:background="@color/bg"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
         </TableLayout>

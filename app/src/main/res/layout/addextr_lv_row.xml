@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/addexCus_cb"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingBottom="10dp"
+            android:paddingLeft="50dp"
+            android:text="First"
+            android:textSize="18sp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/addexCus_name"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingLeft="50dp"
+            android:text="Second"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/addexCus_add"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingBottom="10dp"
+            android:paddingLeft="50dp"
+            android:text="Third"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/addexCus_twn"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingBottom="10dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="10dp"
+            android:gravity="right"
+            android:text="Fourth"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/addexCus_tel"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_gravity="right"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="50dp"
+            android:text="Fifth"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

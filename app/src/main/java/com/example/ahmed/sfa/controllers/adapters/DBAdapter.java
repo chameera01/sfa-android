@@ -234,7 +234,7 @@ public class DBAdapter{
             if(db.insert("Tr_ItineraryDetails", null, contentValues)>0) {
                 result = "success";
 
-                Toast.makeText(context,"Succees",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,"Succees",Toast.LENGTH_SHORT).show();
             }else {
                 result = "outer_if";
                 Toast.makeText(context,"failed",Toast.LENGTH_SHORT).show();

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
     <TextView
         android:id="@+id/TextFirst"
         android:layout_height="wrap_content"
@@ -39,7 +38,8 @@
         android:layout_weight="1"
         android:paddingBottom="10dp"
         android:paddingLeft="50dp"
-        android:layout_gravity="right"
+        android:paddingRight="10dp"
+        android:gravity="right"
         android:text="Fourth"
         android:textSize="18sp" />
     <TextView
@@ -47,8 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="1"
+        android:gravity="right"
         android:layout_gravity="right"
         android:paddingBottom="10dp"
+        android:paddingRight="10dp"
         android:paddingLeft="50dp"
         android:text="Fifth"
         android:textSize="18sp" />
