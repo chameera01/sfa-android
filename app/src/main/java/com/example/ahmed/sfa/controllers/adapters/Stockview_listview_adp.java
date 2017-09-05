@@ -89,7 +89,7 @@ public class Stockview_listview_adp extends BaseAdapter{
             holder.txtFifth=(TextView) convertView.findViewById(R.id.stock_view$sellp);
             holder.txtSixth=(TextView) convertView.findViewById(R.id.stock_view$retailp);
             holder.txtSeventh=(TextView) convertView.findViewById(R.id.stock_view$qnt);
-            holder.txtEighth=(TextView) convertView.findViewById(R.id.stock_view$last_update);
+            //holder.txtEighth=(TextView) convertView.findViewById(R.id.stock_view$last_update);
 
             convertView.setTag(holder);
         }else{
@@ -106,7 +106,7 @@ public class Stockview_listview_adp extends BaseAdapter{
             holder.txtFifth.setText(map.get(FIFTH_COLUMN));
             holder.txtSixth.setText(map.get(SIXTH_COLUMN));
             holder.txtSeventh.setText(map.get(SEVENTH_COLUMN));
-            holder.txtEighth.setText(map.get(EIGHT_COLUMN));
+            //holder.txtEighth.setText(map.get(EIGHT_COLUMN));
 
 
         if (rowCount%2==0) {
@@ -117,7 +117,7 @@ public class Stockview_listview_adp extends BaseAdapter{
             holder.txtFifth.setBackgroundColor(Color.LTGRAY);
             holder.txtSixth.setBackgroundColor(Color.LTGRAY);
             holder.txtSeventh.setBackgroundColor(Color.LTGRAY);
-            holder.txtEighth.setBackgroundColor(Color.LTGRAY);
+           // holder.txtEighth.setBackgroundColor(Color.LTGRAY);
         }else{
             holder.txtFirst.setBackgroundColor(Color.WHITE);
             holder.txtSecond.setBackgroundColor(Color.WHITE);
@@ -126,7 +126,7 @@ public class Stockview_listview_adp extends BaseAdapter{
             holder.txtFifth.setBackgroundColor(Color.WHITE);
             holder.txtSixth.setBackgroundColor(Color.WHITE);
             holder.txtSeventh.setBackgroundColor(Color.WHITE);
-            holder.txtEighth.setBackgroundColor(Color.WHITE);
+           // holder.txtEighth.setBackgroundColor(Color.WHITE);
         }
 
         return convertView;
