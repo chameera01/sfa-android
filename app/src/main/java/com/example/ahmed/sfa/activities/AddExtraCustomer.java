@@ -37,7 +37,7 @@ import java.util.HashMap;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
-//import com.example.ahmed.sfa.controllers.adapters.AddExtraCusListViewAdp;
+//import com.example.ahmed.sfa.controllers.adapters.Stockview_listview_adp;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 
@@ -218,6 +218,7 @@ public class AddExtraCustomer extends AppCompatActivity {
         btn_add_itinerary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddExtraCustomer.this);
                 builder
                         .setTitle("Add Customers To Itinery")
@@ -228,11 +229,7 @@ public class AddExtraCustomer extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which)
                             {
                                 getSelectedRows();
-                                area = spinner_area.getSelectedItem().toString();
-                                town = spinner_town.getSelectedItem().toString();
-                                customer_name = cus_name.getQuery().toString();
 
-                                getdata(town, area, customer_name);
                             }
                         });
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener()
@@ -488,7 +485,7 @@ public class AddExtraCustomer extends AppCompatActivity {
 
         try {
            /* ListView listView = (ListView) findViewById(R.id.add_extra_customer_listview);
-            AddExtraCusListViewAdp adapter=new AddExtraCusListViewAdp(this,list);
+            Stockview_listview_adp adapter=new Stockview_listview_adp(this,list);
             listView.setAdapter(adapter);*/
         }catch (Exception e){
             Toast.makeText(this, "AdapterError:"+e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -716,6 +713,11 @@ public class AddExtraCustomer extends AppCompatActivity {
         }catch (Exception e){
             Toast.makeText(this,"Error:"+e.getMessage(), Toast.LENGTH_LONG).show();
         }
+        area = spinner_area.getSelectedItem().toString();
+        town = spinner_town.getSelectedItem().toString();
+        customer_name = cus_name.getQuery().toString();
+
+        getdata(town, area, customer_name);
 
     }
     private void addToItinerary(String id){
@@ -728,7 +730,7 @@ public class AddExtraCustomer extends AppCompatActivity {
             //Toast.makeText(this, "came inside addtoIternerary_method", Toast.LENGTH_LONG).show();
 
             itinerary.setCustomerNo(id);
-            itinerary.setItineraryID(rg.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"ITRY_",5));
+            itinerary.setItineraryID(rg.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"ITRY_",15));
             itinerary.setItineraryDate(DateManager.dateToday());
             itinerary.setIsInvoiced(0);/*default value*/
             itinerary.setIsPlaned(0);/**default val*/
