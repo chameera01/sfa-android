@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -578,6 +579,7 @@ public class AddExtraCustomer extends AppCompatActivity {
         TextView tv_cusName = new TextView(wrappedContext,null,0);
         tv_cusName.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_cusName.setText(cus.getCustomerName());
+            tv_cusName.setGravity(Gravity.LEFT);
 
 
 
@@ -585,17 +587,20 @@ public class AddExtraCustomer extends AppCompatActivity {
         TextView tv_address = new TextView(wrappedContext,null,0);
         tv_address.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_address.setText(cus.getAddress()+"");
+        tv_address.setGravity(Gravity.LEFT);
         //tv_description.setWidth(0);
 
         //add coloum_contact
         TextView tv_contact = new TextView(wrappedContext,null,0);
         tv_contact.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_contact.setText(cus.getTelephone()+"");
+        tv_contact.setGravity(Gravity.LEFT);
 
         //add coloum_town
         TextView tv_town = new TextView(wrappedContext,null,0);
         tv_town.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_town.setText(cus.getTown());
+        tv_town.setGravity(Gravity.LEFT);
 
 
 

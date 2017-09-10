@@ -21,6 +21,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.Volley.VolleyLog;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
@@ -40,6 +41,8 @@ import org.json.JSONObject;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.R.attr.name;
 import static android.R.attr.type;
@@ -360,6 +363,59 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
 
     public void send_to_web() {
 
+    }
+
+    public void josnPost(String weblink){
+        try {
+            final JSONObject jsonBody = new JSONObject();
+            jsonBody.put("Title", "VolleyApp Android Demo");
+            jsonBody.put("Author", "BNK");
+            jsonBody.put("Date", "2015/08/26");
+            final String requestBody = jsonBody.toString();
+
+            //Toast.makeText(this, "link:"+postlink, Toast.LENGTH_SHORT).show();
+            String url=weblink;//"https://httpbin.org/post";
+
+            StringRequest stringRequest = new StringRequest(1, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    //textView.setText(response);
+                    Log.i("response",response);
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("error:",error.getMessage());
+                }
+            }) {
+                @Override
+                public Map<String, String> getParams(){
+                    Map<String, String> params = new HashMap<>();
+                    params.put("name", jsonBody.toString());
+                    return params;
+                }
+                @Override
+                public String getBodyContentType() {
+                    return String.format("application/json; charset=utf-8");
+                }
+
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        com.android.volley.VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s",
+                                requestBody, "utf-8");
+                        return null;
+                    }
+                }
+            };
+            // MySingleton.getInstance(this).addToRequestQueue(stringRequest);
+//        Volley.addToRequestQueue(stringRequest);
+            Volley.newRequestQueue(this).add(stringRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 

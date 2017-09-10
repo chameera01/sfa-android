@@ -471,11 +471,11 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     @Override
     public void receiveData(String result, String filter) {
-        initialDwnloadCount++;//count downloaded table count;
+
         //-----------------------------------------receive data
         Toast.makeText(this, "Try to Fetch Data from Table:"+filter, Toast.LENGTH_LONG).show();
         if(result!=null){
-
+            initialDwnloadCount++;//count downloaded table count;
             String josnString=result;
             //Toast.makeText(this, "result:" + josnString, Toast.LENGTH_LONG).show();
             try{
