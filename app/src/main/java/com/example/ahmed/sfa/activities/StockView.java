@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -30,14 +32,29 @@ import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
+import com.example.ahmed.sfa.controllers.adapters.Stockview_listview_adp;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Tr_TabStock;
 
 public class StockView extends AppCompatActivity {
+
+    //public  static int rowCount = 0;
+    private ArrayList<HashMap<String, String>> list;
+    public static final String FIRST_COLUMN="First";
+    public static final String SECOND_COLUMN="Second";
+    public static final String THIRD_COLUMN="Third";
+    public static final String FOURTH_COLUMN="Fourth";
+    public static final String FIFTH_COLUMN="Fifth";
+    public static final String SIXTH_COLUMN="six";
+    public static final String SEVENTH_COLUMN="seven";
+    public static final String EIGHT_COLUMN="eight";
+
+
+
     Spinner spinner_brand_sv;
     Spinner spinner_principle_sv;
     SearchView searchView_sv;
@@ -143,7 +160,10 @@ public class StockView extends AppCompatActivity {
             }
 
             public void callSearch(String query) {
-                //Do searching
+                brand = spinner_brand_sv.getSelectedItem().toString();
+                principle = spinner_principle_sv.getSelectedItem().toString();
+                keyword = searchView_sv.getQuery().toString();
+                getdata(principle, brand, keyword);
             }
 
         });
@@ -323,7 +343,7 @@ public class StockView extends AppCompatActivity {
             Cursor res = db.getData(query);//return tupple id=1;
 
 
-
+            list = new ArrayList<HashMap<String, String>>();
             while (res.moveToNext()) {
                 row_count++;
                 product_sv.setPrinciple(res.getString(res.getColumnIndex("PrincipleID")));//should be modified
@@ -338,9 +358,32 @@ public class StockView extends AppCompatActivity {
                 product_sv.setQuantity(res.getInt(res.getColumnIndex("Qty")));
                 product_sv.setLastupadateDate(res.getString(res.getColumnIndex("LastUpdateDate")));
 
-                update(product_sv);
+                try {
+                    HashMap<String, String> hashmap = new HashMap<String, String>();
+
+                    hashmap.put(FIRST_COLUMN, res.getString(res.getColumnIndex("ItemCode")));
+                    hashmap.put(SECOND_COLUMN, res.getString(res.getColumnIndex("Description")));
+                    hashmap.put(THIRD_COLUMN, res.getString(res.getColumnIndex("BatchNumber")));
+                    hashmap.put(FOURTH_COLUMN, res.getString(res.getColumnIndex("ExpiryDate")));
+                    hashmap.put(FIFTH_COLUMN, ""+res.getFloat(res.getColumnIndex("SellingPrice")) );
+                    hashmap.put(SIXTH_COLUMN,""+res.getFloat(res.getColumnIndex("RetailPrice")) );
+                    hashmap.put(SEVENTH_COLUMN, ""+res.getInt(res.getColumnIndex("Qty")));
+                    hashmap.put(EIGHT_COLUMN, res.getString(res.getColumnIndex("LastUpdateDate")));
+                    list.add(hashmap);
+
+                }catch (Exception e){
+                    Log.i("hashMaPUT",e.getMessage());
+                }
+
+                //update(product_sv);
                 //btnView_sv.setText(res.getCount());
             }
+
+            ListView listView = (ListView) findViewById(R.id.stock_view_list_view);
+            Stockview_listview_adp adapter=new Stockview_listview_adp(this,list);
+            listView.setAdapter(adapter);
+
+
             if(row_count<1){
                 Toast.makeText(StockView.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
                 TextView tr_emty_msg=new TextView(this);

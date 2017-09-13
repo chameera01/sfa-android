@@ -7,38 +7,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-
+    tools:openDrawer="start"
     >
 
-    <include
+    <!--include
         layout="@layout/app_bar_navigation_drawer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" /-->
     <RelativeLayout
         android:id="@+id/activity_display_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="80dp"
+        android:paddingTop="10dp"
 
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        >
+        android:paddingRight="@dimen/activity_horizontal_margin">
 
 
         <Button
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Button"
-            android:id="@+id/button"
-            android:onClick="selfDestruct"
-            android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/button_view"
-            android:visibility="gone"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:text="ViewAll"
             android:onClick="viewallbtnClick"
             android:id="@+id/button_view"
@@ -46,20 +35,27 @@
             android:layout_alignParentEnd="true"
             android:visibility="gone"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="New Button"
+            android:id="@+id/button"
+            android:onClick="selfDestruct"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/button_view"
+            android:visibility="gone"/>
+
         <RelativeLayout
 
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/relativeLayout"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true">
+            android:layout_height="match_parent">
 
             <LinearLayout
 
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_alignParentStart="true"
 
                 android:layout_below="@+id/linear_layout">
 
@@ -76,16 +72,14 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_column="1"
                         android:paddingBottom="10dp"
-                        android:paddingLeft="50dp"
+                        android:paddingLeft="20dp"
 
-
-
-                        android:paddingRight="20dp"
+                        android:layout_gravity="center"
+                        android:paddingRight="0dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
-                        />
+                        android:textSize="18sp" />
 
 
                     <TextView
@@ -93,14 +87,14 @@
                         android:layout_weight="2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_column="2"
                         android:paddingBottom="10dp"
-                        android:paddingLeft="100dp"
+                        android:gravity="left"
 
-                        android:paddingRight="50dp"
+                        android:paddingLeft="50dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
-                        android:id="@+id/tv_product_col_title" />
+                        android:id="@+id/tv_product_col_title"
+                        android:textSize="18sp" />
 
 
 
@@ -109,15 +103,14 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_column="4"
                         android:paddingBottom="10dp"
                         android:paddingLeft="0dp"
+                        android:gravity="center"
 
-
-
-                        android:paddingRight="20dp"
+                        android:paddingRight="0dp"
                         android:paddingTop="10dp"
-                        android:background="#92C94a" />
+                        android:background="#92C94a"
+                        android:textSize="18sp" />
 
 
                     <TextView
@@ -125,16 +118,14 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_column="4"
                         android:paddingBottom="10dp"
                         android:paddingLeft="0dp"
 
-
-
-                        android:paddingRight="20dp"
+                        android:gravity="right"
+                        android:paddingRight="0dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
-                        />
+                        android:textSize="18sp" />
 
 
                     <TextView
@@ -142,29 +133,34 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_column="5"
                         android:paddingBottom="10dp"
                         android:paddingLeft="0dp"
-
-
-
-                        android:paddingRight="20dp"
+                        android:gravity="right"
                         android:paddingTop="10dp"
-                        android:background="#92C94a"/>
-                </LinearLayout>
+                        android:background="#92C94a"
+                        android:textSize="18sp" />
 
+                </LinearLayout>
+                <ListView
+                    android:id="@+id/list_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    />
                 <ScrollView
 
                     android:id="@+id/scrollView"
 
 
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
 
                     android:layout_below="@+id/linearLayout_stockview"
                     android:layout_alignEnd="@+id/linearLayout_stockview"
 
-                    android:layout_marginEnd="0dp">
+                    android:layout_marginEnd="0dp"
+                    android:layout_height="300dp">
+
+
 
                     <TableLayout
                         android:layout_width="match_parent"
@@ -185,11 +181,12 @@
 
                         <TableRow
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
 
                             android:textSize="16sp"
                             android:background="#9cf9be"
                             android:layout_margin="1dp"
+                            android:visibility="invisible"
                             android:layout_marginLeft="2dp"
                             android:paddingRight="0dp"
                             android:layout_alignParentRight="true">
@@ -208,7 +205,7 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linear_layout"
                 android:layout_alignParentTop="true"
@@ -221,7 +218,8 @@
                     android:text="       Principle      "
                     android:id="@+id/textView2"
                     android:paddingTop="15dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18sp" />
 
                 <Spinner
                     android:layout_width="164dp"
@@ -236,7 +234,8 @@
                     android:layout_height="match_parent"
                     android:text="Brand        "
                     android:id="@+id/textView3"
-                    android:paddingTop="15dp"/>
+                    android:paddingTop="15dp"
+                    android:textSize="18sp" />
 
                 <Spinner
                     android:layout_width="164dp"

@@ -18,6 +18,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -76,6 +77,7 @@ public class AddCustomer extends AppCompatActivity {
     TextView longitude;
     Button saveandsubmitbtn;
     Location lastKnownLocation;
+    Button dismiss;
 
     private boolean controlsEnabled=false;
 
@@ -120,7 +122,60 @@ public class AddCustomer extends AppCompatActivity {
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
         navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
+
+        dismiss =(Button) findViewById(R.id.addcustomer$dismiss);
+        dismiss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(AddCustomer.this, "Test Dismis button", Toast.LENGTH_LONG).show();
+                customerName.setText("");
+                customerName.setEnabled(false);
+                address.setText("");
+                address.setEnabled(false);
+
+                //address.setText("");
+                area.setText("");
+                area.setEnabled(false);
+                town.setText("");
+                town.setEnabled(false);
+                ContactNo.setText("");
+                ContactNo.setEnabled(false);
+                fax.setText("");
+                fax.setEnabled(false);
+                email.setText("");
+                email.setEnabled(false);
+                brNo.setText("");
+                brNo.setEnabled(false);
+                ownersName.setText("");
+                ownersName.setEnabled(false);
+                ownersContactNo.setText("");
+                ownersContactNo.setEnabled(false);
+                registrationNo.setText("");
+                registrationNo.setEnabled(false);
+                latitude.setText("");
+                latitude.setEnabled(false);
+                longitude.setText("");
+                longitude.setEnabled(false);
+
+                customerImage.setImageBitmap(null);
+                route.setEnabled(false);
+                customerStatus.setEnabled(false);
+                district.setEnabled(false);
+                controlsEnabled=false;
+
+                init();
+
+
+            }
+        });
+        /*district.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //
+            }
+        });*/
     }
+
 
     private void init(){
         //get Location
@@ -174,27 +229,44 @@ public class AddCustomer extends AppCompatActivity {
                 latitude=(TextView)findViewById(R.id.addcustomer$latitude);
                 longitude=(TextView)findViewById(R.id.addcustomer$longitude);
 
-                List<District> districts = dbAdapter.getDistricts();
+                List<District> districts =dbAdapter.getDistricts();
+                /*newly added by Asanka*/
+                districts.add(new District("0","Select District"));
+                int spinnerPosition =districts.size()-1;/* end of new added*/
+
                 ArrayAdapter<District> districtArrayAdapter = new ArrayAdapter<District>(this,android.R.layout.simple_spinner_item,districts);
 
                 districtArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 district.setAdapter(districtArrayAdapter);
                 district.setEnabled(false);
+                //set the default according to value
+                district.setSelection(spinnerPosition);
 
                 List<CustomerStatus> customerStatuses = dbAdapter.getCustomerStatus();
+                /*newly added by Asanka*/
+                customerStatuses.add(new CustomerStatus("0","Select Status"));
+                int statusSpinnerPosition =customerStatuses.size()-1;/* end of new added*/
                 ArrayAdapter<CustomerStatus> customerStatusArrayAdapter = new ArrayAdapter<CustomerStatus>(this,android.R.layout.simple_spinner_item,customerStatuses);
 
                 customerStatusArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 customerStatus.setAdapter(customerStatusArrayAdapter);
                 customerStatus.setEnabled(false);
+                //set the default according to value
+                customerStatus.setSelection(statusSpinnerPosition);
 
 
                 List<Route> routes = dbAdapter.getRoutes();
+                /*newly added by Asanka*/
+                routes.add(new Route("0","Select Route"));
+                int routeSpinnerPosition =routes.size()-1;/* end of new added*/
                 ArrayAdapter<Route> routeArrayAdapter = new ArrayAdapter<Route>(this,android.R.layout.simple_spinner_item,routes);
 
                 routeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 route.setAdapter(routeArrayAdapter);
+                //set default selection
+                route.setSelection(routeSpinnerPosition);
                 route.setEnabled(false);
+
 
                 latitude.setText(lastKnownLocation.getLatitude()+"");
                 longitude.setText(lastKnownLocation.getLongitude()+"");
@@ -348,7 +420,24 @@ public class AddCustomer extends AppCompatActivity {
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         }else{
-            super.onBackPressed();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Going back will erase all changes, are you sure?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+
+            // super.onBackPressed();
         }
     }
 
@@ -382,7 +471,7 @@ public class AddCustomer extends AppCompatActivity {
             ArrayList<District> districts = new ArrayList<>();
             openDB();
             Cursor cursor;
-            cursor = db.rawQuery("SELECT DistrictId,DistrictName FROM Mst_District;",null);
+            cursor = db.rawQuery("SELECT DistrictId,DistrictName FROM Mst_District ORDER BY DistrictName asc ;",null);
             while (cursor.moveToNext()){
                 District district = new District(cursor.getString(0),cursor.getString(1));
                 districts.add(district);
@@ -395,7 +484,7 @@ public class AddCustomer extends AppCompatActivity {
             ArrayList<CustomerStatus> customerStatuses = new ArrayList<>();
             openDB();
             Cursor cursor;
-            cursor = db.rawQuery("SELECT StatusID,Status FROM Mst_CustomerStatus;",null);
+            cursor = db.rawQuery("SELECT StatusID,Status FROM Mst_CustomerStatus ORDER BY Status asc ;",null);
             while (cursor.moveToNext()){
                 CustomerStatus cs = new CustomerStatus(cursor.getString(0),cursor.getString(1));
                 customerStatuses.add(cs);
@@ -408,7 +497,7 @@ public class AddCustomer extends AppCompatActivity {
             ArrayList<Route> routes = new ArrayList<>();
             openDB();
             Cursor cursor;
-            cursor = db.rawQuery("SELECT RouteID,Route FROM Mst_Route;",null);
+            cursor = db.rawQuery("SELECT RouteID,Route FROM Mst_Route ORDER BY Route asc ;",null);
             while (cursor.moveToNext()){
                 Route r = new Route(cursor.getString(0),cursor.getString(1));
                 routes.add(r);

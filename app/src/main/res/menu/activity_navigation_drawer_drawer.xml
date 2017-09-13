@@ -35,6 +35,10 @@
             android:id="@+id/db_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Database" />
+        <item
+            android:id="@+id/activity_manual_sync"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Sync" />
     </group>
 
     <item android:title="Communicate">

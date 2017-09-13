@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -26,16 +28,27 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.adapters.Customer_pennding_listview_adptr;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 
 
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
+import com.example.ahmed.sfa.controllers.adapters.Stockview_listview_adp;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Tr_NewCustomer;
 
 public class PendingCustomer extends AppCompatActivity {
+
+    private ArrayList<HashMap<String, String>> list;
+    public static final String FIRST_COLUMN="First";
+    public static final String SECOND_COLUMN="Second";
+    public static final String THIRD_COLUMN="Third";
+    public static final String FOURTH_COLUMN="Fourth";
+    public static final String FIFTH_COLUMN="Fifth";
+
     Spinner spinner_area;
     Spinner spinner_town;
     SearchView cus_name;
@@ -235,16 +248,17 @@ public class PendingCustomer extends AppCompatActivity {
 
 
         //end refresh
-            Toast.makeText(this, "before try:", Toast.LENGTH_SHORT).show();
+
         try {
-                Toast.makeText(this, "inside__try:", Toast.LENGTH_SHORT).show();
+
             Tr_NewCustomer  pending_customer= new Tr_NewCustomer();
 
             DBHelper db = new DBHelper(this);
             Cursor res = db.getData(query);//return tupple id=1;
 
-            Toast.makeText(this, "before while:", Toast.LENGTH_SHORT).show();
 
+
+            list = new ArrayList<HashMap<String, String>>();
             while (res.moveToNext()) {
                 row_count++;
                     //Toast.makeText(this, "inside_while:", Toast.LENGTH_SHORT).show();
@@ -253,7 +267,7 @@ public class PendingCustomer extends AppCompatActivity {
                 String  address="";
                 String  contact="0715624852";
 
-                Toast.makeText(this, "data;"+res.getString(res.getColumnIndexOrThrow("isUpload")), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "data;"+res.getString(res.getColumnIndexOrThrow("isUpload")), Toast.LENGTH_SHORT).show();
                 if(res.getInt(res.getColumnIndex("isUpload"))>0){
                     uplwd=1;
                     //Toast.makeText(this, "inside_if1:", Toast.LENGTH_SHORT).show();
@@ -274,26 +288,38 @@ public class PendingCustomer extends AppCompatActivity {
                 //Toast.makeText(this, "inside while_isUpload:"+res.getInt(res.getColumnIndex("isUpload"))+":"+res.getInt(res.getColumnIndex("ApproveStatus")), Toast.LENGTH_SHORT).show();
 
                 pending_customer.setNewCustomerID(res.getString(res.getColumnIndex("NewCustomerID")));
-                   // Toast.makeText(this, "NewCus:"+res.getString(res.getColumnIndex("NewCustomerID")), Toast.LENGTH_SHORT).show();
                 pending_customer.setCustomerName(res.getString(res.getColumnIndex("CustomerName")));
-                    //Toast.makeText(this, "NewCusId:"+res.getString(res.getColumnIndex("CustomerName")), Toast.LENGTH_SHORT).show();
                 pending_customer.setAddress(address);
-                    //Toast.makeText(this, "Adress:"+res.getString(res.getColumnIndex("Address")), Toast.LENGTH_LONG).show();
                 pending_customer.setContactNo(contact);
-                    //Toast.makeText(this, ""+contact, Toast.LENGTH_SHORT).show();
                 pending_customer.setUploadedStatus(uplwd);
                 pending_customer.setApprovedStatus(apprwl);
 
-               /* pending_customer.setDescription(res.getString(res.getColumnIndex("Description")));//should be modified
-                pending_customer.setBatchNumber(res.getString(res.getColumnIndex("BatchNumber")));
-                pending_customer.setExpireyDate(res.getString(res.getColumnIndex("ExpiryDate")));
-                */
+                try {
+                    HashMap<String, String> hashmap = new HashMap<String, String>();
+
+                    hashmap.put(FIRST_COLUMN, res.getString(res.getColumnIndex("CustomerName")));
+                    hashmap.put(SECOND_COLUMN, address);
+                    hashmap.put(THIRD_COLUMN, contact);
+                    hashmap.put(FOURTH_COLUMN, ""+uplwd);
+                    hashmap.put(FIFTH_COLUMN, ""+apprwl );
+
+                    list.add(hashmap);
+
+                }catch (Exception e){
+                    Log.i("hashMaPUT",e.getMessage());
+                }
 
 
-                update(pending_customer);
+
+
+                //update(pending_customer);
                 //btnView_sv.setText(res.getCount());
             }
-            Toast.makeText(PendingCustomer.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
+            db.close();
+
+            ListView listView = (ListView) findViewById(R.id.pending_customer_listview);
+           Customer_pennding_listview_adptr adapter=new Customer_pennding_listview_adptr(this,list);
+            listView.setAdapter(adapter);
             if(row_count<1){
                 //Toast.makeText(DisplayProductTableActivity.this, "RowCount<1:"+row_count, Toast.LENGTH_SHORT).show();
                 TextView tr_emty_msg=new TextView(this);
@@ -302,7 +328,7 @@ public class PendingCustomer extends AppCompatActivity {
             }
             row_count=0;
 
-            db.close();
+
             //return product;
 
         }catch (Exception e){

@@ -234,7 +234,7 @@ public class DBAdapter{
             if(db.insert("Tr_ItineraryDetails", null, contentValues)>0) {
                 result = "success";
 
-                Toast.makeText(context,"Succees",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,"Succees",Toast.LENGTH_SHORT).show();
             }else {
                 result = "outer_if";
                 Toast.makeText(context,"failed",Toast.LENGTH_SHORT).show();
@@ -314,12 +314,12 @@ public class DBAdapter{
             //_id INTEGER PRIMARY KEY AUTOINCREMENT,StatusID TEXT,Status TEXT,isActive INTEGER,LastUpdateDate TEXT
             db.execSQL(
                     "INSERT OR REPLACE INTO Mst_CustomerStatus (_id ,StatusID,Status,isActive," +
-                            "LastUpdateDate) values (" +
-                            "(select _id from Mst_CustomerStatus where StatusID='"+cusStatus.getStatusId()+"')," +
-                            "'"+cusStatus.getStatus()+"',"+cusStatus.getIsActive()+",'"+DateManager.dateToday()+"'" +
+                            "LastUpdateDate) values ((select _id from Mst_CustomerStatus where StatusID ='"+cusStatus.getStatusId()+"'  )," +
+                            "'"+cusStatus.getStatusId()+"','"+cusStatus.getStatus()+"',"+cusStatus.getIsActive()+",'"+DateManager.dateToday()+"'" +
                             " );"
             );
         }catch (Exception e){
+            Toast.makeText(context, cusStatus.getStatusId()+"dnload Error:"+e.getMessage(), Toast.LENGTH_LONG).show();
             e.getMessage();
         }
         closeDB();

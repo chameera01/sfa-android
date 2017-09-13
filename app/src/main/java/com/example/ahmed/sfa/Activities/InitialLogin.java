@@ -10,7 +10,6 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
 
@@ -27,11 +26,15 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,6 +88,8 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
     private  TextView result_view;
     private Activity activity;
     Context contxt;
+    static int initialDwnloadCount =0;
+    Button mEmailSignInButton;
 
 
     @Override
@@ -95,7 +100,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
         // Set up the login form.
         mDeviceId = (AutoCompleteTextView) findViewById(R.id.email);
         result_view=(TextView) findViewById(R.id.result_Json);
-        populateAutoComplete();
+        //populateAutoComplete();
 
 
         contxt=this;
@@ -118,21 +123,84 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                mEmailSignInButton.setEnabled(false);
                 attemptLogin();
+
+                /* any UI starts when signIn button click
                 Intent intent = new Intent(activity,AndroidDatabaseManager.class);
                 //Intent intent = new Intent(activity, AndroidDatabaseManager.class);
-                activity.startActivity(intent);
+                activity.startActivity(intent);*/
             }
         });
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        final LinearLayout LoginBox = (LinearLayout) findViewById(R.id.email_login_form);
+        LoginBox.setVisibility(View.GONE);
+        ImageView img = (ImageView) findViewById(R.id.initialLogo);
+        img.setVisibility(View.GONE);
+
+        sleepthread();
     }
 
+    private void sleepthread() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //pic.get(0).setImageDrawable(getResources().getDrawable(R.drawable.coin));
+                        animation();
+                    }
+                });
+            }
+        }).start();
+    }
+    //animation method
+    public  void animation(){
+        final LinearLayout LoginBox = (LinearLayout) findViewById(R.id.email_login_form);
+        try {
+
+        }catch (Exception e){
+            Toast.makeText(this, "ani_exception"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        Animation animTranslate  = AnimationUtils.loadAnimation(InitialLogin.this, R.anim.initiallogin);
+        animTranslate.setAnimationListener(new Animation.AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation arg0) {
+                ImageView img = (ImageView) findViewById(R.id.initialLogo);
+                img.setVisibility(View.VISIBLE);
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation arg0) { }
+
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                LoginBox.setVisibility(View.VISIBLE);
+                Animation animFade  = AnimationUtils.loadAnimation(InitialLogin.this, R.anim.fade);
+                LoginBox.startAnimation(animFade);
+            }
+        });
+        ImageView imgLogo = (ImageView) findViewById(R.id.initialLogo);
+        imgLogo.setVisibility(View.VISIBLE);
+        imgLogo.startAnimation(animTranslate);
+        //end animation method;
+    }
     private void populateAutoComplete() {
         if (!mayRequestContacts()) {
             return;
@@ -171,7 +239,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                                            @NonNull int[] grantResults) {
         if (requestCode == REQUEST_READ_CONTACTS) {
             if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                populateAutoComplete();
+                //populateAutoComplete();
             }
         }
     }
@@ -222,6 +290,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
+            mEmailSignInButton.setEnabled(true);
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
@@ -236,7 +305,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                 @Override
                 public void receiveData(Object object) {
                     String tmpData = (String) object;
-                    result_view.setText(tmpData);
+                    //result_view.setText(tmpData);
                 /*universal metho to filter Json Data from Json Array*/
                     ///filterType="deviceid_pass";
 
@@ -253,8 +322,8 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                         devCheck.setPass(password);
                         devCheck.setStatus(jsonObject.optString("ACTIVESTATUS"));
 
-                        Toast.makeText(InitialLogin.this, jsonObject.toString() + "*", Toast.LENGTH_LONG).show();
-                        result_view.setText(jsonObject.optString("ACTIVESTATUS"));
+                        //Toast.makeText(InitialLogin.this, jsonObject.toString() + "*", Toast.LENGTH_LONG).show();
+                        //result_view.setText(jsonObject.optString("ACTIVESTATUS"));
 
                         DBAdapter adp = new DBAdapter(InitialLogin.this);
                         adp.insertDeviceCheckController(devCheck);
@@ -278,18 +347,26 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                             customer_master_tbl_download();
                             customerMaster_tbl_dwnoad();
 
-                            //open app
-                            Intent appUI=new Intent(InitialLogin.this,CheckIn.class);
-                            InitialLogin.this.startActivity(appUI);
+                            //download complete here
+                            //previoesly CheckIn ui launched from here
 
                         } else {
+                            initialDwnloadCount=0;
+                            mEmailSignInButton.setEnabled(true);
                             Toast.makeText(InitialLogin.this, "Device ID or password is incorrect. Please check and tryagain", Toast.LENGTH_SHORT).show();
+                            showProgress(false);
                         }
                         //setLonding(false);
                         //filterJsonData(tmpData,"deviceid_pass") ;
 
                         //getMstProductData("devideId","pass");
                     } catch (JSONException e) {
+                        if(tmpData=="did not work"){
+                            initialDwnloadCount=0;
+                            Toast.makeText(activity, "Check Internet Connection", Toast.LENGTH_SHORT).show();
+                            mEmailSignInButton.setEnabled(true);
+                            showProgress(false);
+                        }
                         e.printStackTrace();
                     }
 
@@ -310,7 +387,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 1;
     }
 
     /**
@@ -394,22 +471,34 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     @Override
     public void receiveData(String result, String filter) {
+
         //-----------------------------------------receive data
-        Toast.makeText(this, "came inside recieve data", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Try to Fetch Data from Table:"+filter, Toast.LENGTH_LONG).show();
         if(result!=null){
+            initialDwnloadCount++;//count downloaded table count;
             String josnString=result;
-            Toast.makeText(this, "result:" + josnString, Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "result:" + josnString, Toast.LENGTH_LONG).show();
             try{
                 JsonFilter_Send josnFilter= new JsonFilter_Send(InitialLogin.this.getApplicationContext());
                 josnFilter.filterJsonData(josnString,filter);
 
             }catch (Exception e) {
-                Toast.makeText(this,"RecieveData:"+ e.getMessage(),Toast.LENGTH_LONG ).show();
+                Toast.makeText(this,"RecieveData Error:"+ e.getMessage(),Toast.LENGTH_LONG ).show();
             }
+
         }else{
-            Toast.makeText(this,"is nulllll",Toast.LENGTH_LONG ).show();
+            Toast.makeText(this,"is null",Toast.LENGTH_LONG ).show();
         }
-        Toast.makeText(InitialLogin.this,"method_complete",Toast.LENGTH_LONG).show();
+        //Toast.makeText(InitialLogin.this,"method_complete",Toast.LENGTH_LONG).show();
+        if(initialDwnloadCount>10){
+            //open app
+            showProgress(false);
+            Intent appUI=new Intent(InitialLogin.this,CheckIn.class);
+            InitialLogin.this.startActivity(appUI);
+            finish();
+
+        }
+        showProgress(true);
     }
     //-----------------------------------------------------------------------------------
 
@@ -452,21 +541,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                 JsonHelper jh = new JsonHelper(contxt,result_view);
                 initialDetails=jh.initialLoging(mDevideID, mPassword);
 
-
-               /* DBAdapter adp=new DBAdapter(InitialLogin.this);
-                adp.insertDeviceCheckController(initialDetails);*/
-
-
-                //launch login UI if Status is active
-               /*if(initialDetails.getStatus()=="YES"){
-                    Intent ui=new Intent(InitialLogin.this,Login.class );
-                    InitialLogin.this.startActivity(ui);
-
-                }*/
-
-
-
-            }catch (Exception e){
+             }catch (Exception e){
                 Toast.makeText(activity, "err"+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
@@ -487,8 +562,8 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
-            showProgress(false);
-            Toast.makeText(InitialLogin.this, "initialDetails_Status:"+initialDetails.getStatus(), Toast.LENGTH_SHORT).show();
+
+            //Toast.makeText(InitialLogin.this, "initialDetails_ Active Status:"+initialDetails.getStatus()+"Please Check DeviceId and Password", Toast.LENGTH_SHORT).show();
             if (success) {
                // finish();
                 //result_view.setText(statusStrg+"working");
@@ -654,7 +729,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+            //Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
         }
     }
     public  void supplet_tbl_update(){
@@ -667,7 +742,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+            //Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
         }
     }
     public  void productBrand_tbl_update(){
@@ -680,7 +755,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+            //Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
         }
     }
 }

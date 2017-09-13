@@ -15,7 +15,7 @@
     <color name="listDone">#607D8B</color>
     <color name="listUnDone">#B2DFDB</color>
     <color name="listUnselectedText">#000000</color>
-    <color name="bg">#46f4e0</color>
+    <color name="bg">#24b1a1</color>
     <color name="btn">#f2750f</color>
 
    <!-- Graph colors are declared in the 'Constants' Class "-->
