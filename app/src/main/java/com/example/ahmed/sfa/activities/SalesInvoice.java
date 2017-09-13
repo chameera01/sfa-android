@@ -304,7 +304,7 @@ public class SalesInvoice extends AppCompatActivity {
     }
 
     private void initSubBrandsSpinner(String principle) {
-        if (principle == null || principle == "" || principle.equals("ALL")) {
+        if (principle == null || principle.equals("ALL")) {
             principle = "";
         }
 

@@ -42,7 +42,7 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
 
          //navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);

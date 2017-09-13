@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.Activities.AddCustomer;
+import com.example.ahmed.sfa.Activities.Invoice;
 import com.example.ahmed.sfa.R;
 
 import com.example.ahmed.sfa.Activities.AddExtraCustomer;
@@ -247,9 +248,9 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
                 break;
 
             case R.id.sales_invoice:
-                if(!(activity instanceof SalesInvoice)){
+                if(!(activity instanceof Invoice)){
                     //Intent intent = new Intent(activity,DisplayProductTableActivity.class);
-                    Intent intent = new Intent(activity, SalesReturn.class);
+                    Intent intent = new Intent(activity, Invoice.class);
                     activity.startActivity(intent);
                     return true;
                 }

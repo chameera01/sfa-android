@@ -205,49 +205,32 @@
             android:layout_height="wrap_content">
             <TextView
                 android:text="Sub Total"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                style="@style/InvoiceSummaryTextViews"/>
             <TextView
                 android:id="@+id/sub_tot_si"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                style="@style/InvoiceSummaryTextViews"/>
             <TextView
                 android:text="Invoiced Qty"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                style="@style/InvoiceSummaryTextViews"/>
             <TextView
                 android:id="@+id/inv_qty_si"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                style="@style/InvoiceSummaryTextViews" />
             <TextView
                 android:text="Discount"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                style="@style/InvoiceSummaryTextViews"/>
             <TextView
                 android:id="@+id/discount_si"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                style="@style/InvoiceSummaryTextViews"/>
             <TextView
                 android:text="Total"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/tot_si"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                style="@style/InvoiceSummaryTextViews"/>
             <TextView
 
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                android:id="@+id/tot_si"
+                style="@style/InvoiceSummaryTextViews" />
+            <TextView
+
+                style="@style/InvoiceSummaryTextViews" />
 
             <Button
                 android:id="@+id/next_si"
@@ -261,14 +244,6 @@
 
     </RelativeLayout>
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_navigation_drawer"
-        app:menu="@menu/activity_navigation_drawer_drawer" />
 
 
 

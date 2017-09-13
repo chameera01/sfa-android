@@ -363,7 +363,7 @@ public class SalesInvoiceProductsTableAdapter {
         });
 
 
-        EditText disc = (EditText)row.findViewById(R.id.dsc_e_asi);
+        EditText disc = (EditText)row.findViewById(R.id.dsc_e_si);
         disc.setText(salesrow.getDiscountRate()+"");
         disc.addTextChangedListener(new TextWatcher() {
             CharSequence old;

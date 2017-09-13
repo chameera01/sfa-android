@@ -135,7 +135,7 @@ public class SalesInvoiceAddedChoicesAdapter {
         EditText request = (EditText) row.findViewById(R.id.request_e_si);
         EditText order = (EditText) row.findViewById(R.id.order_e_si);
         EditText free = (EditText) row.findViewById(R.id.free_e_si);
-        EditText disc = (EditText) row.findViewById(R.id.dsc_e_asi);
+        EditText disc = (EditText) row.findViewById(R.id.dsc_e_si);
         TextView linVal = (TextView)row.findViewById(R.id.line_val_e_si);
 
         code.setText(salesrow.getCode());
