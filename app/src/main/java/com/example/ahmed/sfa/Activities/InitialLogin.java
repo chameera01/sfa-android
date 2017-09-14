@@ -614,7 +614,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private void check_incheck_out_tbl_download() {
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_CheckInOutPoints/SelectMst_CheckInOutPoints?DeviceID=T1&RepID=93",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_CheckInOutPoints/SelectMst_CheckInOutPoints?DeviceID=T1&RepID=93",InitialLogin.this);
             jObjGen.setFilterType("CheckInOutPoints");
 
             SyncReturn io = new SyncReturn();
@@ -628,7 +628,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private void reason_tbl_download() {
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_Reasons/SelectMst_Reasons?DeviceID=T1&RepID=93",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Reasons/SelectMst_Reasons?DeviceID=T1&RepID=93",InitialLogin.this);
             jObjGen.setFilterType("Reason");
 
             SyncReturn io = new SyncReturn();
@@ -642,7 +642,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private void route_tbl_download() {
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_Route/SelectMst_Route?DeviceID=T1&RepID=93",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Route/SelectMst_Route?DeviceID=T1&RepID=93",InitialLogin.this);
             jObjGen.setFilterType("route");
 
             SyncReturn io = new SyncReturn();
@@ -656,7 +656,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private void territory_tbl_download() {
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_Territory/SelectMst_Territory?DeviceID=T1&RepID=93",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Territory/SelectMst_Territory?DeviceID=T1&RepID=93",InitialLogin.this);
             jObjGen.setFilterType("territory");
 
             SyncReturn io = new SyncReturn();
@@ -670,7 +670,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private void distric_table_download() {
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_District/SelectMst_District?DeviceID=T1&RepID=93",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_District/SelectMst_District?DeviceID=T1&RepID=93",InitialLogin.this);
             jObjGen.setFilterType("district");
 
             SyncReturn io = new SyncReturn();
@@ -685,7 +685,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
     private void customer_status_tbl_download() {
 
         try{
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_CustomerStatus/SelectMst_CustomerStatus?DeviceID=T1&RepID=93",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_CustomerStatus/SelectMst_CustomerStatus?DeviceID=T1&RepID=93",InitialLogin.this);
             jObjGen.setFilterType("CustomerStatus");
 
             SyncReturn io = new SyncReturn();
@@ -709,8 +709,8 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
     //initial update of data tables;
     public void customerMaster_tbl_dwnoad() {
      try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93",InitialLogin.this);
-            jObjGen.setFilterType("ProductDetails");
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/productdetails/SelectProductDetails?DeviceID=T1&RepID=93",InitialLogin.this);
+            jObjGen.setFilterType("productdetails");
             SyncReturn io = new SyncReturn();
             io.execute(jObjGen);
 
@@ -721,7 +721,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
     }
     public  void repDetails_update(){
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/GetRepDetails/SelectGetRepDetails?DeviceID=T1&RepID=93",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/GetRepDetails/SelectGetRepDetails?DeviceID=T1&RepID=93",InitialLogin.this);
             jObjGen.setFilterType("RepDetails");
 
             SyncReturn io = new SyncReturn();
@@ -734,7 +734,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
     }
     public  void supplet_tbl_update(){
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_SupplierTable/SelectProductMst_SupplierTable?DeviceID=T1&RepID=93",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_SupplierTable/SelectProductMst_SupplierTable?DeviceID=T1&RepID=93",InitialLogin.this);
             jObjGen.setFilterType("SupplierTable");
 
             SyncReturn io = new SyncReturn();

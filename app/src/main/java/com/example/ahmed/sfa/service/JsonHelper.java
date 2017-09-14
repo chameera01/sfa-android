@@ -138,7 +138,7 @@ public class JsonHelper {
                     String tmpData = (String)object;
                     //result_view.setText("inside Method getMstProductData");
                 /*universal metho to filter Json Data from Json Array*/
-                    //filterType="ProductDetails";
+                    //filterType="productdetails";
 
                 /*end unit methos*/
                     try {
@@ -149,14 +149,14 @@ public class JsonHelper {
                         */
                         //result_view.setText("inside try catch");
                         setLonding(false);
-                        filterJsonData(tmpData,"ProductDetails") ;
+                        filterJsonData(tmpData,"productdetails") ;
                     } catch (Exception e) {
                         e.printStackTrace();
                         //result_view.setText("exception on trycatch "+e.getMessage());
                     }
 
                 }
-            }.execute("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93",null,null);
+            }.execute("http://www.bizmapexpert.com/api/productdetails/SelectProductDetails?DeviceID=T1&RepID=93",null,null);
 
 
             return recieveData[0];
@@ -348,7 +348,7 @@ public class JsonHelper {
 
                     break;
 
-                case "ProductDetails":
+                case "productdetails":
                     Mst_ProductMaster productMst= new Mst_ProductMaster();
 
                     JSONArray jsonProductArray = new JSONArray(result);

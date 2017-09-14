@@ -49,7 +49,7 @@ TextView result_view;
         }*/
 
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93", this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/productdetails/SelectProductDetails?DeviceID=T1&RepID=93", this);
             SyncReturn io = new SyncReturn();
             io.execute(jObjGen);
 
@@ -66,7 +66,7 @@ TextView result_view;
             Toast.makeText(this, "result" + josnString, Toast.LENGTH_LONG).show();
             try{
                 JsonFilter_Send josnFilter= new JsonFilter_Send(ServiceTest.this.getApplicationContext());
-                josnFilter.filterJsonData(josnString,"ProductDetails");
+                josnFilter.filterJsonData(josnString,"productdetails");
             }catch (Exception e) {
                 Toast.makeText(this,"RecieveData:"+ e.getMessage(),Toast.LENGTH_LONG ).show();
             }
@@ -82,7 +82,7 @@ TextView result_view;
         }
         try{
             JsonFilter_Send josnFilter= new JsonFilter_Send(ServiceTest.this.getApplicationContext());
-           // josnFilter.filterJsonData(josnString,"ProductDetails");
+           // josnFilter.filterJsonData(josnString,"productdetails");
         }catch (Exception e) {
             Toast.makeText(this,"RecieveData:"+ e.getMessage(),Toast.LENGTH_LONG ).show();
         }*/

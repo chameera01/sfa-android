@@ -2,6 +2,7 @@ package com.example.ahmed.sfa.Activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -24,6 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.Volley.VolleyLog;
+import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 import com.example.ahmed.sfa.service.JsonFilter_Send;
 import com.example.ahmed.sfa.service.JsonObjGenerate;
@@ -43,6 +45,7 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 import static android.R.attr.name;
 import static android.R.attr.type;
@@ -62,6 +65,8 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
     ImageView ivReasonSync;
     ImageView ivchechInOutPointsSync;
     ImageView ivCustomerSync;
+    String deviecId ="t1";
+    String repId="93";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +100,29 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
 
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
         NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
+        getRepAndDeviceId();
     }
 
+    public void getRepAndDeviceId(){
+        try {
+        DBAdapter dbAdapter = new DBAdapter(this);
+        Cursor deviceCursor = dbAdapter.runQuery("select * from DeviceCheckController where ACTIVESTATUS = 'YES'");
+        Cursor repCursor = null;
+        deviceCursor.moveToFirst();
+
+
+
+
+
+            deviecId = repCursor.getString(repCursor.getColumnIndex("DeviceID"));
+            repCursor = dbAdapter.runQuery("select * from Mst_RepTable");
+            repCursor.moveToFirst();
+            repId = repCursor.getString(repCursor.getColumnIndex("RepID"));
+        }catch (Exception e){
+            Log.e("data:",e.getMessage());
+        }
+
+    }
     public  void setListeners(){
         final LinearLayout app_layer = (LinearLayout) findViewById (R.id.product_layout);
         app_layer.setOnClickListener(new View.OnClickListener() {
@@ -124,8 +150,8 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"clckedSync",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93",ManualSync.this);
-                    jObjGen.setFilterType("ProductDetails");
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/productdetails/SelectProductDetails?DeviceID=T1&RepID=93",ManualSync.this);
+                    jObjGen.setFilterType("productdetails");
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
 
@@ -143,7 +169,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"clckedSync",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/GetRepDetails/SelectGetRepDetails?DeviceID=T1&RepID=93",ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/GetRepDetails/SelectGetRepDetails?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("RepDetails");
 
                     SyncReturn io = new SyncReturn();
@@ -163,7 +189,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"clckedSync",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_SupplierTable/SelectProductMst_SupplierTable?DeviceID=T1&RepID=93",ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_SupplierTable/SelectProductMst_SupplierTable?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("SupplierTable");
 
                     SyncReturn io = new SyncReturn();
@@ -184,7 +210,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"clckedSync",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93",ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("ProductBrandManagement");
 
                     SyncReturn io = new SyncReturn();
@@ -205,7 +231,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"clckedSync",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_CustomerStatus/SelectMst_CustomerStatus?DeviceID=T1&RepID=93",ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_CustomerStatus/SelectMst_CustomerStatus?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("CustomerStatus");
 
                     SyncReturn io = new SyncReturn();
@@ -225,7 +251,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_District/SelectMst_District?DeviceID=T1&RepID=93",ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_District/SelectMst_District?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("district");
 
                     SyncReturn io = new SyncReturn();
@@ -245,7 +271,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_Territory/SelectMst_Territory?DeviceID=T1&RepID=93",ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Territory/SelectMst_Territory?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("territory");
 
                     SyncReturn io = new SyncReturn();
@@ -265,7 +291,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_Route/SelectMst_Route?DeviceID=T1&RepID=93",ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Route/SelectMst_Route?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("route");
 
                     SyncReturn io = new SyncReturn();
@@ -285,7 +311,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_Reasons/SelectMst_Reasons?DeviceID=T1&RepID=93",ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Reasons/SelectMst_Reasons?DeviceID="+deviecId+"&RepID="+repId+"",ManualSync.this);
                     jObjGen.setFilterType("Reason");
 
                     SyncReturn io = new SyncReturn();
@@ -305,7 +331,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_CheckInOutPoints/SelectMst_CheckInOutPoints?DeviceID=T1&RepID=93",ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_CheckInOutPoints/SelectMst_CheckInOutPoints?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("CheckInOutPoints");
 
                     SyncReturn io = new SyncReturn();
@@ -325,7 +351,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/Mst_Customermaster/SelectMst_Customermaster?DeviceID=T1&RepID=93",ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Customermaster/SelectMst_Customermaster?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("Customer");
 
                     SyncReturn io = new SyncReturn();

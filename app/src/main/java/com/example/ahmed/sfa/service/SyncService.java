@@ -28,7 +28,7 @@ public class SyncService extends Service implements JsonRequestListerner{
             Toast.makeText(this, "result" + josnString, Toast.LENGTH_LONG).show();
             try{
                 JsonFilter_Send josnFilter= new JsonFilter_Send(SyncService.this.getApplicationContext());
-                josnFilter.filterJsonData(josnString,"ProductDetails");
+                josnFilter.filterJsonData(josnString,"productdetails");
             }catch (Exception e) {
                 Toast.makeText(this,"RecieveData:"+ e.getMessage(),Toast.LENGTH_LONG ).show();
             }
@@ -54,7 +54,7 @@ public class SyncService extends Service implements JsonRequestListerner{
                 /*****************/
                 while (0<1){
 
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93", SyncService.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/productdetails/SelectProductDetails?DeviceID=T1&RepID=93", SyncService.this);
                 SyncReturn io = new SyncReturn();
                 io.execute(jObjGen);
                 Toast.makeText(SyncService.this.contxt, "SERVICE_runiing_10sec", Toast.LENGTH_LONG).show();

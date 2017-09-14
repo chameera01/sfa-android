@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.Activities.Home;
@@ -52,7 +53,11 @@ public class CheckIn extends AppCompatActivity implements CheckInCheckOutActions
         TextView day = (TextView) findViewById(R.id.navigation_header_day);
         day.setText(DateManager.getDayOfWeek());
         TextView time = (TextView)findViewById(R.id.navigation_header_time);
-        time.setText(DateManager.getTime());
+        String time_checkIn = DateManager.getTime();
+        String[] time_arr = time_checkIn.split(":");
+        Toast.makeText(this, ""+time_checkIn, Toast.LENGTH_SHORT).show();
+        time.setText(time_arr[0]+":"+time_arr[1]);
+
         TextView month = (TextView)findViewById(R.id.month);
         month.setText(DateManager.getMonthName());
         loc.setAdapter(man.getLocationsArrayAdapter(man.isCheckedIn()));
