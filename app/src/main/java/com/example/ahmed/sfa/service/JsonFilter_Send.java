@@ -63,7 +63,7 @@ public class JsonFilter_Send {
                     //activeStatus=status;
                     break;
 
-                case "ProductDetails":
+                case "productdetails":
                     Mst_ProductMaster productMst= new Mst_ProductMaster();
                     DBAdapter adptr=new DBAdapter(context);
 

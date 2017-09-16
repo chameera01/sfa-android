@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
-                    android:text="Skipp"
+                    android:text="Skip"
                     android:visibility="invisible" />
 
                 <Button
