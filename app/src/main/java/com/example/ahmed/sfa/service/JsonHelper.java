@@ -156,7 +156,7 @@ public class JsonHelper {
                     }
 
                 }
-            }.execute("http://www.bizmapexpert.com/api/productdetails/SelectProductDetails?DeviceID=T1&RepID=93",null,null);
+            }.execute("http://www.bizmapexpert.com/DIstributorManagementSystem/productdetails/SelectProductDetails?DeviceID=T1&RepID=93",null,null);
 
 
             return recieveData[0];
@@ -167,7 +167,7 @@ public class JsonHelper {
     public  void sendInitialData(String devideId,String pass){
         HttpAsyncTask a = new HttpAsyncTask();
 
-        new HttpAsyncTask().execute("http://www.bizmapexpert.com/api/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93");
+        new HttpAsyncTask().execute("http://www.bizmapexpert.com/DIstributorManagementSystem/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93");
        // filterType="salesProductBrand";
     }
 
