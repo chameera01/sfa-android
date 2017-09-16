@@ -2,10 +2,13 @@ package com.example.ahmed.sfa.controllers.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,23 +19,45 @@ import android.widget.Toast;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
+import com.google.android.gms.common.data.DataBufferObserver;
 
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by Ahmed on 9/9/2017.
  */
 
-public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecyclerAdapter.MyViewHolder> {
+public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecyclerAdapter.MyViewHolder>
+implements SummaryUpdater{
 
     private List<SalesInvoiceModel> salesInvoice;
     boolean onBind;
-    public final String SHELF = "SHLEF",REQUEST="REQUEST",ORDER="ORDER",FREE="FREE",DISCOUNT="DISCOUNT";
+    public final String SHELF = "SHLEF",REQUEST="REQUEST",ORDER="ORDER",FREE="FREE",DISCOUNT="DISCOUNT",
+            LINEVAL = "LINEVAL";
     DBAdapter dbAdapter;
+
+    SummaryUpdateListner listner;
+
+
+    @Override
+    public void notifyUpdate() {
+        listner.updateSummary();
+    }
+
+    @Override
+    public void addListener(SummaryUpdateListner listner) {
+        this.listner = listner;
+    }
+
+
+
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView code,product,expiry,unitprice,stock,lineval,batchNum;
@@ -81,6 +106,8 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
                     discount.setSelection(discount.getText().length());
                     break;
 
+
+
             }
         }
 
@@ -123,7 +150,7 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
             holder.request.setText(siModel.getRequest() + "");
             holder.order.setText(siModel.getOrder() + "");
             holder.free.setText(siModel.getFree() + "");
-            holder.discount.setText(siModel.getDiscount() + "");
+            holder.discount.setText(siModel.getDiscountRate() + "");
         }else{
 
             for(Object editText :payload) {
@@ -143,7 +170,11 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
                         holder.free.setText(salesInvoice.get(position).getFree() + "");
                         break;
                     case DISCOUNT:
-                        holder.discount.setText(salesInvoice.get(position).getDiscount() + "");
+                        holder.discount.setText(salesInvoice.get(position).getDiscountRate() + "");
+                        break;
+
+                    case LINEVAL:
+                        holder.lineval.setText(salesInvoice.get(position).getLineValue()+"");
                         break;
                     default:
                         onBindViewHolder(holder, position);
@@ -156,12 +187,7 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
         //ADD TEXT WATCHERS
 
 
-        holder.shelf.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-
-            }
-        });
+        holder.shelf.setOnFocusChangeListener(new FocusChangeListener());
 
         holder.shelf.addTextChangedListener(new GenericTextWatcher() {
 
@@ -189,24 +215,18 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
 
         });
 
+        holder.request.setOnFocusChangeListener(new FocusChangeListener());
 
-        holder.request.addTextChangedListener(new GenericTextWatcher() {
+        holder.request.setOnKeyListener(new View.OnKeyListener() {
             boolean valHasChanged = false;
             boolean freeHasChanged = false;
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
                 valHasChanged = false;
                 freeHasChanged = false;
-                if(!s.toString().equals("")){
+                if(!((EditText)v).getText().toString().equals("")){
 
-                    int val = Integer.parseInt(s.toString());
+                    int val = Integer.parseInt(((EditText)v).getText().toString());
                     int stock =salesInvoice.get(position).getStock();
                     if(val>stock){
                         //Toast.makeText(null,"Enter a valid Qty",Toast.LENGTH_SHORT).show();
@@ -224,6 +244,8 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
                     //initTable();
 
 //                        notifyItemChanged(position,new String[]{ORDER});
+                }else{
+                    salesInvoice.get(position).setRequest(0);
                 }
 
 
@@ -234,16 +256,35 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
                     notifyItemChanged(position,ORDER);
                     if(valHasChanged){
                         notifyItemChanged(position,REQUEST);
-                        holder.setCursor(REQUEST);
+                        //holder.setCursor(REQUEST);
                     }
                     if(freeHasChanged){
                         notifyItemChanged(position,FREE);
                     }
                 }
                 dbAdapter.updateInvoiceData(salesInvoice.get(position));
+                notifyUpdate();
+
+                return false;
+            }
+        });
+        holder.request.addTextChangedListener(new GenericTextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
             }
         });
 
+        holder.order.setOnFocusChangeListener(new FocusChangeListener());
         holder.order.addTextChangedListener(new GenericTextWatcher(){
             boolean valHasChanged = false;
             boolean freeHasChanged = false;
@@ -279,24 +320,28 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
 
                     //notifyItemChanged(position);
 
+                }else{
+                    salesInvoice.get(position).setOrder(0);
                 }
 
                 if(!onBind){
                     //notifyItemChanged(position);
                     if(valHasChanged){
                         notifyItemChanged(position,ORDER);//notify the adapter that value changed and refresh the view mentioned by the string
-                        holder.setCursor(ORDER);
+                        //holder.setCursor(ORDER);
                     }
                     if(freeHasChanged) notifyItemChanged(position,FREE);
                 }
 
                 dbAdapter.updateInvoiceData(salesInvoice.get(position)); //update the value in the database
-
+                notifyUpdate();
 
             }
 
         });
 
+
+        holder.free.setOnFocusChangeListener(new FocusChangeListener());
         holder.free.addTextChangedListener(new GenericTextWatcher(){
             @Override
             public void onTextChanged(CharSequence s,int start,int before,int after) {
@@ -305,26 +350,31 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
 
             @Override
             public void afterTextChanged(Editable s) {
+                boolean valChanged = false;
                 if (!s.toString().equals("")) {
 
                     int val = Integer.parseInt(s.toString());
                     salesInvoice.get(position).setFree(val);
                     if (salesInvoice.get(position).getOrder() + salesInvoice.get(position).getFree() > salesInvoice.get(position).getStock()) {
                         salesInvoice.get(position).setFree(0);
-
+                        valChanged = true;
                     }
                     //initTable();
                     //notifyItemChanged(position);
                 }
                 if(!onBind){
-                    notifyItemChanged(position);
+                    //notifyItemChanged(position);
+                    notifyItemChanged(position,LINEVAL);
+                    if(valChanged)notifyItemChanged(position,FREE);
                 }
                 holder.setCursor(FREE);
                 dbAdapter.updateInvoiceData(salesInvoice.get(position));
+                notifyUpdate();
             }
         });
 
 
+        holder.discount.setOnFocusChangeListener(new FocusChangeListener());
         holder.discount.addTextChangedListener(new GenericTextWatcher(){
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -337,17 +387,22 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
             public void afterTextChanged(Editable s) {
                 if(!(s.equals(salesInvoice.get(position).getDiscountRate()+""))){
                     if(!s.toString().equals("")){
-                        salesInvoice.get(position).setDiscountRate(Double.parseDouble(s.toString()));
+                        Double rate = Double.parseDouble(s.toString().trim());
+                        Log.i(" RAte ",rate+"");
+                        salesInvoice.get(position).setDiscountRate(rate);
                         //notifyItemChanged(position);
+                        if(!onBind)notifyItemChanged(position,LINEVAL);
+                        dbAdapter.updateInvoiceData(salesInvoice.get(position));
+                        notifyUpdate();
                     }
                 }
-                if(!onBind)notifyItemChanged(position);
-                dbAdapter.updateInvoiceData(salesInvoice.get(position));
+                //if(!onBind)notifyItemChanged(position);
+
             }
         });
 
         if(position%2==0){
-            holder.setColor(Color.DKGRAY);
+            holder.setColor(Color.LTGRAY);
         }else{
             holder.setColor(Color.GRAY);
         }
@@ -361,9 +416,7 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
     }
 
 
-    public void notifyDataItemChanged(int position ){
-        super.notifyDataSetChanged();
-    }
+
 
 
     @Override
@@ -397,19 +450,38 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
 
         }
 
-        public void updateInvoiceData(SalesInvoiceModel model){
+        public void updateInvoiceData(final SalesInvoiceModel model){
             openDB();
+
 
             String sql = "UPDATE temp_invoice SET" +
                     " Shelf="+model.getShelf()+" , Request="+model.getRequest()
                     +" , OrderQty="+model.getOrder()+" , Free="+model.getFree()
-                    +" , Disc="+model.getDiscount()+" , LineVal="+model.getLineValue()
-                    +" WHERE ";
+                    +" , Disc="+model.getDiscountRate()+" , LineVal="+model.getLineValue()
+                    +" WHERE _id="+model.getId();
             db.execSQL(sql);
 
             closeDB();
+
         }
 
 
     }
+
+
+    class FocusChangeListener implements View.OnFocusChangeListener{
+
+        @Override
+        public void onFocusChange(View v, boolean hasFocus) {
+            EditText view = (EditText)v;
+            //if(hasFocus){
+            if(view.getText().equals("0") || view.getText().equals("0.0")){
+                view.setText("");
+            }else{
+                view.setSelection(view.getText().length());
+            }
+            //}
+        }
+    }
+
 }

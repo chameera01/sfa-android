@@ -98,7 +98,7 @@ public class JsonHelper {
             }
 
         }
-    }.execute("http://www.bizmapexpert.com/api/DeviceCheck/DeviceCheckController?DeviceID=" + deviceId + "&Password=" + pass + "", null, null);
+    }.execute("http://www.bizmapexpert.com/DistributorManagementSystem/DeviceCheck/DeviceCheckController?DeviceID=" + deviceId + "&Password=" + pass + "", null, null);
 
 
 
@@ -156,7 +156,7 @@ public class JsonHelper {
                     }
 
                 }
-            }.execute("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93",null,null);
+            }.execute("http://www.bizmapexpert.com/DistributorManagementSystem/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93",null,null);
 
 
             return recieveData[0];
@@ -167,7 +167,7 @@ public class JsonHelper {
     public  void sendInitialData(String devideId,String pass){
         HttpAsyncTask a = new HttpAsyncTask();
 
-        new HttpAsyncTask().execute("http://www.bizmapexpert.com/api/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93");
+        new HttpAsyncTask().execute("http://www.bizmapexpert.com/DistributorManagementSystem/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=93");
        // filterType="salesProductBrand";
     }
 

@@ -54,7 +54,7 @@ public class SyncService extends Service implements JsonRequestListerner{
                 /*****************/
                 while (0<1){
 
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/api/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93", SyncService.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DistributorManagementSystem/ProductDetails/SelectProductDetails?DeviceID=T1&RepID=93", SyncService.this);
                 SyncReturn io = new SyncReturn();
                 io.execute(jObjGen);
                 Toast.makeText(SyncService.this.contxt, "SERVICE_runiing_10sec", Toast.LENGTH_LONG).show();

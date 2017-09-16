@@ -20,7 +20,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="InvoiceSummaryTextViews" parent="android:style/Widget.TextView">
+    <style name="SalesSummaryTextViews" parent="android:style/Widget.TextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_margin">1dp</item>
@@ -30,20 +30,21 @@
         <item name="android:textColor">@color/listSelectedText</item>
     </style>
 
-    <style name="SalesInvoiceSpinnerViews" parent="android:style/Widget.Spinner">
+    <style name="SalesSpinnerViews" parent="android:style/Widget.Spinner">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="InvoiceRowTextView" parent="android:style/Widget.TextView">
+    <style name="SalesRowTextView" parent="android:style/Widget.TextView">
         <item name="android:layout_marginTop">0dp</item>
-        <item name="android:padding">0dp</item>
+        <item name="android:padding">1dp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16dp</item>
     </style>
 
-    <style name="InvoiceTableHeaderTextViews" parent="android:style/Widget.TextView">
+    <style name="SalesTableHeaderTextViews" parent="android:style/Widget.TextView">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_height">wrap_content</item>

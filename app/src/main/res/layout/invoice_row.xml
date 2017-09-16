@@ -14,14 +14,14 @@
 
         android:layout_weight="1"
         android:textAlignment="center"
-        style="@style/InvoiceRowTextView"/>
+        style="@style/SalesRowTextView"/>
     <LinearLayout android:layout_width="0dp" android:layout_weight="3" android:layout_height="match_parent">
 
 
         <TextView android:id="@+id/product_e_si"
             android:textAlignment="textStart"
             android:layout_width="wrap_content"
-            style="@style/InvoiceRowTextView"
+            style="@style/SalesRowTextView"
             />
     </LinearLayout>
 
@@ -29,56 +29,56 @@
 
         android:layout_weight="2"
         android:textAlignment="textStart"
-        style="@style/InvoiceRowTextView"/>
+        style="@style/SalesRowTextView"/>
     <TextView android:id="@+id/expiry_e_si"
 
         android:layout_weight="1.5"
         android:textAlignment="textStart"
-        style="@style/InvoiceRowTextView"/>
+        style="@style/SalesRowTextView"/>
     <TextView android:id="@+id/unit_price_e_si"
 
         android:inputType="numberDecimal"
         android:layout_weight="1"
         android:textAlignment="center"
-        style="@style/InvoiceRowTextView"/>
+        style="@style/SalesRowTextView"/>
     <TextView android:id="@+id/stock_e_si"
 
         android:inputType="number"
         android:layout_weight="1"
         android:textAlignment="center"
-        style="@style/InvoiceRowTextView"/>
+        style="@style/SalesRowTextView"/>
     <EditText android:id="@+id/shelf_e_si"
         android:inputType="number"
         android:layout_weight="1"
         android:textAlignment="center"
-        style="@style/InvoiceRowTextView"/>
+        style="@style/SalesRowTextView"/>
     <EditText android:id="@+id/request_e_si"
 
         android:layout_weight="1"
         android:inputType="number"
         android:textAlignment="center"
-        style="@style/InvoiceRowTextView"/>
+        style="@style/SalesRowTextView"/>
     <EditText android:id="@+id/order_e_si"
 
         android:layout_weight="1"
         android:inputType="number"
         android:textAlignment="center"
-        style="@style/InvoiceRowTextView"/>
+        style="@style/SalesRowTextView"/>
     <EditText android:id="@+id/free_e_si"
 
         android:layout_weight="1"
         android:inputType="number"
         android:textAlignment="center"
-        style="@style/InvoiceRowTextView"/>
+        style="@style/SalesRowTextView"/>
     <EditText android:id="@+id/dsc_e_si"
-        style="@style/InvoiceRowTextView"
+        style="@style/SalesRowTextView"
         android:layout_weight="1"
         android:inputType="numberDecimal"
         android:textAlignment="center"
         />
     <TextView android:id="@+id/line_val_e_si"
         android:layout_weight="1"
-        style="@style/InvoiceRowTextView"
+        style="@style/SalesRowTextView"
         android:textAlignment="center"
         />
 </TableRow>
