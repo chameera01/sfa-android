@@ -121,7 +121,7 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SalesInvoicePayment.this,SalesReturn.class);
+                Intent intent = new Intent(SalesInvoicePayment.this,Return.class);
                 intent.putExtra(Constants.CUSTOMER_NO,customerNo);
                 intent.putExtra(Constants.ITINERARY,itinerary);
                // intent.putExtra(Constants.SALES_PAYMENT_SUMMARY,payment);//send this so the activity can return the object adding more data to it

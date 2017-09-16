@@ -137,8 +137,8 @@ public class SalesReturnProductsTableAdapter {
         TableRow row = (TableRow)activity.getLayoutInflater().inflate(R.layout.si_editview_row,table,false);
         salesrow = data.get(selectedRow);
 
-        TextView code = (TextView)row.findViewById(R.id.code_e_si);
-        TextView product = (TextView)row.findViewById(R.id.product_e_si);
+        TextView code = (TextView)row.findViewById(R.id.code_e);
+        TextView product = (TextView)row.findViewById(R.id.product_e);
         code.setText(salesrow.getCode());
         product.setText(salesrow.getProduct());
 
@@ -165,19 +165,19 @@ public class SalesReturnProductsTableAdapter {
             }
         });
 
-        TextView batch = (TextView)row.findViewById(R.id.batch_e_si);
+        TextView batch = (TextView)row.findViewById(R.id.batch_e);
         batch.setText(salesrow.getBatchNumber());
 
-        TextView expiry = (TextView)row.findViewById(R.id.expiry_e_si);
+        TextView expiry = (TextView)row.findViewById(R.id.expiry_e);
         expiry.setText(salesrow.getExpiryDate());
 
-        TextView unitprice = (TextView) row.findViewById(R.id.unit_price_e_si);
+        TextView unitprice = (TextView) row.findViewById(R.id.unit_price_e);
         unitprice.setText(salesrow.getUnitPrice()+"");
 
-        TextView stock = (TextView)row.findViewById(R.id.stock_e_si);
+        TextView stock = (TextView)row.findViewById(R.id.stock_e);
         stock.setText(salesrow.getStock()+"");
 
-        EditText shelf = (EditText)row.findViewById(R.id.shelf_e_si);
+        EditText shelf = (EditText)row.findViewById(R.id.shelf_e);
         shelf.setText(salesrow.getShelf()+"");
         shelf.addTextChangedListener(new TextWatcher() {
             CharSequence old;
@@ -214,7 +214,7 @@ public class SalesReturnProductsTableAdapter {
             }
         });
 
-        EditText request = (EditText)row.findViewById(R.id.request_e_si);
+        EditText request = (EditText)row.findViewById(R.id.request_e);
         request.setText(salesrow.getRequest()+"");
         request.addTextChangedListener(new TextWatcher() {
             CharSequence old;
@@ -267,7 +267,7 @@ public class SalesReturnProductsTableAdapter {
         });
 
 
-        final EditText order = (EditText)row.findViewById(R.id.order_e_si);
+        final EditText order = (EditText)row.findViewById(R.id.order_e);
         order.setText(salesrow.getOrder()+"");
         order.addTextChangedListener(new TextWatcher() {
 
@@ -321,7 +321,7 @@ public class SalesReturnProductsTableAdapter {
             }
         });
 
-        EditText free = (EditText)row.findViewById(R.id.free_e_si);
+        EditText free = (EditText)row.findViewById(R.id.free_e);
         free.setText(salesrow.getFree()+"");
         free.addTextChangedListener(new TextWatcher() {
             CharSequence old;
@@ -363,7 +363,7 @@ public class SalesReturnProductsTableAdapter {
         });
 
 
-        EditText disc = (EditText)row.findViewById(R.id.dsc_e_si);
+        EditText disc = (EditText)row.findViewById(R.id.dsc_e);
         disc.setText(salesrow.getDiscountRate()+"");
         disc.addTextChangedListener(new TextWatcher() {
             CharSequence old;
@@ -398,7 +398,7 @@ public class SalesReturnProductsTableAdapter {
         });
 
 
-        TextView linVal = (TextView)row.findViewById(R.id.line_val_e_si);
+        TextView linVal = (TextView)row.findViewById(R.id.line_val_e);
         linVal.setText(salesrow.getLineValue()+"");
 
 

@@ -2,6 +2,7 @@ package com.example.ahmed.sfa.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.location.Location;
 import android.location.LocationManager;
@@ -73,55 +74,6 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
         init();
         //assign views for summary
 
-        subTotal = (TextView)findViewById(R.id.sub_tot_si);
-        invoicedQty = (TextView)findViewById(R.id.inv_qty_si);
-        discount = (TextView) findViewById(R.id.discount_si);
-        total = (TextView) findViewById(R.id.tot_si);
-
-        //assign views
-        principleSpinner = (Spinner)findViewById(R.id.principleSpinner);
-        subBrandSpinner = (Spinner)findViewById(R.id.subBrandSpinner);
-        searchView = (SearchView) findViewById(R.id.search);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterContent((Principle) principleSpinner.getSelectedItem()
-                        ,(Brand)subBrandSpinner.getSelectedItem(),newText);
-                return true;
-            }
-        });
-
-        //set navigation drawer
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
-
-        dbAdapter = new DBAdapter(this);
-        dbAdapter.createTempTable();
-        invoiceModelList = dbAdapter.getAllData();
-        recyclerView = (RecyclerView)findViewById(R.id.invoiceRecycler);
-        adapter = new InvoiceRecyclerAdapter(invoiceModelList);
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        adapter.addListener(this);
-        adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-            @Override
-            public void onChanged() {
-                super.onChanged();
-
-            }
-        });
-
-        //intialize the spinnners
-        initPrincipleSpinner();//inside this subrands spinner initializer will be called
 
     }
 
@@ -150,6 +102,58 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
                 itinerary = getIntent().getParcelableExtra(Constants.ITINERARY);
 
 
+
+                subTotal = (TextView)findViewById(R.id.sub_tot_si);
+                invoicedQty = (TextView)findViewById(R.id.inv_qty_si);
+                discount = (TextView) findViewById(R.id.discount_si);
+                total = (TextView) findViewById(R.id.tot_si);
+
+                //assign views
+                principleSpinner = (Spinner)findViewById(R.id.principleSpinner);
+                subBrandSpinner = (Spinner)findViewById(R.id.subBrandSpinner);
+                searchView = (SearchView) findViewById(R.id.search);
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        filterContent((Principle) principleSpinner.getSelectedItem()
+                                ,(Brand)subBrandSpinner.getSelectedItem(),newText);
+                        return true;
+                    }
+                });
+
+                //set navigation drawer
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
+
+                dbAdapter = new DBAdapter(this);
+                dbAdapter.createTempTable();
+                invoiceModelList = dbAdapter.getAllData();
+                recyclerView = (RecyclerView)findViewById(R.id.invoiceRecycler);
+                adapter = new InvoiceRecyclerAdapter(invoiceModelList);
+
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                adapter.addListener(this);
+
+        /*adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+
+            }
+        });*/
+
+                //intialize the spinnners
+                initPrincipleSpinner();//inside this subrands spinner initializer will be called
+
                 Button nextBtn = (Button) findViewById(R.id.next_si);
                 nextBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -167,6 +171,21 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
         }else{
             Toast.makeText(this,"Permission Unavailable",Toast.LENGTH_SHORT).show();
             setContentView(R.layout.location_not_found_error_layout);
+
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] grantResults){
+        //Toast.makeText(this," permission Received",Toast.LENGTH_SHORT).show();
+        switch (requestCode){
+            case PermissionManager.MY_PERMISSIONS_REQUEST_LOCATION:
+                //Toast.makeText(this," Location",Toast.LENGTH_SHORT).show();
+                if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                    init();
+                    //Toast.makeText(this,"Location permission Received",Toast.LENGTH_SHORT).show();
+                }
+                break;
 
         }
     }
@@ -285,30 +304,20 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
             sql="CREATE TABLE temp_invoice(_id INTEGER PRIMARY KEY AUTOINCREMENT,ItemCode TEXT,Description TEXT,BatchNumber" +
                     " TEXT,ExpiryDate TEXT,SellingPrice REAL,Qty INTEGER DEFAULT 0" +
                     ",Shelf INTEGER DEFAULT 0,Request INTEGER DEFAULT 0,OrderQty INTEGER DEFAULT 0" +
-                    ",Free INTEGER DEFAULT 0,Disc Real DEFAULT 0.0,LineVal Real DEFAULT 0.0,PrincipleID TEXT,BrandID TEXT);";
+                    ",Free INTEGER DEFAULT 0,Disc Real DEFAULT 0.0,LineVal Real DEFAULT 0.0,PrincipleID TEXT,BrandID TEXT,ServerID TEXT);";
             db.execSQL(sql); //create the table again;
 
             //fill in data
             sql = "INSERT INTO temp_invoice(ItemCode,Description,BatchNumber" +
-                    ",ExpiryDate,SellingPrice,Qty,PrincipleID,BrandID) SELECT a.ItemCode,a.Description," +
-                    "b.BatchNumber,b.ExpiryDate,b.SellingPrice,b.Qty,a.PrincipleID,a.BrandID" +
+                    ",ExpiryDate,SellingPrice,Qty,PrincipleID,BrandID,ServerID) SELECT a.ItemCode,a.Description," +
+                    "b.BatchNumber,b.ExpiryDate,b.SellingPrice,b.Qty,a.PrincipleID,a.BrandID,b.ServerID" +
                     " FROM Mst_ProductMaster a inner join Tr_TabStock b " +
                     "on a.ItemCode  = b.ItemCode";
             db.execSQL(sql);
             closeDB();
         }
 
-        public void updateInvoiceData(SalesInvoiceModel model){
-            openDB();
 
-            String sql = "UPDATE temp_invoice SET" +
-                    "Shelf="+model.getShelf()+" , Request="+model.getRequest()
-                    +" , OrderQty="+model.getOrder()+" , Free="+model.getFree()
-                    +" , Disc="+model.getDiscount()+" , LineVal="+model.getLineValue();
-            db.execSQL(sql);
-
-            closeDB();
-        }
 
         public ArrayList<SalesInvoiceModel> getAllData(){
             ArrayList<SalesInvoiceModel> data = new ArrayList<>();
@@ -331,6 +340,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
                     salesInvoiceModel.setFree(cursor.getInt(10));
                     salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                     salesInvoiceModel.setLineValue(cursor.getDouble(12));
+                    salesInvoiceModel.setServerID(cursor.getString(15));
                     data.add(salesInvoiceModel);
                 }catch (Exception ex){
 
@@ -384,6 +394,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
 
                 salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                 salesInvoiceModel.setLineValue(cursor.getDouble(12));
+                salesInvoiceModel.setServerID(cursor.getString(15));
                 data.add(salesInvoiceModel);
             }
             closeDB();
@@ -453,6 +464,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
                     salesInvoiceModel.setFree(cursor.getInt(10));
                     salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                     salesInvoiceModel.setLineValue(cursor.getDouble(12));
+                    salesInvoiceModel.setServerID(cursor.getString(15));
                     data.add(salesInvoiceModel);
                 }catch (Exception ex){
 

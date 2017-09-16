@@ -73,7 +73,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     "ImageID TEXT,Latitude REAL,Longitude REAL,isUpload INTEGER,UploadDate TEXT,ApproveStatus INTEGER,LastUpdateDate TEXT);");
 
             //insert into Tr_NewCustomer
-            db.execSQL("INSERT INTO Tr_NewCustomer(NewCustomerID,CustomerName,Address,Town,Area,isUpload,ApproveStatus) values('tmp_cus_1','tmp_cusname','myadd','mytown','area_51',0,0);");
+           // db.execSQL("INSERT INTO Tr_NewCustomer(NewCustomerID,CustomerName,Address,Town,Area,isUpload,ApproveStatus) values('tmp_cus_1','tmp_cusname','myadd','mytown','area_51',0,0);");
 
 
             //create Tr_DailyRouteDetails
@@ -107,10 +107,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
             //insert data into reasons table
-            db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN1','Reason 1',1);");
+           /*db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN1','Reason 1',1);");
             db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN2','Reason 2',0);");
             db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN3','Reason 3',0);");
+            */
 
+           /*
             //insert data into sales header
             db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS1','INV1','04/08/2017',12000.00,500.00);");
             db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS2','INV2','04/08/2017',12020.02,500.01);");
@@ -120,23 +122,27 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS1','INV3','04/07/2017',12030.02,530.01);");
             db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS2','INV3','04/07/2017',12030.02,530.01);");
             db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS4','INV3','04/07/2017',12030.02,530.01);");
+            */
 
-
+           /*
             //insert data into mst_checkinoutpoints
             db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p1','IN','WareHouse 1',0)");
             db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p2','IN','WareHouse 2',0)");
             db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p3','IN','WareHouse 3',1)");
             db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p4','OUT','WareHouse 4',0)");
             db.execSQL("INSERT INTO Mst_CheckInOutPoints (ServerID,Type,PointDescription,isActive) VALUES ('p4','OUT','WareHouse 5',0)");
+            */
 
             //add data to the DailyRouteDetails
             //db.execSQL("INSERT INTO Tr_DailyRouteDetails (SerialCode ,Date,ItineraryID ,CustomerNo ,IsPlanned ,IsInvoiced ,InvoiceNo ,Reasons ,Comment ,IsUpload ,UploadDate) VALUES ('SER1','2017/3/10','IT1','CUS1',0,1) ");
 
+            /*
             //adding data to District table
             db.execSQL("INSERT INTO Mst_District(DistrictId,DistrictName,isActive,LastUpdateDate) VALUES('DST1','Matale',1,'2017/3/2');");
             db.execSQL("INSERT INTO Mst_District(DistrictId,DistrictName,isActive,LastUpdateDate) VALUES('DST2','Colombo',1,'2017/3/2');");
             db.execSQL("INSERT INTO Mst_District(DistrictId,DistrictName,isActive,LastUpdateDate) VALUES('DST3','Kandy',1,'2017/3/2');");
-
+            */
+            /*
             //adding data to customer status table
             db.execSQL("INSERT INTO Mst_CustomerStatus (StatusID,Status,isActive,LastUpdateDate)" +
                     "VALUES ('STS1','ACTIVE',1,'2017/3/2');");
@@ -205,6 +211,7 @@ public class DBHelper extends SQLiteOpenHelper {
 */
 
 
+            /*
             //adding data to customer table
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS1','aksa','Town1');");
@@ -228,7 +235,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     "VALUES ('CUS11','rose','Town5');");
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS12','rose','Town5');");
-
+            */
 
 
 
@@ -276,11 +283,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
             db.execSQL("CREATE TABLE Mst_SupplierTable(_id INTEGER PRIMARY KEY AUTOINCREMENT,PrincipleID TEXT, Principle TEXT, Activate INTEGER, LastUpdateDate TEXT)");
 
+            /*
             db.execSQL("INSERT INTO Mst_SupplierTable VALUES(1,'PRN1','Principle1',0,'2017/1/1')");
             db.execSQL("INSERT INTO Mst_SupplierTable VALUES(2,'PRN2','Principle2',0,'2017/1/1')");
             db.execSQL("INSERT INTO Mst_SupplierTable VALUES(3,'PRN3','Principle3',0,'2017/1/1')");
             db.execSQL("INSERT INTO Mst_SupplierTable VALUES(4,'PRN4','Principle4',0,'2017/1/1')");
             db.execSQL("INSERT INTO Mst_SupplierTable VALUES(5,'PRN5','Principle5',0,'2017/1/1')");
+            */
 
             db.execSQL(
                     "create table Mst_ProductBrandManagement" +
@@ -288,16 +297,19 @@ public class DBHelper extends SQLiteOpenHelper {
                             "MainBrand text,Activate integer,LastUpdateDate text)"
             );
 
+            /*
+
             db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(1,'BRND1','PRN1','Principle1','Brand1',0,'2017/1/1')");
             db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(2,'BRND2','PRN1','Principle1','Brand2',0,'2017/1/1')");
             db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(3,'BRND3','PRN2','Principle2','Brand3',0,'2017/1/1')");
             db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(4,'BRND4','PRN2','Principle2','Brand4',0,'2017/1/1')");
             db.execSQL("INSERT INTO Mst_ProductBrandManagement VALUES(5,'BRND5','PRN3','Principle3','Brand5',1,'2017/1/1')");
+            */
 
 
 
 
-
+            /*
 
             db.execSQL("INSERT INTO Mst_ProductMaster(ItemCode,Description,PrincipleID,Principle," +
                     "BrandID,Brand ,SubBrandID,SubBrand,UnitSize,UnitName,RetailPrice," +
@@ -318,11 +330,12 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Tr_TabStock values(3,'S3','PRN2','BRND3','ITM2','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
             db.execSQL("INSERT INTO Tr_TabStock values(4,'S4','PRN2','BRND4','ITM3','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
             db.execSQL("INSERT INTO Tr_TabStock values(5,'S5','PRN3','BRND5','ITM4','batch1','2017/1/16',10.2,8.2,20,'2016/7/1')");
-
+            */
             //db.execSQL("INSERT INTO ");
 
             db.execSQL("CREATE TABLE Mst_Banks (_id INTEGER PRIMARY KEY AUTOINCREMENT,BankNameID TEXT,BankName TEXT,IsActive INTEGER,LastUpdateDate TEXT)");
 
+            /*
             db.execSQL("INSERT INTO Mst_Banks (BankNameID,BankName ,IsActive ,LastUpdateDate)" +
                     "VALUES ('BNK1','Sampath',0,'2017/3/16')");
             db.execSQL("INSERT INTO Mst_Banks (BankNameID,BankName ,IsActive ,LastUpdateDate)" +
@@ -363,12 +376,14 @@ public class DBHelper extends SQLiteOpenHelper {
                     ",IsUpdate INTEGER,Status TEXT,StatusUpdateDate TEXT)");
             db.execSQL("CREATE TABLE Mst_InvoiceNumbers_Management(_id INTEGER PRIMARY KEY AUTOINCREMENT,InvoiceNo INTEGER,InvoiceReturnNo INTEGER,CollectionNoteNo INTEGER,LastUpdateDate TEXT)");
 
+            /*
             db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management(InvoiceNo,InvoiceReturnNo) VALUES (5,8);");
 
             db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management(InvoiceNo) VALUES (5);");
-
+            */
 
             db.execSQL("CREATE TABLE Tr_TargetData (_id INTEGER PRIMARY KEY AUTOINCREMENT,ServerID TEXT,Date TEXT,Month TEXT,TargetValue INTEGER)");
+            /*
             db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG1','04/09/2017','April',35000)");
             db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG2','04/08/2017','April',20000)");
             db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','04/07/2017','April',15000)");
@@ -377,7 +392,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG3','04/04/2017','April',15000)");
             db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG4','03/05/2017','March',50000)");
             db.execSQL("INSERT INTO Tr_TargetData (ServerID,Date,Month,TargetValue) VALUES('TG5','03/34/2017','March',30000)");
-
+            */
 
             db.execSQL("CREATE TABLE Tr_SalesReturnDetails(_ID INTEGER  PRIMARY KEY AUTOINCREMENT,HeaderID INTEGER,ItemCode TEXT," +
                     "UnitPrice REAL,BatchNumber REAL,ExpiryDate TEXT,DiscountRate REAL,DiscountAmount REAL," +

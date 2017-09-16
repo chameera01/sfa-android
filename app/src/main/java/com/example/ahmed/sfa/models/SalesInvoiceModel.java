@@ -14,6 +14,16 @@ import java.text.DecimalFormat;
 public class SalesInvoiceModel implements Parcelable {
     //private Customer customer;
     private String id;
+    private String serverID; //will be used to udpate stock table
+
+    public String getServerID() {
+        return serverID;
+    }
+
+    public void setServerID(String serverID) {
+        this.serverID = serverID;
+    }
+
     private String Code;
     private String Product;
     private String BatchNumber;

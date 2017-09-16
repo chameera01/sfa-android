@@ -120,18 +120,18 @@ public class SalesReturnAddedChoicesAdapter {
 
 
 
-        TextView code = (TextView)row.findViewById(R.id.code_e_si);
-        TextView product = (TextView)row.findViewById(R.id.product_e_si);
-        TextView batch = (TextView)row.findViewById(R.id.batch_e_si);
-        TextView expiry = (TextView)row.findViewById(R.id.expiry_e_si);
-        TextView unitprice = (TextView) row.findViewById(R.id.unit_price_e_si);
-        EditText shelf = (EditText) row.findViewById(R.id.shelf_e_si);
+        TextView code = (TextView)row.findViewById(R.id.code_e);
+        TextView product = (TextView)row.findViewById(R.id.product_e);
+        TextView batch = (TextView)row.findViewById(R.id.batch_e);
+        TextView expiry = (TextView)row.findViewById(R.id.expiry_e);
+        TextView unitprice = (TextView) row.findViewById(R.id.unit_price_e);
+        EditText shelf = (EditText) row.findViewById(R.id.shelf_e);
 
-        EditText request = (EditText) row.findViewById(R.id.request_e_si);
-        EditText order = (EditText) row.findViewById(R.id.order_e_si);
-        EditText free = (EditText) row.findViewById(R.id.free_e_si);
-        EditText disc = (EditText) row.findViewById(R.id.dsc_e_si);
-        TextView linVal = (TextView)row.findViewById(R.id.line_val_e_si);
+        EditText request = (EditText) row.findViewById(R.id.request_e);
+        EditText order = (EditText) row.findViewById(R.id.order_e);
+        EditText free = (EditText) row.findViewById(R.id.free_e);
+        EditText disc = (EditText) row.findViewById(R.id.dsc_e);
+        TextView linVal = (TextView)row.findViewById(R.id.line_val_e);
 
         code.setText(salesrow.getCode());
         product.setText(salesrow.getProduct());

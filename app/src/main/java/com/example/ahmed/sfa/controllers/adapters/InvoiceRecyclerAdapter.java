@@ -2,8 +2,6 @@ package com.example.ahmed.sfa.controllers.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.AsyncTask;
-import android.support.annotation.IdRes;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,20 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
-import com.google.android.gms.common.data.DataBufferObserver;
 
-import org.w3c.dom.CharacterData;
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by Ahmed on 9/9/2017.
@@ -69,19 +59,19 @@ implements SummaryUpdater{
             super(view);
             this.view = view;
             dbAdapter = new DBAdapter(view.getContext());
-            code = (TextView) view.findViewById(R.id.code_e_si);
-            product =(TextView) view.findViewById(R.id.product_e_si);
-            batchNum = (TextView) view.findViewById(R.id.batch_e_si);
-            expiry = (TextView)view.findViewById(R.id.expiry_e_si);
-            unitprice = (TextView) view.findViewById(R.id.unit_price_e_si);
-            stock = (TextView)view.findViewById(R.id.stock_e_si);
-            lineval = (TextView)view.findViewById(R.id.line_val_e_si);
+            code = (TextView) view.findViewById(R.id.code_e);
+            product =(TextView) view.findViewById(R.id.product_e);
+            batchNum = (TextView) view.findViewById(R.id.batch_e);
+            expiry = (TextView)view.findViewById(R.id.expiry_e);
+            unitprice = (TextView) view.findViewById(R.id.unit_price_e);
+            stock = (TextView)view.findViewById(R.id.stock_e);
+            lineval = (TextView)view.findViewById(R.id.line_val_e);
 
-            shelf = (EditText)view.findViewById(R.id.shelf_e_si);
-            request =(EditText)view.findViewById(R.id.request_e_si);
-            order = (EditText)view.findViewById(R.id.order_e_si);
-            free = (EditText)view.findViewById(R.id.free_e_si);
-            discount = (EditText)view.findViewById(R.id.dsc_e_si);
+            shelf = (EditText)view.findViewById(R.id.shelf_e);
+            request =(EditText)view.findViewById(R.id.request_e);
+            order = (EditText)view.findViewById(R.id.order_e);
+            free = (EditText)view.findViewById(R.id.free_e);
+            discount = (EditText)view.findViewById(R.id.dsc_e);
 
 
         }
@@ -125,7 +115,7 @@ implements SummaryUpdater{
 
     public MyViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.invoice_row,parent,false);
+                .inflate(R.layout.sales_row,parent,false);
 
         return new MyViewHolder(itemView);
 

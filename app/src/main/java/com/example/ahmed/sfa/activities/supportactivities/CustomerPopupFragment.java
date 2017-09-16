@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.Activities.Invoice;
+import com.example.ahmed.sfa.Activities.Return;
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 
@@ -87,7 +88,7 @@ public class CustomerPopupFragment extends Fragment {
         generateReturnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomerPopupFragment.this.getActivity(), SalesReturn.class);
+                Intent intent = new Intent(CustomerPopupFragment.this.getActivity(), Return.class);
                 intent.putExtra(Constants.CUSTOMER_NO,cusNo);//this data will be passed on to the db insert step
                 intent.putExtra(Constants.ITINERARY,itineraryforCurrentCustomer);//this data will be passed on to the db insert step
                 startActivity(intent);

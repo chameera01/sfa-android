@@ -403,7 +403,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
             openDB();
             ContentValues cv = new ContentValues();
             cv.put(Constants.TAB_STOCK_COLUMNS[8],valToAssign);
-            String whereClauseArgs[] = {model.getId()};
+            String whereClauseArgs[] = {model.getServerID()};
             Log.w("id",model.getId()+"");
             int updatedCount = db.update(Constants.TAB_STOCK, cv, Constants.TAB_STOCK_COLUMNS[0]+"=?", whereClauseArgs);
             closeDB();
