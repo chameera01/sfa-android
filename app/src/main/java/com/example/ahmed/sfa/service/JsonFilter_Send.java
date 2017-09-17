@@ -17,6 +17,7 @@ import com.example.ahmed.sfa.models.Mst_RepTable;
 import com.example.ahmed.sfa.models.Mst_Route;
 import com.example.ahmed.sfa.models.Mst_SupplierTable;
 import com.example.ahmed.sfa.models.Mst_Territory;
+import com.example.ahmed.sfa.models.Tr_TabStock;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -253,6 +254,29 @@ public class JsonFilter_Send {
                         reason_adptr.insertReason(reason);
                     }
                     break;
+                case "TabStock":
+                    Tr_TabStock tabStock = new Tr_TabStock();
+                    DBAdapter tabstock_adptr = new DBAdapter(context);
+
+                    JSONArray jsontabStockArr = new JSONArray(result);
+                    for(int i = 0; i< jsontabStockArr.length(); i++){
+                        JSONObject jsonTabStockObj = jsontabStockArr.getJSONObject(i);
+
+
+                        tabStock.setServerId(jsonTabStockObj.optString("ServerID"));
+                        tabStock.setPrincipleID(jsonTabStockObj.optString("PrincipleID"));
+                        tabStock.setBrandId(jsonTabStockObj.optString("BrandID"));
+                        tabStock.setItemCode(jsonTabStockObj.optString("ItemCode"));
+                        tabStock.setBatchNumber(jsonTabStockObj.optString("BatchNumber"));
+                        tabStock.setExpireyDate(jsonTabStockObj.optString("ExpiryDate"));
+                        tabStock.setSellingPrice(jsonTabStockObj.optDouble("SellingPrice"));
+                        tabStock.setRetailPrice(jsonTabStockObj.optDouble("RetailPrice"));
+                        tabStock.setQuantity(jsonTabStockObj.optInt("Qty"));
+
+                        tabstock_adptr.insert_tabStock(tabStock);
+                    }
+                    break;
+
                 case  "CheckInOutPoints":
                     ////ID | ServerID | Type | PointDescription | IsActive | LastUpdateDate
 
