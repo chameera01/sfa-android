@@ -5,15 +5,18 @@ package com.example.ahmed.sfa.models;
  */
 
 public class Tr_TabStock {
+    private String serverId;
     private String id;
     private String principle;
+    private String principleID;
     private String brand;
+    private String brandId;
     private String itemCode;
     private String description;
     private String batchNumber;
     private String expireyDate;
-    private float sellingPrice;
-    private float retailPrice;
+    private double sellingPrice;
+    private double retailPrice;
     private  int quantity;
     private String lastupadateDate;
 
@@ -74,19 +77,19 @@ public class Tr_TabStock {
         this.expireyDate = expireyDate;
     }
 
-    public float getSellingPrice() {
+    public double getSellingPrice() {
         return sellingPrice;
     }
 
-    public void setSellingPrice(float sellingPrice) {
+    public void setSellingPrice(double sellingPrice) {
         this.sellingPrice = sellingPrice;
     }
 
-    public float getRetailPrice() {
+    public double getRetailPrice() {
         return retailPrice;
     }
 
-    public void setRetailPrice(float retailPrice) {
+    public void setRetailPrice(double retailPrice) {
         this.retailPrice = retailPrice;
     }
 
@@ -104,5 +107,29 @@ public class Tr_TabStock {
 
     public void setLastupadateDate(String lastupadateDate) {
         this.lastupadateDate = lastupadateDate;
+    }
+
+    public String getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(String brandId) {
+        this.brandId = brandId;
+    }
+
+    public String getServerId() {
+        return serverId;
+    }
+
+    public void setServerId(String serverId) {
+        this.serverId = serverId;
+    }
+
+    public String getPrincipleID() {
+        return principleID;
+    }
+
+    public void setPrincipleID(String principleID) {
+        this.principleID = principleID;
     }
 }

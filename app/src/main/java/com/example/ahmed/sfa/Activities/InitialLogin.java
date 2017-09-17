@@ -346,7 +346,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                             check_incheck_out_tbl_download();
                             customer_master_tbl_download();
                             customerMaster_tbl_dwnoad();
-
+                            tabStock_tbl_update();
                             //download complete here
                             //previoesly CheckIn ui launched from here
 
@@ -749,6 +749,19 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
         try {
             JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=99",InitialLogin.this);
             jObjGen.setFilterType("ProductBrandManagement");
+
+            SyncReturn io = new SyncReturn();
+            io.execute(jObjGen);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            //Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+        }
+    }
+    public  void tabStock_tbl_update(){
+        try {
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/D_Tr_RepStock/GetRepStock?DeviceID=T1&RepID=99",InitialLogin.this);
+            jObjGen.setFilterType("TabStock");
 
             SyncReturn io = new SyncReturn();
             io.execute(jObjGen);

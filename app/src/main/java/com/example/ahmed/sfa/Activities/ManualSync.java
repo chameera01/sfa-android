@@ -65,6 +65,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
     ImageView ivReasonSync;
     ImageView ivchechInOutPointsSync;
     ImageView ivCustomerSync;
+    ImageView ivTabStockSync;
     String deviecId ="t1";
     String repId="93";
 
@@ -85,6 +86,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivReasonSync=(ImageView) findViewById (R.id.iv_ReasonSync);
         ivchechInOutPointsSync=(ImageView) findViewById (R.id.iv_chechInOutPointsSync);
         ivCustomerSync=(ImageView) findViewById (R.id.iv_CustomerSync);
+        ivTabStockSync=(ImageView) findViewById (R.id.iv_StockSync);
 
 
 
@@ -353,6 +355,26 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
                 try {
                     JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Customermaster/SelectMst_Customermaster?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("Customer");
+
+                    SyncReturn io = new SyncReturn();
+                    io.execute(jObjGen);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(ManualSync.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+                }
+
+
+            }
+        });
+        /*sunc tabStock*/
+        ivTabStockSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
+                try {
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/D_Tr_RepStock/GetRepStock?DeviceID=T1&RepID=99",ManualSync.this);
+                    jObjGen.setFilterType("TabStock");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);

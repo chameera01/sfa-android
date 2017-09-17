@@ -36,6 +36,7 @@ import com.example.ahmed.sfa.models.Mst_SupplierTable;
 import com.example.ahmed.sfa.models.Mst_Territory;
 
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
+import com.example.ahmed.sfa.models.Tr_TabStock;
 
 /**
  * Created by DELL on 3/10/2017.
@@ -423,5 +424,32 @@ public class DBAdapter{
         }
         closeDB();
 
+    }
+
+    public void insert_tabStock(Tr_TabStock tabStock) {
+        openDB();
+        try{
+            /*
+              {
+        "ServerID": 8,
+        "PrincipleID": 2021,
+        "BrandID": 2035,
+        "ItemCode": "GEP80-G",
+        "BatchNumber": "GEP80-G",
+        "ExpiryDate": "2050-01-01T00:00:00",
+        "SellingPrice": 772,
+        "RetailPrice": 950,
+        "Qty": 100
+    }
+             */
+            db.execSQL("INSERT OR REPLACE INTO Tr_TabStock (_ID," +
+                    "ServerID,PrincipleID ,BrandID,ItemCode ,BatchNumber ,ExpiryDate," +
+                    "SellingPrice,RetailPrice,Qty) VALUES((select _ID from  Tr_TabStock where ServerID='"+tabStock.getServerId()+"')" +
+                    ",'"+tabStock.getServerId()+"','"+tabStock.getPrincipleID()+"','"+tabStock.getBrandId()+"','"+tabStock.getItemCode()+"','"+tabStock.getBatchNumber()+"'," +
+                    "'"+tabStock.getExpireyDate()+"',"+tabStock.getSellingPrice()+","+tabStock.getRetailPrice()+","+tabStock.getQuantity()+");");
+        }catch (Exception e){
+            Toast.makeText(context, "tabstock_insert:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
     }
 }
