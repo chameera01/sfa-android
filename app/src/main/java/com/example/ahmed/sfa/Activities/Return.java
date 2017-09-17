@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.icu.util.Calendar;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ import com.example.ahmed.sfa.models.SalesPayment;
 import com.example.ahmed.sfa.models.SalesReturnSummary;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -395,14 +397,14 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
             sql = "CREATE TABLE temp_return(_id INTEGER PRIMARY KEY AUTOINCREMENT,ItemCode TEXT,Description TEXT,BatchNumber" +
                     " TEXT,ExpiryDate TEXT,SellingPrice REAL,Qty INTEGER DEFAULT 0" +
                     ",Shelf INTEGER DEFAULT 0,Request INTEGER DEFAULT 0,returnQty INTEGER DEFAULT 0" +
-                    ",Free INTEGER DEFAULT 0,Disc Real DEFAULT 0.0,LineVal Real DEFAULT 0.0,PrincipleID TEXT,BrandID TEXT,ServerID TEXT);";
+                    ",Free INTEGER DEFAULT 0,Disc Real DEFAULT 0.0,LineVal Real DEFAULT 0.0,PrincipleID TEXT,BrandID TEXT,ServerID TEXT,RetailPrice Real);";
             db.execSQL(sql); //create the table again;
 
             //fill in data
             sql = "INSERT INTO temp_return(ItemCode,Description,BatchNumber" +
-                    ",ExpiryDate,SellingPrice,Qty,PrincipleID,BrandID,ServerID) SELECT a.ItemCode,a.Description," +
-                    "b.BatchNumber,b.ExpiryDate,b.SellingPrice,b.Qty,a.PrincipleID,a.BrandID,b.ServerID" +
-                    " FROM Mst_ProductMaster a inner join Tr_TabStock b " +
+                    ",ExpiryDate,SellingPrice,Qty,PrincipleID,BrandID,ServerID,RetailPrice) SELECT a.ItemCode,a.Description," +
+                    "b.BatchNumber,b.ExpiryDate,b.SellingPrice,b.Qty,a.PrincipleID,a.BrandID,b.ServerID, a.RetailPrice" +
+                    " FROM Mst_ProductMaster a Left join Tr_TabStock b " +
                     "on a.ItemCode  = b.ItemCode";
             db.execSQL(sql);
             closeDB();
@@ -429,7 +431,11 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
                     salesInvoiceModel.setFree(cursor.getInt(10));
                     salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                     salesInvoiceModel.setLineValue(cursor.getDouble(12));
+                    salesInvoiceModel.setPrincipleID(cursor.getString(13));
+                    salesInvoiceModel.setBrandID(cursor.getString(14));
                     salesInvoiceModel.setServerID(cursor.getString(15));
+                    salesInvoiceModel.setRetailPrice(cursor.getDouble(16));
+
                     data.add(salesInvoiceModel);
                 }catch (Exception ex){
 
@@ -475,14 +481,17 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
                 SalesInvoiceModel salesInvoiceModel =new SalesInvoiceModel(cursor.getString(0),
                         cursor.getString(1),cursor.getString(2),cursor.getString(3),
                         cursor.getString(4),cursor.getDouble(5),cursor.getInt(6)) ;
-                salesInvoiceModel.setShelf(Integer.parseInt(cursor.getString(7)));
-                salesInvoiceModel.setRequest(Integer.parseInt(cursor.getString(8)));
-                salesInvoiceModel.setOrder(Integer.parseInt(cursor.getString(9)));
-                salesInvoiceModel.setFree(Integer.parseInt(cursor.getString(10)));
-
+                salesInvoiceModel.setShelf(cursor.getInt(7));
+                salesInvoiceModel.setRequest(cursor.getInt(8));
+                salesInvoiceModel.setOrder(cursor.getInt(9));
+                salesInvoiceModel.setFree(cursor.getInt(10));
                 salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                 salesInvoiceModel.setLineValue(cursor.getDouble(12));
+                salesInvoiceModel.setPrincipleID(cursor.getString(13));
+                salesInvoiceModel.setBrandID(cursor.getString(14));
                 salesInvoiceModel.setServerID(cursor.getString(15));
+                salesInvoiceModel.setRetailPrice(cursor.getDouble(16));
+
                 data.add(salesInvoiceModel);
             }
             closeDB();
@@ -613,7 +622,11 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
                     salesInvoiceModel.setFree(cursor.getInt(10));
                     salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                     salesInvoiceModel.setLineValue(cursor.getDouble(12));
+                    salesInvoiceModel.setPrincipleID(cursor.getString(13));
+                    salesInvoiceModel.setBrandID(cursor.getString(14));
                     salesInvoiceModel.setServerID(cursor.getString(15));
+                    salesInvoiceModel.setRetailPrice(cursor.getDouble(16));
+
                     data.add(salesInvoiceModel);
                 }catch (Exception ex){
 
@@ -702,10 +715,31 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
             openDB();
             ContentValues cv = new ContentValues();
             cv.put(Constants.TAB_STOCK_COLUMNS[8],valToAssign);
-            String whereClauseArgs[] = {model.getServerID()};
+            //String whereClauseArgs[] = {model.getServerID()};
+            String whereClauseArgs[] = {model.getCode(),model.getBatchNumber(),model.getUnitPrice()+""};
 
             Log.w("id",model.getServerID()+"");
-            int updatedCount = db.update(Constants.TAB_STOCK, cv, Constants.TAB_STOCK_COLUMNS[0]+"=?", whereClauseArgs);
+
+
+
+            int updatedCount = db.update(Constants.TAB_STOCK, cv, Constants.TAB_STOCK_COLUMNS[3]+"=? AND " +
+                    Constants.TAB_STOCK_COLUMNS[4]+"=? AND "+Constants.TAB_STOCK_COLUMNS[6]+"=?" , whereClauseArgs);
+            if(updatedCount<=0){
+                cv.put(Constants.TAB_STOCK_COLUMNS[0],model.getServerID());
+                cv.put(Constants.TAB_STOCK_COLUMNS[1],model.getId());
+                cv.put(Constants.TAB_STOCK_COLUMNS[2],model.getBrandID());
+                cv.put(Constants.TAB_STOCK_COLUMNS[3],model.getCode());
+                cv.put(Constants.TAB_STOCK_COLUMNS[4],model.getBatchNumber());
+                cv.put(Constants.TAB_STOCK_COLUMNS[5],model.getExpiryDate());
+                cv.put(Constants.TAB_STOCK_COLUMNS[6],model.getUnitPrice());
+                cv.put(Constants.TAB_STOCK_COLUMNS[7],model.getRetailPrice());
+                cv.put(Constants.TAB_STOCK_COLUMNS[8],valToAssign);
+                cv.put(Constants.TAB_STOCK_COLUMNS[9], DateManager.dateToday());
+                long a = db.insert(Constants.TAB_STOCK,null,cv);
+                if(a!=-1){
+                    updatedCount = 1;
+                }
+            }
             closeDB();
             Log.w("UpdateCount :",""+updatedCount);
             if(updatedCount>0) return true;

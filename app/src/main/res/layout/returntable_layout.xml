@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:background="@drawable/backshadow"
+    android:textAlignment="center"
+    android:paddingTop="2dp"
+    android:paddingBottom="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+
+        android:id="@+id/code_e"
+        android:text="test1"
+
+        android:layout_weight="1"
+        android:textAlignment="center"
+        style="@style/SalesRowTextView"/>
+    <LinearLayout android:layout_width="0dp" android:layout_weight="3" android:layout_height="match_parent">
+
+
+        <TextView android:id="@+id/product_e"
+            android:textAlignment="textStart"
+            android:layout_width="wrap_content"
+            style="@style/SalesRowTextView"
+            />
+    </LinearLayout>
+
+    <TextView android:id="@+id/batch_e"
+
+        android:layout_weight="2"
+        android:textAlignment="textStart"
+        style="@style/SalesRowTextView"/>
+    <TextView android:id="@+id/expiry_e"
+
+        android:layout_weight="1.5"
+        android:textAlignment="textStart"
+        style="@style/SalesRowTextView"/>
+    <EditText android:id="@+id/unit_price"
+
+        android:inputType="numberDecimal"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        style="@style/SalesRowTextView"/>
+    <TextView android:id="@+id/stock_e"
+
+        android:inputType="number"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        style="@style/SalesRowTextView"/>
+    <EditText android:id="@+id/shelf_e"
+        android:inputType="number"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        style="@style/SalesRowTextView"/>
+    <EditText android:id="@+id/request_e"
+
+        android:layout_weight="1"
+        android:inputType="number"
+        android:textAlignment="center"
+        style="@style/SalesRowTextView"/>
+    <EditText android:id="@+id/order_e"
+
+        android:layout_weight="1"
+        android:inputType="number"
+        android:textAlignment="center"
+        style="@style/SalesRowTextView"/>
+    <EditText android:id="@+id/free_e"
+
+        android:layout_weight="1"
+        android:inputType="number"
+        android:textAlignment="center"
+        style="@style/SalesRowTextView"/>
+    <EditText android:id="@+id/dsc_e"
+        style="@style/SalesRowTextView"
+        android:layout_weight="1"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        />
+    <TextView android:id="@+id/line_val_e"
+        android:layout_weight="1"
+        style="@style/SalesRowTextView"
+        android:textAlignment="center"
+        />
+</TableRow>

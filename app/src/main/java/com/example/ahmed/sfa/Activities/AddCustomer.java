@@ -471,7 +471,7 @@ public class AddCustomer extends AppCompatActivity {
             ArrayList<District> districts = new ArrayList<>();
             openDB();
             Cursor cursor;
-            cursor = db.rawQuery("SELECT DistrictId,DistrictName FROM Mst_District ORDER BY DistrictName asc ;",null);
+            cursor = db.rawQuery("SELECT DistrictId,DistrictName FROM Mst_District RETURN BY DistrictName asc ;",null);
             while (cursor.moveToNext()){
                 District district = new District(cursor.getString(0),cursor.getString(1));
                 districts.add(district);
@@ -484,7 +484,7 @@ public class AddCustomer extends AppCompatActivity {
             ArrayList<CustomerStatus> customerStatuses = new ArrayList<>();
             openDB();
             Cursor cursor;
-            cursor = db.rawQuery("SELECT StatusID,Status FROM Mst_CustomerStatus ORDER BY Status asc ;",null);
+            cursor = db.rawQuery("SELECT StatusID,Status FROM Mst_CustomerStatus RETURN BY Status asc ;",null);
             while (cursor.moveToNext()){
                 CustomerStatus cs = new CustomerStatus(cursor.getString(0),cursor.getString(1));
                 customerStatuses.add(cs);
@@ -497,7 +497,7 @@ public class AddCustomer extends AppCompatActivity {
             ArrayList<Route> routes = new ArrayList<>();
             openDB();
             Cursor cursor;
-            cursor = db.rawQuery("SELECT RouteID,Route FROM Mst_Route ORDER BY Route asc ;",null);
+            cursor = db.rawQuery("SELECT RouteID,Route FROM Mst_Route RETURN BY Route asc ;",null);
             while (cursor.moveToNext()){
                 Route r = new Route(cursor.getString(0),cursor.getString(1));
                 routes.add(r);

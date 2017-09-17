@@ -41,6 +41,35 @@ public class SalesInvoiceModel implements Parcelable {
     private double discount;
 
 
+    String brandID;
+
+    public String getBrandID() {
+        return brandID;
+    }
+
+    public void setBrandID(String brandID) {
+        this.brandID = brandID;
+    }
+
+    public String getPrincipleID() {
+        return principleID;
+    }
+
+    public void setPrincipleID(String principleID) {
+        this.principleID = principleID;
+    }
+
+    public double getRetailPrice() {
+        return retailPrice;
+    }
+
+    public void setRetailPrice(double retailPrice) {
+        this.retailPrice = retailPrice;
+    }
+
+    String principleID;
+    private double retailPrice;
+
 
     public SalesInvoiceModel(String id,String code, String product, String batchNumber, String expiryDate, double unitPrice,int Stock) {
         this.id = id;

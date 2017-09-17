@@ -376,11 +376,11 @@ public class DBHelper extends SQLiteOpenHelper {
                     ",IsUpdate INTEGER,Status TEXT,StatusUpdateDate TEXT)");
             db.execSQL("CREATE TABLE Mst_InvoiceNumbers_Management(_id INTEGER PRIMARY KEY AUTOINCREMENT,InvoiceNo INTEGER,InvoiceReturnNo INTEGER,CollectionNoteNo INTEGER,LastUpdateDate TEXT)");
 
-            /*
+
             db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management(InvoiceNo,InvoiceReturnNo) VALUES (5,8);");
 
             db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management(InvoiceNo) VALUES (5);");
-            */
+
 
             db.execSQL("CREATE TABLE Tr_TargetData (_id INTEGER PRIMARY KEY AUTOINCREMENT,ServerID TEXT,Date TEXT,Month TEXT,TargetValue INTEGER)");
             /*

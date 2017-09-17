@@ -291,8 +291,8 @@ public class SalesInvoiceProductsTableAdapter {
                             Toast.makeText(activity.getApplicationContext(),"Order is more than the stock",Toast.LENGTH_SHORT).show();
                             val=stock;
                         }
-                        selectedModel.setOrder(val);//make sure we set order before
-                        //chekcing the total of order and free against stock
+                        selectedModel.setOrder(val);//make sure we set returnQty before
+                        //chekcing the total of returnQty and free against stock
 
                         if(selectedModel.getOrder()+selectedModel.getFree()>selectedModel.getStock()){
                             selectedModel.setFree(0);
@@ -415,7 +415,7 @@ public class SalesInvoiceProductsTableAdapter {
         });
 
 
-        //diable order,free and discount if stock is 0
+        //diable returnQty,free and discount if stock is 0
         if(!(salesrow.getStock()>0)){
             free.setEnabled(false);
             order.setEnabled(false);

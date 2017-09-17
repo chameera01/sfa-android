@@ -28,7 +28,7 @@ implements SummaryUpdater{
 
     private List<SalesInvoiceModel> salesInvoice;
     boolean onBind;
-    public final String SHELF = "SHLEF",REQUEST="REQUEST",ORDER="ORDER",FREE="FREE",DISCOUNT="DISCOUNT",
+    public final String SHELF = "SHLEF",REQUEST="REQUEST",ORDER="RETURN",FREE="FREE",DISCOUNT="DISCOUNT",
             LINEVAL = "LINEVAL";
     DBAdapter dbAdapter;
 
@@ -115,7 +115,7 @@ implements SummaryUpdater{
 
     public MyViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.sales_row,parent,false);
+                .inflate(R.layout.invoicetabel_row,parent,false);
 
         return new MyViewHolder(itemView);
 
@@ -233,7 +233,7 @@ implements SummaryUpdater{
                     }
                     //initTable();
 
-//                        notifyItemChanged(position,new String[]{ORDER});
+//                        notifyItemChanged(position,new String[]{RETURN});
                 }else{
                     salesInvoice.get(position).setRequest(0);
                 }
@@ -242,7 +242,7 @@ implements SummaryUpdater{
 
                 if(!onBind){
                     //List<String> item = new ArrayList<>();
-                    //item.add(ORDER);
+                    //item.add(RETURN);
                     notifyItemChanged(position,ORDER);
                     if(valHasChanged){
                         notifyItemChanged(position,REQUEST);
@@ -300,8 +300,8 @@ implements SummaryUpdater{
                         valHasChanged = true;
 
                     }
-                    salesInvoice.get(position).setOrder(val);//make sure we set order before
-                    //chekcing the total of order and free against stock
+                    salesInvoice.get(position).setOrder(val);//make sure we set returnQty before
+                    //chekcing the total of returnQty and free against stock
 
                     if(salesInvoice.get(position).getOrder()+salesInvoice.get(position).getFree()>salesInvoice.get(position).getStock()){
                         salesInvoice.get(position).setFree(0);
@@ -318,7 +318,7 @@ implements SummaryUpdater{
                     //notifyItemChanged(position);
                     if(valHasChanged){
                         notifyItemChanged(position,ORDER);//notify the adapter that value changed and refresh the view mentioned by the string
-                        //holder.setCursor(ORDER);
+                        //holder.setCursor(RETURN);
                     }
                     if(freeHasChanged) notifyItemChanged(position,FREE);
                 }
