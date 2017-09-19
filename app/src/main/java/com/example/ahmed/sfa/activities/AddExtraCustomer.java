@@ -389,7 +389,7 @@ public class AddExtraCustomer extends AppCompatActivity {
         query = "SELECT * FROM Mst_Customermaster where "+cus_name_filtr+" Area='"+area+"' AND Town='"+town+"' AND  CustomerNo not in (select CustomerNo from Tr_ItineraryDetails where 0 in (strftime('%d','now')-substr(ItineraryDate,4,5))) ";
     }
         //limit data to 100 rows
-        query += " RETURN BY _id limit 100";
+        query += " ORDER BY _id limit 100";
 
         //query += " AND CustomerNo  not in (select CustomerNo from Tr_ItineraryDetails where  0  in (strftime('%d','now')-substr(ItinerarytDate,4,5))) ";
     /*if (cusName != "" && !(town == "All" && area == "All")) {

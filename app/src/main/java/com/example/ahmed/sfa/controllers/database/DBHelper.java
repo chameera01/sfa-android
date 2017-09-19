@@ -397,7 +397,14 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE Tr_SalesReturnDetails(_ID INTEGER  PRIMARY KEY AUTOINCREMENT,HeaderID INTEGER,ItemCode TEXT," +
                     "UnitPrice REAL,BatchNumber REAL,ExpiryDate TEXT,DiscountRate REAL,DiscountAmount REAL," +
                     "IssueMode TEXT,OrderQty INTEGER,FreeQty INTEGER,Total REAL,IsUpload INTEGER,UploadDate TEXT)");
-
+            db.execSQL("CREATE TABLE Mst_CreditDays (_ID INTEGER PRIMARY KEY AUTOINCREMENT,CreditDaysID TEXT,CreditDays INTEGER," +
+                    "IsActive INTEGER DEFAULT 0,LastUpdateDate TEXT)");
+            db.execSQL("INSERT INTO Mst_CreditDays(CreditDaysID,CreditDays,IsActive,LastUpdateDate)" +
+                    "VALUES ('ID1',20,0,'19/09/2017')");
+            db.execSQL("INSERT INTO Mst_CreditDays(CreditDaysID,CreditDays,IsActive,LastUpdateDate)" +
+                    "VALUES ('ID2',30,0,'19/09/2017')");
+            db.execSQL("INSERT INTO Mst_CreditDays(CreditDaysID,CreditDays,IsActive,LastUpdateDate)" +
+                    "VALUES ('ID3',10,0,'19/09/2017')");
 
         }catch (SQLException e){
             e.printStackTrace();

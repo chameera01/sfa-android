@@ -17,6 +17,8 @@ import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -124,12 +126,19 @@ implements SummaryUpdater{
     public void onBindViewHolder(final MyViewHolder holder, final int position, List<Object> payload){
         //onBindViewHolder(holder,position);
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
         onBind = true;
         SalesInvoiceModel siModel = salesInvoice.get(position);
         holder.code.setText(siModel.getCode());
         holder.product.setText(siModel.getProduct());
         holder.batchNum.setText(siModel.getBatchNumber());
+        try{
+            Date date = simpleDateFormat.parse(siModel.getExpiryDate());
+            holder.expiry.setText(date.toString());
+        }catch (Exception ex){
+            holder.expiry.setText("Error");
+        }
         holder.expiry.setText(siModel.getExpiryDate());
         holder.unitprice.setText(siModel.getUnitPrice()+"");
         holder.stock.setText(siModel.getStock()+"");
@@ -178,32 +187,21 @@ implements SummaryUpdater{
 
 
         holder.shelf.setOnFocusChangeListener(new FocusChangeListener());
-
-        holder.shelf.addTextChangedListener(new GenericTextWatcher() {
-
+        holder.shelf.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                EditText editText = (EditText)v;
+                String s = editText.getText().toString();
                 if(!s.toString().equals("")) {
 
                     salesInvoice.get(position).setShelf(Integer.parseInt(s+""));
                     dbAdapter.updateInvoiceData(salesInvoice.get(position));
-                    //initTable();
-                    // if(!onBind)notifyItemChanged(position);
-
                 }
-
+                return false;
             }
-
-
         });
+
+
 
         holder.request.setOnFocusChangeListener(new FocusChangeListener());
 
@@ -258,37 +256,19 @@ implements SummaryUpdater{
                 return false;
             }
         });
-        holder.request.addTextChangedListener(new GenericTextWatcher() {
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-
-            }
-        });
 
         holder.order.setOnFocusChangeListener(new FocusChangeListener());
-        holder.order.addTextChangedListener(new GenericTextWatcher(){
+        holder.order.setOnKeyListener(new View.OnKeyListener() {
             boolean valHasChanged = false;
             boolean freeHasChanged = false;
 
             @Override
-            public void onTextChanged(CharSequence s,int start,int before,int count){
-
-                //siModel.setOrder(Integer.parseInt(s+""));
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
                 valHasChanged = false;
                 freeHasChanged = false;
+                EditText editText = (EditText)v;
+                String s = editText.getText().toString();
                 if(!(s.toString().equals(""))){
 
                     int val = Integer.parseInt(s.toString());
@@ -326,21 +306,19 @@ implements SummaryUpdater{
                 dbAdapter.updateInvoiceData(salesInvoice.get(position)); //update the value in the database
                 notifyUpdate();
 
+                return false;
             }
-
         });
 
 
+
         holder.free.setOnFocusChangeListener(new FocusChangeListener());
-        holder.free.addTextChangedListener(new GenericTextWatcher(){
+        holder.free.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onTextChanged(CharSequence s,int start,int before,int after) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
                 boolean valChanged = false;
+                EditText editText = (EditText)v;
+                String s = editText.getText().toString();
                 if (!s.toString().equals("")) {
 
                     int val = Integer.parseInt(s.toString());
@@ -360,21 +338,18 @@ implements SummaryUpdater{
                 holder.setCursor(FREE);
                 dbAdapter.updateInvoiceData(salesInvoice.get(position));
                 notifyUpdate();
+                return false;
             }
         });
 
 
+
         holder.discount.setOnFocusChangeListener(new FocusChangeListener());
-        holder.discount.addTextChangedListener(new GenericTextWatcher(){
+        holder.discount.setOnKeyListener(new View.OnKeyListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                EditText editText = (EditText)v;
+                String s  = editText.getText().toString();
                 if(!(s.equals(salesInvoice.get(position).getDiscountRate()+""))){
                     if(!s.toString().equals("")){
                         Double rate = Double.parseDouble(s.toString().trim());
@@ -386,10 +361,10 @@ implements SummaryUpdater{
                         notifyUpdate();
                     }
                 }
-                //if(!onBind)notifyItemChanged(position);
-
+                return false;
             }
         });
+
 
         if(position%2==0){
             holder.setColor(Color.LTGRAY);
@@ -464,13 +439,17 @@ implements SummaryUpdater{
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             EditText view = (EditText)v;
-            //if(hasFocus){
-            if(view.getText().equals("0") || view.getText().equals("0.0")){
-                view.setText("");
+            if(hasFocus){
+                if(view.getText().toString().equals("0") || view.getText().toString().equals("0.0")){
+                    view.setText("");
+                }else{
+                    view.setSelection(view.getText().length());
+                }
             }else{
-                view.setSelection(view.getText().length());
+                if(view.getText().toString().equalsIgnoreCase("") ){
+                    view.setText("0");
+                }
             }
-            //}
         }
     }
 

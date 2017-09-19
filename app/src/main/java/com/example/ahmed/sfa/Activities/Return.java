@@ -730,7 +730,7 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
                 cv.put(Constants.TAB_STOCK_COLUMNS[2],model.getBrandID());
                 cv.put(Constants.TAB_STOCK_COLUMNS[3],model.getCode());
                 cv.put(Constants.TAB_STOCK_COLUMNS[4],model.getBatchNumber());
-                cv.put(Constants.TAB_STOCK_COLUMNS[5],model.getExpiryDate());
+                cv.put(Constants.TAB_STOCK_COLUMNS[5],"01-01-2025");
                 cv.put(Constants.TAB_STOCK_COLUMNS[6],model.getUnitPrice());
                 cv.put(Constants.TAB_STOCK_COLUMNS[7],model.getRetailPrice());
                 cv.put(Constants.TAB_STOCK_COLUMNS[8],valToAssign);
