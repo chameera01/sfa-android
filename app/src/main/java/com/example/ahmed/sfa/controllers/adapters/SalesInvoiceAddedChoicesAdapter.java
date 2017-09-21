@@ -78,17 +78,17 @@ public class SalesInvoiceAddedChoicesAdapter {
     public TableRow getView(SalesInvoiceModel salesrow,int tag){
         TableRow row = (TableRow)activity.getLayoutInflater().inflate(R.layout.si_viewrow_layout,table,false);
         row.setTag(tag);
-        TextView code = (TextView)row.findViewById(R.id.code_v_si);
-        TextView product = (TextView)row.findViewById(R.id.product_v_si);
-        TextView batch = (TextView)row.findViewById(R.id.batch_v_si);
-        TextView expiry = (TextView)row.findViewById(R.id.expiry_v_si);
-        TextView unitprice = (TextView)row.findViewById(R.id.unit_price_v_si);
-        TextView shelf = (TextView)row.findViewById(R.id.shelf_v_si);
-        TextView request = (TextView)row.findViewById(R.id.request_v_si);
-        TextView order = (TextView)row.findViewById(R.id.order_v_si);
-        TextView free = (TextView)row.findViewById(R.id.free_v_si);
-        TextView disc = (TextView)row.findViewById(R.id.dsc_v_asi);
-        TextView linVal = (TextView)row.findViewById(R.id.line_val_v_si);
+        TextView code = (TextView)row.findViewById(R.id.code_e);
+        TextView product = (TextView)row.findViewById(R.id.product_e);
+        TextView batch = (TextView)row.findViewById(R.id.batch_e);
+        TextView expiry = (TextView)row.findViewById(R.id.expiry_e);
+        TextView unitprice = (TextView)row.findViewById(R.id.unit_price_e);
+        TextView shelf = (TextView)row.findViewById(R.id.shelf_e);
+        TextView request = (TextView)row.findViewById(R.id.request_e);
+        TextView order = (TextView)row.findViewById(R.id.order_e);
+        TextView free = (TextView)row.findViewById(R.id.free_e);
+        TextView disc = (TextView)row.findViewById(R.id.dsc_e);
+        TextView linVal = (TextView)row.findViewById(R.id.line_val_e);
 
 
 

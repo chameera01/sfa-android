@@ -67,12 +67,12 @@
                 <TextView
                     android:text="Code"
 
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:textAlignment="center"
                     style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Product"
 
-                    android:layout_weight="3"
+                    android:layout_weight="4"
                     android:textAlignment="center"
                     style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Batch Number"
@@ -81,7 +81,7 @@
                     android:textAlignment="center"
                     style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Expiry Date"
-
+                    android:visibility="gone"
                     android:layout_weight="1.5"
                     android:textAlignment="center"
                     style="@style/SalesTableHeaderTextViews"/>

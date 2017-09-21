@@ -68,14 +68,14 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.payment_ui);
+        setContentView(R.layout.activity_invoice_payment);
         cashFocused =true;
 
         chequeModel = new Cheque();
 
         credit = (TextView) findViewById(R.id.si_pay_totcredit);
         cash = (TextView)findViewById(R.id.si_pay_cash);
-        fullInvDisc = (EditText)findViewById(R.id.si_pay_full_inv_disc);
+        fullInvDisc = (EditText)findViewById(R.id.full_invoice_discount);
         cheque = (TextView) findViewById(R.id.si_pay_cheque);
 
         Button chqBtn = (Button)findViewById(R.id.si_pay_cheque_popup);
@@ -86,14 +86,14 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
             }
         });
 
-        subTot = (TextView) findViewById(R.id.si_pay_sub_tot);
-        invTot = (TextView) findViewById(R.id.si_pay_inv_qty);
-        discount = (TextView)findViewById(R.id.si_pay_disc);
-        freeQty = (TextView)findViewById(R.id.si_pay_free_qty);
-        returnTot =(TextView) findViewById(R.id.si_pay_return_tot);
-        returnQty = (TextView)findViewById(R.id.si_pay_return_qty);
+        subTot = (TextView) findViewById(R.id.subtotal);
+        invTot = (TextView) findViewById(R.id.invoice_qty);
+        discount = (TextView)findViewById(R.id.payment_discount);
+        freeQty = (TextView)findViewById(R.id.free_qty);
+        returnTot =(TextView) findViewById(R.id.return_total);
+        returnQty = (TextView)findViewById(R.id.return_qty);
 
-        total = (TextView)findViewById(R.id.si_pay_tot);
+        total = (TextView)findViewById(R.id.invoice_total);
 
         creditDays = (Spinner)findViewById(R.id.pay_si_credit_dates);
         creditDays.setAdapter(new DBAdapter(this).getCreditDewDates());

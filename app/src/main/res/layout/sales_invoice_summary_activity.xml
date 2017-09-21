@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="50dp"
-    android:paddingRight="50dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
     android:paddingBottom="10dp"
     android:layout_gravity="bottom">
     <LinearLayout
@@ -13,94 +13,80 @@
         android:layout_height="0dp"
         android:layout_weight="2">
         <TableLayout
-            android:id="@+id/table_header_si"
-            android:layout_below="@+id/search_para_si"
+            android:id="@+id/table_header"
+            android:layout_below="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:background="@color/colorPrimary"
+            android:textColor="@color/listSelectedText"
             >
             <TableRow android:background="@drawable/backshadow"
-                android:textAlignment="center"
+                android:backgroundTint="@color/secondoryText"
+                android:textColor="@color/textPrimary"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp">
                 <TextView
                     android:text="Code"
-                    android:layout_width="0dp"
+
                     android:layout_weight="1"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Product"
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
+
+                    android:layout_weight="4"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Batch Number"
-                    android:layout_width="0dp"
+
                     android:layout_weight="2"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Expiry Date"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:layout_weight="1.5"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Unit Price"
-                    android:layout_width="0dp"
+
                     android:inputType="numberDecimal"
                     android:layout_weight="1"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Stock"
-                    android:layout_width="0dp"
+
                     android:inputType="numberDecimal"
                     android:layout_weight="1"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Shelf"
+
                     android:inputType="number"
-                    android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Request"
-                    android:layout_width="0dp"
                     android:layout_weight="1"
                     android:inputType="number"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Order"
-                    android:layout_width="0dp"
                     android:layout_weight="1"
                     android:inputType="number"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Free"
-                    android:layout_width="0dp"
                     android:layout_weight="1"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Disc%"
-                    android:layout_width="0dp"
+
                     android:layout_weight="1"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Line Value"
-                    android:layout_width="0dp"
+
                     android:layout_weight="1"
                     android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"/>
+                    style="@style/SalesTableHeaderTextViews"/>
             </TableRow>
         </TableLayout>
         <ScrollView
@@ -333,19 +319,23 @@
             android:layout_weight="1"
             android:paddingBottom="10dp"
             android:layout_height="match_parent">
+
             <Button
                 android:id="@+id/print_button_ss"
-                android:text="Print"
-                android:enabled="false"
-                android:layout_gravity="bottom"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:enabled="false"
+                android:text="Print" />
+
             <Button
                 android:id="@+id/save_button_ss"
-                android:text="Save"
-                android:layout_gravity="bottom"
+                style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="Save" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

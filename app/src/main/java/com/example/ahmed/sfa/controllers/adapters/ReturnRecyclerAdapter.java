@@ -123,9 +123,15 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         SalesInvoiceModel siModel = salesInvoice.get(position);
         holder.code.setText(siModel.getCode());
         holder.product.setText(siModel.getProduct());
-        holder.batchNum.setText(siModel.getBatchNumber());
-        holder.expiry.setText(siModel.getExpiryDate());
 
+        holder.batchNum.setText(siModel.getBatchNumber());
+        if(siModel.getBatchNumber() == null||siModel.getBatchNumber().equalsIgnoreCase("")){
+            holder.batchNum.setText(siModel.getCode());
+        }
+        holder.expiry.setText(siModel.getExpiryDate());
+        if(siModel.getExpiryDate()==null||siModel.getExpiryDate().equalsIgnoreCase("")){
+            holder.expiry.setText("01-05-2025");
+        }
         holder.stock.setText(siModel.getStock()+"");
         holder.lineval.setText(siModel.getLineValue()+"");
 
@@ -182,15 +188,19 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                 if(!s.toString().equals("")) {
 
                     salesInvoice.get(position).setUnitPrice(Double.parseDouble(s+""));
-                    dbAdapter.updateInvoiceData(salesInvoice.get(position));
+
                     //initTable();
                     // if(!onBind)notifyItemChanged(position);
-                    if(!onBind)notifyItemChanged(position,LINEVAL);
 
+
+                }else{
+                    salesInvoice.get(position).setUnitPrice(0.0);
                 }
-
+                dbAdapter.updateInvoiceData(salesInvoice.get(position));
+                if(!onBind)notifyItemChanged(position,LINEVAL);
 
                 return false;
+
             }
         });
 
@@ -204,11 +214,14 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                 if(!s.toString().equals("")) {
 
                     salesInvoice.get(position).setShelf(Integer.parseInt(s+""));
-                    dbAdapter.updateInvoiceData(salesInvoice.get(position));
+
                     //initTable();
                     // if(!onBind)notifyItemChanged(position);
 
+                }else{
+                    salesInvoice.get(position).setShelf(0);
                 }
+                dbAdapter.updateInvoiceData(salesInvoice.get(position));
                 return false;
             }
         });
@@ -385,12 +398,16 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         public void onFocusChange(View v, boolean hasFocus) {
             EditText view = (EditText)v;
             if(hasFocus){
+                view.setBackgroundColor(Color.BLACK);
+                (view).setTextColor(Color.WHITE);
                 if(view.getText().toString().equals("0") || view.getText().toString().equals("0.0")){
                     view.setText("");
                 }else{
                     view.setSelection(view.getText().length());
                 }
             }else{
+                v.setBackgroundColor(Color.TRANSPARENT);
+                (view).setTextColor(Color.BLACK);
                 if(view.getText().toString().equalsIgnoreCase("") ){
                     view.setText("0");
                 }

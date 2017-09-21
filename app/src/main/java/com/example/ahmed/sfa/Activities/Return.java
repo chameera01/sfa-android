@@ -425,6 +425,7 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
                     SalesInvoiceModel salesInvoiceModel =new SalesInvoiceModel(cursor.getString(0),
                             cursor.getString(1),cursor.getString(2),cursor.getString(3),
                             cursor.getString(4),cursor.getDouble(5),cursor.getInt(6)) ;
+
                     salesInvoiceModel.setShelf(cursor.getInt(7));
                     salesInvoiceModel.setRequest(cursor.getInt(8));
                     salesInvoiceModel.setOrder(cursor.getInt(9));
@@ -709,27 +710,29 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
 
         //this method is to reduce the invoiced quanity from the Tr_TabStock
         //we have assumed tht item code is unique here
-        private boolean updateStockRow(SalesInvoiceModel model){
+        private boolean updateStockRow(SalesInvoiceModel model) {
             boolean result = false;
-            int valToAssign = model.getStock()+model.getInvoiceQuantity();
+            int valToAssign = model.getStock() + model.getInvoiceQuantity();
             openDB();
             ContentValues cv = new ContentValues();
-            cv.put(Constants.TAB_STOCK_COLUMNS[8],valToAssign);
+            cv.put(Constants.TAB_STOCK_COLUMNS[8], valToAssign);
             //String whereClauseArgs[] = {model.getServerID()};
-            String whereClauseArgs[] = {model.getCode(),model.getBatchNumber(),model.getUnitPrice()+""};
+            String whereClauseArgs[] = {model.getCode(), model.getBatchNumber(), model.getUnitPrice() + ""};
 
-            Log.w("id",model.getServerID()+"");
+            Log.w("id", model.getServerID() + "");
 
+            int updatedCount = 0;
+            if(! (model.getBatchNumber() == null|| model.getBatchNumber().equalsIgnoreCase("") )){
+                updatedCount = db.update(Constants.TAB_STOCK, cv, Constants.TAB_STOCK_COLUMNS[3]+"=? AND " +
+                        Constants.TAB_STOCK_COLUMNS[4]+"=? AND "+Constants.TAB_STOCK_COLUMNS[6]+"=?" , whereClauseArgs);
+            }
 
-
-            int updatedCount = db.update(Constants.TAB_STOCK, cv, Constants.TAB_STOCK_COLUMNS[3]+"=? AND " +
-                    Constants.TAB_STOCK_COLUMNS[4]+"=? AND "+Constants.TAB_STOCK_COLUMNS[6]+"=?" , whereClauseArgs);
             if(updatedCount<=0){
                 cv.put(Constants.TAB_STOCK_COLUMNS[0],model.getServerID());
                 cv.put(Constants.TAB_STOCK_COLUMNS[1],model.getId());
                 cv.put(Constants.TAB_STOCK_COLUMNS[2],model.getBrandID());
                 cv.put(Constants.TAB_STOCK_COLUMNS[3],model.getCode());
-                cv.put(Constants.TAB_STOCK_COLUMNS[4],model.getBatchNumber());
+                cv.put(Constants.TAB_STOCK_COLUMNS[4],model.getCode());
                 cv.put(Constants.TAB_STOCK_COLUMNS[5],"01-01-2025");
                 cv.put(Constants.TAB_STOCK_COLUMNS[6],model.getUnitPrice());
                 cv.put(Constants.TAB_STOCK_COLUMNS[7],model.getRetailPrice());

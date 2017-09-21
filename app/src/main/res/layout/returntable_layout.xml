@@ -12,10 +12,10 @@
         android:id="@+id/code_e"
         android:text="test1"
 
-        android:layout_weight="1"
+        android:layout_weight="1.5"
         android:textAlignment="center"
         style="@style/SalesRowTextView"/>
-    <LinearLayout android:layout_width="0dp" android:layout_weight="3" android:layout_height="match_parent">
+    <LinearLayout android:layout_width="0dp" android:layout_weight="4" android:layout_height="match_parent">
 
 
         <TextView android:id="@+id/product_e"
@@ -31,7 +31,7 @@
         android:textAlignment="textStart"
         style="@style/SalesRowTextView"/>
     <TextView android:id="@+id/expiry_e"
-
+        android:visibility="gone"
         android:layout_weight="1.5"
         android:textAlignment="textStart"
         style="@style/SalesRowTextView"/>

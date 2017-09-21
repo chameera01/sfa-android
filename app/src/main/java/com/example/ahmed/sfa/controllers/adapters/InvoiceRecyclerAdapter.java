@@ -440,12 +440,16 @@ implements SummaryUpdater{
         public void onFocusChange(View v, boolean hasFocus) {
             EditText view = (EditText)v;
             if(hasFocus){
+                view.setBackgroundColor(Color.BLACK);
+                (view).setTextColor(Color.WHITE);
                 if(view.getText().toString().equals("0") || view.getText().toString().equals("0.0")){
                     view.setText("");
                 }else{
                     view.setSelection(view.getText().length());
                 }
             }else{
+                v.setBackgroundColor(Color.TRANSPARENT);
+                (view).setTextColor(Color.BLACK);
                 if(view.getText().toString().equalsIgnoreCase("") ){
                     view.setText("0");
                 }
