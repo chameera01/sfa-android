@@ -5,13 +5,16 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -98,92 +101,118 @@ public class SalesSummaryActivity extends AppCompatActivity {
         });
 
         Button saveBtn = (Button)findViewById(R.id.save_button_ss);
-        saveBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isError = false;
-                if(pman.checkForLocationPermission()){
-                    LocationManager locMan = (LocationManager)getSystemService(LOCATION_SERVICE);
-                    Location loc = locMan.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                }else {
-                    Toast.makeText(getApplicationContext(),"Location Permission Not available",Toast.LENGTH_SHORT).show();
-                }
-
-                DBAdapter dbAdapter = new DBAdapter(SalesSummaryActivity.this);
-                String serialCode = RandomNumberGenerator.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"SRL",14);
-                //String invNum = RandomNumberGenerator.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"INV",14);
-
-                //get invoice number from table -1 will be returned on error
-                int invNo = dbAdapter.getInvoiceNo();
-                if (invNo!=-1){
-                    //insert into sales header and get sales header id
-                    if(dbAdapter.insertIntoSalesHeader(payment,new Location(LocationManager.GPS_PROVIDER),itinerary.getId(),customerNo,invNo)){
-                        int salesHeaderID = dbAdapter.getLastSalesHeaderID();
-                        if (salesHeaderID!=-1){
-                            int val = dbAdapter.insertDataToSalesDetails(data,salesHeaderID);
-                            if(val==data.size()){
-                                int r =dbAdapter.updateStock(data);
-                                Log.w("Error check :",r+"");
-                                Log.w("Error check :",data.size()+"");
-                                if(r==data.size()){
-                                    if (dbAdapter.insertToInvoiceOutStanding(payment,invNo)){
-                                          if(dbAdapter.insertToDailyRouteDetails(itinerary,customerNo,invNo)){
-                                              if(dbAdapter.updateItineraryDetailsTable(itinerary.getId(),customerNo)){
-                                                    if(dbAdapter.insertChequeDetails(chequeModel,serialCode,invNo,customerNo,payment.getTotal())){
-                                                        if(dbAdapter.increaseInvoiceNo()){
-                                                            alert.showAlert("Success","Invoice completed",null,successfull);
-                                                        }else{
-                                                            Log.w("Eror : >","incr inv no");
-                                                            isError = true;//increasing invoice number error
-                                                        }
-                                                    }else {
-                                                        Log.w("Eror : >","cheque");
-                                                        isError = true;//inserting cheque details error
-                                                    }
-                                              }else{
-                                                  Log.w("Eror : >","itinerary");
-                                                  isError=true;//updating itinerary table error
-                                              }
-                                          }else{
-                                              Log.w("Eror : >","daily route");
-                                              isError= true;//inserting data into daily route details error
-                                          }
-                                    }else{
-                                        Log.w("Eror : >","sales outstanding");
-                                        isError = true;//inserting data into sales outstanding error;
+        saveBtn.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(SalesSummaryActivity.this);
+                        builder
+                                .setTitle("Confirm ")
+                                .setMessage("Are you sure ?")
+                                .setIcon(null)
+                                .setPositiveButton("Yes",new DialogInterface.OnClickListener(){
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                       insertData();
                                     }
+                                })
+                                .setNegativeButton("No",new DialogInterface.OnClickListener(){
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
 
-                                }else {
-                                    Log.w("Eror : >","stock values");
-                                    isError = true;//not all product's Stock values are updated;
-                                }
-                            }else {
-                                Log.w("Eror : >","sales details");
-                                isError =true;//Not all data inserted to the sales details table
-                            }
-                        }else {
-                            Log.w("Eror : >","sales header");
-                            isError = true; //retreiving id from sales header error;
-                        }
-                    }else{
-                        Log.w("Eror : >","sales headr");
-                        isError = true;//inserting into sales header error
+
                     }
-                }else{
-                    Log.w("Eror : >","invoice num ret");
-                    isError = true;//invoice number retreiving error
-                }
-
-                if(isError)alert.showAlert("Error","Invoicing error try again",null,null);
-
-                //this value has to be taken from the home ui but hard coded here for convenience
-                /**if(dbAdapter.insertChequeDetails(chequeModel,serialCode,invNum,customerNo,payment.getTotal()))
-                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
-                else Toast.makeText(getApplicationContext(),"Un Successfull",Toast.LENGTH_SHORT).show();*/
-            }
-        });
+                });
 
         init();
+    }
+
+    private void insertData(){
+        boolean isError = false;
+        if(pman.checkForLocationPermission()){
+            LocationManager locMan = (LocationManager)getSystemService(LOCATION_SERVICE);
+            Location loc = locMan.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        }else {
+            Toast.makeText(getApplicationContext(),"Location Permission Not available",Toast.LENGTH_SHORT).show();
+        }
+
+        DBAdapter dbAdapter = new DBAdapter(SalesSummaryActivity.this);
+        String serialCode = RandomNumberGenerator.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"SRL",14);
+        //String invNum = RandomNumberGenerator.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"INV",14);
+
+        //get invoice number from table -1 will be returned on error
+        int invNo = dbAdapter.getInvoiceNo();
+        if (invNo!=-1){
+            //insert into sales header and get sales header id
+            if(dbAdapter.insertIntoSalesHeader(payment,new Location(LocationManager.GPS_PROVIDER),itinerary.getId(),customerNo,invNo)){
+                int salesHeaderID = dbAdapter.getLastSalesHeaderID();
+                if (salesHeaderID!=-1){
+                    int val = dbAdapter.insertDataToSalesDetails(data,salesHeaderID);
+                    if(val==data.size()){
+                        int r =dbAdapter.updateStock(data);
+                        Log.w("Error check :",r+"");
+                        Log.w("Error check :",data.size()+"");
+                        if(r==data.size()){
+                            if (dbAdapter.insertToInvoiceOutStanding(payment,invNo)){
+                                if(dbAdapter.insertToDailyRouteDetails(itinerary,customerNo,invNo)){
+                                    if(dbAdapter.updateItineraryDetailsTable(itinerary.getId(),customerNo)){
+                                        if(dbAdapter.insertChequeDetails(chequeModel,serialCode,invNo,customerNo,payment.getTotal())){
+                                            if(dbAdapter.increaseInvoiceNo()){
+                                                alert.showAlert("Success","Invoice completed",null,successfull);
+                                            }else{
+                                                Log.w("Eror : >","incr inv no");
+                                                isError = true;//increasing invoice number error
+                                            }
+                                        }else {
+                                            Log.w("Eror : >","cheque");
+                                            isError = true;//inserting cheque details error
+                                        }
+                                    }else{
+                                        Log.w("Eror : >","itinerary");
+                                        isError=true;//updating itinerary table error
+                                    }
+                                }else{
+                                    Log.w("Eror : >","daily route");
+                                    isError= true;//inserting data into daily route details error
+                                }
+                            }else{
+                                Log.w("Eror : >","sales outstanding");
+                                isError = true;//inserting data into sales outstanding error;
+                            }
+
+                        }else {
+                            Log.w("Eror : >","stock values");
+                            isError = true;//not all product's Stock values are updated;
+                        }
+                    }else {
+                        Log.w("Eror : >","sales details");
+                        isError =true;//Not all data inserted to the sales details table
+                    }
+                }else {
+                    Log.w("Eror : >","sales header");
+                    isError = true; //retreiving id from sales header error;
+                }
+            }else{
+                Log.w("Eror : >","sales headr");
+                isError = true;//inserting into sales header error
+            }
+        }else{
+            Log.w("Eror : >","invoice num ret");
+            isError = true;//invoice number retreiving error
+        }
+
+        if(isError)alert.showAlert("Error","Invoicing error try again",null,null);
+
+        //this value has to be taken from the home ui but hard coded here for convenience
+        /**if(dbAdapter.insertChequeDetails(chequeModel,serialCode,invNum,customerNo,payment.getTotal()))
+         Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+         else Toast.makeText(getApplicationContext(),"Un Successfull",Toast.LENGTH_SHORT).show();*/
+
     }
 
     private DialogInterface.OnClickListener successfull= new DialogInterface.OnClickListener(){
@@ -218,20 +247,25 @@ public class SalesSummaryActivity extends AppCompatActivity {
 
     public TableRow getView(int i){
         SalesInvoiceModel salesrow = data.get(i);
-        TableRow row = (TableRow) getLayoutInflater().inflate(R.layout.si_viewrow_layout,table,false);
-
+        TableRow row = (TableRow) getLayoutInflater().inflate(R.layout.sales_summary_row,table,false);
+        if(i%2==0){
+            row.setBackgroundColor(Color.LTGRAY);
+        }else{
+            row.setBackgroundColor(Color.GRAY);
+        }
         TextView code = (TextView)row.findViewById(R.id.code_e);
         TextView product = (TextView)row.findViewById(R.id.product_e);
         TextView batch = (TextView)row.findViewById(R.id.batch_e);
         TextView expiry = (TextView)row.findViewById(R.id.expiry_e);
-        TextView unitprice = (TextView)row.findViewById(R.id.unit_price_e);
+        TextView unitprice = (TextView)row.findViewById(R.id.unit_price);
         TextView stock = (TextView)row.findViewById(R.id.stock_e);
-        TextView shelf = (TextView)row.findViewById(R.id.shelf_e);
+        TextView shelf = (TextView) row.findViewById(R.id.shelf_e);
         TextView request = (TextView)row.findViewById(R.id.request_e);
         TextView order = (TextView)row.findViewById(R.id.order_e);
         TextView free = (TextView)row.findViewById(R.id.free_e);
         TextView disc = (TextView)row.findViewById(R.id.dsc_e);
         TextView linVal = (TextView)row.findViewById(R.id.line_val_e);
+
 
         code.setText(salesrow.getCode());
         product.setText(salesrow.getProduct());

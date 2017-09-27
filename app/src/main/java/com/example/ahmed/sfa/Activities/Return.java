@@ -14,12 +14,14 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -169,13 +171,43 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
 
 
                 Button doneBtn = (Button) findViewById(R.id.next_ri);
+                /*
                 doneBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         submit();
 
                     }
-                });
+                });*/
+
+                doneBtn.setOnClickListener(
+                        new View.OnClickListener() {
+                           @Override
+                           public void onClick(View v) {
+                               AlertDialog.Builder builder = new AlertDialog.Builder(Return.this);
+                               builder
+                                       .setTitle("Confirm ")
+                                       .setMessage("Are you sure ?")
+                                       .setIcon(null)
+                                       .setPositiveButton("Yes",new DialogInterface.OnClickListener(){
+                                           @Override
+                                           public void onClick(DialogInterface dialog, int which) {
+                                               submit();
+                                           }
+                                       })
+                                       .setNegativeButton("No",new DialogInterface.OnClickListener(){
+                                           @Override
+                                           public void onClick(DialogInterface dialog, int which) {
+                                               dialog.dismiss();
+                                           }
+                                       });
+                               AlertDialog alert = builder.create();
+                               alert.show();
+
+
+                           }
+                       }
+                );
 
                 launchedForResult = false;
                 if(getCallingActivity()!=null){
@@ -403,7 +435,7 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
             //fill in data
             sql = "INSERT INTO temp_return(ItemCode,Description,BatchNumber" +
                     ",ExpiryDate,SellingPrice,Qty,PrincipleID,BrandID,ServerID,RetailPrice) SELECT a.ItemCode,a.Description," +
-                    "b.BatchNumber,b.ExpiryDate,b.SellingPrice,b.Qty,a.PrincipleID,a.BrandID,b.ServerID, a.RetailPrice" +
+                    "b.BatchNumber,b.ExpiryDate,a.RetailPrice,b.Qty,a.PrincipleID,a.BrandID,b.ServerID, a.RetailPrice" +
                     " FROM Mst_ProductMaster a Left join Tr_TabStock b " +
                     "on a.ItemCode  = b.ItemCode";
             db.execSQL(sql);

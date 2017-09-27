@@ -40,7 +40,7 @@
         android:inputType="numberDecimal"
         android:layout_weight="1"
         android:textAlignment="center"
-        style="@style/SalesRowTextView"/>
+        style="@style/SalesRowEditText"/>
     <TextView android:id="@+id/stock_e"
 
         android:inputType="number"
@@ -51,27 +51,27 @@
         android:inputType="number"
         android:layout_weight="1"
         android:textAlignment="center"
-        style="@style/SalesRowTextView"/>
+        style="@style/SalesRowEditText"/>
     <EditText android:id="@+id/request_e"
 
         android:layout_weight="1"
         android:inputType="number"
         android:textAlignment="center"
-        style="@style/SalesRowTextView"/>
+        style="@style/SalesRowEditText"/>
     <EditText android:id="@+id/order_e"
 
         android:layout_weight="1"
         android:inputType="number"
         android:textAlignment="center"
-        style="@style/SalesRowTextView"/>
+        style="@style/SalesRowEditText"/>
     <EditText android:id="@+id/free_e"
 
         android:layout_weight="1"
         android:inputType="number"
         android:textAlignment="center"
-        style="@style/SalesRowTextView"/>
+        style="@style/SalesRowEditText"/>
     <EditText android:id="@+id/dsc_e"
-        style="@style/SalesRowTextView"
+        style="@style/SalesRowEditText"
         android:layout_weight="1"
         android:inputType="numberDecimal"
         android:textAlignment="center"

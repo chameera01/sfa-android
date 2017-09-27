@@ -54,7 +54,7 @@ implements SummaryUpdater{
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView code,product,expiry,unitprice,stock,lineval,batchNum;
         EditText shelf,request,order,free,discount;
-
+        int ref;
 
         View view;
         public MyViewHolder(View view){
@@ -125,7 +125,7 @@ implements SummaryUpdater{
 
     public void onBindViewHolder(final MyViewHolder holder, final int position, List<Object> payload){
         //onBindViewHolder(holder,position);
-
+        holder.ref = position;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
         onBind = true;
@@ -187,6 +187,21 @@ implements SummaryUpdater{
 
 
         holder.shelf.setOnFocusChangeListener(new FocusChangeListener());
+        holder.shelf.addTextChangedListener(new GenericTextWatcher(){
+            @Override
+            public void afterTextChanged(String s){
+                int pos = holder.ref;
+                if(!s.toString().equals("")) {
+
+                    salesInvoice.get(pos).setShelf(Integer.parseInt(s+""));
+                    dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                }
+
+            }
+        });
+        /* removing this code because of the issue with android version 4.4
+        but this code is the most efficient code
+         *//*
         holder.shelf.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -201,10 +216,59 @@ implements SummaryUpdater{
             }
         });
 
-
+        */
 
         holder.request.setOnFocusChangeListener(new FocusChangeListener());
+        holder.request.addTextChangedListener(new GenericTextWatcher(){
+            @Override
+            public void afterTextChanged(String s){
+                boolean valHasChanged = false;
+                boolean freeHasChanged = false;
+                int pos = holder.ref;
+                if(!(s.equals(""))){
 
+                    int val = Integer.parseInt((s));
+                    int stock =salesInvoice.get(pos).getStock();
+                    if(val>stock){
+                        //Toast.makeText(null,"Enter a valid Qty",Toast.LENGTH_SHORT).show();
+                        val=stock;
+                        valHasChanged = true;
+                    }
+                    salesInvoice.get(pos).setRequest(val);
+                    salesInvoice.get(pos).setOrder(val);
+
+                    if(salesInvoice.get(pos).getFree()+salesInvoice.get(pos).getOrder()>salesInvoice.get(pos).getStock()){
+                        salesInvoice.get(pos).setFree(0);
+                        freeHasChanged = true;
+
+                    }
+                    //initTable();
+
+//                        notifyItemChanged(position,new String[]{RETURN});
+                }else{
+                    salesInvoice.get(pos).setRequest(0);
+                }
+
+
+
+                if(!onBind){
+                    //List<String> item = new ArrayList<>();
+                    //item.add(RETURN);
+                    notifyItemChanged(pos,ORDER);
+                    if(valHasChanged){
+                        notifyItemChanged(pos,REQUEST);
+                        //holder.setCursor(REQUEST);
+                    }
+                    if(freeHasChanged){
+                        notifyItemChanged(pos,FREE);
+                    }
+                }
+                dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                notifyUpdate();
+            }
+        });
+
+        /* ISSUE 4.4 use this code if the apps least supported version increase more than 4.4
         holder.request.setOnKeyListener(new View.OnKeyListener() {
             boolean valHasChanged = false;
             boolean freeHasChanged = false;
@@ -255,10 +319,56 @@ implements SummaryUpdater{
 
                 return false;
             }
-        });
+        });*/
 
 
         holder.order.setOnFocusChangeListener(new FocusChangeListener());
+        holder.order.addTextChangedListener(new GenericTextWatcher(){
+            @Override
+            public void afterTextChanged(String s){
+                boolean valHasChanged = false;
+                boolean freeHasChanged = false;
+                int pos = holder.ref;
+                if(!(s.toString().equals(""))){
+
+                    int val = Integer.parseInt(s.toString());
+                    int stock =salesInvoice.get(pos).getStock();
+
+                    if(val>stock){
+                        //Toast.makeText(null,"Order is more than the stock",Toast.LENGTH_SHORT).show();
+                        val=stock;
+                        valHasChanged = true;
+
+                    }
+                    salesInvoice.get(pos).setOrder(val);//make sure we set returnQty before
+                    //chekcing the total of returnQty and free against stock
+
+                    if(salesInvoice.get(pos).getOrder()+salesInvoice.get(pos).getFree()>salesInvoice.get(pos).getStock()){
+                        salesInvoice.get(pos).setFree(0);
+                        freeHasChanged = true;
+                    }
+
+                    //notifyItemChanged(position);
+
+                }else{
+                    salesInvoice.get(pos).setOrder(0);
+                }
+
+                if(!onBind){
+                    //notifyItemChanged(position);
+                    if(valHasChanged){
+                        notifyItemChanged(pos,ORDER);//notify the adapter that value changed and refresh the view mentioned by the string
+                        //holder.setCursor(RETURN);
+                    }
+                    if(freeHasChanged) notifyItemChanged(pos,FREE);
+                    notifyItemChanged(pos,LINEVAL);
+                }
+
+                dbAdapter.updateInvoiceData(salesInvoice.get(pos)); //update the value in the database
+                notifyUpdate();
+            }
+        });
+        /*working better code ISSUE 4.4
         holder.order.setOnKeyListener(new View.OnKeyListener() {
             boolean valHasChanged = false;
             boolean freeHasChanged = false;
@@ -308,11 +418,39 @@ implements SummaryUpdater{
 
                 return false;
             }
-        });
+        });*/
 
 
 
         holder.free.setOnFocusChangeListener(new FocusChangeListener());
+        holder.free.addTextChangedListener(new GenericTextWatcher() {
+            @Override
+            public void afterTextChanged(String s){
+                boolean valChanged = false;
+                int pos = holder.ref;
+
+                if (!s.toString().equals("")) {
+
+                    int val = Integer.parseInt(s.toString());
+                    salesInvoice.get(pos).setFree(val);
+                    if (salesInvoice.get(pos).getOrder() + salesInvoice.get(pos).getFree() > salesInvoice.get(pos).getStock()) {
+                        salesInvoice.get(pos).setFree(0);
+                        valChanged = true;
+                    }
+                    //initTable();
+                    //notifyItemChanged(position);
+                }
+                if(!onBind){
+                    //notifyItemChanged(position);
+                    notifyItemChanged(pos,LINEVAL);
+                    if(valChanged)notifyItemChanged(pos,FREE);
+                }
+                holder.setCursor(FREE);
+                dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                notifyUpdate();
+            }
+        });
+        /* ISSUE 4.4
         holder.free.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -340,11 +478,29 @@ implements SummaryUpdater{
                 notifyUpdate();
                 return false;
             }
-        });
+        });*/
 
 
 
         holder.discount.setOnFocusChangeListener(new FocusChangeListener());
+        holder.discount.addTextChangedListener(new GenericTextWatcher(){
+            @Override
+            public void afterTextChanged(String s){
+                int pos = holder.ref;
+                if(!(s.equals(salesInvoice.get(pos).getDiscountRate()+""))){
+                    if(!s.toString().equals("")){
+                        Double rate = Double.parseDouble(s.toString().trim());
+                        Log.i(" RAte ",rate+"");
+                        salesInvoice.get(pos).setDiscountRate(rate);
+                        //notifyItemChanged(position);
+                        if(!onBind)notifyItemChanged(pos,LINEVAL);
+                        dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                        notifyUpdate();
+                    }
+                }
+            }
+        });
+        /*
         holder.discount.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -363,7 +519,7 @@ implements SummaryUpdater{
                 }
                 return false;
             }
-        });
+        });*/
 
 
         if(position%2==0){
@@ -392,6 +548,10 @@ implements SummaryUpdater{
 
     class GenericTextWatcher implements TextWatcher {
 
+        public void afterTextChanged(String s){
+
+        }
+
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -404,7 +564,7 @@ implements SummaryUpdater{
 
         @Override
         public void afterTextChanged(Editable s) {
-
+            afterTextChanged(s.toString());
         }
     }
 
@@ -447,7 +607,7 @@ implements SummaryUpdater{
                 }else{
                     view.setSelection(view.getText().length());
                 }
-            }else{
+            }else if(salesInvoice.size()>0){
                 v.setBackgroundColor(Color.TRANSPARENT);
                 (view).setTextColor(Color.BLACK);
                 if(view.getText().toString().equalsIgnoreCase("") ){

@@ -125,32 +125,41 @@
 
                 <Button
                     android:id="@+id/generateinvoice"
-                    android:text="Invoice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:text="Invoice"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    />
+
                 <Button
                     android:id="@+id/generatereturn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/generateinvoice"
                     android:text="Return"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    />
+
                 <Button
                     android:id="@+id/invoicehistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/generatereturn"
                     android:text="History"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/generatereturn"/>
-                <Button
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    />
 
+                <Button
                     android:id="@+id/skipp_customer"
-                    android:text="Dismiss"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/invoicehistory"
                     android:layout_alignParentRight="true"
+                    android:layout_below="@+id/invoicehistory"
+                    android:text="Dismiss"
+                    style="@style/Widget.AppCompat.Button.Colored"
                     />
 
             </RelativeLayout>

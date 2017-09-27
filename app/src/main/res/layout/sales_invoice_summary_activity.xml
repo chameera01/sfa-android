@@ -60,26 +60,26 @@
                 <TextView android:text="Shelf"
 
                     android:inputType="number"
-                    android:layout_weight="1"
+                    android:layout_weight="0.9"
                     android:textAlignment="center"
                     style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Request"
-                    android:layout_weight="1"
+                    android:layout_weight="0.9"
                     android:inputType="number"
                     android:textAlignment="center"
                     style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Order"
-                    android:layout_weight="1"
+                    android:layout_weight="0.9"
                     android:inputType="number"
                     android:textAlignment="center"
                     style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Free"
-                    android:layout_weight="1"
+                    android:layout_weight="0.9"
                     android:textAlignment="center"
                     style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Disc%"
 
-                    android:layout_weight="1"
+                    android:layout_weight="0.9"
                     android:textAlignment="center"
                     style="@style/SalesTableHeaderTextViews"/>
                 <TextView android:text="Line Value"

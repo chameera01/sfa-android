@@ -78,8 +78,8 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         fullInvDisc = (EditText)findViewById(R.id.full_invoice_discount);
         cheque = (TextView) findViewById(R.id.si_pay_cheque);
 
-        Button chqBtn = (Button)findViewById(R.id.si_pay_cheque_popup);
-        chqBtn.setOnClickListener(new View.OnClickListener() {
+        //Button chqBtn = (Button)findViewById(R.id.si_pay_cheque_popup);
+        cheque.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showChequeDialog();

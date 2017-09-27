@@ -48,7 +48,7 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView code,product,expiry,stock,lineval,batchNum;
         EditText shelf,request,unitprice, returnQty,free,discount;
-
+        int ref;
 
         View view;
         public MyViewHolder(View view){
@@ -118,8 +118,8 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
     public void onBindViewHolder(final MyViewHolder holder, final int position, List<Object> payload){
         //onBindViewHolder(holder,position);
 
-
         onBind = true;
+        holder.ref = position;
         SalesInvoiceModel siModel = salesInvoice.get(position);
         holder.code.setText(siModel.getCode());
         holder.product.setText(siModel.getProduct());
@@ -133,14 +133,17 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
             holder.expiry.setText("01-05-2025");
         }
         holder.stock.setText(siModel.getStock()+"");
-        holder.lineval.setText(siModel.getLineValue()+"");
+
 
         if(payload==null || payload.size()==0) {
+            holder.unitprice.setText(siModel.getUnitPrice()+"");
             holder.shelf.setText(siModel.getShelf() + "");
             holder.request.setText(siModel.getRequest() + "");
             holder.returnQty.setText(siModel.getOrder() + "");
             holder.free.setText(siModel.getFree() + "");
             holder.discount.setText(siModel.getDiscountRate() + "");
+
+            holder.lineval.setText(siModel.getLineValue()+"");
         }else{
 
             for(Object editText :payload) {
@@ -180,6 +183,25 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         //ADD TEXT WATCHERS
 
         holder.unitprice.setOnFocusChangeListener(new FocusChangeListener());
+        holder.unitprice.addTextChangedListener(new GenericTextWatcher(){
+            public void afterTextChanged(String s ){
+                int pos = holder.ref;
+                if(!s.toString().equals("")) {
+
+                    salesInvoice.get(pos).setUnitPrice(Double.parseDouble(s+""));
+
+                    //initTable();
+                    // if(!onBind)notifyItemChanged(position);
+
+
+                }else{
+                    salesInvoice.get(pos).setUnitPrice(0.0);
+                }
+                dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                if(!onBind)notifyItemChanged(pos,LINEVAL);
+            }
+        });
+        /*
         holder.unitprice.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -202,10 +224,28 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                 return false;
 
             }
-        });
+        });*/
+
 
 
         holder.shelf.setOnFocusChangeListener(new FocusChangeListener());
+        holder.shelf.addTextChangedListener(new GenericTextWatcher(){
+            public void afterTextChanged(String s){
+                int pos = holder.ref;
+                if(!s.toString().equals("")) {
+
+                    salesInvoice.get(pos).setShelf(Integer.parseInt(s+""));
+
+                    //initTable();
+                    // if(!onBind)notifyItemChanged(position);
+
+                }else{
+                    salesInvoice.get(pos).setShelf(0);
+                }
+                dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+            }
+        });
+        /*
         holder.shelf.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -224,10 +264,32 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                 dbAdapter.updateInvoiceData(salesInvoice.get(position));
                 return false;
             }
-        });
+        });*/
 
         holder.request.setOnFocusChangeListener(new FocusChangeListener());
+        holder.request.addTextChangedListener(new GenericTextWatcher(){
+            public void afterTextChanged(String s){
+                int pos = holder.ref;
+                if(!(s.equals(""))){
 
+                    int val = Integer.parseInt(s);
+                    salesInvoice.get(pos).setRequest(val);
+                    salesInvoice.get(pos).setOrder(val);
+                }else{
+                    salesInvoice.get(pos).setRequest(0);
+                }
+
+                if(!onBind){
+
+                    notifyItemChanged(position, RETURN);
+                    notifyItemChanged(position,LINEVAL);
+                }
+                dbAdapter.updateInvoiceData(salesInvoice.get(position));
+                notifyUpdate();
+
+            }
+        });
+        /*
         holder.request.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -253,10 +315,28 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
 
                 return false;
             }
-        });
+        });*/
 
 
         holder.returnQty.setOnFocusChangeListener(new FocusChangeListener());
+        holder.returnQty.addTextChangedListener(new GenericTextWatcher(){
+            public void afterTextChanged(String s){
+
+                int pos = holder.ref;
+                if(!(s.toString().equals(""))){
+
+                    int val = Integer.parseInt(s.toString());
+                    salesInvoice.get(pos).setOrder(val);//make sure we set returnQty before
+
+                }else{
+                    salesInvoice.get(pos).setOrder(0);
+                }
+                if(!onBind)notifyItemChanged(pos,LINEVAL);
+                dbAdapter.updateInvoiceData(salesInvoice.get(pos)); //update the value in the database
+                notifyUpdate();
+            }
+        });
+        /*
         holder.returnQty.setOnKeyListener(new View.OnKeyListener() {
             boolean valHasChanged = false;
             boolean freeHasChanged = false;
@@ -279,11 +359,30 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                 notifyUpdate();
                 return false;
             }
-        });
+        });*/
 
 
 
         holder.free.setOnFocusChangeListener(new FocusChangeListener());
+        holder.free.addTextChangedListener(new GenericTextWatcher(){
+            public void afterTextChanged(String s){
+                int pos = holder.ref;
+                if (!s.toString().equals("")) {
+
+                    int val = Integer.parseInt(s.toString());
+                    salesInvoice.get(pos).setFree(val);
+                }
+                if(!onBind){
+                    //notifyItemChanged(position);
+                    notifyItemChanged(pos,LINEVAL);
+
+                }
+                holder.setCursor(FREE);
+                dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                notifyUpdate();
+            }
+        });
+        /*
         holder.free.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -304,9 +403,26 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                 notifyUpdate();
                 return false;
             }
-        });
+        });*/
 
         holder.discount.setOnFocusChangeListener(new FocusChangeListener());
+        holder.discount.addTextChangedListener(new GenericTextWatcher(){
+            public void afterTextChanged(String s){
+                int pos = holder.ref;
+                if(!(s.equals(salesInvoice.get(pos).getDiscountRate()+""))){
+                    if(!s.toString().equals("")){
+                        Double rate = Double.parseDouble(s.toString().trim());
+
+                        salesInvoice.get(pos).setDiscountRate(rate);
+                        //notifyItemChanged(position);
+                        if(!onBind)notifyItemChanged(pos,LINEVAL);
+                        dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                        notifyUpdate();
+                    }
+                }
+            }
+        });
+        /*
         holder.discount.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -325,7 +441,7 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                 }
                 return false;
             }
-        });
+        });*/
 
 
         if(position%2==0){
@@ -350,6 +466,10 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
 
     class GenericTextWatcher implements TextWatcher {
 
+        public void afterTextChanged(String s){
+
+        }
+
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -362,7 +482,7 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
 
         @Override
         public void afterTextChanged(Editable s) {
-
+            afterTextChanged(s.toString());
         }
     }
 
@@ -413,6 +533,8 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                 }
             }
         }
+
+
     }
 
 }
