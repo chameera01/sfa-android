@@ -27,6 +27,8 @@ import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.Volley.VolleyLog;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
+import com.example.ahmed.sfa.models.Mst_Customermaster;
+import com.example.ahmed.sfa.service.HttpGetRequest;
 import com.example.ahmed.sfa.service.JsonFilter_Send;
 import com.example.ahmed.sfa.service.JsonObjGenerate;
 import com.example.ahmed.sfa.service.JsonRequestListerner;
@@ -43,6 +45,7 @@ import org.json.JSONObject;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -352,7 +355,9 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             @Override
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
-                try {
+
+               //download customer master data
+                 try {
                     JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Customermaster/SelectMst_Customermaster?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("Customer");
 
@@ -363,8 +368,50 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
                     e.printStackTrace();
                     Toast.makeText(ManualSync.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
                 }
+                //upload Mst_CustomerMaster data
+                try {
+                    DBAdapter adp_customermaster = new DBAdapter(ManualSync.this);
+                    String sqlQry = "select * from Mst_CustomerMaster where isActive = 0 ";
+                    Cursor cusCursor= adp_customermaster.runQuery(sqlQry);
+
+                    while (cusCursor.moveToNext()) {
+                        String cusno =  cusCursor.getString(cusCursor.getColumnIndex("CustomerNo"));
+                        String cusname =  cusCursor.getString(cusCursor.getColumnIndex("CustomerName"));
+                        String addrss = cusCursor.getString(cusCursor.getColumnIndex("Address"));
+                        //String cusno = cusCursor.getString(cusCursor.getColumnIndex("Address"));
+                        String dist = cusCursor.getString(cusCursor.getColumnIndex("DistrictID"));
+                        String area = cusCursor.getString(cusCursor.getColumnIndex("Area"));
+                        String twn = cusCursor.getString(cusCursor.getColumnIndex("Town"));
+                        String route = cusCursor.getString(cusCursor.getColumnIndex("RouteID"));
+                        String status = cusCursor.getString(cusCursor.getColumnIndex("CustomerStatus"));//CustomerStatusId instead
+
+                        String tel = cusCursor.getString(cusCursor.getColumnIndex("Telephone"));
+                        String fax = cusCursor.getString(cusCursor.getColumnIndex("Fax"));
+                        String email = cusCursor.getString(cusCursor.getColumnIndex("Email"));
+                        String ownername = cusCursor.getString(cusCursor.getColumnIndex("OwnerName"));
+                        String ownerCon = cusCursor.getString(cusCursor.getColumnIndex("OwnerContactNo"));
+                        String regno = cusCursor.getString(cusCursor.getColumnIndex("PhamacyRegNo"));
+                        //String cusno = cusCursor.getString(cusCursor.getColumnIndex("Email"));
+
+                        Float lat = cusCursor.getFloat(cusCursor.getColumnIndex("Latitude"));
+                        Float lng = cusCursor.getFloat(cusCursor.getColumnIndex("Longitude"));
+                        String img = cusCursor.getString(cusCursor.getColumnIndex("ImageID"));
+                        String brno = cusCursor.getString(cusCursor.getColumnIndex("BRno"));
+
+                        String url_str = "http://www.bizmapexpert.com/DIstributorManagementSystem/Up_Tr_CustomerMaster_Pending/Tr_CustomerMaster_PendingNew?" +
+                                "RepID=99&TabCustomerNo="+cusno+"CustomerName="+cusname+"&Address="+addrss+"&DistrictID="+dist+"&" +
+                                "Area="+area+"&Town="+twn+"&RouteID="+route+"&CustomerStatusID="+status+"&Telephone="+tel+"&Fax="+fax+"&" +
+                                "Email="+email+"&BRno="+brno+"&OwnerName="+ownername+"&OwnerContactNo="+ownerCon+"&PhamacyRegNo="+regno+"&" +
+                                "Latitude="+lat+"&longitude="+lng+"&ImageID="+img+"";
 
 
+
+                        new HttpGetRequest().execute(url_str);
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
         /*sunc tabStock*/
