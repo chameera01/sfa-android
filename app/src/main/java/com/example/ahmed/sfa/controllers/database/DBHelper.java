@@ -52,7 +52,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     "Area TEXT,Town TEXT,Telephone TEXT,Fax TEXT,Email Text, BRno TEXT,OwnerContactNo TEXT," +
                     "OwnerName TEXT,PhamacyRegNo TEXT,CreditLimit real,CurrentCreditAmount real,CustomerStatus TEXT" +
                     ",InsertDate TEXT,RouteID TEXT,RouteName TEXT,ImageID TEXT,Latitude real,Longitude real,CompanyCode TEXT," +
-                    "IsActive INTEGER,LastUpdateDate TEXT);");
+                    "IsActive INTEGER,LastUpdateDate TEXT,uploadStatus INTEGER DEFAULT 0);");
 
             //creating Customer status Table
             db.execSQL("CREATE TABLE Mst_CustomerStatus (_id INTEGER PRIMARY KEY AUTOINCREMENT,StatusID TEXT,Status TEXT,isActive INTEGER,LastUpdateDate TEXT);");

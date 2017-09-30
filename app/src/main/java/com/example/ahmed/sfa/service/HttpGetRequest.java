@@ -6,7 +6,9 @@ package com.example.ahmed.sfa.service;
 
 
 
+        import android.content.Context;
         import android.os.AsyncTask;
+        import android.widget.Toast;
 
         import org.json.JSONException;
         import org.json.JSONObject;
@@ -24,6 +26,11 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
     public static final String REQUEST_METHOD = "GET";
     public static final int READ_TIMEOUT = 15000;
     public static final int CONNECTION_TIMEOUT = 15000;
+    Context context;
+
+    public HttpGetRequest(Context c){
+        this.context = c;
+    }
     @Override
     protected String doInBackground(String... params){
         String stringUrl = params[0];
@@ -72,8 +79,7 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        if(result.toString()=="{{ success}}"){
-            //UpdateuploadStatus changeStatus
-        }
+        Toast.makeText(context, "response:"+result, Toast.LENGTH_SHORT).show();
+
     }
 }

@@ -30,10 +30,12 @@ import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.service.HttpGetRequest;
 import com.example.ahmed.sfa.service.JsonFilter_Send;
+import com.example.ahmed.sfa.service.JsonHelper;
 import com.example.ahmed.sfa.service.JsonObjGenerate;
 import com.example.ahmed.sfa.service.JsonRequestListerner;
 import com.example.ahmed.sfa.service.SendDeviceDetails;
 import com.example.ahmed.sfa.service.SyncReturn;
+import com.example.ahmed.sfa.service.UploadTables;
 
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
@@ -356,8 +358,55 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
 
+                //uploading data
+                UploadTables uplwd = new UploadTables(ManualSync.this);
+               ArrayList<String> cusArr =  uplwd.mstCustomerMaster();
+
+
+                try {
+                    for (String url : cusArr) {
+                        Toast.makeText(ManualSync.this, "URL:"+url, Toast.LENGTH_SHORT).show();
+                        //new HttpGetRequest(ManualSync.this).execute(url);
+                        //////////////////////////////////////////////////////
+                        new JsonHelper.JsonDataCallback() {
+                            @Override
+                            public void receiveData(Object object) {
+                                String tmpData = (String) object;
+                                Toast.makeText(ManualSync.this, "Result:"+tmpData, Toast.LENGTH_SHORT).show();
+                                try {
+                                    JSONArray jsonArray = new JSONArray(tmpData);
+                                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+                                    jsonObject.optString("ACTIVESTATUS");
+
+                                    if (jsonObject.optString("ACTIVESTATUS").equals("SUCCESS")) {
+                                        Toast.makeText(ManualSync.this, "Activated", Toast.LENGTH_SHORT).show();
+                                    } else {
+
+                                    }
+
+                                } catch (JSONException e) {
+                                    if(tmpData=="did not work"){
+
+                                    }
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }.execute(url, null, null);
+                        //////////////////////////////////////////////////////
+                        //method 2
+                       // new HttpGetRequest(ManualSync.this).execute(url);
+
+                        //////////////////////////////////////////////////////////
+                    }
+                }catch (Exception e){
+                    Toast.makeText(ManualSync.this, "ArrayList:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+
+
                //download customer master data
-                 try {
+               /*  try {
                     JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Customermaster/SelectMst_Customermaster?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("Customer");
 
@@ -365,53 +414,10 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
                     io.execute(jObjGen);
 
                 }catch (Exception e){
-                    e.printStackTrace();
+                   // e.printStackTrace();
                     Toast.makeText(ManualSync.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
-                }
-                //upload Mst_CustomerMaster data
-                try {
-                    DBAdapter adp_customermaster = new DBAdapter(ManualSync.this);
-                    String sqlQry = "select * from Mst_CustomerMaster where isActive = 0 ";
-                    Cursor cusCursor= adp_customermaster.runQuery(sqlQry);
+                }*/
 
-                    while (cusCursor.moveToNext()) {
-                        String cusno =  cusCursor.getString(cusCursor.getColumnIndex("CustomerNo"));
-                        String cusname =  cusCursor.getString(cusCursor.getColumnIndex("CustomerName"));
-                        String addrss = cusCursor.getString(cusCursor.getColumnIndex("Address"));
-                        //String cusno = cusCursor.getString(cusCursor.getColumnIndex("Address"));
-                        String dist = cusCursor.getString(cusCursor.getColumnIndex("DistrictID"));
-                        String area = cusCursor.getString(cusCursor.getColumnIndex("Area"));
-                        String twn = cusCursor.getString(cusCursor.getColumnIndex("Town"));
-                        String route = cusCursor.getString(cusCursor.getColumnIndex("RouteID"));
-                        String status = cusCursor.getString(cusCursor.getColumnIndex("CustomerStatus"));//CustomerStatusId instead
-
-                        String tel = cusCursor.getString(cusCursor.getColumnIndex("Telephone"));
-                        String fax = cusCursor.getString(cusCursor.getColumnIndex("Fax"));
-                        String email = cusCursor.getString(cusCursor.getColumnIndex("Email"));
-                        String ownername = cusCursor.getString(cusCursor.getColumnIndex("OwnerName"));
-                        String ownerCon = cusCursor.getString(cusCursor.getColumnIndex("OwnerContactNo"));
-                        String regno = cusCursor.getString(cusCursor.getColumnIndex("PhamacyRegNo"));
-                        //String cusno = cusCursor.getString(cusCursor.getColumnIndex("Email"));
-
-                        Float lat = cusCursor.getFloat(cusCursor.getColumnIndex("Latitude"));
-                        Float lng = cusCursor.getFloat(cusCursor.getColumnIndex("Longitude"));
-                        String img = cusCursor.getString(cusCursor.getColumnIndex("ImageID"));
-                        String brno = cusCursor.getString(cusCursor.getColumnIndex("BRno"));
-
-                        String url_str = "http://www.bizmapexpert.com/DIstributorManagementSystem/Up_Tr_CustomerMaster_Pending/Tr_CustomerMaster_PendingNew?" +
-                                "RepID=99&TabCustomerNo="+cusno+"CustomerName="+cusname+"&Address="+addrss+"&DistrictID="+dist+"&" +
-                                "Area="+area+"&Town="+twn+"&RouteID="+route+"&CustomerStatusID="+status+"&Telephone="+tel+"&Fax="+fax+"&" +
-                                "Email="+email+"&BRno="+brno+"&OwnerName="+ownername+"&OwnerContactNo="+ownerCon+"&PhamacyRegNo="+regno+"&" +
-                                "Latitude="+lat+"&longitude="+lng+"&ImageID="+img+"";
-
-
-
-                        new HttpGetRequest().execute(url_str);
-                    }
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
             }
         });
         /*sunc tabStock*/
