@@ -33,6 +33,7 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
 
     SummaryUpdateListner listner;
 
+
     @Override
     public void notifyUpdate() {
         listner.updateSummary();
@@ -186,19 +187,23 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         holder.unitprice.addTextChangedListener(new GenericTextWatcher(){
             public void afterTextChanged(String s ){
                 int pos = holder.ref;
-                if(!s.toString().equals("")) {
+                if(!onBind){
+                    if(!s.toString().equals("")) {
 
-                    salesInvoice.get(pos).setUnitPrice(Double.parseDouble(s+""));
+                        salesInvoice.get(pos).setUnitPrice(Double.parseDouble(s+""));
 
-                    //initTable();
-                    // if(!onBind)notifyItemChanged(position);
+                        //initTable();
+                        // if(!onBind)notifyItemChanged(position);
 
 
-                }else{
-                    salesInvoice.get(pos).setUnitPrice(0.0);
+                    }else{
+                        salesInvoice.get(pos).setUnitPrice(0.0);
+                    }
+
+
+                    //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                    notifyItemChanged(pos,LINEVAL);
                 }
-                dbAdapter.updateInvoiceData(salesInvoice.get(pos));
-                if(!onBind)notifyItemChanged(pos,LINEVAL);
             }
         });
         /*
@@ -232,17 +237,19 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         holder.shelf.addTextChangedListener(new GenericTextWatcher(){
             public void afterTextChanged(String s){
                 int pos = holder.ref;
-                if(!s.toString().equals("")) {
+                if(!onBind) {
+                    if (!s.toString().equals("")) {
 
-                    salesInvoice.get(pos).setShelf(Integer.parseInt(s+""));
+                        salesInvoice.get(pos).setShelf(Integer.parseInt(s + ""));
 
-                    //initTable();
-                    // if(!onBind)notifyItemChanged(position);
+                        //initTable();
+                        // if(!onBind)notifyItemChanged(position);
 
-                }else{
-                    salesInvoice.get(pos).setShelf(0);
+                    } else {
+                        salesInvoice.get(pos).setShelf(0);
+                    }
+                    //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
                 }
-                dbAdapter.updateInvoiceData(salesInvoice.get(pos));
             }
         });
         /*
@@ -270,22 +277,25 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         holder.request.addTextChangedListener(new GenericTextWatcher(){
             public void afterTextChanged(String s){
                 int pos = holder.ref;
-                if(!(s.equals(""))){
-
-                    int val = Integer.parseInt(s);
-                    salesInvoice.get(pos).setRequest(val);
-                    salesInvoice.get(pos).setOrder(val);
-                }else{
-                    salesInvoice.get(pos).setRequest(0);
-                }
-
                 if(!onBind){
+                    if(!(s.equals(""))){
 
-                    notifyItemChanged(position, RETURN);
-                    notifyItemChanged(position,LINEVAL);
+                        int val = Integer.parseInt(s);
+                        salesInvoice.get(pos).setRequest(val);
+                        salesInvoice.get(pos).setOrder(val);
+                    }else{
+                        salesInvoice.get(pos).setRequest(0);
+                    }
+
+
+
+                        notifyItemChanged(position, RETURN);
+                        notifyItemChanged(position,LINEVAL);
+
+                        //dbAdapter.updateInvoiceData(salesInvoice.get(position));
+                        notifyUpdate();
                 }
-                dbAdapter.updateInvoiceData(salesInvoice.get(position));
-                notifyUpdate();
+
 
             }
         });
@@ -322,7 +332,8 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         holder.returnQty.addTextChangedListener(new GenericTextWatcher(){
             public void afterTextChanged(String s){
 
-                int pos = holder.ref;
+            int pos = holder.ref;
+            if(!onBind){
                 if(!(s.toString().equals(""))){
 
                     int val = Integer.parseInt(s.toString());
@@ -331,9 +342,12 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                 }else{
                     salesInvoice.get(pos).setOrder(0);
                 }
-                if(!onBind)notifyItemChanged(pos,LINEVAL);
-                dbAdapter.updateInvoiceData(salesInvoice.get(pos)); //update the value in the database
-                notifyUpdate();
+
+                notifyItemChanged(pos,LINEVAL);
+                //dbAdapter.updateInvoiceData(salesInvoice.get(pos)); //update the value in the database
+
+            }
+
             }
         });
         /*
@@ -367,19 +381,20 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         holder.free.addTextChangedListener(new GenericTextWatcher(){
             public void afterTextChanged(String s){
                 int pos = holder.ref;
-                if (!s.toString().equals("")) {
-
-                    int val = Integer.parseInt(s.toString());
-                    salesInvoice.get(pos).setFree(val);
-                }
                 if(!onBind){
+                    if (!s.toString().equals("")) {
+
+                        int val = Integer.parseInt(s.toString());
+                        salesInvoice.get(pos).setFree(val);
+                    }
+
                     //notifyItemChanged(position);
                     notifyItemChanged(pos,LINEVAL);
-
+                    holder.setCursor(FREE);
+                    //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                   // notifyUpdate();
                 }
-                holder.setCursor(FREE);
-                dbAdapter.updateInvoiceData(salesInvoice.get(pos));
-                notifyUpdate();
+
             }
         });
         /*
@@ -407,19 +422,24 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
 
         holder.discount.setOnFocusChangeListener(new FocusChangeListener());
         holder.discount.addTextChangedListener(new GenericTextWatcher(){
-            public void afterTextChanged(String s){
+            public void afterTextChanged(String s) {
                 int pos = holder.ref;
-                if(!(s.equals(salesInvoice.get(pos).getDiscountRate()+""))){
-                    if(!s.toString().equals("")){
-                        Double rate = Double.parseDouble(s.toString().trim());
+                if (!onBind) {
+                    if (!(s.equals(salesInvoice.get(pos).getDiscountRate() + ""))) {
+                        if (!s.toString().equals("")) {
+                            Double rate = Double.parseDouble(s.toString().trim());
 
-                        salesInvoice.get(pos).setDiscountRate(rate);
-                        //notifyItemChanged(position);
-                        if(!onBind)notifyItemChanged(pos,LINEVAL);
-                        dbAdapter.updateInvoiceData(salesInvoice.get(pos));
-                        notifyUpdate();
+                            salesInvoice.get(pos).setDiscountRate(rate);
+                            //notifyItemChanged(position);
+
+                            notifyItemChanged(pos, LINEVAL);
+                            //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                            //notifyUpdate();
+                        }
+
                     }
                 }
+
             }
         });
         /*
@@ -451,6 +471,8 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         }
 
         onBind=false;
+        dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
+        notifyUpdate();
 
     }
 
@@ -520,17 +542,18 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
             if(hasFocus){
                 view.setBackgroundColor(Color.BLACK);
                 (view).setTextColor(Color.WHITE);
-                if(view.getText().toString().equals("0") || view.getText().toString().equals("0.0")){
+                /*if(view.getText().toString().equals("0") || view.getText().toString().equals("0.0")){
                     view.setText("");
                 }else{
                     view.setSelection(view.getText().length());
-                }
+                }*/
+                view.setSelection(view.getText().length());
             }else{
                 v.setBackgroundColor(Color.TRANSPARENT);
                 (view).setTextColor(Color.BLACK);
-                if(view.getText().toString().equalsIgnoreCase("") ){
+                /*if(view.getText().toString().equalsIgnoreCase("") ){
                     view.setText("0");
-                }
+                }*/
             }
         }
 

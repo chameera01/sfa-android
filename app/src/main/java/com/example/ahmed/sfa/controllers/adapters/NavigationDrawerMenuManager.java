@@ -8,6 +8,8 @@ import android.support.annotation.NonNull;
 
 import android.support.design.widget.NavigationView;
 
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -50,7 +52,7 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
     NavigationView navview;
 
     //String[] places ;
-
+    DrawerLayout drawer ;
 
     public NavigationDrawerMenuManager(final Activity activity){
 
@@ -111,7 +113,7 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
         final CheckInOutManager man = new CheckInOutManager(activity.getApplicationContext(),this);//create an instance of the manager
         //to manage database operations
 
-
+        drawer = (DrawerLayout)activity.findViewById(R.id.drawer_layout);
 
         //find the navigation view from the passed activities layout
         navview =(NavigationView)activity.findViewById(R.id.nav_view);
@@ -184,11 +186,16 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }
         switch (id){
             case R.id.Home:
                 if(!(activity instanceof Home)){
                     Intent intent = new Intent(activity, Home.class);
                     activity.startActivity(intent);
+
                     //activity.overridePendingTransition(R.animator.fadein,R.animator.fadeout);
                     return true;
                 }

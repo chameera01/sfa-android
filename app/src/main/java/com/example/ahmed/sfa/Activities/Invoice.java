@@ -1,6 +1,7 @@
 package com.example.ahmed.sfa.Activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -8,7 +9,9 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,6 +69,32 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
     //data fields for summary
     TextView subTotal,invoicedQty,discount,total;
 
+    @Override
+    public void onBackPressed(){
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Going back will erase all changes, are you sure?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+
+           // super.onBackPressed();
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstance){
@@ -275,7 +304,8 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
         invoiceModelList.addAll(dbAdapter.getAllData(principle.getId(),subbrand.getBrandID(),product));
         //invoiceModelList =
 
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
+        adapter.customNotifyDataSetChanged();
     }
 
     @Override

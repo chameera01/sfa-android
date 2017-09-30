@@ -103,6 +103,33 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
 
     }
 
+    @Override
+    public void onBackPressed(){
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Going back will erase all changes, are you sure?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+
+            //super.onBackPressed();
+        }
+    }
+
     private void init(){
         PermissionManager pm = new PermissionManager(this);
         if(pm.checkForLocationPermission()) {
@@ -244,15 +271,7 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
         }
     }
 
-    @Override
-    public void onBackPressed(){
-        DrawerLayout drawer = (DrawerLayout )findViewById(R.id.drawer_layout);
-        if(drawer.isDrawerOpen(GravityCompat.START)){
-            drawer.closeDrawer(GravityCompat.START);
-        }else{
-            super.onBackPressed();
-        }
-    }
+
 
 
 
