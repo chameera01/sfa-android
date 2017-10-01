@@ -11,6 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
+import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 
 import android.util.Log;
@@ -459,6 +460,27 @@ public class DBAdapter{
             db.execSQL("UPDATE Tr_NewCustomer" +
                     " SET isUpload = 1 " +
                     " WHERE NewCustomerID = '"+cusNo+"' ;");
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(context, "updae customer upload status:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+    }
+
+    public void insertItineraryDetails(Tr_ItineraryDetails itineraryDetails) {
+        openDB();
+        try{
+            RandomNumberGenerator rg = new RandomNumberGenerator();
+            String itineraryId = rg.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"ITRY_",15);
+            String[] dateConvert = itineraryDetails.getItineraryDate().split("-");
+            String date = dateConvert[1]+"/"+dateConvert[2].substring(0,2)+"/"+dateConvert[0];
+            /*_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "ItineraryID TEXT,ItineraryDate TEXT,CustomerNo TEXT,IsPlanned INTEGER,IsInvoiced INTEGER,LastUpdateDate TEXT );");*/
+            db.execSQL("INSERT OR REPLACE INTO Tr_ItineraryDetails (_id," +
+                    "ItineraryID,ItineraryDate ,CustomerNo,IsPlanned ,IsInvoiced ,LastUpdateDate" +
+                    ") VALUES((select _id from  Tr_ItineraryDetails where CustomerNo='"+itineraryDetails.getCustomerNo()+"' AND ItineraryDate = '"+date+"')" +
+                    ",'"+itineraryId+"','"+date+"','"+itineraryDetails.getCustomerNo()+"',"+itineraryDetails.getIsPlaned()+","+itineraryDetails.getIsInvoiced()+"," +
+                    "'"+DateManager.dateToday()+"');");
         }catch (Exception e){
             e.printStackTrace();
             Toast.makeText(context, "updae customer upload status:"+e.getMessage(), Toast.LENGTH_SHORT).show();

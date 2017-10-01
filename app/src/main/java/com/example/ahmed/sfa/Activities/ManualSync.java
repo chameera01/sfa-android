@@ -83,6 +83,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
     ImageView ivTabStockSync;
     String deviecId ="t1";
     String repId="93";
+    ImageView ivItineraryDeatildSync;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +103,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivchechInOutPointsSync=(ImageView) findViewById (R.id.iv_chechInOutPointsSync);
         ivCustomerSync=(ImageView) findViewById (R.id.iv_CustomerSync);
         ivTabStockSync=(ImageView) findViewById (R.id.iv_StockSync);
-
+        ivItineraryDeatildSync = (ImageView) findViewById(R.id.iv_ItinerarySync);
 
 
         setListeners();
@@ -449,7 +450,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
 
 
                //download customer master data
-               /*  try {
+                try {
                     JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Customermaster/SelectMst_Customermaster?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("Customer");
 
@@ -459,7 +460,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
                 }catch (Exception e){
                    // e.printStackTrace();
                     Toast.makeText(ManualSync.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
-                }*/
+                }
 
             }
         });
@@ -481,6 +482,24 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
                 }
 
 
+            }
+        });
+
+        //download ItinerayDetails
+        ivItineraryDeatildSync.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                try{
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Tr_ItineraryDetails/GetItineraryDetails?DeviceID=T1&RepID=99",ManualSync.this);
+                    jObjGen.setFilterType("ItineraryDetails");
+
+                    SyncReturn io = new SyncReturn();
+                    io.execute(jObjGen);
+
+                }catch (Exception e){
+                    Toast.makeText(ManualSync.this, "ItineraryDeatils Download:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
