@@ -41,8 +41,9 @@ public class UploadTables {
             Toast.makeText(context, "db conn error:"+e.getCause(), Toast.LENGTH_SHORT).show();
         }
         try {
-            String cusno,cusname,addrss,dist,area,twn,route,status,tel,fax,email,ownername,ownerCon,regno,brno,img  ="";
-            Double  lat,lng = 0.0;
+            String cusno,cusname,addrss,dist,area,twn,route,tel="deaultvalue",fax="deaultvalue",email="deaultvalue",ownername="deaultvalue",ownerCon="deaultvalue",regno="deaultvalue",brno="deaultvalue",img = "deaultvalue";
+            Double  lat =0.0 ,lng = 0.0;
+            int status = 0;
 
             while (cusCursor.moveToNext()) {
 
@@ -56,9 +57,9 @@ public class UploadTables {
                 area = cusCursor.getString(cusCursor.getColumnIndex("Area"));
                 twn = cusCursor.getString(cusCursor.getColumnIndex("Town"));
                 route = cusCursor.getString(cusCursor.getColumnIndex("RouteID"));
-                status = cusCursor.getString(cusCursor.getColumnIndex("CustomerStatus"));//CustomerStatusId instead
+                status = 486;//this should be integer//cusCursor.getString(cusCursor.getColumnIndex("CustomerStatus"));//CustomerStatusId instead
 
-                tel = cusCursor.getString(cusCursor.getColumnIndex("Telephone"));
+               /* tel = cusCursor.getString(cusCursor.getColumnIndex("Telephone")) ;
                 fax = cusCursor.getString(cusCursor.getColumnIndex("Fax"));
                 email = cusCursor.getString(cusCursor.getColumnIndex("Email"));
                 ownername = cusCursor.getString(cusCursor.getColumnIndex("OwnerName"));
@@ -69,15 +70,25 @@ public class UploadTables {
                  lat = cusCursor.getDouble(cusCursor.getColumnIndex("Latitude"));
                  lng = cusCursor.getDouble(cusCursor.getColumnIndex("Longitude"));
                  img = cusCursor.getString(cusCursor.getColumnIndex("ImageID"));
-                 brno = cusCursor.getString(cusCursor.getColumnIndex("BRno"));
+                 brno = cusCursor.getString(cusCursor.getColumnIndex("BRno"));*/
 
                 url_str= "http://www.bizmapexpert.com/DIstributorManagementSystem/Up_Tr_CustomerMaster_Pending/Tr_CustomerMaster_PendingNew?" +
-                        "RepID=99&TabCustomerNo="+cusno+"CustomerName="+cusname+"&Address="+addrss+"&DistrictID="+dist+"&" +
+                        "RepID=99&TabCustomerNo="+cusno+"&CustomerName="+cusname+"&Address="+addrss+"&DistrictID="+dist+"&" +
                         "Area="+area+"&Town="+twn+"&RouteID="+route+"&CustomerStatusID="+status+"&Telephone="+tel+"&Fax="+fax+"&" +
                         "Email="+email+"&BRno="+brno+"&OwnerName="+ownername+"&OwnerContactNo="+ownerCon+"&PhamacyRegNo="+regno+"&" +
                         "Latitude="+lat+"&longitude="+lng+"&ImageID="+img+"";
 
-                cusArr.add(url_str);
+                String url ="";
+                try{
+                    String[] parts = url_str.split(" ");
+                    for(String tmp : parts){
+                        url += tmp;
+                    }
+                }catch (Exception e ){
+
+                }
+
+                cusArr.add(url);
 
                 
             }

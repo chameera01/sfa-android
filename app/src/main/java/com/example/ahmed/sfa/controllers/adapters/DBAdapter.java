@@ -452,4 +452,17 @@ public class DBAdapter{
         }
         closeDB();
     }
+
+    public void updateCustomerUploadStatus(String cusNo) {
+        openDB();
+        try{
+            db.execSQL("UPDATE Mst_Customermaster" +
+                    " SET uploadStatus = 1 " +
+                    " WHERE CustomerNo = '"+cusNo+"' ;");
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(context, "updae customer upload status:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+    }
 }

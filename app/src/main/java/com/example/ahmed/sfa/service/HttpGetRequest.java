@@ -75,7 +75,9 @@ public class HttpGetRequest extends AsyncTask<String, Void, String> {
         super.onPostExecute(result);
         JSONObject reslt ;
         try {
-             reslt = new JSONObject(result);
+            if(result!=null) {
+                reslt = new JSONObject(result);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
