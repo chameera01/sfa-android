@@ -456,9 +456,9 @@ public class DBAdapter{
     public void updateCustomerUploadStatus(String cusNo) {
         openDB();
         try{
-            db.execSQL("UPDATE Mst_Customermaster" +
-                    " SET uploadStatus = 1 " +
-                    " WHERE CustomerNo = '"+cusNo+"' ;");
+            db.execSQL("UPDATE Tr_NewCustomer" +
+                    " SET isUpload = 1 " +
+                    " WHERE NewCustomerID = '"+cusNo+"' ;");
         }catch (Exception e){
             e.printStackTrace();
             Toast.makeText(context, "updae customer upload status:"+e.getMessage(), Toast.LENGTH_SHORT).show();

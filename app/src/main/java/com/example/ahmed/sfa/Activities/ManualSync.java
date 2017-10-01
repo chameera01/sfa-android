@@ -49,6 +49,7 @@ import org.json.JSONObject;
 
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -415,9 +416,11 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
                         //HashMap<String, String> map = new HashMap<String, String>();//put in it
                         //map.put(stts, filename[i]);
                         String urlToSplit =url ;
+
                         String cusNo =    urlToSplit.split("TabCustomerNo=")[1].split("&CustomerName")[0];
                         @Override
                         public void receiveData(Object result) {
+                            Toast.makeText(ManualSync.this, "Ststus"+url, Toast.LENGTH_SHORT).show();
                             String response = (String) result;
                             Toast.makeText(ManualSync.this, "Response_callback:"+response, Toast.LENGTH_SHORT).show();
                             try {

@@ -31,7 +31,7 @@ public class UploadTables {
 
         try{
 //            DBAdapter adp_customermaster = new DBAdapter(context);
-            String sqlQry = "SELECT * FROM Mst_Customermaster where uploadStatus = 0";
+            String sqlQry = "SELECT * FROM Tr_NewCustomer where isUpload = 0";
   //          cusCursor= adp_customermaster.runQuery(sqlQry);
 
             DBHelper dbConn = new DBHelper(context);
@@ -41,23 +41,23 @@ public class UploadTables {
             Toast.makeText(context, "db conn error:"+e.getCause(), Toast.LENGTH_SHORT).show();
         }
         try {
-            String cusno,cusname,addrss,dist,area,twn,route,tel="deaultvalue",fax="deaultvalue",email="deaultvalue",ownername="deaultvalue",ownerCon="deaultvalue",regno="deaultvalue",brno="deaultvalue",img = "deaultvalue";
+            String cusno,cusname,addrss,area,twn,route,tel="deaultvalue",fax="deaultvalue",email="deaultvalue",ownername="deaultvalue",ownerCon="deaultvalue",regno="deaultvalue",brno="deaultvalue",img = "deaultvalue";
             Double  lat =0.0 ,lng = 0.0;
-            int status = 0;
+            int dist=0,status = 0;
+
 
             while (cusCursor.moveToNext()) {
 
 
 
-                cusno =  cusCursor.getString(cusCursor.getColumnIndex("CustomerNo"));
+                cusno =  cusCursor.getString(cusCursor.getColumnIndex("NewCustomerID"));
                 cusname =  cusCursor.getString(cusCursor.getColumnIndex("CustomerName"));
                 addrss = cusCursor.getString(cusCursor.getColumnIndex("Address"));
-                //String cusno = cusCursor.getString(cusCursor.getColumnIndex("Address"));
-                dist = cusCursor.getString(cusCursor.getColumnIndex("DistrictID"));
+                dist = 12;//cusCursor.getString(cusCursor.getColumnIndex("District"));
                 area = cusCursor.getString(cusCursor.getColumnIndex("Area"));
                 twn = cusCursor.getString(cusCursor.getColumnIndex("Town"));
                 route = cusCursor.getString(cusCursor.getColumnIndex("RouteID"));
-                status = 486;//this should be integer//cusCursor.getString(cusCursor.getColumnIndex("CustomerStatus"));//CustomerStatusId instead
+                status = cusCursor.getInt(cusCursor.getColumnIndex("CustomerStatusID"));//CustomerStatusId instead
 
                /* tel = cusCursor.getString(cusCursor.getColumnIndex("Telephone")) ;
                 fax = cusCursor.getString(cusCursor.getColumnIndex("Fax"));
