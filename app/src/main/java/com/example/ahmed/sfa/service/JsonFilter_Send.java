@@ -17,6 +17,7 @@ import com.example.ahmed.sfa.models.Mst_RepTable;
 import com.example.ahmed.sfa.models.Mst_Route;
 import com.example.ahmed.sfa.models.Mst_SupplierTable;
 import com.example.ahmed.sfa.models.Mst_Territory;
+import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 import com.example.ahmed.sfa.models.Tr_TabStock;
 
 import org.json.JSONArray;
@@ -346,6 +347,24 @@ public class JsonFilter_Send {
 
                     break;
 
+                case "ItineraryDetails":
+                    Tr_ItineraryDetails itineraryDetails = new Tr_ItineraryDetails();
+                    DBAdapter itinerary_adptr=new DBAdapter(context);
+
+                    JSONArray jsonItineraryDetailsArray = new JSONArray(result);
+                    for (int i = 0; i < jsonItineraryDetailsArray.length(); i++) {
+                        JSONObject jsonSupObject = jsonItineraryDetailsArray.getJSONObject(i);
+
+                        itineraryDetails.setCustomerNo(jsonSupObject.optString("CustomerNo"));
+                        itineraryDetails.setIsInvoiced(jsonSupObject.optInt("IsInvoiced"));
+                        itineraryDetails.setIsPlaned(jsonSupObject.optInt("IsPlaned"));
+                        itineraryDetails.setItineraryDate(jsonSupObject.optString("ItineraryDate"));
+                        itineraryDetails.setItineraryID(jsonSupObject.optString("ItineraryID"));
+                        itineraryDetails.setLastUpdateDate(DateManager.dateToday());
+
+                        itinerary_adptr.insertItineraryDetails(itineraryDetails);
+                    }
+                    break;
                 default:
                     break;
             }

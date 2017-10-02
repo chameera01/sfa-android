@@ -530,10 +530,10 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
                 android:background="#aad7f9"
                 android:visibility="visible"
-                tools:visibility="invisible">
+                tools:visibility="invisible"
+                android:layout_height="0dp">
 
                 <TextView
                     android:text="Update Target Details"
@@ -557,9 +557,50 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="57dp"
+                android:layout_height="55dp"
+                android:background="#aad7f9">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <TextView
+                        android:text="Update Itinerary Details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="34dp"
+                        android:id="@+id/tv_Itinerary_details"
+
+                        android:layout_marginStart="179dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="0.02" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        app:srcCompat="@drawable/ico_sync"
+                        android:id="@+id/iv_ItinerarySync"
+                        android:layout_marginTop="0dp"
+
+                        android:layout_toEndOf="@+id/textView4"
+                        android:layout_marginStart="36dp"
+                        android:layout_weight="0.20"
+                        android:scaleType="fitStart"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
                 android:background="#6db8f1"
-                android:visibility="invisible">
+                android:visibility="invisible"
+                android:layout_height="0dp">
 
                 <TextView
                     android:text="Update Product Details"
