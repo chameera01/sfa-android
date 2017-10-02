@@ -512,15 +512,21 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
             String sql = "SELECT * from temp_return WHERE";
 
             if (!(principle.equals("ALL")|| principle == null) ){
-                sql+=" PrincipleID ='"+principle+"'";
+                sql+=" trim(PrincipleID) = '"+principle+"'";
                 //principle = "";
                 if(!(subbrand.equals("ALL") || subbrand == null)){
-                    sql+=" AND BrandID ='"+subbrand+"'";
+                    sql+=" AND trim(BrandID) = '"+subbrand+"'";
                     //subbrand = "";
                 }
                 sql+=" AND ";
-            }
+            }else{
+                if(!(subbrand.equals("ALL") || subbrand == null)){
+                    sql+=" trim(BrandID) = '"+subbrand+"'";
+                    //subbrand = "";
+                    sql+=" AND ";
+                }
 
+            }
             if(product.equals("ALL")|| product==null){
                 product = "";
 

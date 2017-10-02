@@ -406,13 +406,20 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
             String sql = "SELECT * from temp_invoice WHERE";
 
             if (!(principle.equals("ALL")|| principle == null) ){
-                sql+=" PrincipleID ='"+principle+"'";
+                sql+=" trim(PrincipleID) = '"+principle+"'";
                 //principle = "";
                 if(!(subbrand.equals("ALL") || subbrand == null)){
-                    sql+=" AND BrandID ='"+subbrand+"'";
+                    sql+=" AND trim(BrandID) = '"+subbrand+"'";
                     //subbrand = "";
                 }
                 sql+=" AND ";
+            }else{
+                if(!(subbrand.equals("ALL") || subbrand == null)){
+                    sql+=" trim(BrandID) = '"+subbrand+"'";
+                    //subbrand = "";
+                    sql+=" AND ";
+                }
+
             }
 
             if(product.equals("ALL")|| product==null){
@@ -422,7 +429,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
             sql+=" Description Like '"+product+"%'";
 
             Cursor cursor = db.rawQuery(sql,null);
-
+            Log.i(" INVOICE ",sql);
             while(cursor.moveToNext()){
                 SalesInvoiceModel salesInvoiceModel =new SalesInvoiceModel(cursor.getString(0),
                         cursor.getString(1),cursor.getString(2),cursor.getString(3),

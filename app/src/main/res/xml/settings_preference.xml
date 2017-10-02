@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--
+    <PreferenceScreen
+        android:icon="@drawable/sync_refresh"
+        android:key="psSyncronizePreferences"
+        android:summary="@string/syncronize_info"
+        android:title="@string/syncronize" >
+
+        <Preference
+            android:icon="@drawable/sync_refresh"
+            android:key="pSyncroniseProducts"
+            android:summary="@string/syncronize_products_info"
+            android:title="@string/syncronize_products" />
+        <Preference
+            android:icon="@drawable/sync_refresh"
+            android:key="pSyncronizeCustomers"
+            android:summary="@string/syncronize_customers_info"
+            android:title="@string/syncronize_customers" />
+        <Preference
+            android:icon="@drawable/sync_refresh"
+            android:key="pSyncronizeInventory"
+            android:summary="@string/syncronize_inventory_info"
+            android:title="@string/syncronize_inventory" />
+        <Preference
+            android:icon="@drawable/sync_refresh"
+            android:key="pSyncronizeItinerary"
+            android:summary="@string/syncronize_itinerary_info"
+            android:title="@string/syncronize_itinerary" />
+        <Preference
+            android:icon="@drawable/sync_refresh"
+            android:key="pUploadInvoices"
+            android:summary="@string/upload_invoices_info"
+            android:title="@string/upload_invoice" />
+        <Preference
+            android:icon="@drawable/sync_refresh"
+            android:key="pUploadCustomers"
+            android:summary="@string/upload_customers_info"
+            android:title="@string/upload_customers" />
+        <Preference
+            android:icon="@drawable/sync_refresh"
+            android:key="pUploadReturns"
+            android:summary="@string/upload_returns_info"
+            android:title="@string/upload_returns" />
+        <Preference
+            android:icon="@drawable/sync_refresh"
+            android:key="pUploadImages"
+            android:summary="@string/upload_images_info"
+            android:title="@string/upload_images" />
+        <Preference
+            android:icon="@drawable/sync_refresh"
+            android:key="pUploadShelfQuantity"
+            android:summary="@string/upload_shelf_quantity_info"
+            android:title="@string/upload_shelf_quantity" />
+    </PreferenceScreen>
+    -->
+    <Preference
+        android:icon="@drawable/common_google_signin_btn_icon_dark"
+        android:key="pBackupDatabase"
+        android:summary="Backup"
+        android:title="Backup" />
+
+    <!--
+    Products
+    Customers
+    Repstore
+    itinerary
+    remove auto syncronise
+    remove periodic sync shit
+    Return Products
+
+
+
+
+
+
+
+
+
+
+
+
+
+    -->
+
+</PreferenceScreen>
