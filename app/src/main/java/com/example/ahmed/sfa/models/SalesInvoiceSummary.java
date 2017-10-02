@@ -24,6 +24,7 @@ public class SalesInvoiceSummary implements Parcelable{
 
 
 
+
     public SalesInvoiceSummary() {
         discount = 0.0;
         subtotal = 0.0;
@@ -54,6 +55,7 @@ public class SalesInvoiceSummary implements Parcelable{
         freeQty = in.readInt();
         returnVal = in.readDouble();
         returnQty = in.readInt();
+
     }
 
     public static final Creator<SalesInvoiceSummary> CREATOR = new Creator<SalesInvoiceSummary>() {
@@ -128,5 +130,6 @@ public class SalesInvoiceSummary implements Parcelable{
         dest.writeInt(freeQty);
         dest.writeDouble(returnVal);
         dest.writeInt(returnQty);
+
     }
 }

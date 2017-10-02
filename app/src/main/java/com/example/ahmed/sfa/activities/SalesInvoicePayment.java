@@ -18,18 +18,21 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.ahmed.sfa.Activities.Dialogs.PricipleDiscountDialog;
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.Activities.Dialogs.ChequeDialogFragment;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.Cheque;
 import com.example.ahmed.sfa.models.Itinerary;
+import com.example.ahmed.sfa.models.PrincipleDiscountModel;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 import com.example.ahmed.sfa.models.SalesInvoiceSummary;
 import com.example.ahmed.sfa.models.SalesPayment;
 import com.example.ahmed.sfa.models.SalesReturnSummary;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ahmed on 3/23/2017.
@@ -62,6 +65,8 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
     Itinerary itinerary;
 
     Spinner creditDays;
+
+    EditText principleDiscount;
 
     int selectCreditDatePosition;
 
@@ -209,6 +214,14 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         customerNo = getIntent().getStringExtra(Constants.CUSTOMER_NO);
         itinerary = getIntent().getParcelableExtra(Constants.ITINERARY);
 
+        principleDiscount = (EditText)findViewById(R.id.principle_discount);
+        principleDiscount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPrincipleDiscountDialog();
+            }
+        });
+
         init(true);
     }
 
@@ -234,6 +247,30 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         total.setText(payment.getTotal()+"");
 
         if(!(payment.getCreditDays()==0))creditDays.setSelection(selectCreditDatePosition);
+    }
+
+    private void showPrincipleDiscountDialog(){
+        final DialogFragment dialogFragment = new PricipleDiscountDialog(){
+            @Override
+            public void doPositiveClick(List<PrincipleDiscountModel> models) {
+                super.doPositiveClick(models);
+                payment.setTotalPrincipleDiscounts(getTotalPrincipleDiscount(models));
+                init(false);
+            }
+        };
+        dialogFragment.onAttach(this);
+        dialogFragment.show(getFragmentManager(),"Principle Discount");
+        ((PricipleDiscountDialog)dialogFragment).notifyDataSetChanged();
+    }
+
+
+    public double getTotalPrincipleDiscount(List<PrincipleDiscountModel> models){
+        double total = 0.0;
+        for(PrincipleDiscountModel model:models){
+            total+=model.getDisountValue();
+        }
+
+        return  total;
     }
 
     private void showChequeDialog(){

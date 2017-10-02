@@ -344,6 +344,16 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
                     " FROM Mst_ProductMaster a inner join Tr_TabStock b " +
                     "on a.ItemCode  = b.ItemCode";
             db.execSQL(sql);
+
+            sql = "DROP TABLE IF EXISTS temp_discount_rate";
+            db.execSQL(sql);
+
+            sql = "CREATE TABLE temp_discount_rate(_id INTEGER PRIMARY KEY AUTOINCREMENT,PrincipleID TEXT,Principle TEXT" +
+                    ",DiscountRate REAL DEFAULT 0.0)";
+            db.execSQL(sql);
+            sql = "INSERT INTO temp_discount_rate(PrincipleID,Principle) SELECT PrincipleID,Principle " +
+                    "FROM Mst_SupplierTable ";
+            db.execSQL(sql);
             closeDB();
         }
 

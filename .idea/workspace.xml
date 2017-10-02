@@ -11,21 +11,25 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="111f0e57-0fae-4757-9e0b-3639f23b74f6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/PrincipleDiscountAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/PrincipleDiscountModel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/principle_discount_dialog.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/principle_discount_row.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Invoice.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Invoice.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Return.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Return.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/NavigationDrawerMenuManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/NavigationDrawerMenuManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/ReturnRecyclerAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/ReturnRecyclerAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/invoicetabel_row.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/invoicetabel_row.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sfa-android.iml" afterPath="$PROJECT_DIR$/sfa-android.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Dialogs/ChequeDialogFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Dialogs/ChequeDialogFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesInvoicePayment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesInvoicePayment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/database/BaseDBAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/database/BaseDBAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceSummary.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceSummary.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesPayment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesPayment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_invoice_payment.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_invoice_payment.xml" />
     </list>
     <ignored path="sfa-android.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,46 +63,35 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="invoicetabel_row.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/invoicetabel_row.xml">
+      <file leaf-file-name="SalesInvoicePayment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/SalesInvoicePayment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Invoice.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Invoice.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="94" column="13" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="13" />
+            <state relative-caret-position="17">
+              <caret line="257" column="26" selection-start-line="257" selection-start-column="26" selection-end-line="257" selection-end-column="26" />
               <folding>
-                <element signature="method#onCreate#0;class#Invoice#0" expanded="false" />
-                <element signature="method#init#0;class#Invoice#0" expanded="false" />
-                <element signature="method#onRequestPermissionsResult#0;class#Invoice#0" expanded="false" />
-                <element signature="method#moveToPayment#0;class#Invoice#0" expanded="false" />
-                <element signature="method#updateSummaryView#0;class#Invoice#0" expanded="false" />
-                <element signature="method#getSalesInvoiceSummary#0;class#Invoice#0" expanded="false" />
-                <element signature="method#initPrincipleSpinner#0;class#Invoice#0" expanded="false" />
-                <element signature="method#initSubBrandsSpinner#0;class#Invoice#0" expanded="false" />
-                <element signature="method#filterContent#0;class#Invoice#0" expanded="false" />
-                <element signature="method#updateSummary#0;class#Invoice#0" expanded="false" />
-                <element signature="class#DBAdapter#0;class#Invoice#0" expanded="false" />
+                <element signature="e#2576#2728#0" expanded="true" />
+                <element signature="e#2727#2728#0" expanded="true" />
+                <element signature="e#4221#4780#0" expanded="true" />
+                <element signature="e#4779#4780#0" expanded="true" />
+                <element signature="e#4903#5507#0" expanded="true" />
+                <element signature="e#5506#5507#0" expanded="true" />
+                <element signature="e#7910#8073#0" expanded="true" />
+                <element signature="e#8072#8073#0" expanded="true" />
+                <element signature="e#9016#9333#0" expanded="true" />
+                <element signature="e#9332#9333#0" expanded="true" />
+                <element signature="method#onActivityResult#0;class#SalesInvoicePayment#0" expanded="false" />
+                <element signature="class#DBAdapter#0;class#SalesInvoicePayment#0" expanded="false" />
+                <element signature="e#11517#11525#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Return.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Return.java">
+      <file leaf-file-name="PricipleDiscountDialog.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="128" column="14" selection-start-line="128" selection-start-column="14" selection-end-line="128" selection-end-column="14" />
+            <state relative-caret-position="17">
+              <caret line="98" column="36" selection-start-line="98" selection-start-column="36" selection-end-line="98" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -110,8 +103,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="ASClass" />
-        <option value="Class" />
         <option value="layoutResourceFile_vertical" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -1608,7 +1601,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="C:\Users\Ahmed\Documents\sfa-android" value="4487381521823" />
+        <entry key="C:\Users\Ahmed\Documents\sfa-android" value="4488038609595" />
         <entry key="F:\run_android\git-SFA" value="4469677028716" />
       </map>
     </option>
@@ -1967,18 +1960,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/RestfulWebService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/supportactivities/ServiceTest.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/ItineraryAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/supportactivities/CameraTest.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/supportactivities/NavigationDrawer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/AddCustomer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/AndroidDatabaseManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/DisplayProductTableActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/PendingCustomer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/StockView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/JsonHelper.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/ServiceTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/ServiceTest.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/AddExtraCustomer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/supportactivities/CustomerPopupFragment.java" />
@@ -2017,14 +1998,26 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/invoicetabel_row.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Return.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/ChequeDialogFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/PrincipleDiscountModel.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_invoice_payment.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/database/BaseDBAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/principle_discount_dialog.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Invoice.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/PrincipleDiscountAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceSummary.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesPayment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/SalesInvoicePayment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/principle_discount_row.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1382" />
+    <option name="width" value="1378" />
     <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -2052,6 +2045,58 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sfa-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sfa-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sfa-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sfa-android" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -2088,256 +2133,14 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane />
+      </pane>
       <pane id="Scratches">
         <subPane />
       </pane>
       <pane id="PackagesPane">
         <subPane />
-      </pane>
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="example" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="example" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="example" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="example" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="adapters" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="example" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="com" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="example" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Dialogs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
       </pane>
     </panes>
   </component>
@@ -2347,7 +2150,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
-    <property name="android.project.structure.last.selected" value="Project" />
+    <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="device.picker.selection" value="Nexus_7_2012_API_19" />
     <property name="SearchEverywhereHistoryKey" value="sales&#9;FILE&#9;file://C:/Users/Ahmed/Documents/sfa-android/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceModel.java" />
@@ -2736,7 +2539,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2744,21 +2547,21 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12116041" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5060514" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.721843" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.301059" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.314871" sideWeight="0.47674417" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24961832" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.092150174" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48634812" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31013617" sideWeight="0.5232558" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2846,25 +2649,112 @@
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java</url>
-          <line>636</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java</url>
+          <line>117</line>
           <properties />
-          <option name="timeStamp" value="34" />
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java</url>
+          <line>112</line>
+          <properties />
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java</url>
+          <line>132</line>
+          <properties />
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java</url>
+          <line>148</line>
+          <properties />
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/SalesInvoicePayment.java</url>
+          <line>262</line>
+          <properties />
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java</url>
+          <line>75</line>
+          <properties />
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java</url>
+          <line>157</line>
+          <properties />
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java</url>
+          <line>158</line>
+          <properties />
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java</url>
+          <line>159</line>
+          <properties />
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="35" />
+      <option name="time" value="57" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/SalesInvoicePayment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#2576#2728#0" expanded="true" />
+            <element signature="e#2727#2728#0" expanded="true" />
+            <element signature="e#4221#4780#0" expanded="true" />
+            <element signature="e#4779#4780#0" expanded="true" />
+            <element signature="e#4903#5507#0" expanded="true" />
+            <element signature="e#5506#5507#0" expanded="true" />
+            <element signature="e#7910#8073#0" expanded="true" />
+            <element signature="e#8072#8073#0" expanded="true" />
+            <element signature="e#9016#9333#0" expanded="true" />
+            <element signature="e#9332#9333#0" expanded="true" />
+            <element signature="method#onActivityResult#0;class#SalesInvoicePayment#0" expanded="false" />
+            <element signature="class#DBAdapter#0;class#SalesInvoicePayment#0" expanded="false" />
+            <element signature="e#11517#11525#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1666">
+          <caret line="98" column="36" selection-start-line="98" selection-start-column="36" selection-end-line="98" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/principle_discount_dialog.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="40" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="class#MyViewHolder#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+            <element signature="method#setCursor#0;class#MyViewHolder#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
             <element signature="class#GenericTextWatcher#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
             <element signature="class#DBAdapter#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+            <element signature="class#FocusChangeListener#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2875,16 +2765,13 @@
           <caret line="238" column="0" selection-start-line="238" selection-start-column="0" selection-end-line="238" selection-end-column="0" />
           <folding>
             <element signature="method#onCreate#0;class#Invoice#0" expanded="false" />
-            <element signature="method#init#0;class#Invoice#0" expanded="false" />
             <element signature="method#onRequestPermissionsResult#0;class#Invoice#0" expanded="false" />
             <element signature="method#moveToPayment#0;class#Invoice#0" expanded="false" />
             <element signature="method#updateSummaryView#0;class#Invoice#0" expanded="false" />
             <element signature="method#getSalesInvoiceSummary#0;class#Invoice#0" expanded="false" />
             <element signature="method#initPrincipleSpinner#0;class#Invoice#0" expanded="false" />
             <element signature="method#initSubBrandsSpinner#0;class#Invoice#0" expanded="false" />
-            <element signature="method#filterContent#0;class#Invoice#0" expanded="false" />
             <element signature="method#updateSummary#0;class#Invoice#0" expanded="false" />
-            <element signature="class#DBAdapter#0;class#Invoice#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2893,7 +2780,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8908">
           <caret line="555" column="19" selection-start-line="555" selection-start-column="19" selection-end-line="555" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2902,9 +2788,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="class#MyViewHolder#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+            <element signature="method#setCursor#0;class#MyViewHolder#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
             <element signature="class#GenericTextWatcher#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
             <element signature="class#DBAdapter#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+            <element signature="class#FocusChangeListener#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2915,16 +2802,13 @@
           <caret line="238" column="0" selection-start-line="238" selection-start-column="0" selection-end-line="238" selection-end-column="0" />
           <folding>
             <element signature="method#onCreate#0;class#Invoice#0" expanded="false" />
-            <element signature="method#init#0;class#Invoice#0" expanded="false" />
             <element signature="method#onRequestPermissionsResult#0;class#Invoice#0" expanded="false" />
             <element signature="method#moveToPayment#0;class#Invoice#0" expanded="false" />
             <element signature="method#updateSummaryView#0;class#Invoice#0" expanded="false" />
             <element signature="method#getSalesInvoiceSummary#0;class#Invoice#0" expanded="false" />
             <element signature="method#initPrincipleSpinner#0;class#Invoice#0" expanded="false" />
             <element signature="method#initSubBrandsSpinner#0;class#Invoice#0" expanded="false" />
-            <element signature="method#filterContent#0;class#Invoice#0" expanded="false" />
             <element signature="method#updateSummary#0;class#Invoice#0" expanded="false" />
-            <element signature="class#DBAdapter#0;class#Invoice#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2933,7 +2817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7463">
           <caret line="464" column="0" selection-start-line="464" selection-start-column="0" selection-end-line="464" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2942,9 +2825,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="class#MyViewHolder#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+            <element signature="method#setCursor#0;class#MyViewHolder#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
             <element signature="class#GenericTextWatcher#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
             <element signature="class#DBAdapter#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+            <element signature="class#FocusChangeListener#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2955,16 +2839,13 @@
           <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
           <folding>
             <element signature="method#onCreate#0;class#Invoice#0" expanded="false" />
-            <element signature="method#init#0;class#Invoice#0" expanded="false" />
             <element signature="method#onRequestPermissionsResult#0;class#Invoice#0" expanded="false" />
             <element signature="method#moveToPayment#0;class#Invoice#0" expanded="false" />
             <element signature="method#updateSummaryView#0;class#Invoice#0" expanded="false" />
             <element signature="method#getSalesInvoiceSummary#0;class#Invoice#0" expanded="false" />
             <element signature="method#initPrincipleSpinner#0;class#Invoice#0" expanded="false" />
             <element signature="method#initSubBrandsSpinner#0;class#Invoice#0" expanded="false" />
-            <element signature="method#filterContent#0;class#Invoice#0" expanded="false" />
             <element signature="method#updateSummary#0;class#Invoice#0" expanded="false" />
-            <element signature="class#DBAdapter#0;class#Invoice#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2973,7 +2854,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7463">
           <caret line="464" column="0" selection-start-line="464" selection-start-column="0" selection-end-line="464" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2982,9 +2862,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="class#MyViewHolder#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+            <element signature="method#setCursor#0;class#MyViewHolder#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
             <element signature="class#GenericTextWatcher#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
             <element signature="class#DBAdapter#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+            <element signature="class#FocusChangeListener#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2995,16 +2876,13 @@
           <caret line="261" column="0" selection-start-line="261" selection-start-column="0" selection-end-line="261" selection-end-column="0" />
           <folding>
             <element signature="method#onCreate#0;class#Invoice#0" expanded="false" />
-            <element signature="method#init#0;class#Invoice#0" expanded="false" />
             <element signature="method#onRequestPermissionsResult#0;class#Invoice#0" expanded="false" />
             <element signature="method#moveToPayment#0;class#Invoice#0" expanded="false" />
             <element signature="method#updateSummaryView#0;class#Invoice#0" expanded="false" />
             <element signature="method#getSalesInvoiceSummary#0;class#Invoice#0" expanded="false" />
             <element signature="method#initPrincipleSpinner#0;class#Invoice#0" expanded="false" />
             <element signature="method#initSubBrandsSpinner#0;class#Invoice#0" expanded="false" />
-            <element signature="method#filterContent#0;class#Invoice#0" expanded="false" />
             <element signature="method#updateSummary#0;class#Invoice#0" expanded="false" />
-            <element signature="class#DBAdapter#0;class#Invoice#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3013,7 +2891,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7888">
           <caret line="464" column="0" selection-start-line="464" selection-start-column="0" selection-end-line="464" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3077,7 +2954,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8908">
           <caret line="555" column="19" selection-start-line="555" selection-start-column="19" selection-end-line="555" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3085,7 +2961,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="440" column="9" selection-start-line="418" selection-start-column="8" selection-end-line="440" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3093,19 +2968,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1275">
           <caret line="197" column="0" selection-start-line="197" selection-start-column="0" selection-end-line="197" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
-          <folding>
-            <element signature="class#MyViewHolder#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
-            <element signature="class#GenericTextWatcher#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
-            <element signature="class#DBAdapter#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3113,6 +2975,24 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Return.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="128" column="14" selection-start-line="128" selection-start-column="14" selection-end-line="128" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_cheque_details.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="105" column="15" selection-start-line="105" selection-start-column="15" selection-end-line="105" selection-end-column="15" />
           <folding />
         </state>
       </provider>
@@ -3120,30 +3000,186 @@
         <state />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/Alert.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/PrincipleDiscountModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="48" column="20" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_invoice_payment.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="210" column="41" selection-start-line="210" selection-start-column="41" selection-end-line="210" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/database/BaseDBAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/ChequeDialogFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-527">
+          <caret line="90" column="35" selection-start-line="90" selection-start-column="35" selection-end-line="90" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/sdk/sources/android-25/android/app/FragmentManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="921" column="0" selection-start-line="921" selection-start-column="0" selection-end-line="921" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/sdk/sources/android-25/android/app/DialogFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="412" column="0" selection-start-line="412" selection-start-column="0" selection-end-line="412" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8343">
+          <caret line="636" column="0" selection-start-line="636" selection-start-column="0" selection-end-line="636" selection-end-column="0" />
+          <folding>
+            <element signature="method#setCursor#0;class#MyViewHolder#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+            <element signature="class#GenericTextWatcher#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+            <element signature="class#DBAdapter#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+            <element signature="class#FocusChangeListener#0;class#InvoiceRecyclerAdapter#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/SyncService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1572">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/SendDeviceDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-770">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Invoice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="94" column="13" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="13" />
+        <state relative-caret-position="409">
+          <caret line="354" column="46" selection-start-line="354" selection-start-column="46" selection-end-line="354" selection-end-column="46" />
           <folding>
             <element signature="method#onCreate#0;class#Invoice#0" expanded="false" />
-            <element signature="method#init#0;class#Invoice#0" expanded="false" />
             <element signature="method#onRequestPermissionsResult#0;class#Invoice#0" expanded="false" />
             <element signature="method#moveToPayment#0;class#Invoice#0" expanded="false" />
             <element signature="method#updateSummaryView#0;class#Invoice#0" expanded="false" />
             <element signature="method#getSalesInvoiceSummary#0;class#Invoice#0" expanded="false" />
             <element signature="method#initPrincipleSpinner#0;class#Invoice#0" expanded="false" />
             <element signature="method#initSubBrandsSpinner#0;class#Invoice#0" expanded="false" />
-            <element signature="method#filterContent#0;class#Invoice#0" expanded="false" />
             <element signature="method#updateSummary#0;class#Invoice#0" expanded="false" />
-            <element signature="class#DBAdapter#0;class#Invoice#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Return.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/PrincipleDiscountAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="128" column="14" selection-start-line="128" selection-start-column="14" selection-end-line="128" selection-end-column="14" />
+        <state relative-caret-position="245">
+          <caret line="59" column="71" selection-start-line="59" selection-start-column="71" selection-end-line="59" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesPayment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="217" column="26" selection-start-line="217" selection-start-column="26" selection-end-line="217" selection-end-column="26" />
+          <folding>
+            <element signature="e#5065#5066#0" expanded="true" />
+            <element signature="e#5111#5112#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceSummary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1612">
+          <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/SalesInvoicePayment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="257" column="26" selection-start-line="257" selection-start-column="26" selection-end-line="257" selection-end-column="26" />
+          <folding>
+            <element signature="e#2576#2728#0" expanded="true" />
+            <element signature="e#2727#2728#0" expanded="true" />
+            <element signature="e#4221#4780#0" expanded="true" />
+            <element signature="e#4779#4780#0" expanded="true" />
+            <element signature="e#4903#5507#0" expanded="true" />
+            <element signature="e#5506#5507#0" expanded="true" />
+            <element signature="e#7910#8073#0" expanded="true" />
+            <element signature="e#8072#8073#0" expanded="true" />
+            <element signature="e#9016#9333#0" expanded="true" />
+            <element signature="e#9332#9333#0" expanded="true" />
+            <element signature="method#onActivityResult#0;class#SalesInvoicePayment#0" expanded="false" />
+            <element signature="class#DBAdapter#0;class#SalesInvoicePayment#0" expanded="false" />
+            <element signature="e#11517#11525#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/principle_discount_dialog.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="54" column="40" selection-start-line="54" selection-start-column="40" selection-end-line="54" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/principle_discount_row.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="24" column="33" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Activities/Dialogs/PricipleDiscountDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="98" column="36" selection-start-line="98" selection-start-column="36" selection-end-line="98" selection-end-column="36" />
           <folding />
         </state>
       </provider>

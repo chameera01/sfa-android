@@ -200,13 +200,17 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"/>
+
                 <EditText
-                    android:editable="false"
-                    android:enabled="false"
+                    android:id="@+id/principle_discount"
+                    android:text="Click To Prin"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    style="@style/InvoicePaymentEditText"/>
+                    android:layout_weight="1"
+
+                    android:enabled="true"
+                    style="@style/InvoicePaymentEditText"
+                    />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
