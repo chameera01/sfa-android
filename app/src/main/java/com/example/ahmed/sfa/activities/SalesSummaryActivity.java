@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.location.Location;
@@ -11,10 +12,14 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -26,13 +31,17 @@ import com.example.ahmed.sfa.Activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
+import com.example.ahmed.sfa.controllers.adapters.ReturnRecyclerAdapter;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
+import com.example.ahmed.sfa.models.Brand;
 import com.example.ahmed.sfa.models.Cheque;
 import com.example.ahmed.sfa.models.Itinerary;
+import com.example.ahmed.sfa.models.Principle;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 import com.example.ahmed.sfa.models.SalesPayment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Ahmed on 3/27/2017.
@@ -62,77 +71,87 @@ public class SalesSummaryActivity extends AppCompatActivity {
 
     private Alert alert;
 
+    Location lastKnownLocation;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sales_invoice_summary_activity);
-
-        alert = new Alert(this);
-
-        itinerary = getIntent().getParcelableExtra(Constants.ITINERARY);
-        customerNo = getIntent().getStringExtra(Constants.CUSTOMER_NO);
-
-        pman = new PermissionManager(this);
-
-        data = getIntent().getParcelableArrayListExtra(Constants.DATA_ARRAY_NAME);
-        payment = getIntent().getParcelableExtra(Constants.SALES_PAYMENT_SUMMARY);
-        chequeModel = getIntent().getParcelableExtra(Constants.CHEQUE);
-
-        table = (TableLayout)findViewById(R.id.si_pay_sum_data);
 
 
-        subtotal = (TextView) findViewById(R.id.si_pay_sum_sub_tot);
-        discount =(TextView)findViewById(R.id.si_pay_sum_disc);
-        returntot = (TextView)findViewById(R.id.si_pay_sum_return_tot);
-        invoiceQty = (TextView)findViewById(R.id.si_pay_sum_inv_qty);
-        freeQty = (TextView)findViewById(R.id.si_pay_sum_free_qty);
-        returnQty = (TextView)findViewById(R.id.si_pay_sum__return_qty);
 
-        cash = (TextView)findViewById(R.id.si_pay_sum_cash);
-        cheque = (TextView)findViewById(R.id.si_pay_sum_chq);
-        credit = (TextView)findViewById(R.id.si_pay_sum_crdt);
-
-        Button printBtn = (Button)findViewById(R.id.print_button_ss);
-        printBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        Button saveBtn = (Button)findViewById(R.id.save_button_ss);
-        saveBtn.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(SalesSummaryActivity.this);
-                        builder
-                                .setTitle("Confirm ")
-                                .setMessage("Are you sure ?")
-                                .setIcon(null)
-                                .setPositiveButton("Yes",new DialogInterface.OnClickListener(){
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                       insertData();
-                                    }
-                                })
-                                .setNegativeButton("No",new DialogInterface.OnClickListener(){
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                        AlertDialog alert = builder.create();
-                        alert.show();
-
-
-                    }
-                });
 
         init();
     }
 
-    private void insertData(){
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,int[] grantResults){
+        //Toast.makeText(this," permission Received",Toast.LENGTH_SHORT).show();
+        switch (requestCode){
+            case PermissionManager.MY_PERMISSIONS_REQUEST_LOCATION:
+                //Toast.makeText(this," Location",Toast.LENGTH_SHORT).show();
+                if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                    init();
+                    //Toast.makeText(this,"Location permission Received",Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+        }
+    }
+
+
+    private void insertReturnData(){
+        boolean isError = false;
+        Return.DBAdapter dbAdapter = new Return(). new DBAdapter(this);
+        ArrayList<SalesInvoiceModel> list = dbAdapter.getInvoicedItems();
+        int invoNum  = dbAdapter.getInvoiceReturnNo();//this method will return the invoice number we should use to enter the data
+        if(invoNum!=-1){
+            //insert data into sales return header
+            if(dbAdapter.insertIntoSalesReturnHeader(payment,lastKnownLocation,itinerary.getId(),customerNo,invoNum)){
+                int lastSalesReturnHeaderID = dbAdapter.getLastSalesReturnHeaderID();
+                if (lastSalesReturnHeaderID!=-1){
+                    ArrayList<SalesInvoiceModel> data = list;
+                    int val = dbAdapter.insertDataToSalesReturnDetails(data,lastSalesReturnHeaderID);
+                    if(val == data.size()){
+                        int updatedStockCount = dbAdapter.updateStock(data);
+                        if(updatedStockCount == data.size()){
+                            if(dbAdapter.insertToDailyRouteDetails(itinerary,customerNo,invoNum)){
+                                if(dbAdapter.increaseInvoiceReturnNo()){
+                                    alert.showAlert("Success","Invoice completed",null,successfull);
+                                }else{
+                                    Log.w("Error > ","increment on sales return num error");
+                                    isError = true;
+                                }
+                            }else{
+                                Log.w("Error > ","updating itinerary details error");
+                                isError = true;
+                            }
+                        }else {
+                            Log.w("Error > ","updating stock error");
+                            isError = true;
+                        }
+                    }else{
+                        Log.w("Error > ","not all sales return details entered to db");
+                        isError = true;
+                    }
+                }else{
+                    Log.w("Error > ","retrieving data from sales header error");
+                    isError = true;
+                }
+            }else{
+                //inserting to sales return error
+                isError = true;
+                Log.w("Error >","Inserting data into sales return header");
+            }
+        }else{
+            //invoice number is -1 show the corresponding error
+            Log.w("Error >","Getting invoice return no");
+            isError = true;
+        }
+
+        if(isError)alert.showAlert("Error","Invoicing error try again",null,null);
+    }
+
+    private void insertInvoiceData(){
         boolean isError = false;
         if(pman.checkForLocationPermission()){
             LocationManager locMan = (LocationManager)getSystemService(LOCATION_SERVICE);
@@ -225,24 +244,120 @@ public class SalesSummaryActivity extends AppCompatActivity {
     };
 
     private void init(){
-        //table.removeAllViews();
-        for(int i=0;i<data.size();i++){
-            table.addView(getView(i));
+
+        PermissionManager pm = new PermissionManager(this);
+        if(pm.checkForLocationPermission()) {
+            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            List<String> providers = locationManager.getProviders(true);
+            for (String provider : providers) {
+                Location tempLoc = locationManager.getLastKnownLocation(provider);
+                if (tempLoc == null) continue;
+                if (lastKnownLocation == null || tempLoc.getAccuracy() > lastKnownLocation.getAccuracy()) {
+                    lastKnownLocation = tempLoc;
+                }
+            }
+            //lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            /* -----------------------------------------------------------------------------------------------*/
+            lastKnownLocation = new Location(LocationManager.GPS_PROVIDER);//this line has to be removed
+            /* -----------------------------------------------------------------------------------------------*/
+            //this has been added since emmulator failed to send gps points
+
+            if (lastKnownLocation != null) {
+                setContentView(R.layout.sales_invoice_summary_activity);
+                alert = new Alert(this);
+
+                itinerary = getIntent().getParcelableExtra(Constants.ITINERARY);
+                customerNo = getIntent().getStringExtra(Constants.CUSTOMER_NO);
+
+                pman = new PermissionManager(this);
+
+                data = getIntent().getParcelableArrayListExtra(Constants.DATA_ARRAY_NAME);
+                payment = getIntent().getParcelableExtra(Constants.SALES_PAYMENT_SUMMARY);
+                chequeModel = getIntent().getParcelableExtra(Constants.CHEQUE);
+
+                table = (TableLayout)findViewById(R.id.si_pay_sum_data);
+
+
+                subtotal = (TextView) findViewById(R.id.si_pay_sum_sub_tot);
+                discount =(TextView)findViewById(R.id.si_pay_sum_disc);
+                returntot = (TextView)findViewById(R.id.si_pay_sum_return_tot);
+                invoiceQty = (TextView)findViewById(R.id.si_pay_sum_inv_qty);
+                freeQty = (TextView)findViewById(R.id.si_pay_sum_free_qty);
+                returnQty = (TextView)findViewById(R.id.si_pay_sum__return_qty);
+
+                cash = (TextView)findViewById(R.id.si_pay_sum_cash);
+                cheque = (TextView)findViewById(R.id.si_pay_sum_chq);
+                credit = (TextView)findViewById(R.id.si_pay_sum_crdt);
+
+                Button printBtn = (Button)findViewById(R.id.print_button_ss);
+                printBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+
+                Button saveBtn = (Button)findViewById(R.id.save_button_ss);
+                saveBtn.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                AlertDialog.Builder builder = new AlertDialog.Builder(SalesSummaryActivity.this);
+                                builder
+                                        .setTitle("Confirm ")
+                                        .setMessage("Are you sure ?")
+                                        .setIcon(null)
+                                        .setPositiveButton("Yes",new DialogInterface.OnClickListener(){
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                insertInvoiceData();
+                                                if(payment.getReturnQty()>0){
+                                                    insertReturnData();
+                                                }
+                                            }
+                                        })
+                                        .setNegativeButton("No",new DialogInterface.OnClickListener(){
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                AlertDialog alert = builder.create();
+                                alert.show();
+
+
+                            }
+                        });
+                //table.removeAllViews();
+                for(int i=0;i<data.size();i++){
+                    table.addView(getView(i));
+
+                }
+
+                subtotal.setText(payment.getSubTotal()+"");
+                discount.setText(payment.getTotalDiscount()+"");
+                returntot.setText(payment.getReturnTot()+"");
+                returnQty.setText(payment.getReturnQty()+"");
+                invoiceQty.setText(payment.getInvQty()+"");
+                freeQty.setText(payment.getFreeQty()+"");
+                returnQty.setText(payment.getReturnQty()+"");
+
+
+                cash.setText(payment.getCash()+"");
+                credit.setText(payment.getCredit()+"");
+                cheque.setText(payment.getCheque()+"");
+            }else{
+                Toast.makeText(this,"Location unavailable",Toast.LENGTH_SHORT).show();
+                setContentView(R.layout.location_not_found_error_layout);
+            }
+
+        }else{
+            Toast.makeText(this,"Permission Unavailable",Toast.LENGTH_SHORT).show();
+            setContentView(R.layout.location_not_found_error_layout);
 
         }
 
-        subtotal.setText(payment.getSubTotal()+"");
-        discount.setText(payment.getTotalDiscount()+"");
-        returntot.setText(payment.getReturnTot()+"");
-        returnQty.setText(payment.getReturnQty()+"");
-        invoiceQty.setText(payment.getInvQty()+"");
-        freeQty.setText(payment.getFreeQty()+"");
-        returnQty.setText(payment.getReturnQty()+"");
 
-
-        cash.setText(payment.getCash()+"");
-        credit.setText(payment.getCredit()+"");
-        cheque.setText(payment.getCheque()+"");
     }
 
     public TableRow getView(int i){

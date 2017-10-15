@@ -1,11 +1,13 @@
 package com.example.ahmed.sfa.controllers.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,18 +22,21 @@ import java.util.List;
 
 public class PrincipleDiscountAdapter extends RecyclerView.Adapter<PrincipleDiscountAdapter.MyViewHolder> {
     List<PrincipleDiscountModel> list;
+    TextView tv_total_discount;
 
-    public PrincipleDiscountAdapter(List<PrincipleDiscountModel> list){
+    public PrincipleDiscountAdapter(List<PrincipleDiscountModel> list,TextView totalTextView){
         this.list = list;
-
+        this.tv_total_discount  = totalTextView;
     }
 
+    @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position, List<Object> payload){
         holder.href = position;
         holder.value.setText(list.get(holder.href).getDisountValue()+"");
         holder.amount.setText(list.get(holder.href).getAmount()+"");
         if(payload.size()==0)holder.discount.setText(list.get(holder.href).getDiscount()+"");
         holder.brand.setText(list.get(holder.href).getPrinciple());
+
 
         holder.discount.addTextChangedListener(new TextWatcher() {
             @Override
@@ -58,6 +63,7 @@ public class PrincipleDiscountAdapter extends RecyclerView.Adapter<PrincipleDisc
             }
         });
         holder.discount.setSelection(holder.discount.getText().length());
+        setTotalPrincipleDiscount();
     }
 
     public void onBindViewHolder( final MyViewHolder holder, int position){
@@ -88,11 +94,15 @@ public class PrincipleDiscountAdapter extends RecyclerView.Adapter<PrincipleDisc
                 }
 
                 list.get(holder.href).setDiscount(rate);
+
                 notifyItemChanged(holder.href);
+
             }
         });
 
         holder.discount.setSelection(holder.discount.getText().length());
+        //showSoftKeyboard(holder.discount);
+        setTotalPrincipleDiscount();
     }
 
     @Override
@@ -104,6 +114,22 @@ public class PrincipleDiscountAdapter extends RecyclerView.Adapter<PrincipleDisc
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.principle_discount_row,parent,false);
         return new MyViewHolder(itemView);
+    }
+
+    public void showSoftKeyboard(View view) {
+        if (view.requestFocus()) {
+            InputMethodManager imm = (InputMethodManager)
+                    view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
+    private void setTotalPrincipleDiscount(){
+        double totalPrincipleDiscount =0.0;
+        for(PrincipleDiscountModel model:list){
+            totalPrincipleDiscount+=model.getDisountValue();
+        }
+        tv_total_discount.setText(totalPrincipleDiscount+"");
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{

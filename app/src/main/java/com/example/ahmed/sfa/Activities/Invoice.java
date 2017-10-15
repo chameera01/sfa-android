@@ -220,6 +220,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
     }
 
     private void moveToPayment(){
+        dbAdapter.createTempDiscountTable();
         Intent intent = new Intent(this,SalesInvoicePayment.class);
         ArrayList<SalesInvoiceModel> data = dbAdapter.getInvoicedItems();
         intent.putParcelableArrayListExtra(Constants.DATA_ARRAY_NAME,data);
@@ -345,7 +346,13 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
                     "on a.ItemCode  = b.ItemCode";
             db.execSQL(sql);
 
-            sql = "DROP TABLE IF EXISTS temp_discount_rate";
+
+            closeDB();
+        }
+
+        public void createTempDiscountTable(){
+            openDB();
+            String sql = "DROP TABLE temp_discount_rate";
             db.execSQL(sql);
 
             sql = "CREATE TABLE temp_discount_rate(_id INTEGER PRIMARY KEY AUTOINCREMENT,PrincipleID TEXT,Principle TEXT" +
@@ -354,7 +361,6 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
             sql = "INSERT INTO temp_discount_rate(PrincipleID,Principle) SELECT PrincipleID,Principle " +
                     "FROM Mst_SupplierTable ";
             db.execSQL(sql);
-            closeDB();
         }
 
 

@@ -34,6 +34,8 @@ import com.example.ahmed.sfa.models.SalesReturnSummary;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.ahmed.sfa.Constants.PRINCIPLE_DISCOUNT_REQUEST_RESULT;
+
 /**
  * Created by Ahmed on 3/23/2017.
  */
@@ -222,6 +224,13 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
             }
         });
 
+        Button btn = (Button)findViewById(R.id.btn_principle_discount);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPrincipleDiscountDialog();
+            }
+        });
         init(true);
     }
 
@@ -249,6 +258,7 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         if(!(payment.getCreditDays()==0))creditDays.setSelection(selectCreditDatePosition);
     }
 
+    /*
     private void showPrincipleDiscountDialog(){
         final DialogFragment dialogFragment = new PricipleDiscountDialog(){
             @Override
@@ -261,6 +271,17 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         dialogFragment.onAttach(this);
         dialogFragment.show(getFragmentManager(),"Principle Discount");
         ((PricipleDiscountDialog)dialogFragment).notifyDataSetChanged();
+    }*/
+
+    private void onPrincipleDiscountUpdate(List<PrincipleDiscountModel> models){
+        payment.setTotalPrincipleDiscounts(getTotalPrincipleDiscount(models));
+        init(false);
+    }
+
+    private void showPrincipleDiscountDialog(){
+        Intent intent = new Intent(this,PricipleDiscountDialog.class);
+
+        startActivityForResult(intent,Constants.PRINCIPLE_DISCOUNT_REQUEST_RESULT);
     }
 
 
@@ -303,6 +324,11 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
                 payment.setReturnTot(returnSummary.getReturnTot());
                 payment.setReturnQty(returnSummary.getReturnQty());
                 init(false);
+            }
+        }else if(requestCode==PRINCIPLE_DISCOUNT_REQUEST_RESULT){
+            if(resultCode==RESULT_OK){
+                List<PrincipleDiscountModel> list = data.getExtras().getParcelableArrayList("MODELS");
+                onPrincipleDiscountUpdate(list);
             }
         }
     }

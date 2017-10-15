@@ -3,6 +3,33 @@
 
     <item
         is-multidex="false"
+        jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
+        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-appindexing-8.4.0_abd82bfd61be96a12ff095efce57a6629b9938e1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.2.0_e59b18691bcdc8971507cb4d538815fe0c805f38.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.2.0_8aecbda6f46af7dc25f67e03feb0262658227b1a.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.2.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -48,12 +75,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.2.0_464c0be7e5a008e9ef9cda52b5cd966654fb525d.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Ahmed\Documents\sfa-android\app\libs\MPChartLib.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="7116198d997b62904e8d9b9a9d719b4fafd8b541">
         <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\MPChartLib_fb26a4ecfbf97968cd70d81b4a17ce9f637d8068.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-8.4.0_a477f0ac32a5dfca837a5aadf7a4da48e0f040c5.jar" />
     </item>
     <item
         is-multidex="false"
@@ -66,12 +111,30 @@
     </item>
     <item
         is-multidex="false"
+        jar="D:\sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\support-annotations-25.2.0_6636da86169c7151508e83f33242e8e507c2158c.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.android.support\transition\25.2.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.2"
         sha1="e51c2f662bb72419632af5192553c37e33890a99">
         <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.android.support-transition-25.2.0_2fa5273387d4955c4259eafc1d9f4efa692d3fc0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Ahmed\Documents\sfa-android\app\libs\GraphView-4.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3626a38455159707e355da96a61e598fbbc049e9">
+        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\GraphView-4.2.1_60e69aff3627fed0817ecf91d07962b99ca7cb27.jar" />
     </item>
     <item
         is-multidex="false"
@@ -99,69 +162,6 @@
         revision="25.0.2"
         sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
         <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.2.0_b6f1c3e0df56cab93684127cb7cfe15b990b0b65.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
-        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-appindexing-8.4.0_abd82bfd61be96a12ff095efce57a6629b9938e1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.2.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
-        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.2.0_e59b18691bcdc8971507cb4d538815fe0c805f38.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.2.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.2.0_8aecbda6f46af7dc25f67e03feb0262658227b1a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.2.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
-        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.2.0_464c0be7e5a008e9ef9cda52b5cd966654fb525d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.4.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
-        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-8.4.0_a477f0ac32a5dfca837a5aadf7a4da48e0f040c5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
-        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\support-annotations-25.2.0_6636da86169c7151508e83f33242e8e507c2158c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Ahmed\Documents\sfa-android\app\libs\GraphView-4.2.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.2"
-        sha1="3626a38455159707e355da96a61e598fbbc049e9">
-        <dex dex="C:\Users\Ahmed\Documents\sfa-android\app\build\intermediates\pre-dexed\debug\GraphView-4.2.1_60e69aff3627fed0817ecf91d07962b99ca7cb27.jar" />
     </item>
     <item
         is-multidex="false"
