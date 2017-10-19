@@ -352,7 +352,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
 
         public void createTempDiscountTable(){
             openDB();
-            String sql = "DROP TABLE temp_discount_rate";
+            String sql = "DROP TABLE IF EXISTS temp_discount_rate";
             db.execSQL(sql);
 
             sql = "CREATE TABLE temp_discount_rate(_id INTEGER PRIMARY KEY AUTOINCREMENT,PrincipleID TEXT,Principle TEXT" +
