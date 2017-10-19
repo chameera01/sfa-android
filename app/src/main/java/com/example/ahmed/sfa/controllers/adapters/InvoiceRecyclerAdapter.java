@@ -145,7 +145,14 @@ implements SummaryUpdater{
             holder.expiry.setText("Error");
         }
         holder.expiry.setText(siModel.getExpiryDate());
-        holder.unitprice.setText(siModel.getUnitPrice()+"");
+        //holder.unitprice.setText(siModel.getUnitPrice()+"");
+        //this condition is added for specific client
+        if(siModel.getDiscountRate()>0){
+            holder.unitprice.setText(siModel.getRetailPrice()+"");
+        }else{
+            holder.unitprice.setText(siModel.getUnitPrice()+"");
+        }//coondition ends here
+
         holder.stock.setText(siModel.getStock()+"");
         holder.lineval.setText(siModel.getLineValue()+"");
 
@@ -524,16 +531,19 @@ implements SummaryUpdater{
                         salesInvoice.get(pos).setDiscountRate(rate);
                         //notifyItemChanged(position);
                         holder.free.setEnabled(false);
-                        if(!onBind){
-                            notifyItemChanged(pos,LINEVAL);
-                            //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
-                            lastUpdatedRow = pos;
-                            //notifyUpdate();
-                        }
+
 
                     }else{
                         salesInvoice.get(pos).setDiscountRate(0.0);
                         holder.free.setEnabled(true);
+
+                    }
+
+                    if(!onBind){
+                        notifyItemChanged(pos,LINEVAL);
+                        //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                        lastUpdatedRow = pos;
+                        //notifyUpdate();
                     }
                 }
             }
@@ -623,6 +633,7 @@ implements SummaryUpdater{
                     " Shelf="+model.getShelf()+" , Request="+model.getRequest()
                     +" , OrderQty="+model.getOrder()+" , Free="+model.getFree()
                     +" , Disc="+model.getDiscountRate()+" , LineVal="+model.getLineValue()
+                    +", RetailPriceLineVal="+model.getRetailLineVal()
                     +" WHERE _id="+model.getId();
             db.execSQL(sql);
 

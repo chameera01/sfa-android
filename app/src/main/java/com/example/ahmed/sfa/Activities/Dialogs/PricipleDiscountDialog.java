@@ -165,17 +165,18 @@ public class PricipleDiscountDialog extends Activity {
             //get datafrom tempInvoice
             openDB();
 
-            String sql = "SELECT PrincipleID,SUM(LineVal),SUM(Disc) FROM temp_invoice GROUP BY PrincipleID";
+            String sql = "SELECT PrincipleID,SUM(LineVal),SUM(Disc),SUM(RetailPriceLineVal) FROM temp_invoice GROUP BY PrincipleID";
             Cursor cursor = db.rawQuery(sql,null);
 
             String selectionList = "(";//make the string for retrieving discount rate and principle
             while (cursor.moveToNext()){
                 double disc = Double.parseDouble(cursor.getString(2));
                 double tot = Double.parseDouble(cursor.getString(1));
+
                 if(disc==0 && tot>0) {
                     PrincipleDiscountModel model = new PrincipleDiscountModel();
                     model.setPrincipleID(cursor.getString(0));
-                    model.setAmount(tot);
+                    model.setAmount(cursor.getDouble(3));
                     models.add(model);
                     selectionList += cursor.getString(0) + ",";
                 }
@@ -194,6 +195,7 @@ public class PricipleDiscountDialog extends Activity {
                         if(model.getPrincipleID().equals(cursor.getString(0))){
                             model.setPrinciple(cursor.getString(1));
                             model.setDiscount(Double.parseDouble(cursor.getString(2)));
+
                             break;
                         }
                     }

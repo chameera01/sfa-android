@@ -29,6 +29,7 @@ public class SalesInvoiceModel implements Parcelable {
     private String BatchNumber;
     private String ExpiryDate;
     private double UnitPrice;
+
     private int stock;
     private int Shelf;
     private int Request;
@@ -36,6 +37,7 @@ public class SalesInvoiceModel implements Parcelable {
     private int Free;
     private double discountRate;
     private double LineValue;
+    private double retailLineVal;
 
     private double subtotalVal;
     private double discount;
@@ -65,6 +67,7 @@ public class SalesInvoiceModel implements Parcelable {
 
     public void setRetailPrice(double retailPrice) {
         this.retailPrice = retailPrice;
+        calculateLineVal();
     }
 
     String principleID;
@@ -103,6 +106,8 @@ public class SalesInvoiceModel implements Parcelable {
         LineValue = in.readDouble();
         subtotalVal = in.readDouble();
         discount = in.readDouble();
+        retailPrice = in.readDouble();
+        retailLineVal = in.readDouble();
     }
 
     public static final Creator<SalesInvoiceModel> CREATOR = new Creator<SalesInvoiceModel>() {
@@ -118,16 +123,33 @@ public class SalesInvoiceModel implements Parcelable {
     };
 
     private void calculateLineVal(){
+        /* changing for client
         subtotalVal = ((Order)*UnitPrice);
         discount = (subtotalVal*discountRate/100);
-        LineValue = subtotalVal - discount;
+        LineValue = subtotalVal - discount;*/
+        if(discountRate>0){
+            subtotalVal = ((Order)*retailPrice);
+            discount = (subtotalVal*discountRate/100);
+            LineValue = subtotalVal - discount;
+        }else{
+            subtotalVal = ((Order)*UnitPrice);
+            discount = (subtotalVal*discountRate/100);
+            LineValue = subtotalVal - discount;
+        }
+        retailLineVal = getOrder()*getRetailPrice();
     }
 
     public String getCode() {
         return Code;
     }
 
+    public double getRetailLineVal() {
+        return retailLineVal;
+    }
 
+    public void setRetailLineVal(double retailLineVal) {
+        this.retailLineVal = retailLineVal;
+    }
 
     public void setCode(String code) {
         Code = code;
@@ -284,6 +306,7 @@ public class SalesInvoiceModel implements Parcelable {
         dest.writeDouble(LineValue);
         dest.writeDouble(subtotalVal);
         dest.writeDouble(discount);
-
+        dest.writeDouble(retailPrice);
+        dest.writeDouble(retailLineVal);
     }
 }

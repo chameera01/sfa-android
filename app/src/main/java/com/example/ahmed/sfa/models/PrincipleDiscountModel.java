@@ -14,6 +14,8 @@ public class PrincipleDiscountModel implements Parcelable{
     private double discount;
     private double disountValue;
 
+
+
     public PrincipleDiscountModel(Parcel in) {
         principleID = in.readString();
         principle = in.readString();

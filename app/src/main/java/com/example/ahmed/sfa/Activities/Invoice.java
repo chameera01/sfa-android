@@ -335,13 +335,13 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
             sql="CREATE TABLE temp_invoice(_id INTEGER PRIMARY KEY AUTOINCREMENT,ItemCode TEXT,Description TEXT,BatchNumber" +
                     " TEXT,ExpiryDate TEXT,SellingPrice REAL,Qty INTEGER DEFAULT 0" +
                     ",Shelf INTEGER DEFAULT 0,Request INTEGER DEFAULT 0,OrderQty INTEGER DEFAULT 0" +
-                    ",Free INTEGER DEFAULT 0,Disc Real DEFAULT 0.0,LineVal Real DEFAULT 0.0,PrincipleID TEXT,BrandID TEXT,ServerID TEXT);";
+                    ",Free INTEGER DEFAULT 0,Disc Real DEFAULT 0.0,LineVal Real DEFAULT 0.0,PrincipleID TEXT,BrandID TEXT,ServerID TEXT,RetailPrice REAL DEFAULT 0.0,RetailPriceLineVal REAL DEFAULT 0.0);";
             db.execSQL(sql); //create the table again;
 
             //fill in data
             sql = "INSERT INTO temp_invoice(ItemCode,Description,BatchNumber" +
-                    ",ExpiryDate,SellingPrice,Qty,PrincipleID,BrandID,ServerID) SELECT a.ItemCode,a.Description," +
-                    "b.BatchNumber,b.ExpiryDate,b.SellingPrice,b.Qty,a.PrincipleID,a.BrandID,b.ServerID" +
+                    ",ExpiryDate,SellingPrice,Qty,PrincipleID,BrandID,ServerID,RetailPrice) SELECT a.ItemCode,a.Description," +
+                    "b.BatchNumber,b.ExpiryDate,b.SellingPrice,b.Qty,a.PrincipleID,a.BrandID,b.ServerID,b.RetailPrice" +
                     " FROM Mst_ProductMaster a inner join Tr_TabStock b " +
                     "on a.ItemCode  = b.ItemCode";
             db.execSQL(sql);
@@ -387,6 +387,8 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
                     salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                     salesInvoiceModel.setLineValue(cursor.getDouble(12));
                     salesInvoiceModel.setServerID(cursor.getString(15));
+                    salesInvoiceModel.setRetailPrice(cursor.getDouble(16));
+                    salesInvoiceModel.setRetailLineVal(cursor.getDouble(17));
                     data.add(salesInvoiceModel);
                 }catch (Exception ex){
 
@@ -448,6 +450,8 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
                 salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                 salesInvoiceModel.setLineValue(cursor.getDouble(12));
                 salesInvoiceModel.setServerID(cursor.getString(15));
+                salesInvoiceModel.setRetailPrice(cursor.getDouble(16));
+                salesInvoiceModel.setRetailLineVal(cursor.getDouble(17));
                 data.add(salesInvoiceModel);
             }
             closeDB();
@@ -518,6 +522,8 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
                     salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                     salesInvoiceModel.setLineValue(cursor.getDouble(12));
                     salesInvoiceModel.setServerID(cursor.getString(15));
+                    salesInvoiceModel.setRetailPrice(cursor.getDouble(16));
+                    salesInvoiceModel.setRetailLineVal(cursor.getDouble(17));
                     data.add(salesInvoiceModel);
                 }catch (Exception ex){
 
