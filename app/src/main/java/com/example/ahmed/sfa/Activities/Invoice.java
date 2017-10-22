@@ -224,7 +224,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
         Intent intent = new Intent(this,SalesInvoicePayment.class);
         ArrayList<SalesInvoiceModel> data = dbAdapter.getInvoicedItems();
         intent.putParcelableArrayListExtra(Constants.DATA_ARRAY_NAME,data);
-        intent.putExtra(Constants.SUMMARY_OBJECT_NAME,getSalesInvoiceSummary(data));
+        intent.putExtra(Constants.SUMMARY_OBJECT_NAME, SalesInvoiceSummary.createSalesInvoiceSummary(data));
         intent.putExtra(Constants.CUSTOMER_NO,customerNo);
         intent.putExtra(Constants.ITINERARY,itinerary);
         startActivity(intent);
@@ -238,23 +238,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
 
     }
 
-    public SalesInvoiceSummary getSalesInvoiceSummary(List<SalesInvoiceModel> data){
-        double discount=0.0;
-        double subtotal=0.0;
-        double total=0.0;
-        int invoicedQty=0;
-        int freeQty=0;
 
-        for(int i=0;i<data.size();i++){
-            discount +=data.get(i).getDiscount();
-            subtotal += data.get(i).getSubtotalVal();
-            total += data.get(i).getLineValue();
-            invoicedQty += data.get(i).getInvoiceQuantity();
-            freeQty += data.get(i).getFree();
-        }
-
-        return new SalesInvoiceSummary(discount,subtotal,total,invoicedQty,freeQty);
-    }
 
     private void initPrincipleSpinner(){
         principleSpinner.setOnItemSelectedListener (new AdapterView.OnItemSelectedListener() {
@@ -312,7 +296,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
     @Override
     public void updateSummary() {
         updateSummaryView(
-                getSalesInvoiceSummary(
+                SalesInvoiceSummary.createSalesInvoiceSummary(
                         dbAdapter.getInvoicedItems()
                 )
         );
@@ -356,7 +340,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
             db.execSQL(sql);
 
             sql = "CREATE TABLE temp_discount_rate(_id INTEGER PRIMARY KEY AUTOINCREMENT,PrincipleID TEXT,Principle TEXT" +
-                    ",DiscountRate REAL DEFAULT 0.0)";
+                    ",DiscountRate REAL DEFAULT 0.0,DiscountValue REAL DEFAULT 0.0,LineVal REAL DEFAULT 0.0)";
             db.execSQL(sql);
             sql = "INSERT INTO temp_discount_rate(PrincipleID,Principle) SELECT PrincipleID,Principle " +
                     "FROM Mst_SupplierTable ";
@@ -386,6 +370,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
                     salesInvoiceModel.setFree(cursor.getInt(10));
                     salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                     salesInvoiceModel.setLineValue(cursor.getDouble(12));
+                    salesInvoiceModel.setPrincipleID(cursor.getString(13));
                     salesInvoiceModel.setServerID(cursor.getString(15));
                     salesInvoiceModel.setRetailPrice(cursor.getDouble(16));
                     salesInvoiceModel.setRetailLineVal(cursor.getDouble(17));
@@ -449,6 +434,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
 
                 salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                 salesInvoiceModel.setLineValue(cursor.getDouble(12));
+                salesInvoiceModel.setPrincipleID(cursor.getString(13));
                 salesInvoiceModel.setServerID(cursor.getString(15));
                 salesInvoiceModel.setRetailPrice(cursor.getDouble(16));
                 salesInvoiceModel.setRetailLineVal(cursor.getDouble(17));
@@ -521,6 +507,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
                     salesInvoiceModel.setFree(cursor.getInt(10));
                     salesInvoiceModel.setDiscountRate(cursor.getDouble(11));
                     salesInvoiceModel.setLineValue(cursor.getDouble(12));
+                    salesInvoiceModel.setPrincipleID(cursor.getString(13));
                     salesInvoiceModel.setServerID(cursor.getString(15));
                     salesInvoiceModel.setRetailPrice(cursor.getDouble(16));
                     salesInvoiceModel.setRetailLineVal(cursor.getDouble(17));

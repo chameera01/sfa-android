@@ -159,8 +159,22 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if(!s.toString().equals(""))payment.setFullInvDisc(Double.parseDouble(s.toString()));
-                else payment.setFullInvDisc(0.0);
+                if(!s.toString().equals("")){
+
+                    for(SalesInvoiceModel model:data){
+                        model.setCalculateFromRetail(true);
+                    }
+                    payment = new SalesPayment(SalesInvoiceSummary.createSalesInvoiceSummary(data));
+                    payment.setFullInvDisc(Double.parseDouble(s.toString()));
+                }
+                else{
+
+                    for(SalesInvoiceModel model:data){
+                        model.setCalculateFromRetail(false);
+                    }
+                    payment = new SalesPayment(SalesInvoiceSummary.createSalesInvoiceSummary(data));
+                    payment.setFullInvDisc(0.0);
+                }
                 init(false);
             }
 
@@ -258,24 +272,20 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         if(!(payment.getCreditDays()==0))creditDays.setSelection(selectCreditDatePosition);
     }
 
-    /*
-    private void showPrincipleDiscountDialog(){
-        final DialogFragment dialogFragment = new PricipleDiscountDialog(){
-            @Override
-            public void doPositiveClick(List<PrincipleDiscountModel> models) {
-                super.doPositiveClick(models);
-                payment.setTotalPrincipleDiscounts(getTotalPrincipleDiscount(models));
-                init(false);
-            }
-        };
-        dialogFragment.onAttach(this);
-        dialogFragment.show(getFragmentManager(),"Principle Discount");
-        ((PricipleDiscountDialog)dialogFragment).notifyDataSetChanged();
-    }*/
-
     private void onPrincipleDiscountUpdate(List<PrincipleDiscountModel> models){
+
+        for(SalesInvoiceModel salesInvoiceModel : data){
+            for(PrincipleDiscountModel principleDiscountModel :models){
+                if(principleDiscountModel.getPrincipleID().equals(salesInvoiceModel.getPrincipleID())){
+                    if(principleDiscountModel.getDiscount()>0)salesInvoiceModel.setCalculateFromRetail(true);
+                    else salesInvoiceModel.setCalculateFromRetail(false);
+                    break;
+                }
+            }
+        }
+        updateSummary();
         payment.setTotalPrincipleDiscounts(getTotalPrincipleDiscount(models));
-        init(false);
+
     }
 
     private void showPrincipleDiscountDialog(){
@@ -329,8 +339,15 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
             if(resultCode==RESULT_OK){
                 List<PrincipleDiscountModel> list = data.getExtras().getParcelableArrayList("MODELS");
                 onPrincipleDiscountUpdate(list);
+                //updateSummary();
+                init(false);
             }
         }
+    }
+
+    public void updateSummary(){
+        SalesInvoiceSummary salesInvoiceSummary = SalesInvoiceSummary.createSalesInvoiceSummary(data);
+        payment = new SalesPayment(salesInvoiceSummary);
     }
 
     class DBAdapter extends BaseDBAdapter{

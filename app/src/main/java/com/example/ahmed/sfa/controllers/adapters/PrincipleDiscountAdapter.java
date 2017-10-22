@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.PrincipleDiscountModel;
 
 import java.util.List;
@@ -103,6 +104,7 @@ public class PrincipleDiscountAdapter extends RecyclerView.Adapter<PrincipleDisc
         holder.discount.setSelection(holder.discount.getText().length());
         //showSoftKeyboard(holder.discount);
         setTotalPrincipleDiscount();
+
     }
 
     @Override
@@ -146,4 +148,6 @@ public class PrincipleDiscountAdapter extends RecyclerView.Adapter<PrincipleDisc
             value =(TextView)itemView.findViewById(R.id.tv_discount_value);
         }
     }
+
+
 }

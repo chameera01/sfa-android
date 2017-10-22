@@ -3,6 +3,7 @@ package com.example.ahmed.sfa.Activities.Dialogs;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -213,7 +214,9 @@ public class PricipleDiscountDialog extends Activity {
             openDB();
 
             for(PrincipleDiscountModel model : models){
+
                 String sql = "UPDATE temp_discount_rate SET  DiscountRate="+model.getDiscount()+
+                        " , DiscountValue="+model.getDisountValue()+" , LineVal="+model.getAmount()+
                         " WHERE PrincipleID="+model.getPrincipleID();
                 db.execSQL(sql);
             }

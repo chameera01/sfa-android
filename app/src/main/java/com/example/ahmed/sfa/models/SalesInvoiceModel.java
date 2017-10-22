@@ -42,8 +42,55 @@ public class SalesInvoiceModel implements Parcelable {
     private double subtotalVal;
     private double discount;
 
+    private boolean calculateFromRetail;
 
     String brandID;
+
+    String principleID;
+    private double retailPrice;
+
+    public SalesInvoiceModel(){
+        calculateFromRetail = false;
+    }
+
+    public SalesInvoiceModel(String id,String code, String product, String batchNumber, String expiryDate, double unitPrice,int Stock) {
+        this.id = id;
+        Code = code;
+        Product = product;
+        BatchNumber = batchNumber;
+        ExpiryDate = expiryDate;
+        UnitPrice = unitPrice;
+        this.stock = Stock;
+        Shelf=0;
+        Request=0;
+        Order=0;
+        Free=0;
+        discountRate=0;
+        LineValue=0;
+        calculateFromRetail = false;
+    }
+
+    protected SalesInvoiceModel(Parcel in) {
+        id = in.readString();
+        Code = in.readString();
+        Product = in.readString();
+        BatchNumber = in.readString();
+        ExpiryDate = in.readString();
+        UnitPrice = in.readDouble();
+        stock = in.readInt();
+        Shelf = in.readInt();
+        Request = in.readInt();
+        Order = in.readInt();
+        Free = in.readInt();
+        discountRate = in.readDouble();
+        LineValue = in.readDouble();
+        subtotalVal = in.readDouble();
+        discount = in.readDouble();
+        retailPrice = in.readDouble();
+        retailLineVal = in.readDouble();
+        calculateFromRetail = in.readByte()!=0;
+        principleID = in.readString();
+    }
 
     public String getBrandID() {
         return brandID;
@@ -70,45 +117,7 @@ public class SalesInvoiceModel implements Parcelable {
         calculateLineVal();
     }
 
-    String principleID;
-    private double retailPrice;
 
-
-    public SalesInvoiceModel(String id,String code, String product, String batchNumber, String expiryDate, double unitPrice,int Stock) {
-        this.id = id;
-        Code = code;
-        Product = product;
-        BatchNumber = batchNumber;
-        ExpiryDate = expiryDate;
-        UnitPrice = unitPrice;
-        this.stock = Stock;
-        Shelf=0;
-        Request=0;
-        Order=0;
-        Free=0;
-        discountRate=0;
-        LineValue=0;
-    }
-
-    protected SalesInvoiceModel(Parcel in) {
-        id = in.readString();
-        Code = in.readString();
-        Product = in.readString();
-        BatchNumber = in.readString();
-        ExpiryDate = in.readString();
-        UnitPrice = in.readDouble();
-        stock = in.readInt();
-        Shelf = in.readInt();
-        Request = in.readInt();
-        Order = in.readInt();
-        Free = in.readInt();
-        discountRate = in.readDouble();
-        LineValue = in.readDouble();
-        subtotalVal = in.readDouble();
-        discount = in.readDouble();
-        retailPrice = in.readDouble();
-        retailLineVal = in.readDouble();
-    }
 
     public static final Creator<SalesInvoiceModel> CREATOR = new Creator<SalesInvoiceModel>() {
         @Override
@@ -127,7 +136,7 @@ public class SalesInvoiceModel implements Parcelable {
         subtotalVal = ((Order)*UnitPrice);
         discount = (subtotalVal*discountRate/100);
         LineValue = subtotalVal - discount;*/
-        if(discountRate>0){
+        if(calculateFromRetail) {//discountRate>0){
             subtotalVal = ((Order)*retailPrice);
             discount = (subtotalVal*discountRate/100);
             LineValue = subtotalVal - discount;
@@ -229,6 +238,8 @@ public class SalesInvoiceModel implements Parcelable {
 
     public void setDiscountRate(double discountRate) {
         this.discountRate = discountRate;
+        if(discountRate>0) calculateFromRetail = true;
+        else calculateFromRetail = false;
         calculateLineVal();
     }
 
@@ -283,6 +294,15 @@ public class SalesInvoiceModel implements Parcelable {
         this.subtotalVal = subtotalVal;
     }
 
+    public boolean isCalculateFromRetail() {
+        return calculateFromRetail;
+    }
+
+    public void setCalculateFromRetail(boolean calculateFromRetail) {
+        this.calculateFromRetail = calculateFromRetail;
+        calculateLineVal();
+    }
+
     @Override
     public int describeContents() {
 
@@ -308,5 +328,7 @@ public class SalesInvoiceModel implements Parcelable {
         dest.writeDouble(discount);
         dest.writeDouble(retailPrice);
         dest.writeDouble(retailLineVal);
+        dest.writeByte((byte)(calculateFromRetail?1:0));
+        dest.writeString(principleID);
     }
 }

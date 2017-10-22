@@ -79,4 +79,7 @@ public class Constants {
     public static final String SALES_RETURN_DETAILS_TABLE = "Tr_SalesReturnDetails";
     public static final String[] SALES_RETURN_DETAILS_TABLE_COLUMNS ={"HeaderID","ItemCode","UnitPrice","BatchNumber","ExpiryDate","DiscountRate","DiscountAmount","IssueMode","OrderQty","FreeQty","Total","IsUpload","UploadDate"};
 
+    public static final String PRINCIPLE_DISCOUNT_TABLE = "Tr_PrincipleDiscount";
+    public static final String[] PRINCIPLE_DISCOUNT_TABLE_COLUMNS = {"InvoiceId","CustomerNo","Date","PrincipleID",
+            "Principle","Value","DiscountRate","DiscountValue"};
 }

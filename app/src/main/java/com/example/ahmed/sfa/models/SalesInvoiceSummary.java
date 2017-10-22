@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import com.example.ahmed.sfa.controllers.PermissionManager;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * Created by Ahmed on 3/24/2017.
@@ -45,6 +46,24 @@ public class SalesInvoiceSummary implements Parcelable{
         returnQty=0;
 
 
+    }
+
+    public static SalesInvoiceSummary createSalesInvoiceSummary(List<SalesInvoiceModel> data){
+        double discount=0.0;
+        double subtotal=0.0;
+        double total=0.0;
+        int invoicedQty=0;
+        int freeQty=0;
+
+        for(int i=0;i<data.size();i++){
+            discount +=data.get(i).getDiscount();
+            subtotal += data.get(i).getSubtotalVal();
+            total += data.get(i).getLineValue();
+            invoicedQty += data.get(i).getInvoiceQuantity();
+            freeQty += data.get(i).getFree();
+        }
+
+        return new SalesInvoiceSummary(discount,subtotal,total,invoicedQty,freeQty);
     }
 
     protected SalesInvoiceSummary(Parcel in) {

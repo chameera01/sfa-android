@@ -406,6 +406,9 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Mst_CreditDays(CreditDaysID,CreditDays,IsActive,LastUpdateDate)" +
                     "VALUES ('ID3',10,0,'19/09/2017')");
 
+            db.execSQL("CREATE TABLE Tr_PrincipleDiscount(_ID INTEGER  PRIMARY KEY AUTOINCREMENT,InvoiceId TEXT," +
+                    "CustomerNo TEXT,Date TEXT,PrincipleID TEXT,Principle TEXT,Value REAL,DiscountRate REAL,DiscountValue REAL)");
+
         }catch (SQLException e){
             e.printStackTrace();
         }

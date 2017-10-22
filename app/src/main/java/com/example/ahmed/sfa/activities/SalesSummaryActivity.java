@@ -37,6 +37,7 @@ import com.example.ahmed.sfa.models.Brand;
 import com.example.ahmed.sfa.models.Cheque;
 import com.example.ahmed.sfa.models.Itinerary;
 import com.example.ahmed.sfa.models.Principle;
+import com.example.ahmed.sfa.models.PrincipleDiscountModel;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 import com.example.ahmed.sfa.models.SalesPayment;
 
@@ -72,6 +73,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
     private Alert alert;
 
     Location lastKnownLocation;
+    DBAdapter dbAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,7 +81,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
 
 
 
-
+        dbAdapter = new DBAdapter(SalesSummaryActivity.this);
         init();
     }
 
@@ -160,7 +162,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Location Permission Not available",Toast.LENGTH_SHORT).show();
         }
 
-        DBAdapter dbAdapter = new DBAdapter(SalesSummaryActivity.this);
+
         String serialCode = RandomNumberGenerator.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"SRL",14);
         //String invNum = RandomNumberGenerator.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,"INV",14);
 
@@ -182,6 +184,8 @@ public class SalesSummaryActivity extends AppCompatActivity {
                                     if(dbAdapter.updateItineraryDetailsTable(itinerary.getId(),customerNo)){
                                         if(dbAdapter.insertChequeDetails(chequeModel,serialCode,invNo,customerNo,payment.getTotal())){
                                             if(dbAdapter.increaseInvoiceNo()){
+                                                dbAdapter.insertPrincipleDiscountDetails(
+                                                        dbAdapter.getPrincipleDiscountList(),invNo,customerNo);
                                                 alert.showAlert("Success","Invoice completed",null,successfull);
                                             }else{
                                                 Log.w("Eror : >","incr inv no");
@@ -313,6 +317,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
                                                 insertInvoiceData();
                                                 if(payment.getReturnQty()>0){
                                                     insertReturnData();
+
                                                 }
                                             }
                                         })
@@ -639,6 +644,44 @@ public class SalesSummaryActivity extends AppCompatActivity {
             Log.w("Updated Itineraries",">> "+val);
             if(val==1) return true;
             else return false;
+        }
+
+        public void insertPrincipleDiscountDetails(List<PrincipleDiscountModel> list,int invoiceId,String customerId){
+            openDB();
+            for(PrincipleDiscountModel model:list){
+                ContentValues cv = new ContentValues();
+                cv.put(Constants.PRINCIPLE_DISCOUNT_TABLE_COLUMNS[0],invoiceId);
+                cv.put(Constants.PRINCIPLE_DISCOUNT_TABLE_COLUMNS[1],customerId);
+                cv.put(Constants.PRINCIPLE_DISCOUNT_TABLE_COLUMNS[2],DateManager.dateToday());
+                cv.put(Constants.PRINCIPLE_DISCOUNT_TABLE_COLUMNS[3],model.getPrincipleID());
+                cv.put(Constants.PRINCIPLE_DISCOUNT_TABLE_COLUMNS[4],model.getPrinciple());
+                cv.put(Constants.PRINCIPLE_DISCOUNT_TABLE_COLUMNS[5],model.getAmount());
+                cv.put(Constants.PRINCIPLE_DISCOUNT_TABLE_COLUMNS[6],model.getDiscount());
+                cv.put(Constants.PRINCIPLE_DISCOUNT_TABLE_COLUMNS[7],model.getDisountValue());
+                db.insert(Constants.PRINCIPLE_DISCOUNT_TABLE,null,cv);
+            }
+
+
+            closeDB();
+        }
+
+        public List<PrincipleDiscountModel> getPrincipleDiscountList(){
+            openDB();
+            ArrayList<PrincipleDiscountModel> list = new ArrayList<>();
+            String sql = "SELECT * FROM temp_discount_rate WHERE DiscountRate>0";
+            Cursor cursor = db.rawQuery(sql,null);
+            while(cursor.moveToNext()){
+                PrincipleDiscountModel model = new PrincipleDiscountModel();
+                model.setPrincipleID(cursor.getString(1));
+                model.setPrinciple(cursor.getString(2));
+                model.setDiscount(cursor.getDouble(3));
+                model.setDisountValue(cursor.getDouble(4));
+                model.setAmount(cursor.getDouble(5));
+                list.add(model);
+            }
+            closeDB();
+
+            return list;
         }
 
     }
