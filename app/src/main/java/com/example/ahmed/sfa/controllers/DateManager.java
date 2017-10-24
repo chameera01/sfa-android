@@ -151,4 +151,16 @@ public class DateManager {
         return time;
     }
 
+
+        public static Date getNetMonth(int monthsfromNow) {
+
+
+            Calendar cal = Calendar.getInstance(); //Get the Calendar instance
+            cal.add(Calendar.MONTH, +3);//Three months from now
+            Date date = cal.getTime();// Get the Date object
+
+            return date;
+
+        }
+
 }

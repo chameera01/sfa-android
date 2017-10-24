@@ -59,18 +59,20 @@ public class UploadTables {
                 route = cusCursor.getString(cusCursor.getColumnIndex("RouteID"));
                 status = cusCursor.getInt(cusCursor.getColumnIndex("CustomerStatusID"));//CustomerStatusId instead
 
-               /* tel = cusCursor.getString(cusCursor.getColumnIndex("Telephone")) ;
+                String tmpval = null;
+                tel = cusCursor.getString(cusCursor.getColumnIndex("Telephone"));
+
                 fax = cusCursor.getString(cusCursor.getColumnIndex("Fax"));
                 email = cusCursor.getString(cusCursor.getColumnIndex("Email"));
                 ownername = cusCursor.getString(cusCursor.getColumnIndex("OwnerName"));
                 ownerCon = cusCursor.getString(cusCursor.getColumnIndex("OwnerContactNo"));
-                regno = cusCursor.getString(cusCursor.getColumnIndex("PhamacyRegNo"));
+                regno = cusCursor.getString(cusCursor.getColumnIndex("PharmacyRegNo"));
                 //String cusno = cusCursor.getString(cusCursor.getColumnIndex("Email"));
 
                  lat = cusCursor.getDouble(cusCursor.getColumnIndex("Latitude"));
                  lng = cusCursor.getDouble(cusCursor.getColumnIndex("Longitude"));
                  img = cusCursor.getString(cusCursor.getColumnIndex("ImageID"));
-                 brno = cusCursor.getString(cusCursor.getColumnIndex("BRno"));*/
+                 brno = cusCursor.getString(cusCursor.getColumnIndex("BRno"));
 
                 url_str= "http://www.bizmapexpert.com/DIstributorManagementSystem/Up_Tr_CustomerMaster_Pending/Tr_CustomerMaster_PendingNew?" +
                         "RepID=99&TabCustomerNo="+cusno+"&CustomerName="+cusname+"&Address="+addrss+"&DistrictID="+dist+"&" +
@@ -85,10 +87,11 @@ public class UploadTables {
                         url += tmp;
                     }
                 }catch (Exception e ){
-
+                    e.printStackTrace();
                 }
 
-                cusArr.add(url);
+                //cusArr.add(url);
+                cusArr.add( url_str.replace(" ", "$$"));
 
                 
             }

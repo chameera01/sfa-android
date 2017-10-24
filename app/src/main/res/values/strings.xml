@@ -27,5 +27,28 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing DeviceID."
     </string>
+    <string name="search_products">Search Products</string>
+    <string name="cancel">Cancel</string>
+    <string name="save_shelf_qty">Save Shelf Qty</string>
+    <string name="next">Next</string>
+    <string name="search_selected_products">Search Sel. Products</string>
+    <string name="last_invoice_qty">Last Inv Qty:</string>
+    <string name="last_three_month_average_qty">L3MA:</string>
+    <string name="current_stock">Current Stock:</string>
+    <string name="discount">Discount:</string>
+    <string name="expiry_date">Exp:</string>
+    <string name="invoice_title">Invoice</string>
+    <string name="done">Done</string>
+    <string name="price">Price:</string>
+    <string name="product_code">Pro. Code</string>
+    <string name="product">Product</string>
+    <string name="total_value">Total Value:</string>
+    <string name="total_qty">Total Qty:</string>
+    <string name="batch">Batch:</string>
+    <string name="quantity">Quatity:</string>
+    <string name="free">Free:</string>
+    <string name="normal">Normal:</string>
+    <string name="shelf_quantity">Shelf Qty:</string>
+    <string name="request_qty">Request Qty:</string>
 
 </resources>

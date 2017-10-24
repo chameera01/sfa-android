@@ -372,7 +372,12 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
                 //uploading data
                 UploadTables uplwd = new UploadTables(ManualSync.this);
                 ArrayList<String> cusArr =  uplwd.mstCustomerMaster();
-                Toast.makeText(ManualSync.this, "size"+cusArr.get(0), Toast.LENGTH_SHORT).show();
+                if(!cusArr.isEmpty()){
+                    Toast.makeText(ManualSync.this, "size"+cusArr.get(0), Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(ManualSync.this, "Nothing to Upload", Toast.LENGTH_SHORT).show();
+                }
+
 
                // String tmpGenUrl = cusArr.get(0);
                 try {
