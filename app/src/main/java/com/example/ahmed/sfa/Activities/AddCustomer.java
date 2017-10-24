@@ -331,7 +331,7 @@ public class AddCustomer extends AppCompatActivity {
         cvFrTrCustomer.put("ImageID",imageCode);
         cvFrTrCustomer.put("Latitude", Double.parseDouble(latitude.getText().toString()));
         cvFrTrCustomer.put("Longitude", Double.parseDouble(longitude.getText().toString()));
-        cvFrTrCustomer.put("isUpload", 1);
+        cvFrTrCustomer.put("isUpload", 0);
         cvFrTrCustomer.put("UploadDate", DateManager.dateToday());
         cvFrTrCustomer.put("ApproveStatus", 1);
         cvFrTrCustomer.put("LastUpdateDate", DateManager.dateToday());

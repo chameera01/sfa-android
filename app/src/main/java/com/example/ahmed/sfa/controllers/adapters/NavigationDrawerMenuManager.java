@@ -1,13 +1,20 @@
 package com.example.ahmed.sfa.controllers.adapters;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 
 import android.support.design.widget.NavigationView;
 
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +44,16 @@ import com.example.ahmed.sfa.controllers.PermissionManager;
 import com.example.ahmed.sfa.models.CheckInCheckOutActions;
 import com.example.ahmed.sfa.models.CheckSession;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -50,7 +66,7 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
     NavigationView navview;
 
     //String[] places ;
-
+    DrawerLayout drawer ;
 
     public NavigationDrawerMenuManager(final Activity activity){
 
@@ -111,7 +127,7 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
         final CheckInOutManager man = new CheckInOutManager(activity.getApplicationContext(),this);//create an instance of the manager
         //to manage database operations
 
-
+        drawer = (DrawerLayout)activity.findViewById(R.id.drawer_layout);
 
         //find the navigation view from the passed activities layout
         navview =(NavigationView)activity.findViewById(R.id.nav_view);
@@ -184,11 +200,16 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }
         switch (id){
             case R.id.Home:
                 if(!(activity instanceof Home)){
                     Intent intent = new Intent(activity, Home.class);
                     activity.startActivity(intent);
+
                     //activity.overridePendingTransition(R.animator.fadein,R.animator.fadeout);
                     return true;
                 }
@@ -262,6 +283,68 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
                     Intent intent = new Intent(activity, ManualSync.class);
                     activity.startActivity(intent);
                     return true;
+                }
+                break;
+
+            case R.id.nav_share:
+                try {
+                    //File file = activity.getBaseContext().getDatabasePath("sfa"); //"/data/data/com.marina.channelbridge/databases/channel_bridge_db.db";
+                    File file = activity.getBaseContext().getDatabasePath("sfa.db");
+//				    File dbFile = new File(inFileName);
+                    FileInputStream fis;
+
+                    fis = new FileInputStream(file);
+
+                    String version = "0";
+
+                    PackageInfo pInfo;
+                    try {
+                        pInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+                        version = pInfo.versionName;
+                    } catch (PackageManager.NameNotFoundException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                    Integer databaseVersion = 0;
+                    String timeStamp = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss").format(new Date());
+
+                    String outFileName = Environment.getExternalStorageDirectory() + "/sfa.db";
+
+                    // Open the empty db as the output stream
+                    OutputStream output = new FileOutputStream(outFileName);
+
+                    // Transfer bytes from the inputfile to the outputfile
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = fis.read(buffer)) > 0) {
+                        output.write(buffer, 0, length);
+                    }
+
+                    // Close the streams
+                    output.flush();
+                    output.close();
+                    fis.close();
+
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
+                    alertDialog.setTitle("Successful");
+                    alertDialog
+                            .setMessage("File Saved to the location : " + outFileName);
+                    alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int which) {
+                            return;
+                        }
+                    });
+                    alertDialog.show();
+
+                } catch (FileNotFoundException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
                 break;
 

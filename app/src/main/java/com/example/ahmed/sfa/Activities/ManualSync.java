@@ -3,6 +3,7 @@ package com.example.ahmed.sfa.Activities;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,11 +29,17 @@ import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.Volley.VolleyLog;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
+import com.example.ahmed.sfa.models.Mst_Customermaster;
+import com.example.ahmed.sfa.service.CallbackReceiver;
+import com.example.ahmed.sfa.service.HttpGetRequest;
+import com.example.ahmed.sfa.service.HttpGetRequestAbstract;
 import com.example.ahmed.sfa.service.JsonFilter_Send;
+import com.example.ahmed.sfa.service.JsonHelper;
 import com.example.ahmed.sfa.service.JsonObjGenerate;
 import com.example.ahmed.sfa.service.JsonRequestListerner;
 import com.example.ahmed.sfa.service.SendDeviceDetails;
 import com.example.ahmed.sfa.service.SyncReturn;
+import com.example.ahmed.sfa.service.UploadTables;
 
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
@@ -40,14 +48,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-
-
+import java.io.BufferedReader;
+import java.io.Console;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import static android.R.attr.name;
+import static android.R.attr.resource;
 import static android.R.attr.type;
 import static com.example.ahmed.sfa.R.id.address;
 import static com.example.ahmed.sfa.R.id.textView;
@@ -68,6 +83,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
     ImageView ivTabStockSync;
     String deviecId ="t1";
     String repId="93";
+    ImageView ivItineraryDeatildSync;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +103,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivchechInOutPointsSync=(ImageView) findViewById (R.id.iv_chechInOutPointsSync);
         ivCustomerSync=(ImageView) findViewById (R.id.iv_CustomerSync);
         ivTabStockSync=(ImageView) findViewById (R.id.iv_StockSync);
-
+        ivItineraryDeatildSync = (ImageView) findViewById(R.id.iv_ItinerarySync);
 
 
         setListeners();
@@ -352,6 +368,88 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             @Override
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this,"Connecting...",Toast.LENGTH_LONG).show();
+
+                //uploading data
+                UploadTables uplwd = new UploadTables(ManualSync.this);
+                ArrayList<String> cusArr =  uplwd.mstCustomerMaster();
+                Toast.makeText(ManualSync.this, "size"+cusArr.get(0), Toast.LENGTH_SHORT).show();
+
+               // String tmpGenUrl = cusArr.get(0);
+                try {
+                    for (final String url : cusArr) {
+                       // Toast.makeText(ManualSync.this, "URL:"+url, Toast.LENGTH_SHORT).show();
+                        //new HttpGetRequest(ManualSync.this).execute(url);
+                        //////////////////////////////////////////////////////
+                       /* new JsonHelper.JsonDataCallback() {
+                            @Override
+                            public void receiveData(Object object) {
+                                String tmpData = (String) object;
+                                Toast.makeText(ManualSync.this, "Result:"+tmpData, Toast.LENGTH_SHORT).show();
+                                try {
+                                        JSONArray jsonArray = new JSONArray(tmpData);
+//                                    JSONObject jsonObject = jsonArray.getJSONObject(0);
+//                                    jsonObject.optString("ACTIVESTATUS");
+//
+//                                    if (jsonObject.optString("ACTIVESTATUS").equals("SUCCESS")) {
+//                                        Toast.makeText(ManualSync.this, "Activated", Toast.LENGTH_SHORT).show();
+//                                    } else {
+//
+//                                    }
+
+                                } catch (JSONException e) {
+                                    if(tmpData=="did not work"){
+
+                                    }
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }.execute(cusArr.get(0), null, null);*/
+                        //////////////////////////////////////////////////////
+                        //method 2
+                       // new HttpGetRequest(ManualSync.this).execute("http://www.bizmapexpert.com/DIstributorManagementSystem/Up_Tr_CustomerMaster_Pending/Tr_CustomerMaster_PendingNew?RepID=99&TabCustomerNo=382&CustomerName=CASHCUSTOMER&Address=NO221,GALLEROAD,MOUNTLAVINIA&DistrictID=0&Area=MOUNT%20LAVINIA&Town=MOUNT%20LAVINIA&RouteID=1391&CustomerStatusID=456&Telephone=0112721015&Fax=111&Email=f&BRno=r&OwnerName=66&OwnerContactNo=u&PhamacyRegNo=yy&Latitude=0.0&longitude=0.0&ImageID=default");
+
+                        //////////////////////////////////////////////////////////
+
+                    //method 3
+                    new UploadWithCallback(){
+
+                        //HashMap<String, String> map = new HashMap<String, String>();//put in it
+                        //map.put(stts, filename[i]);
+                        String urlToSplit =url ;
+
+                        String cusNo =    urlToSplit.split("TabCustomerNo=")[1].split("&CustomerName")[0];
+                        @Override
+                        public void receiveData(Object result) {
+                            Toast.makeText(ManualSync.this, "Ststus"+url, Toast.LENGTH_SHORT).show();
+                            String response = (String) result;
+                            Toast.makeText(ManualSync.this, "Response_callback:"+response, Toast.LENGTH_SHORT).show();
+                            try {
+                                if(response!=null) {
+                                    JSONArray responseArr = new JSONArray(response);
+                                    JSONObject respondObj=responseArr.getJSONObject(0);
+                                    String stts = respondObj.getString("Status");
+                                    if(stts.equals("Success")){
+                                        DBAdapter adp = new DBAdapter(ManualSync.this);
+                                        adp.updateCustomerUploadStatus(cusNo);
+
+                                    }else{
+                                        Toast.makeText(ManualSync.this, "Ststus"+stts, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }.execute(url);
+                    }
+                }catch (Exception e){
+                    Toast.makeText(ManualSync.this, "ArrayList:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+
+
+               //download customer master data
                 try {
                     JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Customermaster/SelectMst_Customermaster?DeviceID=T1&RepID=93",ManualSync.this);
                     jObjGen.setFilterType("Customer");
@@ -360,10 +458,9 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
                     io.execute(jObjGen);
 
                 }catch (Exception e){
-                    e.printStackTrace();
+                   // e.printStackTrace();
                     Toast.makeText(ManualSync.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
                 }
-
 
             }
         });
@@ -385,6 +482,24 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
                 }
 
 
+            }
+        });
+
+        //download ItinerayDetails
+        ivItineraryDeatildSync.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                try{
+                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Tr_ItineraryDetails/GetItineraryDetails?DeviceID=T1&RepID=99",ManualSync.this);
+                    jObjGen.setFilterType("ItineraryDetails");
+
+                    SyncReturn io = new SyncReturn();
+                    io.execute(jObjGen);
+
+                }catch (Exception e){
+                    Toast.makeText(ManualSync.this, "ItineraryDeatils Download:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -465,6 +580,70 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             e.printStackTrace();
         }
     }
+/////////////////////////////////////////////////////////////////////////////////upload private class
+private static abstract  class  UploadWithCallback extends AsyncTask<String,String,String> implements CallbackReceiver {
+    public static final String REQUEST_METHOD = "GET";
+    public static final int READ_TIMEOUT = 15000;
+    public static final int CONNECTION_TIMEOUT = 15000;
 
+
+
+    @Override
+    protected String doInBackground(String... params){
+        String stringUrl = params[0];
+        String result;
+        String inputLine;
+        try {
+            //Create a URL object holding our url
+            URL myUrl = new URL(stringUrl);
+            //Create a connection
+            HttpURLConnection connection =(HttpURLConnection)
+                    myUrl.openConnection();
+            //Set methods and timeouts
+            connection.setRequestMethod(REQUEST_METHOD);
+            connection.setReadTimeout(READ_TIMEOUT);
+            connection.setConnectTimeout(CONNECTION_TIMEOUT);
+
+            //Connect to our url
+            connection.connect();
+            //Create a new InputStreamReader
+            InputStreamReader streamReader = new
+                    InputStreamReader(connection.getInputStream());
+            //Create a new buffered reader and String Builder
+            BufferedReader reader = new BufferedReader(streamReader);
+            StringBuilder stringBuilder = new StringBuilder();
+            //Check if the line we are reading is not null
+            while((inputLine = reader.readLine()) != null){
+                stringBuilder.append(inputLine);
+            }
+            //Close our InputStream and Buffered reader
+            reader.close();
+            streamReader.close();
+            //Set our result equal to our stringBuilder
+            result = stringBuilder.toString();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+            result = null;
+        }
+        return result;
+    }
+
+
+    protected void onPostExecute(String result){
+        super.onPostExecute(result);
+        if(result!=null)
+        {
+            receiveData(result);
+
+        }else{
+            receiveData("{no data}");
+        }
+
+        //Toast.makeText(ManualSync.this, "response:"+result, Toast.LENGTH_SHORT).show();
+
+    }
+}
+////////////////////////////////////////////////////////////////////////////
 
 }

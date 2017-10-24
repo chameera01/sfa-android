@@ -1,6 +1,7 @@
 package com.example.ahmed.sfa.Activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -8,7 +9,9 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,6 +69,32 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
     //data fields for summary
     TextView subTotal,invoicedQty,discount,total;
 
+    @Override
+    public void onBackPressed(){
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Going back will erase all changes, are you sure?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+
+           // super.onBackPressed();
+        }
+    }
 
     @Override
     public void onCreate(Bundle savedInstance){
@@ -191,6 +220,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
     }
 
     private void moveToPayment(){
+        dbAdapter.createTempDiscountTable();
         Intent intent = new Intent(this,SalesInvoicePayment.class);
         ArrayList<SalesInvoiceModel> data = dbAdapter.getInvoicedItems();
         intent.putParcelableArrayListExtra(Constants.DATA_ARRAY_NAME,data);
@@ -275,7 +305,8 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
         invoiceModelList.addAll(dbAdapter.getAllData(principle.getId(),subbrand.getBrandID(),product));
         //invoiceModelList =
 
-        adapter.notifyDataSetChanged();
+        //adapter.notifyDataSetChanged();
+        adapter.customNotifyDataSetChanged();
     }
 
     @Override
@@ -314,7 +345,22 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
                     " FROM Mst_ProductMaster a inner join Tr_TabStock b " +
                     "on a.ItemCode  = b.ItemCode";
             db.execSQL(sql);
+
+
             closeDB();
+        }
+
+        public void createTempDiscountTable(){
+            openDB();
+            String sql = "DROP TABLE IF EXISTS temp_discount_rate";
+            db.execSQL(sql);
+
+            sql = "CREATE TABLE temp_discount_rate(_id INTEGER PRIMARY KEY AUTOINCREMENT,PrincipleID TEXT,Principle TEXT" +
+                    ",DiscountRate REAL DEFAULT 0.0)";
+            db.execSQL(sql);
+            sql = "INSERT INTO temp_discount_rate(PrincipleID,Principle) SELECT PrincipleID,Principle " +
+                    "FROM Mst_SupplierTable ";
+            db.execSQL(sql);
         }
 
 
@@ -366,13 +412,20 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
             String sql = "SELECT * from temp_invoice WHERE";
 
             if (!(principle.equals("ALL")|| principle == null) ){
-                sql+=" PrincipleID ='"+principle+"'";
+                sql+=" trim(PrincipleID) = '"+principle+"'";
                 //principle = "";
                 if(!(subbrand.equals("ALL") || subbrand == null)){
-                    sql+=" AND BrandID ='"+subbrand+"'";
+                    sql+=" AND trim(BrandID) = '"+subbrand+"'";
                     //subbrand = "";
                 }
                 sql+=" AND ";
+            }else{
+                if(!(subbrand.equals("ALL") || subbrand == null)){
+                    sql+=" trim(BrandID) = '"+subbrand+"'";
+                    //subbrand = "";
+                    sql+=" AND ";
+                }
+
             }
 
             if(product.equals("ALL")|| product==null){
@@ -382,7 +435,7 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
             sql+=" Description Like '"+product+"%'";
 
             Cursor cursor = db.rawQuery(sql,null);
-
+            Log.i(" INVOICE ",sql);
             while(cursor.moveToNext()){
                 SalesInvoiceModel salesInvoiceModel =new SalesInvoiceModel(cursor.getString(0),
                         cursor.getString(1),cursor.getString(2),cursor.getString(3),

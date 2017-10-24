@@ -14,6 +14,8 @@ public class SalesPayment implements Parcelable{
     private double fullInvDisc;//this is the total invoice descount rate
     private double discount;//this is the discount comes from the invoice
     private double totalDiscount;//this is the total of the discounts
+    private double totalPrincipleDiscounts;//this is the discount comes from
+    //discounts accounted for specific principle types
 
     private double credit;
     private double cheque;
@@ -74,6 +76,7 @@ public class SalesPayment implements Parcelable{
         returnQty = in.readInt();
         total = in.readDouble();
         creditDays = in.readInt();
+        totalPrincipleDiscounts  = in.readDouble();
     }
 
     public int getCreditDays() {
@@ -98,7 +101,7 @@ public class SalesPayment implements Parcelable{
 
     private void calculateFields(){
 
-        totalDiscount = discount + (subTotal*fullInvDisc/100);
+        totalDiscount = discount + (subTotal*fullInvDisc/100)+ totalPrincipleDiscounts;
         total = subTotal-totalDiscount-returnTot;
         credit = total-cash-cheque;
     }
@@ -206,6 +209,15 @@ public class SalesPayment implements Parcelable{
         this.totalDiscount = totalDiscount;
     }
 
+    public double getTotalPrincipleDiscounts() {
+        return totalPrincipleDiscounts;
+    }
+
+    public void setTotalPrincipleDiscounts(double totalPrincipleDiscounts) {
+        this.totalPrincipleDiscounts = totalPrincipleDiscounts;
+        calculateFields();
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -226,5 +238,6 @@ public class SalesPayment implements Parcelable{
         dest.writeInt(returnQty);
         dest.writeDouble(total);
         dest.writeInt(creditDays);
+        dest.writeDouble(totalPrincipleDiscounts);
     }
 }

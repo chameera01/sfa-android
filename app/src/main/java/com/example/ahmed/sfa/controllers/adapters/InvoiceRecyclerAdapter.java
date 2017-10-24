@@ -35,8 +35,9 @@ implements SummaryUpdater{
     DBAdapter dbAdapter;
 
     SummaryUpdateListner listner;
-
-
+    boolean refreshed = true;
+    int lastUpdatedRow = -1;
+    boolean refresh = false;
     @Override
     public void notifyUpdate() {
         listner.updateSummary();
@@ -48,6 +49,9 @@ implements SummaryUpdater{
     }
 
 
+    public void customNotifyDataSetChanged(){
+        this.notifyDataSetChanged();
+    }
 
 
 
@@ -125,6 +129,7 @@ implements SummaryUpdater{
 
     public void onBindViewHolder(final MyViewHolder holder, final int position, List<Object> payload){
         //onBindViewHolder(holder,position);
+
         holder.ref = position;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -191,11 +196,19 @@ implements SummaryUpdater{
             @Override
             public void afterTextChanged(String s){
                 int pos = holder.ref;
-                if(!s.toString().equals("")) {
+                if(!onBind){
+                    if(!s.toString().equals("")) {
 
-                    salesInvoice.get(pos).setShelf(Integer.parseInt(s+""));
-                    dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                        salesInvoice.get(pos).setShelf(Integer.parseInt(s+""));
+
+                    }else{
+                        salesInvoice.get(pos).setShelf(0);
+                    }
+
+                    //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                    lastUpdatedRow = pos;
                 }
+
 
             }
         });
@@ -225,33 +238,35 @@ implements SummaryUpdater{
                 boolean valHasChanged = false;
                 boolean freeHasChanged = false;
                 int pos = holder.ref;
-                if(!(s.equals(""))){
-
-                    int val = Integer.parseInt((s));
-                    int stock =salesInvoice.get(pos).getStock();
-                    if(val>stock){
-                        //Toast.makeText(null,"Enter a valid Qty",Toast.LENGTH_SHORT).show();
-                        val=stock;
-                        valHasChanged = true;
-                    }
-                    salesInvoice.get(pos).setRequest(val);
-                    salesInvoice.get(pos).setOrder(val);
-
-                    if(salesInvoice.get(pos).getFree()+salesInvoice.get(pos).getOrder()>salesInvoice.get(pos).getStock()){
-                        salesInvoice.get(pos).setFree(0);
-                        freeHasChanged = true;
-
-                    }
-                    //initTable();
-
-//                        notifyItemChanged(position,new String[]{RETURN});
-                }else{
-                    salesInvoice.get(pos).setRequest(0);
-                }
-
-
-
                 if(!onBind){
+
+                    if(!(s.equals(""))){
+
+                        int val = Integer.parseInt((s));
+                        int stock =salesInvoice.get(pos).getStock();
+                        if(val>stock){
+                            //Toast.makeText(null,"Enter a valid Qty",Toast.LENGTH_SHORT).show();
+                            val=stock;
+                            valHasChanged = true;
+                        }
+                        salesInvoice.get(pos).setRequest(val);
+                        if(!refresh)salesInvoice.get(pos).setOrder(val);
+
+                        if(salesInvoice.get(pos).getFree()+salesInvoice.get(pos).getOrder()>salesInvoice.get(pos).getStock()){
+                            salesInvoice.get(pos).setFree(0);
+                            freeHasChanged = true;
+
+                        }
+                        //initTable();
+
+    //                        notifyItemChanged(position,new String[]{RETURN});
+                    }else{
+                        salesInvoice.get(pos).setRequest(0);
+                    }
+
+
+
+
                     //List<String> item = new ArrayList<>();
                     //item.add(RETURN);
                     notifyItemChanged(pos,ORDER);
@@ -262,9 +277,11 @@ implements SummaryUpdater{
                     if(freeHasChanged){
                         notifyItemChanged(pos,FREE);
                     }
+                    //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                    lastUpdatedRow = pos;
+                    //notifyUpdate();
                 }
-                dbAdapter.updateInvoiceData(salesInvoice.get(pos));
-                notifyUpdate();
+
             }
         });
 
@@ -329,32 +346,36 @@ implements SummaryUpdater{
                 boolean valHasChanged = false;
                 boolean freeHasChanged = false;
                 int pos = holder.ref;
-                if(!(s.toString().equals(""))){
 
-                    int val = Integer.parseInt(s.toString());
-                    int stock =salesInvoice.get(pos).getStock();
-
-                    if(val>stock){
-                        //Toast.makeText(null,"Order is more than the stock",Toast.LENGTH_SHORT).show();
-                        val=stock;
-                        valHasChanged = true;
-
-                    }
-                    salesInvoice.get(pos).setOrder(val);//make sure we set returnQty before
-                    //chekcing the total of returnQty and free against stock
-
-                    if(salesInvoice.get(pos).getOrder()+salesInvoice.get(pos).getFree()>salesInvoice.get(pos).getStock()){
-                        salesInvoice.get(pos).setFree(0);
-                        freeHasChanged = true;
-                    }
-
-                    //notifyItemChanged(position);
-
-                }else{
-                    salesInvoice.get(pos).setOrder(0);
-                }
 
                 if(!onBind){
+                    if(!(s.toString().equals(""))){
+
+                        int val = Integer.parseInt(s.toString());
+                        int stock =salesInvoice.get(pos).getStock();
+
+                        if(val>stock){
+                            //Toast.makeText(null,"Order is more than the stock",Toast.LENGTH_SHORT).show();
+                            val=stock;
+                            valHasChanged = true;
+
+                        }
+                        salesInvoice.get(pos).setOrder(val);//make sure we set returnQty before
+                        //chekcing the total of returnQty and free against stock
+
+                        if(salesInvoice.get(pos).getOrder()+salesInvoice.get(pos).getFree()>salesInvoice.get(pos).getStock()){
+                            salesInvoice.get(pos).setFree(0);
+                            freeHasChanged = true;
+                        }
+
+                        //notifyItemChanged(position);
+
+                    }else{
+                        salesInvoice.get(pos).setOrder(0);
+                    }
+
+
+
                     //notifyItemChanged(position);
                     if(valHasChanged){
                         notifyItemChanged(pos,ORDER);//notify the adapter that value changed and refresh the view mentioned by the string
@@ -362,10 +383,12 @@ implements SummaryUpdater{
                     }
                     if(freeHasChanged) notifyItemChanged(pos,FREE);
                     notifyItemChanged(pos,LINEVAL);
+                    //dbAdapter.updateInvoiceData(salesInvoice.get(pos)); //update the value in the database
+                    lastUpdatedRow = pos;
+                    //notifyUpdate();
                 }
 
-                dbAdapter.updateInvoiceData(salesInvoice.get(pos)); //update the value in the database
-                notifyUpdate();
+
             }
         });
         /*working better code ISSUE 4.4
@@ -428,26 +451,33 @@ implements SummaryUpdater{
             public void afterTextChanged(String s){
                 boolean valChanged = false;
                 int pos = holder.ref;
-
-                if (!s.toString().equals("")) {
-
-                    int val = Integer.parseInt(s.toString());
-                    salesInvoice.get(pos).setFree(val);
-                    if (salesInvoice.get(pos).getOrder() + salesInvoice.get(pos).getFree() > salesInvoice.get(pos).getStock()) {
-                        salesInvoice.get(pos).setFree(0);
-                        valChanged = true;
-                    }
-                    //initTable();
-                    //notifyItemChanged(position);
-                }
                 if(!onBind){
+                    if ((!s.equals(""))&&(!(s.equals("0")))) {
+
+                        int val = Integer.parseInt(s.toString());
+                        salesInvoice.get(pos).setFree(val);
+                        holder.discount.setEnabled(false);
+                        if (salesInvoice.get(pos).getOrder() + salesInvoice.get(pos).getFree() > salesInvoice.get(pos).getStock()) {
+                            salesInvoice.get(pos).setFree(0);
+                            valChanged = true;
+                            holder.discount.setEnabled(true);
+                        }
+                        //initTable();
+                        //notifyItemChanged(position);
+                    }else {
+                        salesInvoice.get(pos).setFree(0);
+
+                        holder.discount.setEnabled(true);
+                    }
                     //notifyItemChanged(position);
                     notifyItemChanged(pos,LINEVAL);
                     if(valChanged)notifyItemChanged(pos,FREE);
+                    holder.setCursor(FREE);
+                    //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                    lastUpdatedRow = pos;
+                    //notifyUpdate();
                 }
-                holder.setCursor(FREE);
-                dbAdapter.updateInvoiceData(salesInvoice.get(pos));
-                notifyUpdate();
+
             }
         });
         /* ISSUE 4.4
@@ -488,14 +518,22 @@ implements SummaryUpdater{
             public void afterTextChanged(String s){
                 int pos = holder.ref;
                 if(!(s.equals(salesInvoice.get(pos).getDiscountRate()+""))){
-                    if(!s.toString().equals("")){
+                    if((!s.equals(""))&&(!(s.equals("0")))&&(!(s.equals("0.0")))&&(!(s.equals("0.")))){
                         Double rate = Double.parseDouble(s.toString().trim());
                         Log.i(" RAte ",rate+"");
                         salesInvoice.get(pos).setDiscountRate(rate);
                         //notifyItemChanged(position);
-                        if(!onBind)notifyItemChanged(pos,LINEVAL);
-                        dbAdapter.updateInvoiceData(salesInvoice.get(pos));
-                        notifyUpdate();
+                        holder.free.setEnabled(false);
+                        if(!onBind){
+                            notifyItemChanged(pos,LINEVAL);
+                            //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
+                            lastUpdatedRow = pos;
+                            //notifyUpdate();
+                        }
+
+                    }else{
+                        salesInvoice.get(pos).setDiscountRate(0.0);
+                        holder.free.setEnabled(true);
                     }
                 }
             }
@@ -529,11 +567,13 @@ implements SummaryUpdater{
         }
 
         onBind=false;
-
+        //if(lastUpdatedRow!=-1)
+        dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
+        notifyUpdate();
     }
 
     public void onBindViewHolder(MyViewHolder holder,int position){
-        onBindViewHolder(holder,position,null);
+        //onBindViewHolder(holder,position,null);
     }
 
 
@@ -599,21 +639,27 @@ implements SummaryUpdater{
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
             EditText view = (EditText)v;
-            if(hasFocus){
-                view.setBackgroundColor(Color.BLACK);
-                (view).setTextColor(Color.WHITE);
-                if(view.getText().toString().equals("0") || view.getText().toString().equals("0.0")){
-                    view.setText("");
-                }else{
+
+            if(!onBind) {
+                if (hasFocus) {
+                    view.setBackgroundColor(Color.BLACK);
+                    (view).setTextColor(Color.WHITE);
+                    /*if (view.getText().toString().equals("0") || view.getText().toString().equals("0.0")) {
+                        view.setText("");
+                    } else {
+                        view.setSelection(view.getText().length());
+                    }*/
                     view.setSelection(view.getText().length());
-                }
-            }else if(salesInvoice.size()>0){
-                v.setBackgroundColor(Color.TRANSPARENT);
-                (view).setTextColor(Color.BLACK);
-                if(view.getText().toString().equalsIgnoreCase("") ){
-                    view.setText("0");
+                } else if (salesInvoice.size() > 0) {
+                    v.setBackgroundColor(Color.TRANSPARENT);
+                    (view).setTextColor(Color.BLACK);
+                    /*if (view.getText().toString().equalsIgnoreCase("")) {
+                        if (!refresh) view.setText("0");
+                    }*/
+
                 }
             }
+
         }
     }
 
