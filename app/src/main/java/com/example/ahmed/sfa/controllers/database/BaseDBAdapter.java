@@ -24,6 +24,7 @@ public class BaseDBAdapter {
             db = dbHelper.getWritableDatabase();
             return true;
         }catch (Exception ex){
+            ex.printStackTrace();
             return false;
         }
     }

@@ -39,6 +39,10 @@
             android:id="@+id/activity_manual_sync"
             android:icon="@drawable/sync"
             android:title="Sync" />
+        <item
+            android:id="@+id/activity_invoice_gen"
+            android:icon="@drawable/sync"
+            android:title="Print" />
     </group>
 
     <item android:title="Communicate">

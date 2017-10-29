@@ -7,8 +7,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
@@ -37,6 +41,7 @@ import com.example.ahmed.sfa.controllers.adapters.ExpireWarning;
 import com.example.ahmed.sfa.controllers.adapters.InvoiceGen1ProductListAdapter;
 import com.example.ahmed.sfa.controllers.adapters.InvoiceGen1SelectedProductListAdapter;
 import com.example.ahmed.sfa.controllers.adapters.ItineraryAdp;
+import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 import com.example.ahmed.sfa.controllers.adapters.ProductRepStore;
 import com.example.ahmed.sfa.controllers.adapters.Products;
 import com.example.ahmed.sfa.controllers.adapters.ShelfQuantity;
@@ -55,6 +60,7 @@ import java.util.List;
 /*
 
 *SEARCH ALL STOP  COMMENTS
+* branch test
  */
 public class InvoiceGen extends AppCompatActivity {
 
@@ -438,6 +444,23 @@ private static final String TAG = "InvoiceGen1Activity";
 
         lViewSelectedProductList.setClickable(true);
 
+
+
+
+        ///
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        drawer.setDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+
+        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
+        //getRepAndDeviceId();
+        /////
     }
 
     private boolean showExpireWarningmesage(final long clickedItem) {//skk

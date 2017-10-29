@@ -16,10 +16,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.Cheque;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Ahmed on 3/26/2017.
@@ -68,6 +70,7 @@ public class ChequeDialogFragment extends DialogFragment {
         chqNum = (EditText)v.findViewById(R.id.chq_dlg_num);
 
                 colDate = (TextView) v.findViewById(R.id.chq_dlg_coldate);
+        colDate.setText(DateManager.dateToday());
         colDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +79,7 @@ public class ChequeDialogFragment extends DialogFragment {
         });
 
         realDate = (TextView)v.findViewById(R.id.chq_dlg_realDate);
+        realDate.setText(DateManager.dateToday());
         realDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

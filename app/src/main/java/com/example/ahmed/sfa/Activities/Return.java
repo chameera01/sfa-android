@@ -103,6 +103,33 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
 
     }
 
+    @Override
+    public void onBackPressed(){
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
+        if(drawer.isDrawerOpen(GravityCompat.START)){
+            drawer.closeDrawer(GravityCompat.START);
+        }else{
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Going back will erase all changes, are you sure?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+
+            //super.onBackPressed();
+        }
+    }
+
     private void init(){
         PermissionManager pm = new PermissionManager(this);
         if(pm.checkForLocationPermission()) {
@@ -244,15 +271,7 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
         }
     }
 
-    @Override
-    public void onBackPressed(){
-        DrawerLayout drawer = (DrawerLayout )findViewById(R.id.drawer_layout);
-        if(drawer.isDrawerOpen(GravityCompat.START)){
-            drawer.closeDrawer(GravityCompat.START);
-        }else{
-            super.onBackPressed();
-        }
-    }
+
 
 
 
@@ -263,53 +282,55 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
         if(launchedForResult){
             setResult();
             //finish();
-        }
-        int invoNum  = dbAdapter.getInvoiceReturnNo();//this method will return the invoice number we should use to enter the data
-        if(invoNum!=-1){
-            //insert data into sales return header
-            if(dbAdapter.insertIntoSalesReturnHeader(payment,lastKnownLocation,itinerary.getId(),customerNo,invoNum)){
-                int lastSalesReturnHeaderID = dbAdapter.getLastSalesReturnHeaderID();
-                if (lastSalesReturnHeaderID!=-1){
-                    ArrayList<SalesInvoiceModel> data = list;
-                    int val = dbAdapter.insertDataToSalesReturnDetails(data,lastSalesReturnHeaderID);
-                    if(val == data.size()){
-                        int updatedStockCount = dbAdapter.updateStock(data);
-                        if(updatedStockCount == data.size()){
-                            if(dbAdapter.insertToDailyRouteDetails(itinerary,customerNo,invoNum)){
-                                if(dbAdapter.increaseInvoiceReturnNo()){
-                                    alert.showAlert("Success","Invoice completed",null,successfull);
+        }else{
+            int invoNum  = dbAdapter.getInvoiceReturnNo();//this method will return the invoice number we should use to enter the data
+            if(invoNum!=-1){
+                //insert data into sales return header
+                if(dbAdapter.insertIntoSalesReturnHeader(payment,lastKnownLocation,itinerary.getId(),customerNo,invoNum)){
+                    int lastSalesReturnHeaderID = dbAdapter.getLastSalesReturnHeaderID();
+                    if (lastSalesReturnHeaderID!=-1){
+                        ArrayList<SalesInvoiceModel> data = list;
+                        int val = dbAdapter.insertDataToSalesReturnDetails(data,lastSalesReturnHeaderID);
+                        if(val == data.size()){
+                            int updatedStockCount = dbAdapter.updateStock(data);
+                            if(updatedStockCount == data.size()){
+                                if(dbAdapter.insertToDailyRouteDetails(itinerary,customerNo,invoNum)){
+                                    if(dbAdapter.increaseInvoiceReturnNo()){
+                                        alert.showAlert("Success","Invoice completed",null,successfull);
+                                    }else{
+                                        Log.w("Error > ","increment on sales return num error");
+                                        isError = true;
+                                    }
                                 }else{
-                                    Log.w("Error > ","increment on sales return num error");
+                                    Log.w("Error > ","updating itinerary details error");
                                     isError = true;
                                 }
-                            }else{
-                                Log.w("Error > ","updating itinerary details error");
+                            }else {
+                                Log.w("Error > ","updating stock error");
                                 isError = true;
                             }
-                        }else {
-                            Log.w("Error > ","updating stock error");
+                        }else{
+                            Log.w("Error > ","not all sales return details entered to db");
                             isError = true;
                         }
                     }else{
-                        Log.w("Error > ","not all sales return details entered to db");
+                        Log.w("Error > ","retrieving data from sales header error");
                         isError = true;
                     }
                 }else{
-                    Log.w("Error > ","retrieving data from sales header error");
+                    //inserting to sales return error
                     isError = true;
+                    Log.w("Error >","Inserting data into sales return header");
                 }
             }else{
-                //inserting to sales return error
+                //invoice number is -1 show the corresponding error
+                Log.w("Error >","Getting invoice return no");
                 isError = true;
-                Log.w("Error >","Inserting data into sales return header");
             }
-        }else{
-            //invoice number is -1 show the corresponding error
-            Log.w("Error >","Getting invoice return no");
-            isError = true;
+
+            if(isError)alert.showAlert("Error","Invoicing error try again",null,null);
         }
 
-        if(isError)alert.showAlert("Error","Invoicing error try again",null,null);
     }
 
     private DialogInterface.OnClickListener successfull= new DialogInterface.OnClickListener(){
@@ -493,15 +514,21 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
             String sql = "SELECT * from temp_return WHERE";
 
             if (!(principle.equals("ALL")|| principle == null) ){
-                sql+=" PrincipleID ='"+principle+"'";
+                sql+=" trim(PrincipleID) = '"+principle+"'";
                 //principle = "";
                 if(!(subbrand.equals("ALL") || subbrand == null)){
-                    sql+=" AND BrandID ='"+subbrand+"'";
+                    sql+=" AND trim(BrandID) = '"+subbrand+"'";
                     //subbrand = "";
                 }
                 sql+=" AND ";
-            }
+            }else{
+                if(!(subbrand.equals("ALL") || subbrand == null)){
+                    sql+=" trim(BrandID) = '"+subbrand+"'";
+                    //subbrand = "";
+                    sql+=" AND ";
+                }
 
+            }
             if(product.equals("ALL")|| product==null){
                 product = "";
 
@@ -606,7 +633,7 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
             else return false;
         }
 
-        private int getInvoiceReturnNo(){
+        public int getInvoiceReturnNo(){
             openDB();
             Cursor cursor = db.rawQuery("SELECT InvoiceReturnNo FROM Mst_InvoiceNumbers_Management",null);
             if(cursor.moveToNext()){
@@ -783,7 +810,7 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
         }
 
         //this will incerase one value of the invoice num in the db
-        private boolean increaseInvoiceReturnNo(){
+        public boolean increaseInvoiceReturnNo(){
             int curVal = getInvoiceReturnNo();
             openDB();
             int newVal = curVal+1;

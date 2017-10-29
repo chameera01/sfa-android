@@ -14,6 +14,7 @@ public class Constants {
     public static final int GRAPH_NUMBEROFDAYS = 5;
 
     public static final int RETURN_REQUEST_RESULT = 147;
+    public static final int PRINCIPLE_DISCOUNT_REQUEST_RESULT = 143;
 
     public static final int ACTIVE = 0; //default value for active
     public static final int INACTIVE = 1;
