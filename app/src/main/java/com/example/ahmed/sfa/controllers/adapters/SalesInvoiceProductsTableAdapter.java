@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.Activities.SalesInvoice;
+import com.example.ahmed.sfa.activities.SalesInvoice;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 

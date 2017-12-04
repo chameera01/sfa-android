@@ -6,8 +6,8 @@ import android.os.AsyncTask;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ahmed.sfa.Activities.InitialLogin;
-import com.example.ahmed.sfa.Activities.Login;
+import com.example.ahmed.sfa.activities.InitialLogin;
+import com.example.ahmed.sfa.activities.Login;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.DeviceCheckController;

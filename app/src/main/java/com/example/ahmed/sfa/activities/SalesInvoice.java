@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.Activities;
+package com.example.ahmed.sfa.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +30,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ahmed.sfa.activities.SalesInvoicePayment;
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.PermissionManager;

@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.Activities;
+package com.example.ahmed.sfa.activities;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.Activities.Dialogs.Alert;
+import com.example.ahmed.sfa.activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;

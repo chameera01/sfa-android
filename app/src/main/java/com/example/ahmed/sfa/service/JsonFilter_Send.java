@@ -3,7 +3,7 @@ package com.example.ahmed.sfa.service;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.example.ahmed.sfa.Activities.ServiceTest;
+import com.example.ahmed.sfa.activities.ServiceTest;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.models.Mst_CheckInOutPoints;

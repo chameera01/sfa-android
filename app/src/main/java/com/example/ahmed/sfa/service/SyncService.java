@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import android.os.Process;
 
-import com.example.ahmed.sfa.Activities.ServiceTest;
+import com.example.ahmed.sfa.activities.ServiceTest;
 
 
 public class SyncService extends Service implements JsonRequestListerner{

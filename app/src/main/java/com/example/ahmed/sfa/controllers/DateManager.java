@@ -1,5 +1,6 @@
 package com.example.ahmed.sfa.controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -95,6 +96,12 @@ public class DateManager {
 
         date = getDate(yearInt,monthInt,dayVal);
         return date;
+    }
+
+    public static String dateWithTimeToday(){
+        Calendar cal  = Calendar.getInstance();
+        String dateStr = new SimpleDateFormat("MM/dd/yyyy hh:mm").format(cal.getTime());
+        return dateStr;
     }
 
     //this will be used to create a date with the format applicaton require

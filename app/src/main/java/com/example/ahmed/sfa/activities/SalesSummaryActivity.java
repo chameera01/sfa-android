@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.Activities;
+package com.example.ahmed.sfa.activities;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,9 +25,10 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ahmed.sfa.activities.Home;
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.Activities.Dialogs.Alert;
+import com.example.ahmed.sfa.activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
@@ -75,6 +76,8 @@ public class SalesSummaryActivity extends AppCompatActivity {
     Location lastKnownLocation;
     DBAdapter dbAdapter;
 
+    int assignedReturned;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,6 +116,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
                 if (lastSalesReturnHeaderID!=-1){
                     ArrayList<SalesInvoiceModel> data = list;
                     int val = dbAdapter.insertDataToSalesReturnDetails(data,lastSalesReturnHeaderID);
+                    assignedReturned = lastSalesReturnHeaderID;
                     if(val == data.size()){
                         int updatedStockCount = dbAdapter.updateStock(data);
                         if(updatedStockCount == data.size()){
@@ -170,7 +174,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
         int invNo = dbAdapter.getInvoiceNo();
         if (invNo!=-1){
             //insert into sales header and get sales header id
-            if(dbAdapter.insertIntoSalesHeader(payment,new Location(LocationManager.GPS_PROVIDER),itinerary.getId(),customerNo,invNo)){
+            if(dbAdapter.insertIntoSalesHeader(payment,new Location(LocationManager.GPS_PROVIDER),itinerary.getId(),customerNo,invNo,assignedReturned,data.size())){
                 int salesHeaderID = dbAdapter.getLastSalesHeaderID();
                 if (salesHeaderID!=-1){
                     int val = dbAdapter.insertDataToSalesDetails(data,salesHeaderID);
@@ -404,6 +408,16 @@ public class SalesSummaryActivity extends AppCompatActivity {
         return row;
     }
 
+    public String getPaymentType(SalesPayment payment){
+        String toReturn = "";
+        toReturn += payment.getCredit()>0?"CR":"";
+        toReturn += payment.getCheque()>0?"CH":"";
+        toReturn += payment.getCash()  >0?"CA":"";
+
+        return toReturn;
+
+    }
+
     class DBAdapter extends BaseDBAdapter{
 
         public DBAdapter(Context c){
@@ -435,33 +449,34 @@ public class SalesSummaryActivity extends AppCompatActivity {
             else return false;
         }
 
-        public boolean insertIntoSalesHeader(SalesPayment payment,Location loc,String itineraryId,String customerNO,int invNo){
+        public boolean insertIntoSalesHeader(SalesPayment payment,Location loc,String itineraryId,String customerNO,int invNo,int returnNo,int totalProductCount){
             openDB();
 
             ContentValues cv = new ContentValues();
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[0],itineraryId);
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[1],customerNO);
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[2],invNo);
-            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[3],DateManager.dateToday());
-            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[4],DateManager.getTimeFull());
+            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[3],DateManager.dateWithTimeToday());
+            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[4],getPaymentType(payment));//done ///TODO: change for payment type
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[5],payment.getSubTotal());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[6],payment.getTotal());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[7],payment.getFullInvDisc());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[8],payment.getDiscount());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[9],"UNKNOWN");//for now discount type is unknown
-            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[10],Constants.INACTIVE);//for now we dont include is on return or not so its one
-            //cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[11],null);leaving un touched will insert null value;
-            //cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[12],null);
+            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[10],payment.getReturnQty()>0?Constants.ACTIVE:Constants.INACTIVE);//for now we dont include is on return or not so its one
+            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[11],returnNo==-1?null:returnNo);//leaving un touched will insert null value;
+            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[12],payment.getReturnTot());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[13],payment.getCredit());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[14],payment.getCash());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[15],payment.getCheque());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[16],Constants.INACTIVE);//is print is default 1 and after printing it shld be changed to 0
-            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[17],payment.getInvQty());//product count is assumed as total invoiced qty
+            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[17],totalProductCount);//product count changed to assign the value from paramter
+            // on 02/12/2017// product count is assumed as total invoiced qty
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[18],"NOTYPE");//invoice type is yet to be clarrified
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[19],loc.getLatitude());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[20],loc.getLongitude());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[21],Constants.INACTIVE);
-            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[22],DateManager.dateToday());
+            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[22],DateManager.dateWithTimeToday());
 
             long result = db.insert(Constants.SALES_HEADER_TABLE,null,cv);
             closeDB();
@@ -499,7 +514,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
             cv.put(Constants.SALES_DETAILS_TABLE_COLUMNS[11],rowModel.getFree());
             cv.put(Constants.SALES_DETAILS_TABLE_COLUMNS[12],rowModel.getLineValue());
             cv.put(Constants.SALES_DETAILS_TABLE_COLUMNS[13],Constants.INACTIVE);
-            cv.put(Constants.SALES_DETAILS_TABLE_COLUMNS[14],DateManager.dateToday());
+            cv.put(Constants.SALES_DETAILS_TABLE_COLUMNS[14],DateManager.dateWithTimeToday());
 
             long result = db.insert(Constants.SALES_DETAILS_TABLE, null, cv);
 

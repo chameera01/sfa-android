@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.Activities;
+package com.example.ahmed.sfa.activities;
 
 /**
  * Created by Ahmed on 3/16/2017.

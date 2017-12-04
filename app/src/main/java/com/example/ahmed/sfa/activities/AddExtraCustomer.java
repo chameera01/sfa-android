@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.Activities;
+package com.example.ahmed.sfa.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-import com.example.ahmed.sfa.Activities.Dialogs.Alert;
+import com.example.ahmed.sfa.activities.Dialogs.Alert;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;

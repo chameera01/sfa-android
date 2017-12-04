@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.Activities.supportactivities;
+package com.example.ahmed.sfa.activities.supportactivities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

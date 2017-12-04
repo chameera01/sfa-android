@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.example.ahmed.sfa.controllers.Utils;
+
 import java.text.DecimalFormat;
 
 /**
@@ -104,11 +106,18 @@ public class SalesPayment implements Parcelable{
         totalDiscount = discount + (subTotal*fullInvDisc/100)+ totalPrincipleDiscounts;
         total = subTotal-totalDiscount-returnTot;
         credit = total-cash-cheque;
+        demcimalFix();
+    }
+
+    private void demcimalFix(){
+        totalDiscount = Utils.decimalFix(totalDiscount);
+        total = Utils.decimalFix(total);
+        credit = Utils.decimalFix(credit);
     }
 
     public double getFullInvDisc() {
-        DecimalFormat format = new DecimalFormat("0.2f");
-        return Double.parseDouble(format.format(fullInvDisc));
+
+        return Utils.decimalFix(fullInvDisc);
         //return fullInvDisc;
     }
 
@@ -118,7 +127,7 @@ public class SalesPayment implements Parcelable{
     }
 
     public double getCredit() {
-        return credit;
+        return Utils.decimalFix(credit);
     }
 
     public void setCredit(double credit) {
@@ -127,7 +136,7 @@ public class SalesPayment implements Parcelable{
     }
 
     public double getCheque() {
-        return cheque;
+        return Utils.decimalFix(cheque);
     }
 
     public void setCheque(double cheque) {
@@ -136,7 +145,7 @@ public class SalesPayment implements Parcelable{
     }
 
     public double getCash() {
-        return cash;
+        return Utils.decimalFix(cash);
     }
 
     public void setCash(double cash) {
@@ -145,7 +154,7 @@ public class SalesPayment implements Parcelable{
     }
 
     public double getSubTotal() {
-        return subTotal;
+        return Utils.decimalFix(subTotal);
     }
 
     public void setSubTotal(double subTotal) {
@@ -186,7 +195,7 @@ public class SalesPayment implements Parcelable{
     }
 
     public double getTotal() {
-        return total;
+        return Utils.decimalFix(total);
     }
 
     public void setTotal(double total) {
@@ -194,7 +203,7 @@ public class SalesPayment implements Parcelable{
     }
 
     public double getDiscount() {
-        return discount;
+        return Utils.decimalFix(discount);
     }
 
     public void setDiscount(double discount) {
@@ -202,7 +211,7 @@ public class SalesPayment implements Parcelable{
     }
 
     public double getTotalDiscount() {
-        return totalDiscount;
+        return Utils.decimalFix(totalDiscount);
     }
 
     public void setTotalDiscount(double totalDiscount) {
@@ -210,7 +219,7 @@ public class SalesPayment implements Parcelable{
     }
 
     public double getTotalPrincipleDiscounts() {
-        return totalPrincipleDiscounts;
+        return Utils.decimalFix(totalPrincipleDiscounts);
     }
 
     public void setTotalPrincipleDiscounts(double totalPrincipleDiscounts) {

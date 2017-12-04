@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.example.ahmed.sfa.Activities.Home;
+import com.example.ahmed.sfa.activities.Home;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.models.Itinerary;
 

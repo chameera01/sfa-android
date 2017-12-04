@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.Activities;
+package com.example.ahmed.sfa.activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;

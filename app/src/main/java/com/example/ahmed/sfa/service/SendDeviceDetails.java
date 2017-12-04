@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.ahmed.sfa.Activities.Login;
+import com.example.ahmed.sfa.activities.Login;
 
 import java.io.DataOutputStream;
 import java.io.InputStream;

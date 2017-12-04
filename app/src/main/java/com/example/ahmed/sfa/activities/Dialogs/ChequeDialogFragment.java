@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.Activities.Dialogs;
+package com.example.ahmed.sfa.activities.Dialogs;
 
 import android.app.Activity;
 import android.app.AlertDialog;

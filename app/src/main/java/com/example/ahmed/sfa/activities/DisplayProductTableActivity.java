@@ -1,4 +1,4 @@
-package com.example.ahmed.sfa.Activities;
+package com.example.ahmed.sfa.activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -27,7 +27,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ahmed.sfa.Activities.supportactivities.TableThread;
+import com.example.ahmed.sfa.activities.supportactivities.TableThread;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;

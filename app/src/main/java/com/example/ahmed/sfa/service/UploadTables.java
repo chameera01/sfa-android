@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.widget.Toast;
 
-import com.example.ahmed.sfa.Activities.ManualSync;
+import com.example.ahmed.sfa.activities.ManualSync;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Mst_Customermaster;

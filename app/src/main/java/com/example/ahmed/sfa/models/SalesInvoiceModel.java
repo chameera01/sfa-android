@@ -3,6 +3,9 @@ package com.example.ahmed.sfa.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.ahmed.sfa.controllers.Utils;
+import com.example.charting.data.LineData;
+
 import java.text.DecimalFormat;
 
 /**
@@ -59,7 +62,7 @@ public class SalesInvoiceModel implements Parcelable {
         Product = product;
         BatchNumber = batchNumber;
         ExpiryDate = expiryDate;
-        UnitPrice = unitPrice;
+        UnitPrice = Utils.decimalFix(unitPrice);
         this.stock = Stock;
         Shelf=0;
         Request=0;
@@ -109,11 +112,11 @@ public class SalesInvoiceModel implements Parcelable {
     }
 
     public double getRetailPrice() {
-        return retailPrice;
+        return Utils.decimalFix(retailPrice);
     }
 
     public void setRetailPrice(double retailPrice) {
-        this.retailPrice = retailPrice;
+        this.retailPrice = Utils.decimalFix(retailPrice);
         calculateLineVal();
     }
 
@@ -146,6 +149,14 @@ public class SalesInvoiceModel implements Parcelable {
             LineValue = subtotalVal - discount;
         }
         retailLineVal = getOrder()*getRetailPrice();
+        decimalFix();
+    }
+
+    public void decimalFix(){
+        subtotalVal = Utils.decimalFix(subtotalVal);
+        discount  = Utils.decimalFix(discount);
+        LineValue = Utils.decimalFix(LineValue);
+        retailLineVal = Utils.decimalFix(retailLineVal);
     }
 
     public String getCode() {

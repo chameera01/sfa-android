@@ -23,7 +23,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="@dimen/activity_vertical_margin"
-            tools:context="com.example.ahmed.sfa.Activities.Home">
+            tools:context="com.example.ahmed.sfa.activities.Home">
 
             <LinearLayout
 
@@ -86,7 +86,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="222dp"
                             android:background="@drawable/backshadow"
-                            android:name="com.example.ahmed.sfa.Activities.supportactivities.DailyGraphFragment"
+                            android:name="com.example.ahmed.sfa.activities.supportactivities.DailyGraphFragment"
                             tools:layout="@layout/graph"/>
 
                         <fragment
@@ -94,7 +94,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="222dp"
                             android:background="@drawable/backshadow"
-                            android:name="com.example.ahmed.sfa.Activities.supportactivities.WeeklyGraphFragment"
+                            android:name="com.example.ahmed.sfa.activities.supportactivities.WeeklyGraphFragment"
                             tools:layout="@layout/graph"/>
 
                     </LinearLayout>
