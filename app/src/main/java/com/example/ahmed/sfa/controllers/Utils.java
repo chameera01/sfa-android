@@ -15,7 +15,7 @@ public class Utils {
      * @return converted value for the given decimal points
      */
     public static double decimalFix(double value,int decimalpoints){
-        DecimalFormat df = new DecimalFormat();
+        DecimalFormat df = new DecimalFormat("#.####");
         df.setMaximumFractionDigits(decimalpoints);
         return Double.parseDouble(df.format(value));
     }

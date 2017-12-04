@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.PermissionManager;
 import com.example.ahmed.sfa.controllers.adapters.InvoiceRecyclerAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
@@ -224,11 +225,16 @@ public class Invoice extends AppCompatActivity implements SummaryUpdateListner {
         Intent intent = new Intent(this,
                 SalesInvoicePayment.class);
         ArrayList<SalesInvoiceModel> data = dbAdapter.getInvoicedItems();
-        intent.putParcelableArrayListExtra(Constants.DATA_ARRAY_NAME,data);
-        intent.putExtra(Constants.SUMMARY_OBJECT_NAME, SalesInvoiceSummary.createSalesInvoiceSummary(data));
-        intent.putExtra(Constants.CUSTOMER_NO,customerNo);
-        intent.putExtra(Constants.ITINERARY,itinerary);
-        startActivity(intent);
+        if(data.size()>0){
+            intent.putParcelableArrayListExtra(Constants.DATA_ARRAY_NAME,data);
+            intent.putExtra(Constants.SUMMARY_OBJECT_NAME, SalesInvoiceSummary.createSalesInvoiceSummary(data));
+            intent.putExtra(Constants.CUSTOMER_NO,customerNo);
+            intent.putExtra(Constants.ITINERARY,itinerary);
+            startActivity(intent);
+        }else{
+            Alert alert = new Alert(this);
+            alert.showAlert("Empty","Select at least one item to invoice ","OK",null);
+        }
     }
 
     private void updateSummaryView(SalesInvoiceSummary salesInvoiceSummary){
