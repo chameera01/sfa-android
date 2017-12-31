@@ -12,32 +12,23 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SearchView;
-import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ahmed.sfa.activities.Home;
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
-import com.example.ahmed.sfa.controllers.adapters.ReturnRecyclerAdapter;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
-import com.example.ahmed.sfa.models.Brand;
 import com.example.ahmed.sfa.models.Cheque;
 import com.example.ahmed.sfa.models.Itinerary;
-import com.example.ahmed.sfa.models.Principle;
 import com.example.ahmed.sfa.models.PrincipleDiscountModel;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 import com.example.ahmed.sfa.models.SalesPayment;
@@ -78,14 +69,34 @@ public class SalesSummaryActivity extends AppCompatActivity {
 
     int assignedReturned;
 
+    String deviceId, repId;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         dbAdapter = new DBAdapter(SalesSummaryActivity.this);
         init();
+        getRepAndDeviceId();
+    }
+
+    public void getRepAndDeviceId() {
+        try {
+            com.example.ahmed.sfa.controllers.adapters.DBAdapter dbAdapter = new com.example.ahmed.sfa.controllers.adapters.DBAdapter(this);
+            dbAdapter.openDB();
+            Cursor deviceCursor = dbAdapter.runQuery("select * from DeviceCheckController where ACTIVESTATUS = 'YES'");
+            Cursor repCursor = null;
+            deviceCursor.moveToFirst();
+
+            deviceId = deviceCursor.getString(deviceCursor.getColumnIndex("DeviceID"));
+            repCursor = dbAdapter.runQuery("select * from Mst_RepTable");
+            repCursor.moveToFirst();
+            repId = repCursor.getString(repCursor.getColumnIndex("RepID"));
+            dbAdapter.closeDB();
+        } catch (Exception e) {
+            Log.e("data:", e.getMessage());
+        }
+
     }
 
     @Override
@@ -172,9 +183,15 @@ public class SalesSummaryActivity extends AppCompatActivity {
 
         //get invoice number from table -1 will be returned on error
         int invNo = dbAdapter.getInvoiceNo();
+        Log.d("TABLE", "Inv NO_" + String.valueOf(invNo));
         if (invNo!=-1){
             //insert into sales header and get sales header id
-            if(dbAdapter.insertIntoSalesHeader(payment,new Location(LocationManager.GPS_PROVIDER),itinerary.getId(),customerNo,invNo,assignedReturned,data.size())){
+
+            int i = invNo + 1;
+            String invNum = deviceId + String.valueOf(i); //deviceID + invoiceNo added to sales header
+            Log.d("TABLE", invNum);
+            if (dbAdapter.insertIntoSalesHeader(payment, new Location(LocationManager.GPS_PROVIDER), itinerary.getId(), customerNo, invNum, assignedReturned, data.size())) {
+                Log.d("TABLE", itinerary.getId());
                 int salesHeaderID = dbAdapter.getLastSalesHeaderID();
                 if (salesHeaderID!=-1){
                     int val = dbAdapter.insertDataToSalesDetails(data,salesHeaderID);
@@ -183,13 +200,17 @@ public class SalesSummaryActivity extends AppCompatActivity {
                         Log.w("Error check :",r+"");
                         Log.w("Error check :",data.size()+"");
                         if(r==data.size()){
-                            if (dbAdapter.insertToInvoiceOutStanding(payment,invNo)){
-                                if(dbAdapter.insertToDailyRouteDetails(itinerary,customerNo,invNo)){
+                            if (dbAdapter.insertToInvoiceOutStanding(payment, invNum)) {
+                                Log.d("TABLE", "inserted to insertToInvoiceOutStanding");
+                                if (dbAdapter.insertToDailyRouteDetails(itinerary, customerNo, invNum)) {
+                                    Log.d("TABLE", "inserted to insertToDailyRouteDetails");
                                     if(dbAdapter.updateItineraryDetailsTable(itinerary.getId(),customerNo)){
-                                        if(dbAdapter.insertChequeDetails(chequeModel,serialCode,invNo,customerNo,payment.getTotal())){
+                                        Log.d("TABLE", "inserted to updateItineraryDetailsTable");
+                                        if (dbAdapter.insertChequeDetails(chequeModel, serialCode, invNum, customerNo, payment.getTotal())) {
+                                            Log.d("TABLE", "inserted to insertChequeDetails");
                                             if(dbAdapter.increaseInvoiceNo()){
-                                                dbAdapter.insertPrincipleDiscountDetails(
-                                                        dbAdapter.getPrincipleDiscountList(),invNo,customerNo);
+                                                Log.d("TABLE", "increased invoice No.");
+                                                dbAdapter.insertPrincipleDiscountDetails(dbAdapter.getPrincipleDiscountList(), invNum, customerNo);
                                                 alert.showAlert("Success","Invoice completed",null,successfull);
                                             }else{
                                                 Log.w("Eror : >","incr inv no");
@@ -233,7 +254,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
             isError = true;//invoice number retreiving error
         }
 
-        if(isError)alert.showAlert("Error","Invoicing error try again",null,null);
+        if (isError) alert.showAlert("Error", "Invoicing error, try again!", null, null);
 
         //this value has to be taken from the home ui but hard coded here for convenience
         /**if(dbAdapter.insertChequeDetails(chequeModel,serialCode,invNum,customerNo,payment.getTotal()))
@@ -275,7 +296,9 @@ public class SalesSummaryActivity extends AppCompatActivity {
                 alert = new Alert(this);
 
                 itinerary = getIntent().getParcelableExtra(Constants.ITINERARY);
+                Log.d("Error", itinerary.getId());
                 customerNo = getIntent().getStringExtra(Constants.CUSTOMER_NO);
+                Log.d("Error", customerNo);
 
                 pman = new PermissionManager(this);
 
@@ -414,6 +437,10 @@ public class SalesSummaryActivity extends AppCompatActivity {
         toReturn += payment.getCheque()>0?"CH":"";
         toReturn += payment.getCash()  >0?"CA":"";
 
+        toReturn += payment.getCash() > 0 && payment.getCredit() > 0 ? "CACR" : "";
+        toReturn += payment.getCash() > 0 && payment.getCheque() > 0 ? "CACH" : "";
+        toReturn += payment.getCheque() > 0 && payment.getCredit() > 0 ? "CRCH" : "";
+
         return toReturn;
 
     }
@@ -424,7 +451,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
             super(c);
         }
 
-        public boolean insertChequeDetails(Cheque chq,String serialCode,int invoiceNumber,String customerNo,double invTotal){
+        public boolean insertChequeDetails(Cheque chq, String serialCode, String invoiceNumber, String customerNo, double invTotal) {
             openDB();
             ContentValues cv =new ContentValues();
 
@@ -449,7 +476,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
             else return false;
         }
 
-        public boolean insertIntoSalesHeader(SalesPayment payment,Location loc,String itineraryId,String customerNO,int invNo,int returnNo,int totalProductCount){
+        public boolean insertIntoSalesHeader(SalesPayment payment, Location loc, String itineraryId, String customerNO, String invNo, int returnNo, int totalProductCount) {
             openDB();
 
             ContentValues cv = new ContentValues();
@@ -463,19 +490,19 @@ public class SalesSummaryActivity extends AppCompatActivity {
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[7],payment.getFullInvDisc());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[8],payment.getDiscount());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[9],"UNKNOWN");//for now discount type is unknown
-            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[10],payment.getReturnQty()>0?Constants.ACTIVE:Constants.INACTIVE);//for now we dont include is on return or not so its one
+            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[10], payment.getReturnQty() > 0 ? Constants.INACTIVE : Constants.ACTIVE);//for now we dont include is on return or not so its one
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[11],returnNo==-1?null:returnNo);//leaving un touched will insert null value;
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[12],payment.getReturnTot());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[13],payment.getCredit());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[14],payment.getCash());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[15],payment.getCheque());
-            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[16],Constants.INACTIVE);//is print is default 1 and after printing it shld be changed to 0
+            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[16], Constants.ACTIVE);//is print is default 0 and after printing it shld be changed to 1
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[17],totalProductCount);//product count changed to assign the value from paramter
             // on 02/12/2017// product count is assumed as total invoiced qty
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[18],"NOTYPE");//invoice type is yet to be clarrified
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[19],loc.getLatitude());
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[20],loc.getLongitude());
-            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[21],Constants.INACTIVE);
+            cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[21], Constants.ACTIVE); //isUpload default is 0
             cv.put(Constants.SALES_HEADER_TABLE_COLUMNS[22],DateManager.dateWithTimeToday());
 
             long result = db.insert(Constants.SALES_HEADER_TABLE,null,cv);
@@ -513,7 +540,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
             cv.put(Constants.SALES_DETAILS_TABLE_COLUMNS[10],rowModel.getOrder());
             cv.put(Constants.SALES_DETAILS_TABLE_COLUMNS[11],rowModel.getFree());
             cv.put(Constants.SALES_DETAILS_TABLE_COLUMNS[12],rowModel.getLineValue());
-            cv.put(Constants.SALES_DETAILS_TABLE_COLUMNS[13],Constants.INACTIVE);
+            cv.put(Constants.SALES_DETAILS_TABLE_COLUMNS[13], Constants.ACTIVE);
             cv.put(Constants.SALES_DETAILS_TABLE_COLUMNS[14],DateManager.dateWithTimeToday());
 
             long result = db.insert(Constants.SALES_DETAILS_TABLE, null, cv);
@@ -545,7 +572,9 @@ public class SalesSummaryActivity extends AppCompatActivity {
             int curVal = getInvoiceNo();
             openDB();
             int newVal = curVal+1;
+//            String invNo = deviceId+String.valueOf(newVal); //deviceID + invNo from Mst_InvNos Table increased by one
             db.execSQL("UPDATE Mst_InvoiceNumbers_Management SET InvoiceNo="+newVal+" Where InvoiceNo="+curVal+";");
+//            db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management VALUES()");
             closeDB();
             return true;
         }
@@ -595,7 +624,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
         }
 
         //this table details is for the transacetion payment details
-        public boolean insertToInvoiceOutStanding(SalesPayment payment,int invNo){
+        public boolean insertToInvoiceOutStanding(SalesPayment payment, String invNo) {
 
             openDB();
             ContentValues cv = new ContentValues();
@@ -624,7 +653,7 @@ public class SalesSummaryActivity extends AppCompatActivity {
 
         //this is kind of a log table where we enter details about the
         //itinerary and its type
-        public boolean insertToDailyRouteDetails(Itinerary itinerary,String customrNo,int invNo){
+        public boolean insertToDailyRouteDetails(Itinerary itinerary, String customrNo, String invNo) {
             openDB();
             ContentValues cv = new ContentValues();
             cv.put(Constants.DAILY_ROUTES_TABLE_COLUMNS[0],RandomNumberGenerator.generateRandomCode(RandomNumberGenerator.GENERATE_ALPHABANUMERIC,10));
@@ -661,8 +690,9 @@ public class SalesSummaryActivity extends AppCompatActivity {
             else return false;
         }
 
-        public void insertPrincipleDiscountDetails(List<PrincipleDiscountModel> list,int invoiceId,String customerId){
+        public void insertPrincipleDiscountDetails(List<PrincipleDiscountModel> list, String invoiceId, String customerId) {
             openDB();
+            Log.d("TABLE", "inside insertPrincipleDiscountDetails");
             for(PrincipleDiscountModel model:list){
                 ContentValues cv = new ContentValues();
                 cv.put(Constants.PRINCIPLE_DISCOUNT_TABLE_COLUMNS[0],invoiceId);
@@ -674,6 +704,8 @@ public class SalesSummaryActivity extends AppCompatActivity {
                 cv.put(Constants.PRINCIPLE_DISCOUNT_TABLE_COLUMNS[6],model.getDiscount());
                 cv.put(Constants.PRINCIPLE_DISCOUNT_TABLE_COLUMNS[7],model.getDisountValue());
                 db.insert(Constants.PRINCIPLE_DISCOUNT_TABLE,null,cv);
+
+                Log.d("TABLE", "inside insertPrincipleDiscountDetails_after inserting");
             }
 
 

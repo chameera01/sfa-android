@@ -2,27 +2,28 @@ package com.example.ahmed.sfa.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
-
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,11 +39,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.example.ahmed.sfa.activities.supportactivities.CheckIn;
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.activities.supportactivities.CheckIn;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.models.DeviceCheckController;
 import com.example.ahmed.sfa.service.JsonFilter_Send;
@@ -54,6 +52,9 @@ import com.example.ahmed.sfa.service.SyncReturn;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -91,6 +92,9 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
     static int initialDwnloadCount =0;
     Button mEmailSignInButton;
 
+    String deviceId, repId;
+    private String devId = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +121,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
                     attemptLogin();
+//                    getRepAndDeviceId();
                     return true;
                 }
                 return false;
@@ -130,7 +135,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
                 mEmailSignInButton.setEnabled(false);
                 attemptLogin();
-
+//                getRepAndDeviceId();
                 /* any UI starts when signIn button click
                 Intent intent = new Intent(activity,AndroidDatabaseManager.class);
                 //Intent intent = new Intent(activity, AndroidDatabaseManager.class);
@@ -146,7 +151,64 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
         ImageView img = (ImageView) findViewById(R.id.initialLogo);
         img.setVisibility(View.GONE);
 
+//        getRepAndDeviceId();
+
         sleepthread();
+    }
+
+    public void getRepAndDeviceId() {
+        try {
+            Log.d("MGT", "inside getRepID");
+            DBAdapter dbAdapter = new DBAdapter(this);
+//            Log.d("MGT",dbAdapter.toString());
+            dbAdapter.openDB();
+            Cursor deviceCursor = dbAdapter.runQuery("select * from DeviceCheckController where ACTIVESTATUS = 'YES'");
+//            Log.d("MGT",deviceCursor.toString());
+            Cursor repCursor = null;
+
+            if (deviceCursor.getCount() == 0) {
+                Log.d("MGT", "dcursor is empty");
+            } else {
+                Log.d("MGT", "dcursor is not empty");
+            }
+
+            if (deviceCursor.moveToFirst()) {
+                Log.d("MGT", "cursor moved to first_device");
+                while (!deviceCursor.isAfterLast()) {
+                    deviceId = deviceCursor.getString(deviceCursor.getColumnIndex("DeviceID"));
+                    Log.d("MGT", "Inside getRepId_" + deviceId);
+                    deviceCursor.moveToNext();
+                    Log.d("MGT", "cursor moved to next_device");
+                }
+            }
+
+//            deviceId = repCursor.getString(repCursor.getColumnIndex("DeviceID"));
+
+            repCursor = dbAdapter.runQuery("select * from Mst_RepTable");
+
+            if (repCursor.getCount() == 0) {
+                Log.d("MGT", "rcursor is empty");
+            } else {
+                Log.d("MGT", "rcursor is not empty");
+                Log.d("MGT", String.valueOf(repCursor.getCount()));
+            }
+
+            if (repCursor.moveToFirst()) {
+                Log.d("MGT", "cursor moved to first_rep");
+                while (!repCursor.isAfterLast()) {
+                    repId = repCursor.getString(repCursor.getColumnIndex("RepID"));
+                    Log.d("MGT", "Inside getRepId_" + repId);
+                    repCursor.moveToNext();
+                    Log.d("MGT", "cursor moved to next_rep");
+                }
+            }
+
+            dbAdapter.closeDB();
+
+        } catch (Exception e) {
+            Log.e("MGT", e.getMessage());
+        }
+
     }
 
     private void sleepthread() {
@@ -250,6 +312,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
+    @SuppressLint("StaticFieldLeak")
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
@@ -298,7 +361,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
 
-            final String deviceId=email;
+            devId = email;
             final String pass=password;
 
             new JsonHelper.JsonDataCallback() {
@@ -318,7 +381,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                     recieveData.setDevice_id(jsonObject.optString("DeviceID"));
                     recieveData.setPass(jsonObject.optString("Password"));*/
                         DeviceCheckController devCheck = new DeviceCheckController();
-                        devCheck.setDevice_id(deviceId);
+                        devCheck.setDevice_id(devId);
                         devCheck.setPass(password);
                         devCheck.setStatus(jsonObject.optString("ACTIVESTATUS"));
 
@@ -333,20 +396,47 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                             Toast.makeText(InitialLogin.this, "Activated", Toast.LENGTH_SHORT).show();
 
 
+                            repDetails_update();//download rep details table
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Log.d("MGT", "before getRepID");
+                                    getRepAndDeviceId();
+                                    Log.d("MGT", "after getRepID");
+                                }
+                            }, 2500);
+
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    supplet_tbl_update();//download suppler table
+                                    Log.d("MGT", "after supplet_tbl_update");
+                                    productBrand_tbl_update();//download brand table
+                                    Log.d("MGT", "after productBrand_tbl_update");
+                                    customer_status_tbl_download();
+                                    Log.d("MGT", "after customer_status_tbl_download");
+                                    distric_table_download();
+                                    Log.d("MGT", "after distric_table_download");
+                                    territory_tbl_download();
+                                    Log.d("MGT", "after territory_tbl_download");
+                                    route_tbl_download();
+                                    Log.d("MGT", "after route_tbl_download");
+                                    reason_tbl_download();
+                                    Log.d("MGT", "after reason_tbl_download");
+                                    check_incheck_out_tbl_download();
+                                    Log.d("MGT", "after check_incheck_out_tbl_download");
+                                    customer_master_tbl_download();
+                                    Log.d("MGT", "after customer_master_tbl_download");
+                                    customerMaster_tbl_dwnoad();
+                                    Log.d("MGT", "after customerMaster_tbl_dwnoad");
+                                    tabStock_tbl_update();
+                                    Log.d("MGT", "after tabStock_tbl_update");
+                                    invoice_nos_mgt_download();
+                                    Log.d("MGT", "after invoice_nos_mgt_download");
+                                }
+                            }, 3500);
 
 
-                            repDetails_update();//download rep deatials table
-                            supplet_tbl_update();//download suppler table
-                            productBrand_tbl_update();//download brand table
-                            customer_status_tbl_download();
-                            distric_table_download();
-                            territory_tbl_download();
-                            route_tbl_download();
-                            reason_tbl_download();
-                            check_incheck_out_tbl_download();
-                            customer_master_tbl_download();
-                            customerMaster_tbl_dwnoad();
-                            tabStock_tbl_update();
                             //download complete here
                             //previoesly CheckIn ui launched from here
 
@@ -371,13 +461,13 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
                     }
 
                 }
-            }.execute("http://www.bizmapexpert.com/DIstributorManagementSystem/DeviceCheck/DeviceCheckController?DeviceID=" + deviceId + "&Password=" + pass + "", null, null);
+            }.execute("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/DeviceCheck/DeviceCheckController?DeviceID=" + devId + "&Password=" + pass + "", null, null);
+
 
 
 
         }
     }
-
 
 
     private boolean isEmailValid(String email) {
@@ -475,12 +565,16 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
         //-----------------------------------------receive data
         Toast.makeText(this, "Try to Fetch Data from Table:"+filter, Toast.LENGTH_LONG).show();
         if(result!=null){
+            Log.d("MGT", "inside receive data_" + result);
             initialDwnloadCount++;//count downloaded table count;
+            Log.d("MGT", String.valueOf(initialDwnloadCount));
+
             String josnString=result;
-            //Toast.makeText(this, "result:" + josnString, Toast.LENGTH_LONG).show();
+            Log.d("MGT", result);
             try{
                 JsonFilter_Send josnFilter= new JsonFilter_Send(InitialLogin.this.getApplicationContext());
                 josnFilter.filterJsonData(josnString,filter);
+                Log.d("MGT", "inside receive data_" + filter);
 
             }catch (Exception e) {
                 Toast.makeText(this,"RecieveData Error:"+ e.getMessage(),Toast.LENGTH_LONG ).show();
@@ -598,9 +692,44 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
         }
     }
 
+    public void repDetails_update() {
+        try {
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/GetRepDetails/SelectGetRepDetails?DeviceID=" + devId + "&RepID=0", InitialLogin.this);
+            Log.d("MGT", jObjGen.toString());
+            Log.d("MGT", "Inside RepDwnld_" + devId + "_");
+
+            jObjGen.setFilterType("RepDetails");
+
+            SyncReturn io = new SyncReturn();
+            io.execute(jObjGen);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            //Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void invoice_nos_mgt_download() {
+        try {
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_InvoiceNumbers/SelectMst_InvoiceNumbers?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
+            Log.d("MGT", "Inside the download__" + deviceId + "__" + repId);
+            jObjGen.setFilterType("InvoiceNumbers");
+
+            SyncReturn io = new SyncReturn();
+            io.execute(jObjGen);
+            Log.d("MGT", "After doInBG");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(InitialLogin.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+
     private void customer_master_tbl_download() {
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Customermaster/SelectMst_Customermaster?DeviceID=T1&RepID=99",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_Customermaster/SelectMst_Customermaster?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
             jObjGen.setFilterType("Customer");
 
             SyncReturn io = new SyncReturn();
@@ -614,7 +743,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private void check_incheck_out_tbl_download() {
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_CheckInOutPoints/SelectMst_CheckInOutPoints?DeviceID=T1&RepID=99",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_CheckInOutPoints/SelectMst_CheckInOutPoints?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
             jObjGen.setFilterType("CheckInOutPoints");
 
             SyncReturn io = new SyncReturn();
@@ -628,7 +757,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private void reason_tbl_download() {
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Reasons/SelectMst_Reasons?DeviceID=T1&RepID=93",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_Reasons/SelectMst_Reasons?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
             jObjGen.setFilterType("Reason");
 
             SyncReturn io = new SyncReturn();
@@ -642,7 +771,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private void route_tbl_download() {
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Route/SelectMst_Route?DeviceID=T1&RepID=99",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_Route/SelectMst_Route?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
             jObjGen.setFilterType("route");
 
             SyncReturn io = new SyncReturn();
@@ -656,7 +785,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private void territory_tbl_download() {
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_Territory/SelectMst_Territory?DeviceID=T1&RepID=99",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_Territory/SelectMst_Territory?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
             jObjGen.setFilterType("territory");
 
             SyncReturn io = new SyncReturn();
@@ -670,7 +799,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 
     private void distric_table_download() {
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_District/SelectMst_District?DeviceID=T1&RepID=99",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_District/SelectMst_District?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
             jObjGen.setFilterType("district");
 
             SyncReturn io = new SyncReturn();
@@ -685,7 +814,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
     private void customer_status_tbl_download() {
 
         try{
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_CustomerStatus/SelectMst_CustomerStatus?DeviceID=T1&RepID=99",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_CustomerStatus/SelectMst_CustomerStatus?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
             jObjGen.setFilterType("CustomerStatus");
 
             SyncReturn io = new SyncReturn();
@@ -707,9 +836,13 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
 //
 //    }
     //initial update of data tables;
+
+    /**
+     * ----------downloading product details------------
+     **/
     public void customerMaster_tbl_dwnoad() {
-     try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/productdetails/SelectProductDetails?DeviceID=T1&RepID=99",InitialLogin.this);
+        try {
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/productdetails/SelectProductDetails?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
             jObjGen.setFilterType("productdetails");
             SyncReturn io = new SyncReturn();
             io.execute(jObjGen);
@@ -719,22 +852,10 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
             //Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
         }
     }
-    public  void repDetails_update(){
-        try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/GetRepDetails/SelectGetRepDetails?DeviceID=T1&RepID=99",InitialLogin.this);
-            jObjGen.setFilterType("RepDetails");
 
-            SyncReturn io = new SyncReturn();
-            io.execute(jObjGen);
-
-        }catch (Exception e){
-            e.printStackTrace();
-            //Toast.makeText(InitialLogin.this,"clck.ExceptionCalled",Toast.LENGTH_LONG).show();
-        }
-    }
     public  void supplet_tbl_update(){
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/Mst_SupplierTable/SelectProductMst_SupplierTable?DeviceID=T1&RepID=99",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_SupplierTable/SelectProductMst_SupplierTable?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
             jObjGen.setFilterType("SupplierTable");
 
             SyncReturn io = new SyncReturn();
@@ -747,7 +868,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
     }
     public  void productBrand_tbl_update(){
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/ProductBrandManagement/SelectProductBrandManagement?DeviceID=T1&RepID=99",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/ProductBrandManagement/SelectProductBrandManagement?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
             jObjGen.setFilterType("ProductBrandManagement");
 
             SyncReturn io = new SyncReturn();
@@ -760,7 +881,7 @@ public class InitialLogin extends AppCompatActivity implements JsonRequestLister
     }
     public  void tabStock_tbl_update(){
         try {
-            JsonObjGenerate jObjGen = new JsonObjGenerate("http://www.bizmapexpert.com/DIstributorManagementSystem/D_Tr_RepStock/GetRepStock?DeviceID=T1&RepID=99",InitialLogin.this);
+            JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/D_Tr_RepStock/GetRepStock?DeviceID=" + deviceId + "&RepID=" + repId + "", InitialLogin.this);
             jObjGen.setFilterType("TabStock");
 
             SyncReturn io = new SyncReturn();

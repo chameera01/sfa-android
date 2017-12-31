@@ -10,9 +10,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Environment;
 import android.support.annotation.NonNull;
-
 import android.support.design.widget.NavigationView;
-
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
@@ -22,22 +20,18 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.ahmed.sfa.activities.AddCustomer;
-import com.example.ahmed.sfa.activities.Invoice;
-import com.example.ahmed.sfa.activities.ManualSync;
 import com.example.ahmed.sfa.R;
-
+import com.example.ahmed.sfa.activities.AddCustomer;
 import com.example.ahmed.sfa.activities.AddExtraCustomer;
 import com.example.ahmed.sfa.activities.AndroidDatabaseManager;
-
-
 import com.example.ahmed.sfa.activities.DisplayProductTableActivity;
 import com.example.ahmed.sfa.activities.Home;
+import com.example.ahmed.sfa.activities.InvCollections;
+import com.example.ahmed.sfa.activities.InvoiceHistory;
+import com.example.ahmed.sfa.activities.ManualSync;
 import com.example.ahmed.sfa.activities.PendingCustomer;
 import com.example.ahmed.sfa.activities.SalesInvoice;
-import com.example.ahmed.sfa.activities.SalesReturn;
 import com.example.ahmed.sfa.activities.StockView;
-
 import com.example.ahmed.sfa.controllers.CheckInOutManager;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
@@ -53,7 +47,6 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.prefs.Preferences;
 
 import static android.content.Context.LOCATION_SERVICE;
 
@@ -233,6 +226,15 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
                 }
                 break;
 
+            case R.id.collections:
+                if (!(activity instanceof InvCollections)) {
+
+                    Intent intent = new Intent(activity, InvCollections.class);
+                    activity.startActivity(intent);
+                    return true;
+                }
+                break;
+
             case R.id.add_extra_customer:
                 if(!(activity instanceof AddExtraCustomer)){
                     Intent intent = new Intent(activity,AddExtraCustomer.class);
@@ -269,14 +271,15 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
                 }
                 break;
 
-            case R.id.sales_invoice:
-                if(!(activity instanceof Invoice)){
-                    //Intent intent = new Intent(activity,DisplayProductTableActivity.class);
-                    Intent intent = new Intent(activity, Invoice.class);
+            case R.id.invoice_history:
+                if (!(activity instanceof InvoiceHistory)) {
+
+                    Intent intent = new Intent(activity, InvoiceHistory.class);
                     activity.startActivity(intent);
                     return true;
                 }
                 break;
+
             case R.id.activity_manual_sync:
                 if(!(activity instanceof SalesInvoice)){
                     //Intent intent = new Intent(activity,DisplayProductTableActivity.class);

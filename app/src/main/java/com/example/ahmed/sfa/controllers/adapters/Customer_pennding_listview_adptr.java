@@ -6,11 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.models.AddExtraCusListViewAdp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,11 +66,11 @@ public Customer_pennding_listview_adptr(Activity activity, ArrayList<HashMap<Str
             convertView=inflater.inflate(R.layout.customer_pending_listview_row, null);
             holder=new ViewHolder();
 
-            holder.txtFirst=(TextView) convertView.findViewById(R.id.customer_pending_lv$name);
-            holder.txtSecond=(TextView) convertView.findViewById(R.id.customer_pending_lv$address);
-            holder.txtThird=(TextView) convertView.findViewById(R.id.customer_pending_lv$contact);
-            holder.txtFourth=(TextView) convertView.findViewById(R.id.customer_pending_lv$uploadstatus);
-            holder.txtFifth=(TextView) convertView.findViewById(R.id.customer_pending_lv$approvalstatus);
+            holder.txtFirst = (TextView) convertView.findViewById(R.id.customer_pending_lv_name);
+            holder.txtSecond = (TextView) convertView.findViewById(R.id.customer_pending_lv_address);
+            holder.txtThird = (TextView) convertView.findViewById(R.id.customer_pending_lv_contact);
+            holder.txtFourth = (TextView) convertView.findViewById(R.id.customer_pending_lv_uploadstatus);
+            holder.txtFifth = (TextView) convertView.findViewById(R.id.customer_pending_lv_approvalstatus);
 
             convertView.setTag(holder);
         }else{

@@ -4,40 +4,44 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/Home"
-            android:icon="@drawable/home"
+            android:icon="@drawable/ic_home"
             android:title="Home" />
         <item
             android:id="@+id/add_customer"
-            android:icon="@drawable/addcustomer"
+            android:icon="@drawable/ic_add_customer"
             android:title="Add Customer" />
         <item
             android:id="@+id/product_details"
-            android:icon="@drawable/productdetails"
+            android:icon="@drawable/ic_product"
             android:title="Display Product Details" />
-        <item
-            android:id="@+id/sales_invoice"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Invoice" />
+
         <item
             android:id="@+id/add_extra_customer"
-            android:icon="@drawable/extracustomer"
+            android:icon="@drawable/ic_add_extra_customer"
             android:title="Add Extra Customer" />
         <item
             android:id="@+id/stock_view"
-            android:icon="@drawable/stock"
+            android:icon="@drawable/ic_stock"
             android:title="Stocks" />
         <item
             android:id="@+id/pending_Customer"
             android:icon="@drawable/customerservice"
             android:title="Customer Pending" />
-
+        <item
+            android:id="@+id/invoice_history"
+            android:icon="@drawable/ic_history_black_24dp"
+            android:title="Invoice History" />
+        <item
+            android:id="@+id/collections"
+            android:icon="@drawable/ic_payment"
+            android:title="Collections" />
         <item
             android:id="@+id/db_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Database" />
         <item
             android:id="@+id/activity_manual_sync"
-            android:icon="@drawable/sync"
+            android:icon="@drawable/ic_sync"
             android:title="Sync" />
     </group>
 

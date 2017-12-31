@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:id="@+id/table_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:textColor="@color/textPrimary"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:text="Code"
+                android:id="@+id/tvRowCode"
+                android:layout_weight="0.6"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView"
+                android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="10dp" />
+
+            <TextView
+                android:text="Product"
+                android:id="@+id/tvRowProduct"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <TextView
+                android:text="Batch Number"
+                android:id="@+id/tvRowBatchNo"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <TextView
+                android:text="Unit Price"
+                android:id="@+id/tvRowUnitPrice"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/SalesRowTextView"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <TextView
+                android:id="@+id/tvRowStock"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <TextView
+                android:text="Shelf"
+                android:id="@+id/tvRowShelf"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <TextView
+                android:text="Request"
+                android:id="@+id/tvRowRequest"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <TextView
+                android:text="Order"
+                android:id="@+id/tvRowOrder"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <TextView
+                android:text="Free"
+                android:id="@+id/tvRowFree"
+                android:layout_weight="0.9"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <TextView
+                android:text="Disc%"
+                android:id="@+id/tvRowDiscRate"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+
+            <TextView
+                android:text="Line Value"
+                android:id="@+id/tvRowLineValue"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

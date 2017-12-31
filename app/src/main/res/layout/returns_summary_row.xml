@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:id="@+id/table_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TableRow
+            android:background="@drawable/backshadow"
+            android:backgroundTint="@color/secondoryText"
+            android:textColor="@color/textPrimary"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:text="Returns No."
+                android:layout_weight="1"
+                android:id="@+id/tvReturnNo"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView" />
+
+            <TextView
+                android:text="Returns Date"
+                android:layout_weight="4"
+                android:id="@+id/tvReturnDate"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView" />
+
+            <TextView
+                android:text="Value"
+                android:layout_weight="2"
+                android:id="@+id/tvReturnValue"
+                android:textAlignment="center"
+                style="@style/SalesRowTextView" />
+
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

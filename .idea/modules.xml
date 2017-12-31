@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/git-SFA.iml" filepath="$PROJECT_DIR$/git-SFA.iml" />
       <module fileurl="file://$PROJECT_DIR$/sfa-android.iml" filepath="$PROJECT_DIR$/sfa-android.iml" />
     </modules>
   </component>

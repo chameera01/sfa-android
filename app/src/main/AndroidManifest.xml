@@ -55,6 +55,13 @@
             android:value="@integer/google_play_services_version" />
 
 
+        //added by shani
+        <receiver android:name=".controllers.adapters.InvoiceSummaryChangeReceiver">
+            <intent-filter>
+                <action android:name="afterTextChanged" />
+            </intent-filter>
+        </receiver>
+
 
         <activity android:screenOrientation="landscape" android:name=".activities.ServiceTest"></activity>
         <activity
@@ -88,6 +95,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.InvoiceHistory"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.SingleInvoiceHistoryDisplay"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.InvCollections"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustResize" />
 
     </application>
 

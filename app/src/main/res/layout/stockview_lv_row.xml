@@ -1,67 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
 
     <TextView
         android:text="TextView"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:id="@+id/stock_view$itemcode"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content"
+        android:id="@+id/stock_view_itemcode"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp" />
 
     <TextView
         android:text="TextView"
         android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_height="match_parent"
-        android:id="@+id/stock_view$itemcodeprinciple"
-        android:textSize="18sp" />
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:id="@+id/stock_view_itemcodeprinciple"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
+    <TextView
+        android:text="TextView"
+        android:layout_width="0dp"
+        android:layout_weight="0.8"
+        android:layout_height="wrap_content"
+        android:id="@+id/stock_view_batch_number"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp" />
     <TextView
         android:text="TextView"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:id="@+id/stock_view$batch_number"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content"
+        android:id="@+id/stock_view_expdate"
+        android:textSize="18sp"
+        android:visibility="gone" />
     <TextView
         android:text="TextView"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:id="@+id/stock_view$expdate"
-        android:textSize="18sp" />
-    <TextView
-        android:text="TextView"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:id="@+id/stock_view$sellp"
-        android:textSize="18sp" />
+        android:id="@+id/stock_view_sellp"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center" />
     <TextView
         android:text="TextView"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:layout_height="match_parent"
-        android:id="@+id/stock_view$retailp"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content"
+        android:id="@+id/stock_view_retailp"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center" />
     <TextView
         android:text="TextView"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:id="@+id/stock_view$qnt"
-        android:textSize="18sp" />
-    <!--TextView
-        android:text="TextView"
-        android:layout_width="0dp"
-
-        android:layout_height="0dp"
-        android:id="@+id/stock_view$last_update"
-        android:textSize="18sp" /-->
+        android:id="@+id/stock_view_qnt"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center" />
 
 </LinearLayout>

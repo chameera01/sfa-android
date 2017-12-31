@@ -56,7 +56,6 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:layout_below="@+id/linear_layout">
 
                 <LinearLayout
@@ -68,28 +67,27 @@
 
 
                     <TextView
-                        android:text="ItemCode"
-                        android:layout_weight="1"
+                        android:text="Item Code"
+                        android:layout_weight="0.8"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
                         android:paddingLeft="20dp"
-
-                        android:layout_gravity="center"
                         android:paddingRight="0dp"
                         android:paddingTop="10dp"
+                        android:layout_gravity="left"
+                        android:textAlignment="center"
                         android:background="#92C94a"
                         android:textSize="18sp" />
 
 
                     <TextView
                         android:text="Product"
-                        android:layout_weight="2"
+                        android:layout_weight="3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
                         android:gravity="left"
-
                         android:paddingLeft="50dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
@@ -99,14 +97,13 @@
 
 
                     <TextView
-                        android:text="UniteSize"
+                        android:text="Unit Size"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
                         android:paddingLeft="0dp"
                         android:gravity="center"
-
                         android:paddingRight="0dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
@@ -114,13 +111,12 @@
 
 
                     <TextView
-                        android:text="Selingprice"
+                        android:text="Selling Price"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingBottom="10dp"
                         android:paddingLeft="0dp"
-
                         android:gravity="right"
                         android:paddingRight="0dp"
                         android:paddingTop="10dp"
@@ -129,7 +125,7 @@
 
 
                     <TextView
-                        android:text="RetailPrice"
+                        android:text="Retail Price"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -137,6 +133,7 @@
                         android:paddingLeft="0dp"
                         android:gravity="right"
                         android:paddingTop="10dp"
+                        android:paddingRight="10dp"
                         android:background="#92C94a"
                         android:textSize="18sp" />
 
@@ -144,61 +141,38 @@
                 <ListView
                     android:id="@+id/list_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="match_parent" />
 
-                    />
                 <ScrollView
-
                     android:id="@+id/scrollView"
-
-
                     android:layout_width="match_parent"
-
-                    android:layout_below="@+id/linearLayout_stockview"
-                    android:layout_alignEnd="@+id/linearLayout_stockview"
-
                     android:layout_marginEnd="0dp"
                     android:layout_height="300dp">
-
-
 
                     <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:id="@+id/table_product"
+                        android:background="@drawable/border">
 
-                        android:background="@drawable/border"
-                        android:layout_row="4"
-                        android:layout_column="35"
-                        android:layout_below="@+id/linearLayout"
-                        android:layout_alignParentStart="true"
+                        <!--<TableRow-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:textSize="16sp"-->
+                        <!--android:background="#9cf9be"-->
+                        <!--android:layout_margin="1dp"-->
+                        <!--android:visibility="invisible"-->
+                        <!--android:layout_marginLeft="2dp"-->
+                        <!--android:paddingRight="0dp"-->
+                        <!--android:layout_alignParentRight="true">-->
 
-                        android:layout_alignParentLeft="true">
+                        <!--<CheckBox-->
+                        <!--android:text="CheckBox"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/checkBox2" />-->
 
-
-
-
-
-                        <TableRow
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-
-                            android:textSize="16sp"
-                            android:background="#9cf9be"
-                            android:layout_margin="1dp"
-                            android:visibility="invisible"
-                            android:layout_marginLeft="2dp"
-                            android:paddingRight="0dp"
-                            android:layout_alignParentRight="true">
-
-
-                            <CheckBox
-                                android:text="CheckBox"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/checkBox2" />
-
-                        </TableRow>
+                        <!--</TableRow>-->
                     </TableLayout>
                 </ScrollView>
             </LinearLayout>
@@ -257,7 +231,6 @@
                     android:layout_height="match_parent"
                     android:id="@+id/search_txt"
                     android:queryHint="Search" />
-
 
                 <View
                     android:layout_width="100dp"

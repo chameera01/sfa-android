@@ -42,26 +42,35 @@
                     <TextView
                         android:id="@+id/customername"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:text="Customer Name" />
                     <TextView
                         android:text="  -  "
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                     <TextView
                         android:id="@+id/town"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
                 <TextView
                     android:id="@+id/address"
                     android:text="124/d3,kuriwela Ukuwela"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp" />
                 <TextView
                     android:id="@+id/tel"
                     android:text="0776699609"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp" />
                 <TextView
 
                     android:layout_width="wrap_content"
@@ -73,7 +82,8 @@
                         android:text="Last Invoice"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp" />
                     <TextView
                         android:id="@+id/lastinvoice"
                         android:text="Last Invoice"
@@ -90,7 +100,8 @@
                         android:text="Last visit Date"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp" />
                     <TextView
                         android:id="@+id/lastvisit"
                         android:layout_width="0dp"
@@ -107,7 +118,8 @@
                         android:text="Reason"
                         android:layout_width="0dp"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp" />
                     <Spinner
                         android:id="@+id/reason_customer_skip"
                         android:layout_width="0dp"

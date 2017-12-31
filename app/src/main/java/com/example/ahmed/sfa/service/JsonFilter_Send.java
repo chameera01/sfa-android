@@ -1,15 +1,17 @@
 package com.example.ahmed.sfa.service;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
-import com.example.ahmed.sfa.activities.ServiceTest;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
+import com.example.ahmed.sfa.models.CollectionsOutStanding;
 import com.example.ahmed.sfa.models.Mst_CheckInOutPoints;
 import com.example.ahmed.sfa.models.Mst_CustomerStatus;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Mst_District;
+import com.example.ahmed.sfa.models.Mst_InvoiceNos_Mgt;
 import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 import com.example.ahmed.sfa.models.Mst_Reasons;
@@ -35,7 +37,7 @@ public class JsonFilter_Send {
         context=c;
     }
 
-    public   void filterJsonData(String result,String filter) {
+    public void filterJsonData(String result, String filter) {
 
 
         try {
@@ -45,7 +47,7 @@ public class JsonFilter_Send {
                     JSONArray jsonArray = new JSONArray(result);
 
                     //Iterate the jsonArray and print the info of JSONObjects
-
+                    Log.d("MGT", "inside json filter_send__" + result);
 
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -53,6 +55,27 @@ public class JsonFilter_Send {
                         String principle = jsonObject.optString("Principle").toString();
                         String mainBrand = jsonObject.optString("MainBrand").toString();
                         //jsonMyArray.add(mainBrand);
+                    }
+
+                    break;
+
+                case "InvoiceNumbers":
+                    Log.d("MGT", "inside json_filter_send");
+                    Mst_InvoiceNos_Mgt inm = new Mst_InvoiceNos_Mgt();
+                    DBAdapter inmAdapter = new DBAdapter(context);
+
+                    JSONArray inmArray = new JSONArray(result);
+                    for (int i = 0; i < inmArray.length(); i++) {
+                        JSONObject inmObject = inmArray.getJSONObject(i);
+
+                        inm.setInvoiceNo(inmObject.optString("InvoiceNo"));
+                        inm.setInvoiceReturnNo(inmObject.optString("InvoiceReturnNo"));
+                        inm.setCollectionNoteNo(inmObject.optString("CollectionNoteNo"));
+                        inm.setlUpdateDate(inmObject.optString("LastUpdateDate"));
+
+                        Log.d("MGT", inm.getInvoiceNo() + "_" + inm.getInvoiceReturnNo() + "_" + inm.getCollectionNoteNo() + "_" + inm.getlUpdateDate());
+                        inmAdapter.setMst_InvNos_Mgt(inm);
+                        Log.d("MGT", inm.toString());
                     }
 
                     break;
@@ -95,6 +118,31 @@ public class JsonFilter_Send {
                        // result_view.setText(productMst.getBrand());
                     }
                     break;
+
+                case "Collections":
+                    CollectionsOutStanding co = new CollectionsOutStanding();
+                    DBAdapter col_adp = new DBAdapter(context);
+                    Log.d("COL", "inside filter send");
+                    JSONArray jsonColArray = new JSONArray(result);
+                    for (int i = 0; i < jsonColArray.length(); i++) {
+                        JSONObject jsonColObj = jsonColArray.getJSONObject(i);
+                        Log.d("COL", "Inside FilterSend_" + i);
+                        co.setCreditDays(jsonColObj.optInt("CreditDays"));
+                        Log.d("COL", "Inside FilterSend_" + co.getCreditDays());
+                        co.setCreditValue(jsonColObj.optDouble("CreditValue"));
+                        co.setCurrentCreditValue(jsonColObj.optDouble("CurrentCreditValue"));
+                        co.setCustomerName(jsonColObj.optString("CustomerName"));
+                        co.setCustomerNo(jsonColObj.optString("CustomerNo"));
+                        co.setInvoiceDate(jsonColObj.optString("InvoiceDate"));
+                        co.setInvoiceNo(jsonColObj.optString("InvoiceNo"));
+                        co.setInvoiceTotal(jsonColObj.optDouble("InvoiceTotalValue"));
+                        co.setRepId(jsonColObj.optString("RepID"));
+                        co.setRepName(jsonColObj.optString("RepName"));
+
+                        col_adp.setCollections(co);
+                        Log.d("COL", "set adapter to insert into col table");
+                    }
+
                 case "RepDetails":
                     Mst_RepTable rep= new Mst_RepTable();
                     DBAdapter rep_adptr=new DBAdapter(context);
@@ -104,6 +152,7 @@ public class JsonFilter_Send {
                         JSONObject jsonRepObject = jsonRepArray.getJSONObject(i);
 
                         rep.setRepId( jsonRepObject.optString("RepID"));
+                        Log.d("MGT", "Inside FilterSend_" + rep.getRepId());
                         rep.setDeviceName(  jsonRepObject.optString("DeviceName"));
                         rep.setRepName( jsonRepObject.optString("RepName"));
                         rep.setAddress( jsonRepObject.optString("Address"));
@@ -116,6 +165,7 @@ public class JsonFilter_Send {
 
 
                         rep_adptr.setMst_RepTable(rep);
+                        Log.d("MGT", "set adapter to insert into rep table");
                         //jsonMyArray.add(productMst);
                         //Toast.makeText(this.context,productMst.getBrand(),Toast.LENGTH_LONG).show();
                         // result_view.setText(productMst.getBrand());
@@ -144,6 +194,7 @@ public class JsonFilter_Send {
                         // result_view.setText(productMst.getBrand());
                     }
                     break;
+
                 case "ProductBrandManagement":
                     Mst_ProductBrandManagement brand= new Mst_ProductBrandManagement();
                     DBAdapter brand_adptr=new DBAdapter(context);
@@ -255,6 +306,7 @@ public class JsonFilter_Send {
                         reason_adptr.insertReason(reason);
                     }
                     break;
+
                 case "TabStock":
                     Tr_TabStock tabStock = new Tr_TabStock();
                     DBAdapter tabstock_adptr = new DBAdapter(context);
@@ -297,14 +349,16 @@ public class JsonFilter_Send {
                         checkin_adptr.insertCheckInOutPoints(checkInOutPoints);
                     }
                     break;
+
                 case"Customer":
 
-                    Mst_Customermaster cus=new Mst_Customermaster();
+                    Mst_Customermaster cus = new Mst_Customermaster();
                     DBAdapter cus_adptr=new DBAdapter(context);
 
                     JSONArray jsonCusInArray = new JSONArray(result);
                     for (int i = 0; i < jsonCusInArray.length(); i++) {
                         JSONObject jsonSupObject = jsonCusInArray.getJSONObject(i);
+
 /*Mst_Customermaster (_id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "CustomerNo TEXT,CustomerName TEXT,Address TEXT,DistrictID TEXT,District TEXT,AreaID TEXT," +
                     "Area TEXT,Town TEXT,Telephone TEXT,Fax TEXT,Email Text, BRno TEXT,OwnerContactNo TEXT," +
@@ -333,10 +387,10 @@ public class JsonFilter_Send {
                         cus.setInsertDate(jsonSupObject.optString("InsertDate"));
                         cus.setRouteID(jsonSupObject.optString("RouteID"));
                         cus.setRouteName(jsonSupObject.optString("RouteName"));
-                        /*cus.setImageID(jsonSupObject.optString("ImageID"));
-                        cus.setLatitude(jsonSupObject.optDouble("Latitude"));
-                        cus.setLongitude(jsonSupObject.optDouble("Longitude"));
-                        cus.setCompanyCode(jsonSupObject.optString("CompanyCode"));*/
+//                        cus.setImageID(jsonSupObject.optString("ImageID"));
+//                        cus.setLatitude(jsonSupObject.optDouble("Latitude"));
+//                        cus.setLongitude(jsonSupObject.optDouble("Longitude"));
+//                        cus.setCompanyCode(jsonSupObject.optString("CompanyCode"));
                         cus.setIsActive(jsonSupObject.optInt("isActive"));
                         cus.setLastUpdateDate(DateManager.dateToday());
 

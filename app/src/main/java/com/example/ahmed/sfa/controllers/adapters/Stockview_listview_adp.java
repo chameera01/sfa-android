@@ -2,23 +2,20 @@ package com.example.ahmed.sfa.controllers.adapters;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.R;
-import com.example.ahmed.sfa.models.AddExtraCusListViewAdp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by DELL on 9/5/2017.
- */
+ * Created by DELL on 9/5/2017. */
+
 
 public class Stockview_listview_adp extends BaseAdapter{
 
@@ -82,14 +79,14 @@ public class Stockview_listview_adp extends BaseAdapter{
             convertView=inflater.inflate(R.layout.stockview_lv_row, null);
             holder=new ViewHolder();
 
-            holder.txtFirst=(TextView) convertView.findViewById(R.id.stock_view$itemcode);
-            holder.txtSecond=(TextView) convertView.findViewById(R.id.stock_view$itemcodeprinciple);
-            holder.txtThird=(TextView) convertView.findViewById(R.id.stock_view$batch_number);
-            holder.txtFourth=(TextView) convertView.findViewById(R.id.stock_view$expdate);
-            holder.txtFifth=(TextView) convertView.findViewById(R.id.stock_view$sellp);
-            holder.txtSixth=(TextView) convertView.findViewById(R.id.stock_view$retailp);
-            holder.txtSeventh=(TextView) convertView.findViewById(R.id.stock_view$qnt);
-            //holder.txtEighth=(TextView) convertView.findViewById(R.id.stock_view$last_update);
+            holder.txtFirst = (TextView) convertView.findViewById(R.id.stock_view_itemcode);
+            holder.txtSecond = (TextView) convertView.findViewById(R.id.stock_view_itemcodeprinciple);
+            holder.txtThird = (TextView) convertView.findViewById(R.id.stock_view_batch_number);
+            holder.txtFourth = (TextView) convertView.findViewById(R.id.stock_view_expdate);
+            holder.txtFifth = (TextView) convertView.findViewById(R.id.stock_view_sellp);
+            holder.txtSixth = (TextView) convertView.findViewById(R.id.stock_view_retailp);
+            holder.txtSeventh = (TextView) convertView.findViewById(R.id.stock_view_qnt);
+            //holder.txtEighth=(TextView) convertView.findViewById(R.id.stock_view_last_update);
 
             convertView.setTag(holder);
         }else{

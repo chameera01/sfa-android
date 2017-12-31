@@ -13,7 +13,6 @@ import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -29,7 +28,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.DateManager;
@@ -41,7 +39,6 @@ import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.CustomerStatus;
 import com.example.ahmed.sfa.models.District;
 import com.example.ahmed.sfa.models.Route;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +120,7 @@ public class AddCustomer extends AppCompatActivity {
         NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
         navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        dismiss =(Button) findViewById(R.id.addcustomer$dismiss);
+        dismiss = (Button) findViewById(R.id.addcustomer_dismiss);
         dismiss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,7 +199,7 @@ public class AddCustomer extends AppCompatActivity {
                 imgMan = new ImageManager(this);
                 dbAdapter = new DBAdapter(this);
 
-                customerImage =(ImageView)findViewById(R.id.addcustomer$customerpic);
+                customerImage = (ImageView) findViewById(R.id.addcustomer_customerpic);
                 customerImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -212,22 +209,22 @@ public class AddCustomer extends AppCompatActivity {
 
 
                 //assign controls
-                customerName = (TextView)findViewById(R.id.addcustomer$customername);
-                address=(TextView)findViewById(R.id.addcustomer$address);
-                district =(Spinner)findViewById(R.id.addcustomer$district);
-                area=(TextView)findViewById(R.id.addcustomer$area);
-                town=(TextView)findViewById(R.id.addcustomer$town);
-                route=(Spinner) findViewById(R.id.addcustomer$route);
-                customerStatus=(Spinner) findViewById(R.id.addcustomer$customerstatus);
-                ContactNo=(TextView)findViewById(R.id.addcustomer$contactno);
-                fax=(TextView)findViewById(R.id.addcustomer$fax);
-                email=(TextView)findViewById(R.id.addcustomer$email);
-                brNo=(TextView)findViewById(R.id.addcustomer$brno);
-                ownersName=(TextView)findViewById(R.id.addcustomer$ownersname);
-                ownersContactNo=(TextView)findViewById(R.id.addcustomer$ownerscontactno);
-                registrationNo=(TextView)findViewById(R.id.addcustomer$regno);
-                latitude=(TextView)findViewById(R.id.addcustomer$latitude);
-                longitude=(TextView)findViewById(R.id.addcustomer$longitude);
+                customerName = (TextView) findViewById(R.id.addcustomer_customername);
+                address = (TextView) findViewById(R.id.addcustomer_address);
+                district = (Spinner) findViewById(R.id.addcustomer_district);
+                area = (TextView) findViewById(R.id.addcustomer_area);
+                town = (TextView) findViewById(R.id.addcustomer_town);
+                route = (Spinner) findViewById(R.id.addcustomer_route);
+                customerStatus = (Spinner) findViewById(R.id.addcustomer_customerstatus);
+                ContactNo = (TextView) findViewById(R.id.addcustomer_contactno);
+                fax = (TextView) findViewById(R.id.addcustomer_fax);
+                email = (TextView) findViewById(R.id.addcustomer_email);
+                brNo = (TextView) findViewById(R.id.addcustomer_brno);
+                ownersName = (TextView) findViewById(R.id.addcustomer_ownersname);
+                ownersContactNo = (TextView) findViewById(R.id.addcustomer_ownerscontactno);
+                registrationNo = (TextView) findViewById(R.id.addcustomer_regno);
+                latitude = (TextView) findViewById(R.id.addcustomer_latitude);
+                longitude = (TextView) findViewById(R.id.addcustomer_longitude);
 
                 List<District> districts =dbAdapter.getDistricts();
                 /*newly added by Asanka*/
@@ -270,12 +267,20 @@ public class AddCustomer extends AppCompatActivity {
 
                 latitude.setText(lastKnownLocation.getLatitude()+"");
                 longitude.setText(lastKnownLocation.getLongitude()+"");
-                saveandsubmitbtn = (Button)findViewById(R.id.addcustomer$submitandsend);
+                saveandsubmitbtn = (Button) findViewById(R.id.addcustomer_submitandsend);
 
                 final DialogInterface.OnClickListener confirmedAddingListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(addDataToDB()) Toast.makeText(AddCustomer.this,"Customer Added",Toast.LENGTH_SHORT).show();
+                        saveandsubmitbtn.setEnabled(false);
+                    }
+                };
+
+                final DialogInterface.OnClickListener dismissAddingListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        saveandsubmitbtn.setEnabled(true);
                     }
                 };
 
@@ -283,8 +288,9 @@ public class AddCustomer extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         //validate the input if valid proceed otherwise return error message
-                        if(validateInputs())
-                            alert.showAlert("Confirm","Are you sure to save this customer","Yes","No",confirmedAddingListener,null);
+                        if (validateInputs()) {
+                            alert.showAlert("Confirm", "Are you sure?", "Yes", "No", confirmedAddingListener, dismissAddingListener);
+                        }
                         else
                             alert.showAlert("Input Invalid","Please check your inputs and try again!","OK","Back",null,null);
 

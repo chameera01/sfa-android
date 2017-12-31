@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.icu.util.Calendar;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -21,7 +20,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,9 +29,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ahmed.sfa.activities.Dialogs.Alert;
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
@@ -50,7 +48,6 @@ import com.example.ahmed.sfa.models.SalesPayment;
 import com.example.ahmed.sfa.models.SalesReturnSummary;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -79,6 +76,8 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
 
     private boolean launchedForResult;
     private Alert alert;
+    private double invTotal;
+
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_return);
@@ -154,6 +153,7 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
 
                 customerNo = getIntent().getStringExtra(Constants.CUSTOMER_NO);
                 itinerary = getIntent().getParcelableExtra(Constants.ITINERARY);
+                invTotal = getIntent().getDoubleExtra("INV_TOTAL", 0.00);
 
                 principleSpinner = (Spinner) findViewById(R.id.principleSpinner);
                 subBrandSpinner = (Spinner) findViewById(R.id.subBrandSpinner);
@@ -211,25 +211,41 @@ public class Return extends AppCompatActivity implements SummaryUpdateListner{
                         new View.OnClickListener() {
                            @Override
                            public void onClick(View v) {
-                               AlertDialog.Builder builder = new AlertDialog.Builder(Return.this);
-                               builder
-                                       .setTitle("Confirm ")
-                                       .setMessage("Are you sure ?")
-                                       .setIcon(null)
-                                       .setPositiveButton("Yes",new DialogInterface.OnClickListener(){
-                                           @Override
-                                           public void onClick(DialogInterface dialog, int which) {
-                                               submit();
-                                           }
-                                       })
-                                       .setNegativeButton("No",new DialogInterface.OnClickListener(){
-                                           @Override
-                                           public void onClick(DialogInterface dialog, int which) {
-                                               dialog.dismiss();
-                                           }
-                                       });
-                               AlertDialog alert = builder.create();
-                               alert.show();
+                               if (Double.parseDouble(total.getText().toString()) > invTotal) {
+                                   AlertDialog.Builder builder = new AlertDialog.Builder(Return.this);
+                                   builder
+                                           .setTitle("Warning ")
+                                           .setMessage("Return amount cannot exceed Invoice Total. Please re-enter.")
+                                           .setIcon(null)
+                                           .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                               @Override
+                                               public void onClick(DialogInterface dialog, int which) {
+                                                   dialog.dismiss();
+                                               }
+                                           });
+                                   AlertDialog alert = builder.create();
+                                   alert.show();
+                               } else {
+                                   AlertDialog.Builder builder = new AlertDialog.Builder(Return.this);
+                                   builder
+                                           .setTitle("Confirm ")
+                                           .setMessage("Are you sure ?")
+                                           .setIcon(null)
+                                           .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                               @Override
+                                               public void onClick(DialogInterface dialog, int which) {
+                                                   submit();
+                                               }
+                                           })
+                                           .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                               @Override
+                                               public void onClick(DialogInterface dialog, int which) {
+                                                   dialog.dismiss();
+                                               }
+                                           });
+                                   AlertDialog alert = builder.create();
+                                   alert.show();
+                               }
 
 
                            }

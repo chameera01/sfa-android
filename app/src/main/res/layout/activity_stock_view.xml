@@ -96,7 +96,7 @@
                     android:layout_below="@+id/scrollView"
                     android:layout_alignEnd="@+id/scrollView">
                     <TextView
-                        android:text="ItemCode"
+                        android:text="Item Code"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:paddingBottom="10dp"
@@ -106,24 +106,24 @@
                         android:layout_weight="1"
                         android:textSize="16sp" />
                     <TextView
-                        android:text="Principle"
+                        android:text="Product"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
-                        android:layout_weight="2"
+                        android:layout_weight="3"
                         android:paddingLeft="10dp"
                         android:textSize="16sp" />
 
                     <TextView
-                        android:text="BatchNumber"
+                        android:text="Batch No."
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
                         android:background="#92C94a"
-                        android:layout_weight="1"
+                        android:layout_weight="0.8"
                         android:textSize="16sp" />
 
                     <TextView
@@ -134,24 +134,27 @@
                         android:paddingTop="10dp"
                         android:layout_weight="1"
                         android:background="#92C94a"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:visibility="gone" />
                     <TextView
-                        android:text="SellingPrice"
+                        android:text="Selling Price"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
                         android:layout_weight="1"
                         android:background="#92C94a"
+                        android:gravity="center"
                         android:textSize="16sp" />
                     <TextView
-                        android:text="RetailPrice"
+                        android:text="Retail Price"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:paddingBottom="10dp"
                         android:paddingTop="10dp"
                         android:layout_weight="1"
                         android:background="#92C94a"
+                        android:gravity="center"
                         android:textSize="16sp" />
                     <TextView
                         android:text="Quantity"

@@ -36,13 +36,10 @@
         android:textAlignment="textStart"
         style="@style/SalesRowTextView"/>
     <TextView android:id="@+id/unit_price_e"
-
-        android:inputType="numberDecimal"
         android:layout_weight="1"
         android:textAlignment="center"
         style="@style/SalesRowTextView"/>
     <TextView android:id="@+id/stock_e"
-
         android:inputType="number"
         android:layout_weight="1"
         android:textAlignment="center"
@@ -53,19 +50,16 @@
         android:textAlignment="center"
         style="@style/SalesRowEditText"/>
     <EditText android:id="@+id/request_e"
-
         android:layout_weight="1"
         android:inputType="number"
         android:textAlignment="center"
         style="@style/SalesRowEditText"/>
     <EditText android:id="@+id/order_e"
-
         android:layout_weight="1"
         android:inputType="number"
         android:textAlignment="center"
         style="@style/SalesRowEditText"/>
     <EditText android:id="@+id/free_e"
-
         android:layout_weight="1"
         android:inputType="number"
         android:textAlignment="center"

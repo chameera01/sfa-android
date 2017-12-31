@@ -1,7 +1,6 @@
 package com.example.ahmed.sfa.activities;
 
 import android.app.DialogFragment;
-
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -18,10 +17,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.ahmed.sfa.activities.Dialogs.PricipleDiscountDialog;
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.activities.Dialogs.ChequeDialogFragment;
+import com.example.ahmed.sfa.activities.Dialogs.PricipleDiscountDialog;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.models.Cheque;
 import com.example.ahmed.sfa.models.Itinerary;
@@ -131,6 +130,7 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
                 Intent intent = new Intent(SalesInvoicePayment.this,Return.class);
                 intent.putExtra(Constants.CUSTOMER_NO,customerNo);
                 intent.putExtra(Constants.ITINERARY,itinerary);
+                intent.putExtra("INV_TOTAL", Double.parseDouble(total.getText().toString()));
                // intent.putExtra(Constants.SALES_PAYMENT_SUMMARY,payment);//send this so the activity can return the object adding more data to it
                 startActivityForResult(intent,Constants.RETURN_REQUEST_RESULT);
 
@@ -230,13 +230,13 @@ public class SalesInvoicePayment extends AppCompatActivity implements ChequeDial
         customerNo = getIntent().getStringExtra(Constants.CUSTOMER_NO);
         itinerary = getIntent().getParcelableExtra(Constants.ITINERARY);
 
-        principleDiscount = (EditText)findViewById(R.id.principle_discount);
-        principleDiscount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPrincipleDiscountDialog();
-            }
-        });
+//        principleDiscount = (EditText)findViewById(R.id.principle_discount);
+//        principleDiscount.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showPrincipleDiscountDialog();
+//            }
+//        });
 
         Button btn = (Button)findViewById(R.id.btn_principle_discount);
         btn.setOnClickListener(new View.OnClickListener() {

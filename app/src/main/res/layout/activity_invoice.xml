@@ -138,23 +138,45 @@
         android:layout_below="@+id/table_header"
         android:layout_above="@+id/invoice_summary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
     <LinearLayout
         android:layout_marginTop="4dp"
         android:paddingTop="2dp"
+        android:paddingBottom="1dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:background="@color/listSelected"
         android:id="@+id/invoice_summary"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
+
         <TextView
-            android:text="Sub Total"
+            android:text="Shelf Qty"
+            style="@style/SalesSummaryTextViews"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/shelf_si"
             style="@style/SalesSummaryTextViews" />
         <TextView
-            android:id="@+id/sub_tot_si"
+            android:text="Order Qty"
+            style="@style/SalesSummaryTextViews"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/order_si"
+            style="@style/SalesSummaryTextViews" />
+
+        <TextView
+            android:text="Free Qty"
+            style="@style/SalesSummaryTextViews"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/free_si"
             style="@style/SalesSummaryTextViews"/>
         <TextView
             android:text="Invoiced Qty"
@@ -162,6 +184,14 @@
         <TextView
             android:id="@+id/inv_qty_si"
             style="@style/SalesSummaryTextViews"/>
+        <TextView
+            android:text="Sub Total"
+            style="@style/SalesSummaryTextViews" />
+
+        <TextView
+            android:id="@+id/sub_tot_si"
+            style="@style/SalesSummaryTextViews" />
+
         <TextView
             android:text="Discount"
             style="@style/SalesSummaryTextViews"/>
@@ -174,9 +204,10 @@
         <TextView
             android:id="@+id/tot_si"
             style="@style/SalesSummaryTextViews"/>
-        <TextView
+        <!--<TextView-->
 
-            style="@style/SalesSummaryTextViews" />
+        <!--style="@style/SalesSummaryTextViews" />-->
+
 
         <Button
             android:id="@+id/next_si"

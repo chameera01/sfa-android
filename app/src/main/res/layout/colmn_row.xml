@@ -6,19 +6,23 @@
         android:id="@+id/TextFirst"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
+        android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:paddingLeft="50dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="0dp"
         android:text="First"
+        android:layout_gravity="start"
+        android:textAlignment="textStart"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/TextSecond"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_gravity="center"
+        android:layout_weight="3"
         android:paddingBottom="10dp"
+        android:paddingTop="10dp"
         android:paddingLeft="50dp"
         android:text="Second"
         android:textSize="18sp" />
@@ -27,8 +31,10 @@
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="1"
+        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="50dp"
+        android:paddingRight="0dp"
         android:text="Third"
         android:textSize="18sp" />
     <TextView
@@ -36,12 +42,14 @@
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="1"
+        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="50dp"
         android:paddingRight="10dp"
         android:gravity="right"
         android:text="Fourth"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textAlignment="center" />
     <TextView
         android:id="@+id/TextFifth"
         android:layout_height="wrap_content"
@@ -49,10 +57,12 @@
         android:layout_weight="1"
         android:gravity="right"
         android:layout_gravity="right"
+        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingRight="10dp"
         android:paddingLeft="50dp"
         android:text="Fifth"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textAlignment="center" />
 
 </LinearLayout>

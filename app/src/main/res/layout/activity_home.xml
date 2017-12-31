@@ -14,97 +14,86 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-           <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/activity_home"
-            android:layout_width="match_parent"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.example.ahmed.sfa.activities.Home">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            tools:context="com.example.ahmed.sfa.activities.Home">
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="70dp"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
 
             <LinearLayout
-
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="359dp"
                 android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                android:layout_marginTop="70dp"
-                android:layout_alignParentStart="true">
-                <LinearLayout
+                <SearchView
+                    android:id="@+id/routesearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-                    android:layout_width="359dp"
+                <ListView
+                    android:id="@+id/routelist"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    >
-
-                    <SearchView
-                        android:id="@+id/routesearch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        />
-                    <ListView
-                        android:id="@+id/routelist"
-                        android:paddingTop="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:choiceMode="singleChoice"
-
-                        android:layout_below="@+id/routesearch"/>
-
-                </LinearLayout>
-                <ScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:overScrollMode="ifContentScrolls"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:layout_marginLeft="10dp">
-
-                        <FrameLayout
-                            android:id="@+id/customermanagementfragment"
-
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/backshadow"
-
-
-                            >
-
-                        </FrameLayout>
-
-                        <fragment
-                            android:id="@+id/weeklytargetfragment"
-                            android:layout_width="match_parent"
-                            android:layout_height="222dp"
-                            android:background="@drawable/backshadow"
-                            android:name="com.example.ahmed.sfa.activities.supportactivities.DailyGraphFragment"
-                            tools:layout="@layout/graph"/>
-
-                        <fragment
-                            android:id="@+id/monthlytargetfragment"
-                            android:layout_width="match_parent"
-                            android:layout_height="222dp"
-                            android:background="@drawable/backshadow"
-                            android:name="com.example.ahmed.sfa.activities.supportactivities.WeeklyGraphFragment"
-                            tools:layout="@layout/graph"/>
-
-                    </LinearLayout>
-                </ScrollView>
-
+                    android:choiceMode="singleChoice"
+                    android:paddingTop="10dp" />
 
             </LinearLayout>
 
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical"
+                    android:overScrollMode="ifContentScrolls">
+
+                    <FrameLayout
+                        android:id="@+id/customermanagementfragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/backshadow"></FrameLayout>
+
+                    <fragment
+                        android:id="@+id/weeklytargetfragment"
+                        android:name="com.example.ahmed.sfa.activities.supportactivities.DailyGraphFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="222dp"
+                        android:background="@drawable/backshadow"
+                        tools:layout="@layout/graph" />
+
+                    <fragment
+                        android:id="@+id/monthlytargetfragment"
+                        android:name="com.example.ahmed.sfa.activities.supportactivities.WeeklyGraphFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="222dp"
+                        android:background="@drawable/backshadow"
+                        tools:layout="@layout/graph" />
+
+                </LinearLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -113,7 +102,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_navigation_drawer"
         app:menu="@menu/activity_navigation_drawer_drawer" />
-
 
 
 </android.support.v4.widget.DrawerLayout>

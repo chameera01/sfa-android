@@ -42,11 +42,13 @@ public class CheckIn extends AppCompatActivity implements CheckInCheckOutActions
 
     }
     private void init(){
+
         final CheckInOutManager man = new CheckInOutManager(this,this);
         Button checkInBtn = (Button) findViewById(R.id.navigation_header_actionbutton);
         Button skipBtn = (Button) findViewById(R.id.skipp_checkin);
         final Spinner loc = (Spinner) findViewById(R.id.navigation_header_place);
         final TextView comment = (TextView) findViewById(R.id.navigation_header_comment);
+
         //CheckingDBAdapter man = new CheckingDBAdapter(getApplicationContext());
         TextView date = (TextView) findViewById(R.id.navigation_header_date);
         date.setText(DateManager.dayToday());

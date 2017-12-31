@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:layout_gravity="bottom">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/backshadow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+
+        <TableLayout
+            android:id="@+id/table_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/listSelectedText">
+
+            <TableRow
+                android:background="@drawable/backshadow"
+                android:backgroundTint="@color/secondoryText"
+                android:textColor="@color/textPrimary"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:text="Code"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    style="@style/SalesTableHeaderTextViews" />
+
+                <TextView
+                    android:text="Product"
+                    android:layout_weight="4"
+                    android:textAlignment="center"
+                    style="@style/SalesTableHeaderTextViews" />
+
+                <TextView
+                    android:text="Batch Number"
+                    android:layout_weight="2"
+                    android:textAlignment="center"
+                    style="@style/SalesTableHeaderTextViews" />
+
+                <TextView
+                    android:text="Unit Price"
+                    android:inputType="numberDecimal"
+                    android:layout_weight="1"
+                    style="@style/SalesTableHeaderTextViews" />
+
+                <TextView
+                    android:text="Stock"
+                    android:inputType="numberDecimal"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    style="@style/SalesTableHeaderTextViews" />
+
+                <TextView
+                    android:text="Shelf"
+                    android:inputType="number"
+                    android:layout_weight="0.9"
+                    android:textAlignment="center"
+                    style="@style/SalesTableHeaderTextViews" />
+
+                <TextView
+                    android:text="Request"
+                    android:layout_weight="0.9"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    style="@style/SalesTableHeaderTextViews" />
+
+                <TextView
+                    android:text="Order"
+                    android:layout_weight="0.9"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    style="@style/SalesTableHeaderTextViews" />
+
+                <TextView
+                    android:text="Free"
+                    android:layout_weight="0.9"
+                    android:textAlignment="center"
+                    style="@style/SalesTableHeaderTextViews" />
+
+                <TextView
+                    android:text="Disc%"
+                    android:layout_weight="0.9"
+                    android:textAlignment="center"
+                    style="@style/SalesTableHeaderTextViews" />
+
+                <TextView
+                    android:text="Line Value"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    style="@style/SalesTableHeaderTextViews" />
+            </TableRow>
+        </TableLayout>
+
+        <ScrollView
+            android:id="@+id/scrl"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--<TableLayout-->
+            <!--android:id="@+id/si_pay_sum_data"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--</TableLayout>-->
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rowViewRecycler"></android.support.v7.widget.RecyclerView>
+        </ScrollView>
+    </LinearLayout>
+
+
+    <LinearLayout
+
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:background="@drawable/backshadow"
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <!-- second row first column here-->
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Sub Total"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tvSubtotal"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Discount"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tvDisc"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Return Tot"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tvReturnTotal"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:text="Total"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tvTotal"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <!-- second row second column here-->
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Invoice Qty"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tvInvoiceQty"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Free Qty"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tvFreeQty"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Return Qty"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tvReturnQty"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@drawable/backshadow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:padding="15dp"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Credit"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tvCredit"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Cash"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tvCash"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Cheque"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/tvCheque"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
+            android:paddingBottom="10dp"
+            android:layout_height="match_parent">
+
+            <!--<Button-->
+            <!--android:id="@+id/print_button_ss"-->
+            <!--style="@style/Widget.AppCompat.Button.Borderless.Colored"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="bottom"-->
+            <!--android:enabled="false"-->
+            <!--android:text="Print" />-->
+
+            <Button
+                android:id="@+id/btnPrint"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="Print" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -197,29 +197,22 @@
                 android:layout_height="wrap_content">
                 <TextView
                     style="@style/InvoicePaymentTextView"
-                    android:text="Value "
+                    android:text="Brand Disc. "
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"/>
 
-                <EditText
-                    android:id="@+id/principle_discount"
-                    android:text="Click To Prin"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:inputType="numberDecimal"
-                    android:enabled="true"
-                    style="@style/InvoicePaymentEditText"
-                    />
                 <Button
                     android:id="@+id/btn_principle_discount"
-                    android:text="Discount"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="0dp"
-                    android:layout_weight="0.5"
                     android:layout_height="wrap_content"
-
-                    />
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:radius="5dp"
+                    android:text="Discount" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

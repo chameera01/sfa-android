@@ -2,13 +2,23 @@ package com.example.ahmed.sfa.controllers.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.MatrixCursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+
+import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
+import com.example.ahmed.sfa.models.CollectionChequeDetails;
+import com.example.ahmed.sfa.models.CollectionNoteDetails;
+import com.example.ahmed.sfa.models.CollectionNoteHeader;
+import com.example.ahmed.sfa.models.InvoiceSummary;
+import com.example.ahmed.sfa.models.InvoiceSummaryFromSalesDetails;
+import com.example.ahmed.sfa.models.InvoiceSummaryFromSalesHeader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +32,10 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "sfa.db";//this is the name of the database created in the phone
     private static final int VERSION = 1;
 
-    public DBHelper (Context ctxt){
+    private static final String TAG = "HISTORY";
+    private String iid;
+
+    public DBHelper(Context ctxt) {
         super(ctxt,DB_NAME,null,VERSION);//error handler shld be implemented
     }
 
@@ -112,17 +125,17 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO Mst_Reasons(ReasonsID,Reason,isActive) VALUES('RSN3','Reason 3',0);");
             */
 
-           /*
+
             //insert data into sales header
-            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS1','INV1','04/08/2017',12000.00,500.00);");
-            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS2','INV2','04/08/2017',12020.02,500.01);");
-            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','04/08/2017',12030.02,530.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('38249','INV1','04/08/2017',12000.00,500.00);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('38326','INV2','04/08/2017',12020.02,500.01);");
+            db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('38327','INV3','04/08/2017',12030.02,530.01);");
             db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','04/08/2017',12030.02,530.01);");
             db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS3','INV3','04/07/2017',12030.02,530.01);");
             db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS1','INV3','04/07/2017',12030.02,530.01);");
             db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS2','INV3','04/07/2017',12030.02,530.01);");
             db.execSQL("INSERT INTO Tr_SalesHeader(CustomerNo,InvoiceNo,InvoiceDate,InvoiceTotal,CreditAmount) VALUES ('CUS4','INV3','04/07/2017',12030.02,530.01);");
-            */
+
 
            /*
             //insert data into mst_checkinoutpoints
@@ -235,8 +248,12 @@ public class DBHelper extends SQLiteOpenHelper {
                     "VALUES ('CUS11','rose','Town5');");
             db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
                     "VALUES ('CUS12','rose','Town5');");
+
             */
 
+            //Testing customer data
+            db.execSQL("INSERT INTO Mst_Customermaster (CustomerNo,CustomerName,Town)" +
+                    "VALUES ('CUS25','BB Retailers','Town5');");
 
 
             /**
@@ -374,13 +391,25 @@ public class DBHelper extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE ChequeDetails (_id INTEGER PRIMARY KEY AUTOINCREMENT,SerialCode TEXT,InvoiceDate TEXT,InvoiceNo TEXT,CustomerNo TEXT" +
                     ",InvoiceTotalValue REAL,ChequeAmount REAL,ChequeNumber TEXT,BankName TEXT,CollectedDate TEXT,RealizedDate TEXT,IsUpload INTEGER" +
                     ",IsUpdate INTEGER,Status TEXT,StatusUpdateDate TEXT)");
+
             db.execSQL("CREATE TABLE Mst_InvoiceNumbers_Management(_id INTEGER PRIMARY KEY AUTOINCREMENT,InvoiceNo INTEGER,InvoiceReturnNo INTEGER,CollectionNoteNo INTEGER,LastUpdateDate TEXT)");
 
+            db.execSQL("CREATE TABLE Collections (_id INTEGER PRIMARY KEY AUTOINCREMENT, CreditDays INTEGER,CreditValue REAL, CurrentCreditValue REAL, CustomerName TEXT, CustomerNo TEXT, InvoiceDate TEXT, InvoiceNo TEXT, InvoiceTotalValue REAL, RepID TEXT, RepName TEXT)");
 
-            db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management(InvoiceNo,InvoiceReturnNo) VALUES (5,8);");
+            //Move
+            db.execSQL("CREATE TABLE Mst_DeviceRepDetails(_id INTEGER PRIMARY KEY AUTOINCREMENT,DeviceID TEXT,RepID TEXT, RepName TEXT)");
+            db.execSQL("INSERT INTO Mst_DeviceRepDetails(_id,DeviceID ,RepID, RepName) VALUES(1,'c1','93','c1')");
+            db.execSQL("INSERT INTO Mst_DeviceRepDetails(_id,DeviceID ,RepID, RepName) VALUES(2,'c1','99','t1')");
+            db.execSQL("INSERT INTO Mst_DeviceRepDetails(_id,DeviceID ,RepID, RepName) VALUES(3,'t1','99','t1')");
 
-            db.execSQL("INSERT INTO Mst_InvoiceNumbers_Management(InvoiceNo) VALUES (5);");
+            db.execSQL("CREATE TABLE Collection_Header(_id INTEGER PRIMARY KEY AUTOINCREMENT,CollectionNoteNo TEXT, CollectedDate TEXT, Type TEXT, CustomerNo TEXT, IsUpload INTEGER)");
+            db.execSQL("CREATE TABLE Cash_Collection_Details (_id INTEGER PRIMARY KEY AUTOINCREMENT, HeaderID TEXT, CollectionNoteNo TEXT,RepID TEXT, Route TEXT, InvoiceNo TEXT, CreditAmount REAL, Cash REAL, Cheque REAl,Balance REAL, CreditRemaining REAL, IsUpload INTEGER )");
+            db.execSQL("CREATE TABLE Cheque_Collection_Details (_id INTEGER PRIMARY KEY AUTOINCREMENT, HeaderID TEXT, CollectionNoteNo TEXT,RepID TEXT, InvoiceNo TEXT, ChequeAmount REAL, ChequeNo TEXT,Bank TEXT, Branch TEXT, RealizeDate TEXT, IsUpload INTEGER)");
 
+
+            /**Shani created this on 13/12/2017**/
+
+            db.execSQL("CREATE TABLE Tr_PrincipleDiscount(_ID INTEGER  PRIMARY KEY AUTOINCREMENT,InvoiceId TEXT, CustomerNo TEXT,Date TEXT,PrincipleID TEXT,Principle TEXT,Value REAL,DiscountRate REAL,DiscountValue REAL)");
 
             db.execSQL("CREATE TABLE Tr_TargetData (_id INTEGER PRIMARY KEY AUTOINCREMENT,ServerID TEXT,Date TEXT,Month TEXT,TargetValue INTEGER)");
             /*
@@ -405,9 +434,6 @@ public class DBHelper extends SQLiteOpenHelper {
                     "VALUES ('ID2',30,0,'19/09/2017')");
             db.execSQL("INSERT INTO Mst_CreditDays(CreditDaysID,CreditDays,IsActive,LastUpdateDate)" +
                     "VALUES ('ID3',10,0,'19/09/2017')");
-
-            db.execSQL("CREATE TABLE Tr_PrincipleDiscount(_ID INTEGER  PRIMARY KEY AUTOINCREMENT,InvoiceId TEXT," +
-                    "CustomerNo TEXT,Date TEXT,PrincipleID TEXT,Principle TEXT,Value REAL,DiscountRate REAL,DiscountValue REAL)");
 
         }catch (SQLException e){
             e.printStackTrace();
@@ -589,12 +615,214 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    //Move
+    public ArrayList<String> getCollectionReps(Context context) {
+
+        ArrayList<String> reps = new ArrayList<>();
+        DBAdapter db2 = new DBAdapter(context);
+
+        db2.openDB();
+        Cursor rep = db2.runQuery("SELECT RepName FROM Mst_DeviceRepDetails WHERE DeviceID = (SELECT DeviceID FROM DeviceCheckController)");
+
+        if (rep.getCount() != 0 && rep.moveToFirst()) {
+            while (!rep.isAfterLast()) {
+                reps.add(rep.getString(rep.getColumnIndex("RepName")));
+                Log.d("COL", rep.getString(rep.getColumnIndex("RepName")));
+                rep.moveToNext();
+            }
+        }
+        db2.closeDB();
+
+        return reps;
+    }
 
 
+    //Move
+    public ArrayList<CollectionCustomer> getCollectionCustomers(String rep, Context context) {
 
+        Log.d("COL", "inside dbhelper getCollectionCustomers");
+        ArrayList<CollectionCustomer> cus = new ArrayList<>();
+        DBAdapter db = new DBAdapter(context);
+        Log.d("COL", "rep_" + rep);
 
+        db.openDB(); //no invoice outstanding table yet-therefore temp from collections
+        Cursor cursor = db.runQuery("SELECT DISTINCT CustomerName, CustomerNo FROM Collections WHERE RepID = (SELECT RepID FROM Mst_RepTable WHERE LOWER(RepName) = LOWER('" + rep + "'))"); //get this correct
 
-    public   ArrayList<String> getAllbrands() {
+        if (cursor.getCount() != 0 && cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                CollectionCustomer cc = new CollectionCustomer();
+                cc.setCustomerName(cursor.getString(cursor.getColumnIndex("CustomerName")));
+                cc.setCustomerNo(cursor.getString(cursor.getColumnIndex("CustomerNo")));
+                Log.d("COL", "Inside getcus_" + cursor.getString(cursor.getColumnIndex("CustomerName")));
+                cus.add(cc);
+                cursor.moveToNext();
+            }
+        } else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+
+            builder.setTitle("No outstanding customers found!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                        }
+                    })
+                    .create().show();
+        }
+        db.closeDB();
+        return cus;
+    }
+
+    public ArrayList<CollectionInvoice> getCollectionInvoiceNos(String cusName, Context context) {
+
+        ArrayList<CollectionInvoice> cinvoices = new ArrayList<>();
+        DBAdapter db3 = new DBAdapter(context);
+
+        db3.openDB();
+        Cursor c3 = db3.runQuery("SELECT InvoiceNo, CurrentCreditValue FROM Collections WHERE CustomerName = '" + cusName + "'");
+        if (c3.getCount() != 0 && c3.moveToFirst()) {
+            while (!c3.isAfterLast()) {
+                CollectionInvoice ci = new CollectionInvoice();
+                ci.setInvNo(c3.getString(c3.getColumnIndex("InvoiceNo")));
+                ci.setCcredit(c3.getDouble(c3.getColumnIndex("CurrentCreditValue")));
+                cinvoices.add(ci);
+                c3.moveToNext();
+            }
+        }
+
+        db3.closeDB();
+        return cinvoices;
+    }
+
+    public void insertCollectionHeader(CollectionNoteHeader cn, Context context) {
+
+        Log.d("COL", "inside insertCollectionHeader");
+        DBAdapter adapter = new DBAdapter(context);
+        SQLiteDatabase db = getWritableDatabase();
+        adapter.openDB();
+        db.execSQL("INSERT INTO Collection_Header(CollectionNoteNo, CollectedDate, Type, CustomerNo,IsUpload) VALUES ('" + cn.getCollectionNoteNo() + "','" + cn.getCollectedDate() + "','" + cn.getType() + "','" + cn.getCustomerNo() + "','" + cn.getIsUpload() + "')");
+        adapter.closeDB();
+
+    }
+
+    public int getLastCollectionHeaderID(Context context) {
+
+        DBAdapter db = new DBAdapter(context);
+        int id = -1;
+        db.openDB();
+        Cursor c = db.runQuery("SELECT _id FROM Collection_Header");
+        if (c.getCount() != 0 && c.moveToLast()) {
+            id = c.getInt(0);
+        }
+        return id;
+    }
+
+    public int getCollectionNoteNo(Context context) {
+        DBAdapter db = new DBAdapter(context);
+        db.openDB();
+        Cursor cursor = db.runQuery("SELECT CollectionNoteNo FROM Mst_InvoiceNumbers_Management");
+        if (cursor.moveToNext()) {
+            int val = cursor.getInt(0);
+            db.closeDB();
+            return val;
+        } else {
+            Log.w("COL", "db error");
+            return -1;
+        }
+    }
+
+    public boolean updateCollectionNoteNo(Context context) {
+        int ccno = getCollectionNoteNo(context);
+        DBAdapter db = new DBAdapter(context);
+        SQLiteDatabase sqldb = getWritableDatabase();
+        int newccno = ccno + 1;
+        db.openDB();
+        sqldb.execSQL("UPDATE Mst_InvoiceNumbers_Management SET CollectionNoteNo = '" + newccno + "' WHERE CollectionNoteNo = '" + ccno + "'");
+        db.closeDB();
+        return true;
+
+    }
+
+    public String getCNoteNofromHeader(int hid, Context context) {
+
+        DBAdapter db = new DBAdapter(context);
+        String cnno = "";
+        db.openDB();
+        Cursor c = db.runQuery("SELECT CollectionNoteNo FROM Collection_Header WHERE _id = '" + hid + "'");
+        if (c.getCount() != 0 && c.moveToFirst()) {
+            cnno = c.getString(0);
+        }
+        return cnno;
+
+    }
+
+    public String getSelectedRepId(String selectedRep, Context context) {
+
+        DBAdapter db = new DBAdapter(context);
+        String repid = "";
+        db.openDB();
+        Cursor cr = db.runQuery("SELECT RepID FROM Mst_RepTable WHERE LOWER(RepName) = LOWER('" + selectedRep + "')");
+        if (cr.getCount() != 0 && cr.moveToFirst()) {
+            repid = cr.getString(0);
+        }
+
+        return repid;
+
+    }
+
+    public void insertCollectionDetails(CollectionNoteDetails cnd, Context context) {
+
+        Log.d("COL", "inside insertCollectionDetails");
+        DBAdapter dbAdapter = new DBAdapter(context);
+        SQLiteDatabase db = getWritableDatabase();
+        dbAdapter.openDB();
+        db.execSQL("INSERT INTO Cash_Collection_Details (HeaderID , CollectionNoteNo ,RepID , Route , InvoiceNo , CreditAmount , Cash , Cheque ,Balance , CreditRemaining , IsUpload) VALUES ('" + cnd.getHeaderId() + "','" + cnd.getCollectionNoteNo() + "','" + cnd.getRepId() + "','" + cnd.getRoute() + "','" + cnd.getInvoiceNo() + "','" + cnd.getCredit() + "','" + cnd.getCash() + "','" + cnd.getCheque() + "','" + cnd.getBalance() + "','" + cnd.getRemaining() + "','" + cnd.getIsUpload() + "')");
+        dbAdapter.closeDB();
+    }
+
+    public void insertCollectionChequeDetails(CollectionChequeDetails ccd, Context context) {
+
+        DBAdapter dbAdapter = new DBAdapter(context);
+        SQLiteDatabase db = getWritableDatabase();
+        dbAdapter.openDB();
+        db.execSQL("INSERT INTO Cheque_Collection_Details (HeaderID, CollectionNoteNo ,RepID , InvoiceNo , ChequeAmount , ChequeNo,Bank , Branch, RealizeDate , IsUpload) VALUES ('" + ccd.getHeaderId() + "','" + ccd.getCollectionNoteNo() + "','" + ccd.getRepId() + "','" + ccd.getInvoiceNo() + "','" + ccd.getChequeAmt() + "','" + ccd.getChequeNo() + "','" + ccd.getBank() + "','" + ccd.getBranch() + "','" + ccd.getRealizeDate() + "','" + ccd.getIsUpload() + "')");
+        dbAdapter.closeDB();
+    }
+
+    public void updateCreditBalance(String selectedInvoice, double balance, Context context) {
+
+        DBAdapter adapter = new DBAdapter(context);
+        SQLiteDatabase db = getWritableDatabase();
+
+        Log.d("COL", "inside update balance_" + balance);
+
+        adapter.openDB();
+        db.execSQL("UPDATE Collections SET CurrentCreditValue = '" + balance + "' WHERE InvoiceNo = '" + selectedInvoice + "'");
+    }
+
+    public class CollectionInvoice {
+
+        private String invNo;
+        private double ccredit;
+
+        public String getInvNo() {
+            return invNo;
+        }
+
+        public void setInvNo(String invNo) {
+            this.invNo = invNo;
+        }
+
+        public double getCcredit() {
+            return ccredit;
+        }
+
+        public void setCcredit(double ccredit) {
+            this.ccredit = ccredit;
+        }
+    }
+
+    public ArrayList<String> getAllbrands() {
         ArrayList<String> array_list = new ArrayList<String>();
 
         //hp = new HashMap();
@@ -604,7 +832,7 @@ public class DBHelper extends SQLiteOpenHelper {
         res.moveToFirst();
 
         array_list.add("All");
-        while(res.isAfterLast() == false){
+        while (!res.isAfterLast()) {
             array_list.add(res.getString(res.getColumnIndex(PRODUCT_COLUMN_BRAND)));
             res.moveToNext();
         }
@@ -626,6 +854,197 @@ public class DBHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
+    //method for accessing all customers
+    public ArrayList<String> getAllCustomers() {
+        ArrayList<String> allCustomers = new ArrayList<String>();
+
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        Cursor cursor = sqldb.rawQuery("SELECT CustomerName FROM Mst_Customermaster ", null);
+        cursor.moveToFirst();
+
+        //allCustomers.add("All");
+        while (cursor.isAfterLast() == false) {
+            allCustomers.add(cursor.getString(cursor.getColumnIndex("CustomerName")));
+            cursor.moveToNext();
+        }
+        return allCustomers;
+    }
+
+    public InvoiceSummary[] getInvoiceDetails(String customerName) {
+
+        Log.d(TAG, customerName);
+        ArrayList<InvoiceSummary> iDetails = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT Tr_SalesHeader.InvoiceNo, Tr_SalesHeader.InvoiceDate, Tr_SalesHeader.InvoiceTotal  FROM Tr_SalesHeader INNER JOIN Mst_Customermaster ON Tr_SalesHeader.CustomerNo = Mst_Customermaster.CustomerNo WHERE Mst_Customermaster.CustomerName = '" + customerName + "'", null);
+
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+            // The Cursor is now set to the right position
+            String id, date, value;
+            id = c.getString(c.getColumnIndex("InvoiceNo"));
+            date = c.getString(c.getColumnIndex("InvoiceDate"));
+            value = c.getString(c.getColumnIndex("InvoiceTotal"));
+            Log.d(TAG, id + "_" + date + "_" + value);
+            iDetails.add(new InvoiceSummary(id, date, value, null, null));
+
+        }
+
+        InvoiceSummary[] array = iDetails.toArray(new InvoiceSummary[iDetails.size()]);
+
+        Log.d(TAG, customerName);
+        return array;
+    }
+
+    public ArrayList<InvoiceSummary> getReturnDetails(String customerName) {
+
+        ArrayList<InvoiceSummary> returnDetails = new ArrayList<>();
+        InvoiceSummary is = new InvoiceSummary("", "", "", "", "");
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT Tr_SalesHeader.OnInvoiceReturnNo, Tr_SalesHeader.InvoiceDate, Tr_SalesHeader.OnInvoiceReturnValue  FROM Tr_SalesHeader INNER JOIN Mst_Customermaster ON Tr_SalesHeader.CustomerNo = Mst_Customermaster.CustomerNo WHERE Mst_Customermaster.CustomerName = '" + customerName + "' AND Tr_SalesHeader.IsOnInvoiceReturn = 1", null);
+
+        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
+
+            String retNo, retDate, retValue;
+            retNo = c.getString(c.getColumnIndex("OnInvoiceReturnNo"));
+            retDate = c.getString(c.getColumnIndex("InvoiceDate"));
+            retValue = c.getString(c.getColumnIndex("OnInvoiceReturnValue"));
+            Log.d(TAG, retNo + "_" + retDate + "_" + retValue);
+            is = new InvoiceSummary(null, retDate, null, retNo, retValue);
+            returnDetails.add(is);
+
+        }
+        Log.d(TAG, is.getReturnNo() + "_" + is.getReturnValue());
+        return returnDetails;
+
+    }
 
 
+    public ArrayList<InvoiceSummaryFromSalesDetails> getSavedInvoiceDetails(String invoiceNo) {
+
+        Log.d(TAG, "inside the sales details method");
+
+        ArrayList<InvoiceSummaryFromSalesDetails> fromSalesDetails = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query2 = "SELECT Tr_SalesDetails.ItemCode, \n" +
+                "        Mst_ProductMaster.Description, \n" +
+                "        Tr_SalesDetails.UnitPrice, \n" +
+                "        Tr_SalesDetails.BatchNumber, \n" +
+                "        Tr_SalesDetails.ShelfQty, \n" +
+                "        Tr_SalesDetails.RequestQty, \n" +
+                "        Tr_SalesDetails.OrderQty, \n" +
+                "        Tr_SalesDetails.FreeQty, \n" +
+                "        Tr_SalesDetails.Total \n" +
+                "\n" +
+                "FROM Tr_SalesDetails    INNER JOIN Tr_SalesHeader ON Tr_SalesHeader._id = Tr_SalesDetails.HeaderID \n" +
+                "                        INNER JOIN Mst_ProductMaster ON Mst_ProductMaster.ItemCode = Tr_SalesDetails.ItemCode \n" +
+                "WHERE Tr_SalesHeader.InvoiceNo = '" + invoiceNo + "'";
+
+        Cursor cursor2 = db.rawQuery(query2, null);
+
+        for (cursor2.moveToFirst(); !cursor2.isAfterLast(); cursor2.moveToNext()) {
+
+            Log.d(TAG, "inside the cursor for loop");
+            String code, product, batchNo, uPrice, shelf, request, order, freeLine, lineVal;
+
+            code = cursor2.getString(cursor2.getColumnIndex("ItemCode"));
+            product = cursor2.getString(cursor2.getColumnIndex("Description"));
+            batchNo = cursor2.getString(cursor2.getColumnIndex("BatchNumber"));
+            uPrice = cursor2.getString(cursor2.getColumnIndex("UnitPrice"));
+            //add stock
+            shelf = cursor2.getString(cursor2.getColumnIndex("ShelfQty"));
+            request = cursor2.getString(cursor2.getColumnIndex("ItemCode"));
+            order = cursor2.getString(cursor2.getColumnIndex("OrderQty"));
+            freeLine = cursor2.getString(cursor2.getColumnIndex("FreeQty"));
+            lineVal = cursor2.getString(cursor2.getColumnIndex("Total"));
+
+            Log.d("HISTORY", code + "_" + product + "_" + uPrice + "_" + lineVal);
+
+            fromSalesDetails.add(new InvoiceSummaryFromSalesDetails(code, product, batchNo, uPrice, shelf, request, order, freeLine, lineVal));
+
+        }
+
+        return fromSalesDetails;
+    }
+
+    public InvoiceSummaryFromSalesHeader getSavedInvoiceHeaderDetails(String invoiceNo) {
+
+        Log.d(TAG, "inside the sales header method");
+        InvoiceSummaryFromSalesHeader isflh = new InvoiceSummaryFromSalesHeader("", "", "", "", "", "", "", "");
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query1 = "SELECT  Tr_SalesHeader.SubTotal,\n" +
+                "        Tr_SalesHeader.InvoiceTotal, \n" +
+                "        Tr_SalesHeader.FullDiscountRate, \n" +
+                "        Tr_SalesHeader.DiscountAmount,\n" +
+                "        Tr_SalesHeader.CreditAmount,\n" +
+                "        Tr_SalesHeader.CashAmount,\n" +
+                "        Tr_SalesHeader.ChequeAmount\n" +
+                "\n" +
+                "FROM Tr_SalesHeader WHERE Tr_SalesHeader.InvoiceNo = '" + invoiceNo + "'";
+
+        Cursor cursor1 = db.rawQuery(query1, null);
+
+        for (cursor1.moveToFirst(); !cursor1.isAfterLast(); cursor1.moveToNext()) {
+
+            // The Cursor is now set to the right position
+            String subTot, invoiceTot, discRate, disc, free, credit, cash, cheque;
+
+            subTot = cursor1.getString(cursor1.getColumnIndex("SubTotal"));
+            invoiceTot = cursor1.getString(cursor1.getColumnIndex("InvoiceTotal"));
+            discRate = cursor1.getString(cursor1.getColumnIndex("FullDiscountRate"));
+            disc = cursor1.getString(cursor1.getColumnIndex("DiscountAmount"));
+            //add free
+            credit = cursor1.getString(cursor1.getColumnIndex("CreditAmount"));
+            cash = cursor1.getString(cursor1.getColumnIndex("CashAmount"));
+            cheque = cursor1.getString(cursor1.getColumnIndex("ChequeAmount"));
+
+            Log.d(TAG, subTot + "_" + invoiceTot + "_" + discRate + "_" + disc);
+
+            isflh = new InvoiceSummaryFromSalesHeader(subTot, invoiceTot, discRate, disc, null, credit, cash, cheque);
+        }
+
+        return isflh;
+    }
+
+
+    public ArrayList<String> getCollectionRoutes() {
+
+        ArrayList<String> colroutes = new ArrayList<String>();
+
+        SQLiteDatabase db1 = this.getReadableDatabase();
+        Cursor cursor = db1.rawQuery("SELECT Route FROM Mst_Route ", null);
+        cursor.moveToFirst();
+
+        //allCustomers.add("All");
+        while (cursor.isAfterLast() == false) {
+            colroutes.add(cursor.getString(cursor.getColumnIndex("Route")));
+            cursor.moveToNext();
+        }
+        return colroutes;
+    }
+
+    public class CollectionCustomer {
+
+        private String customerName;
+        private String customerNo;
+
+        public String getCustomerName() {
+            return customerName;
+        }
+
+        public void setCustomerName(String customerName) {
+            this.customerName = customerName;
+        }
+
+        public String getCustomerNo() {
+            return customerNo;
+        }
+
+        public void setCustomerNo(String customerNo) {
+            this.customerNo = customerNo;
+        }
+    }
 }

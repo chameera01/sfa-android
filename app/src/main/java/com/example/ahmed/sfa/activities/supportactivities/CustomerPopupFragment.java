@@ -2,35 +2,38 @@ package com.example.ahmed.sfa.activities.supportactivities;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.ahmed.sfa.activities.Invoice;
-import com.example.ahmed.sfa.activities.Return;
 import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
-
 import com.example.ahmed.sfa.activities.Home;
-import com.example.ahmed.sfa.activities.SalesInvoice;
-import com.example.ahmed.sfa.activities.SalesReturn;
-
+import com.example.ahmed.sfa.activities.Invoice;
+import com.example.ahmed.sfa.activities.InvoiceHistory;
+import com.example.ahmed.sfa.activities.Return;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.ImageManager;
 import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
+import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Customer;
 import com.example.ahmed.sfa.models.Itinerary;
+import com.example.ahmed.sfa.models.OutstandingInvoice;
 
 import java.util.ArrayList;
 
@@ -42,6 +45,8 @@ public class CustomerPopupFragment extends Fragment {
     public static Itinerary itineraryforCurrentCustomer;
     private Customer currentCustomer;
     private Spinner reason;
+    private String invoiceNo;
+    private double credit;
 
     public static CustomerPopupFragment newInstance(Itinerary itinerary){
         CustomerPopupFragment customerPopupFragment = new CustomerPopupFragment();
@@ -73,6 +78,7 @@ public class CustomerPopupFragment extends Fragment {
         View customerView = inflater.inflate(R.layout.customerpopupforhomeui, container, false);
         reason = (Spinner)customerView.findViewById(R.id.reason_customer_skip);
         reason.setAdapter(adapter.getReasons());
+
         Button generateInvBtn = (Button)customerView.findViewById(R.id.generateinvoice);
         generateInvBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,13 +94,22 @@ public class CustomerPopupFragment extends Fragment {
         generateReturnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CustomerPopupFragment.this.getActivity(), Return.class);
-                intent.putExtra(Constants.CUSTOMER_NO,cusNo);//this data will be passed on to the db insert step
-                intent.putExtra(Constants.ITINERARY,itineraryforCurrentCustomer);//this data will be passed on to the db insert step
-                startActivity(intent);
+                checkOutstanding(cusNo);
+//                Intent intent = new Intent(CustomerPopupFragment.this.getActivity(), Return.class);
+//                intent.putExtra(Constants.CUSTOMER_NO,cusNo);//this data will be passed on to the db insert step
+//                intent.putExtra(Constants.ITINERARY,itineraryforCurrentCustomer);//this data will be passed on to the db insert step
+//                startActivity(intent);
             }
         });
+
         Button dismissBtn = (Button) customerView.findViewById(R.id.close_popup);
+        dismissBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                container.removeViewAt(0);
+            }
+        });
+
         Button skipBtn = (Button) customerView.findViewById(R.id.skipp_customer);
         skipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,10 +118,15 @@ public class CustomerPopupFragment extends Fragment {
                 ((Home)getActivity()).refresh();
             }
         });
-        dismissBtn.setOnClickListener(new View.OnClickListener() {
+
+
+        Button history = (Button) customerView.findViewById(R.id.invoicehistory);
+        history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                container.removeViewAt(0);
+                Intent intent = new Intent(getActivity(), InvoiceHistory.class);
+                intent.putExtra("CUSTOMER", currentCustomer.getName());
+                startActivity(intent);
             }
         });
 
@@ -128,6 +148,100 @@ public class CustomerPopupFragment extends Fragment {
 
     }
 
+    private void checkOutstanding(final String cusNo) {
+
+        DBHelper db = new DBHelper(getActivity());
+
+        Log.d("COL", "inside checkOutstanding");
+
+        final ArrayList<OutstandingInvoice> oiarray = new ArrayList<>();
+
+        com.example.ahmed.sfa.controllers.adapters.DBAdapter adapter = new com.example.ahmed.sfa.controllers.adapters.DBAdapter(getActivity());
+
+        adapter.openDB();
+
+        Cursor c = adapter.runQuery("SELECT InvoiceNo, CurrentCreditValue FROM Collections WHERE CustomerNo ='" + cusNo + "'");
+        if (c.getCount() != 0) {
+            Log.d("COL", "inside DB helper_not empty_" + c.getCount());
+            if (c.moveToFirst()) {
+                while (!c.isAfterLast()) {
+                    OutstandingInvoice oi = new OutstandingInvoice();
+                    oi.setInvoiceNo(c.getString(c.getColumnIndex("InvoiceNo")));
+                    Log.d("COL", oi.getInvoiceNo());
+                    oi.setCurrentCredit(c.getDouble(c.getColumnIndex("CurrentCreditValue")));
+                    Log.d("COL", String.valueOf(oi.getCurrentCredit()));
+                    oiarray.add(oi);
+                    c.moveToNext();
+                    Log.d("COL", "moved to next");
+                }
+            }
+
+            ArrayList<String> dis = setString(oiarray);
+            String[] values = dis.toArray(new String[0]);
+            for (int i = 0; i < values.length; i++) {
+                Log.d("COL", values[i]);
+            }
+
+
+            ArrayAdapter<String> adp = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, values);
+
+            ListView lv = new ListView(getActivity());
+            lv.setAdapter(adp);
+
+            //write onclicklistener
+
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                        long arg3) {
+//                    String value = (String)adapter.getItemAtPosition(position);
+                    invoiceNo = oiarray.get(position).getInvoiceNo();
+                    credit = oiarray.get(position).getCurrentCredit();
+
+                    Intent intent = new Intent(CustomerPopupFragment.this.getActivity(), Return.class);
+                    intent.putExtra(Constants.CUSTOMER_NO, cusNo);//this data will be passed on to the db insert step
+                    intent.putExtra(Constants.ITINERARY, itineraryforCurrentCustomer);//this data will be passed on to the db insert step
+                    intent.putExtra("INVOICE_NO", invoiceNo);
+                    intent.putExtra("CURRENT_CREDIT", credit);
+
+                    startActivity(intent);
+
+                }
+            });
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+
+            builder.setTitle("Outstanding Invoices - Select one")
+                    .setView(lv)
+                    .create().show();
+        } else {
+            Log.d("COL", "inside DB helper_empty");
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+
+            builder.setTitle("There are no outstanding invoices!")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .create().show();
+        }
+
+        adapter.closeDB();
+
+    }
+
+    private ArrayList<String> setString(ArrayList<OutstandingInvoice> oiarray) {
+
+        ArrayList<String> displays = new ArrayList<>();
+
+        for (OutstandingInvoice oi : oiarray) {
+            String display = "Invoice No: " + oi.getInvoiceNo() + "\t\t\t\t\t" + "Current Credit: " + oi.getCurrentCredit();
+            displays.add(display);
+        }
+
+        return displays;
+    }
 
 
     public String getCurrentCustomer(){
@@ -164,8 +278,8 @@ public class CustomerPopupFragment extends Fragment {
                 results.add(cursor.getString(0));
             }
             closeDB();
-            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(CustomerPopupFragment.this.getActivity().getApplicationContext(),android.R.layout.simple_spinner_item,results);
-            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(CustomerPopupFragment.this.getActivity().getApplicationContext(), R.layout.custom_spinner, results);
+            arrayAdapter.setDropDownViewResource(R.layout.custom_spinner);
             return arrayAdapter;
         }
 

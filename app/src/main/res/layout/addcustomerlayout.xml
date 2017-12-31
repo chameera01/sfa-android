@@ -46,7 +46,7 @@
                     android:paddingBottom="10dp">
 
                     <ImageView
-                        android:id="@+id/addcustomer$customerpic"
+                        android:id="@+id/addcustomer_customerpic"
                         android:layout_width="200dp"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="10dp"
@@ -76,7 +76,7 @@
                             android:textColor="@android:color/holo_red_dark" />
 
                         <EditText
-                            android:id="@+id/addcustomer$customername"
+                            android:id="@+id/addcustomer_customername"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -108,7 +108,7 @@
                             android:textColor="@android:color/holo_red_dark" />
 
                         <EditText
-                            android:id="@+id/addcustomer$address"
+                            android:id="@+id/addcustomer_address"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -140,7 +140,7 @@
                             android:textColor="@android:color/holo_red_dark" />
 
                         <Spinner
-                            android:id="@+id/addcustomer$district"
+                            android:id="@+id/addcustomer_district"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -171,7 +171,7 @@
                             android:textColor="@android:color/holo_red_dark" />
 
                         <EditText
-                            android:id="@+id/addcustomer$area"
+                            android:id="@+id/addcustomer_area"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -203,7 +203,7 @@
                             android:textColor="@android:color/holo_red_dark" />
 
                         <EditText
-                            android:id="@+id/addcustomer$town"
+                            android:id="@+id/addcustomer_town"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -236,7 +236,7 @@
                             android:textColor="@android:color/holo_red_dark" />
 
                         <Spinner
-                            android:id="@+id/addcustomer$route"
+                            android:id="@+id/addcustomer_route"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -267,7 +267,7 @@
                             android:textColor="@android:color/holo_red_dark" />
 
                         <Spinner
-                            android:id="@+id/addcustomer$customerstatus"
+                            android:id="@+id/addcustomer_customerstatus"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -305,7 +305,7 @@
                             android:text="Contact No" />
 
                         <EditText
-                            android:id="@+id/addcustomer$contactno"
+                            android:id="@+id/addcustomer_contactno"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="5"
@@ -338,7 +338,7 @@
                             android:text="Fax" />
 
                         <EditText
-                            android:id="@+id/addcustomer$fax"
+                            android:id="@+id/addcustomer_fax"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -368,7 +368,7 @@
                             android:text="Email" />
 
                         <EditText
-                            android:id="@+id/addcustomer$email"
+                            android:id="@+id/addcustomer_email"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -397,7 +397,7 @@
                             android:text="BR No" />
 
                         <EditText
-                            android:id="@+id/addcustomer$brno"
+                            android:id="@+id/addcustomer_brno"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -426,7 +426,7 @@
                             android:text="Owner's Name" />
 
                         <EditText
-                            android:id="@+id/addcustomer$ownersname"
+                            android:id="@+id/addcustomer_ownersname"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -455,7 +455,7 @@
                             android:text="Owners Contact No" />
 
                         <EditText
-                            android:id="@+id/addcustomer$ownerscontactno"
+                            android:id="@+id/addcustomer_ownerscontactno"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -485,7 +485,7 @@
                             android:text="Reg No" />
 
                         <EditText
-                            android:id="@+id/addcustomer$regno"
+                            android:id="@+id/addcustomer_regno"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -514,7 +514,7 @@
                             android:text="Latitude" />
 
                         <EditText
-                            android:id="@+id/addcustomer$latitude"
+                            android:id="@+id/addcustomer_latitude"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -543,7 +543,7 @@
                             android:text="Longitude" />
 
                         <EditText
-                            android:id="@+id/addcustomer$longitude"
+                            android:id="@+id/addcustomer_longitude"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
@@ -577,7 +577,7 @@
                             android:paddingRight="60dp">
 
                             <Button
-                                android:id="@+id/addcustomer$submitandsend"
+                                android:id="@+id/addcustomer_submitandsend"
                                 style="@style/Widget.AppCompat.Button.Colored"
                                 android:layout_width="wrap_content"
                                 android:layout_height="100dp"
@@ -585,7 +585,7 @@
                                 android:text="Submit and send" />
 
                             <Button
-                                android:id="@+id/addcustomer$dismiss"
+                                android:id="@+id/addcustomer_dismiss"
                                 style="@style/Widget.AppCompat.Button.Colored"
                                 android:layout_width="wrap_content"
                                 android:text="Dismiss"
@@ -594,7 +594,7 @@
                                 android:backgroundTint="@color/btn"
                                 android:layout_marginTop="5dp"
                                 android:layout_alignParentTop="false"
-                                android:layout_toStartOf="@+id/addcustomer$submitandsend"
+                                android:layout_toStartOf="@+id/addcustomer_submitandsend"
                                 android:layout_height="40dp" />
                         </RelativeLayout>
                     </LinearLayout>

@@ -4,11 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.widget.Toast;
 
-import com.example.ahmed.sfa.activities.ManualSync;
-import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
-import com.example.ahmed.sfa.models.Mst_Customermaster;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 /**
@@ -106,6 +104,73 @@ public class UploadTables {
         }
         
        return  cusArr;
+    }
+
+    /**
+     * upload Cheque Details data
+     **/
+    public ArrayList<String> chequeDetails() {
+
+        ArrayList<String> chequeArray = new ArrayList<>();
+        String urlString = "";
+        Cursor chequeCursor = null;
+
+        Toast.makeText(context, "inside upload cheque", Toast.LENGTH_SHORT).show();
+
+        try {
+
+            String query = "SELECT * FROM ChequeDetails where isUpload = 0";
+
+            DBHelper con = new DBHelper(context);
+            chequeCursor = con.getData(query);
+
+            Toast.makeText(context, "cursorCount: " + chequeCursor.getCount(), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(context, "db conn error:" + e.getCause(), Toast.LENGTH_SHORT).show();
+        }
+
+        try {
+            String serialCode, invoiceDate, invoiceNo, customerNo, chequeNumber, bankName, collectedDate, realizedDate;
+            double chequeAmount, invoiceTotalValue;
+
+            while (chequeCursor.moveToNext()) {
+
+                serialCode = chequeCursor.getString(chequeCursor.getColumnIndex("SerialCode"));
+                invoiceDate = chequeCursor.getString(chequeCursor.getColumnIndex("InvoiceDate"));
+                invoiceNo = chequeCursor.getString(chequeCursor.getColumnIndex("InvoiceNo"));
+                customerNo = chequeCursor.getString(chequeCursor.getColumnIndex("CustomerNo"));
+                invoiceTotalValue = chequeCursor.getDouble(chequeCursor.getColumnIndex("InvoiceTotalValue"));
+                chequeAmount = chequeCursor.getDouble(chequeCursor.getColumnIndex("ChequeAmount"));
+                chequeNumber = chequeCursor.getString(chequeCursor.getColumnIndex("ChequNumber"));
+                bankName = chequeCursor.getString(chequeCursor.getColumnIndex("BankName"));
+                collectedDate = chequeCursor.getString(chequeCursor.getColumnIndex("CollectedDate"));
+                realizedDate = chequeCursor.getString(chequeCursor.getColumnIndex("RealizedDate"));
+
+                //replace the link
+                urlString = "http://www.bizmapexpert.com/DIstributorManagementSystem/Up_Tr_CustomerMaster_Pending/Tr_CustomerMaster_PendingNew?" +
+                        "RepID=99&TabSerialCode=" + serialCode + "&InvoiceDate=" + invoiceDate + "&InvoiceNo=" + invoiceNo + "&CustomerNo=" + customerNo + "&" +
+                        "InvoiceTotalValue=" + invoiceTotalValue + "&ChequeAmount=" + chequeAmount + "&ChequNumber=" + chequeNumber + "&BankName=" + bankName + "&CollectedDate=" + collectedDate + "&RealizedDate=" + realizedDate + "";
+
+                String url = "";
+                try {
+                    URI uri = new URI(urlString.replace(" ", "$$"));
+                    {
+                        url += uri;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, "error building url:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+                chequeArray.add(url);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "errorupload:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        return chequeArray;
     }
     
 }

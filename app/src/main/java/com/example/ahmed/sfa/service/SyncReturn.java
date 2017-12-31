@@ -1,6 +1,7 @@
 package com.example.ahmed.sfa.service;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 /**
  * Created by DELL on 3/27/2017.
@@ -17,6 +18,7 @@ public class SyncReturn extends AsyncTask<JsonObjGenerate ,Void,String> {
          String inStream=jObj[0].createConnection();
          mlistener =jObj[0].getRequestListener();
         filter=jObj[0].getFilterType();
+        Log.d("MGT", inStream + "_inside sync return");
         return  inStream;
     }
     @Override

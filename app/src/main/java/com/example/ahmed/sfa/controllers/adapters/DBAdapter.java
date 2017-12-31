@@ -5,29 +5,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-
-import android.widget.Toast;
-
-import java.util.ArrayList;
-
-
-import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
-import com.example.ahmed.sfa.controllers.database.DBHelper;
-
 import android.util.Log;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-/*for testing purpose link:http://www.sqlitetutorial.net/tryit/query/sqlite-replace-statement/#1*/
-
 import com.example.ahmed.sfa.controllers.DateManager;
+import com.example.ahmed.sfa.controllers.RandomNumberGenerator;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
-
+import com.example.ahmed.sfa.models.CollectionsOutStanding;
 import com.example.ahmed.sfa.models.DeviceCheckController;
 import com.example.ahmed.sfa.models.Mst_CheckInOutPoints;
 import com.example.ahmed.sfa.models.Mst_CustomerStatus;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
 import com.example.ahmed.sfa.models.Mst_District;
+import com.example.ahmed.sfa.models.Mst_InvoiceNos_Mgt;
 import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 import com.example.ahmed.sfa.models.Mst_Reasons;
@@ -35,9 +25,12 @@ import com.example.ahmed.sfa.models.Mst_RepTable;
 import com.example.ahmed.sfa.models.Mst_Route;
 import com.example.ahmed.sfa.models.Mst_SupplierTable;
 import com.example.ahmed.sfa.models.Mst_Territory;
-
 import com.example.ahmed.sfa.models.Tr_ItineraryDetails;
 import com.example.ahmed.sfa.models.Tr_TabStock;
+
+import java.util.ArrayList;
+
+/*for testing purpose link:http://www.sqlitetutorial.net/tryit/query/sqlite-replace-statement/#1*/
 
 /**
  * Created by DELL on 3/10/2017.
@@ -53,7 +46,7 @@ public class DBAdapter{
         dbHelper = new DBHelper(context);
     }
 
-    private void openDB(){
+    public void openDB() {
         try {
             db = dbHelper.getWritableDatabase();
         }catch (Exception ex){
@@ -61,7 +54,7 @@ public class DBAdapter{
         }
     }
 
-    private void closeDB(){
+    public void closeDB() {
         try{
             dbHelper.close();
         }catch (Exception ex){
@@ -69,10 +62,21 @@ public class DBAdapter{
         }
     }
     public Cursor runQuery(String qry){
-        openDB();
-        Cursor res;
-        res=db.rawQuery(qry,null);
-        closeDB();
+//        openDB();
+        Cursor res = null;
+        try {
+            Log.d("STOCK", "inside runQuery");
+            res = db.rawQuery(qry, null);
+            if (res.getCount() != 0) {
+                Log.d("STOCK", String.valueOf(res.getCount()) + "not empty");
+            } else {
+                Log.d("STOCK", "empty");
+            }
+        } catch (Exception e) {
+            Log.d("STOCK", e.getMessage());
+        }
+
+//        closeDB();
         return  res;
 
     }
@@ -82,37 +86,81 @@ public class DBAdapter{
         //hp = new HashMap();
         //SQLiteDatabase db = dbHelper.getReadableDatabase();
         openDB();
-        Cursor res =  db.rawQuery( "SELECT DISTINCT PrincipleID FROM Tr_TabStock", null );
+        Cursor res = db.rawQuery("SELECT DISTINCT Mst_ProductMaster.Principle FROM Mst_ProductMaster INNER JOIN Tr_TabStock ON Mst_ProductMaster.PrincipleID = Tr_TabStock.PrincipleID", null);
         res.moveToFirst();
 
         array_list.add("All");
-        while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex("PrincipleID")));
+        while (!res.isAfterLast()) {
+            array_list.add(res.getString(res.getColumnIndex("Principle")));
             res.moveToNext();
         }
         closeDB();
         return array_list;
 
     }
-    //get brands
-    public ArrayList<String> getAllbrands(String qry) {
-        ArrayList<String> array_list = new ArrayList<String>();
 
-        //hp = new HashMap();
-        //SQLiteDatabase db = dbHelper.getReadableDatabase();
+    public String getBrand(String qry) {
+
+        Log.d("STOCK", "inside getBrand in DBAdapter");
+        Log.d("STOCK", qry);
+        String br = "";
+        Cursor res;
         openDB();
-        Cursor res =  db.rawQuery( qry, null );
-        res.moveToFirst();
+        try {
+            res = db.rawQuery(qry, null);
+            if (res.getCount() != 0) {
+                Log.d("STOCK", String.valueOf(res.getCount()) + "not empty");
+                if (res.moveToFirst()) {
+                    Log.d("STOCK", "cursor moved to first");
+                    while (!res.isAfterLast()) {
+                        br = (res.getString(res.getColumnIndex("Brand")));
+                        Log.d("STOCK", br);
+//                    Toast.makeText(context, br, Toast.LENGTH_SHORT).show();
+                        res.moveToNext();
+                    }
+                }
+            } else {
+                Log.d("STOCK", "empty");
+                Log.d("STOCK", "next to empty");
+            }
 
-        array_list.add("All");
-        while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex("BrandID")));
-            res.moveToNext();
+        } catch (Exception e) {
+            Log.d("STOCK", e.getMessage());
         }
         closeDB();
-        return array_list;
-
+        return br;
     }
+
+    //get brands
+//    public ArrayList<String> getAllbrands(String qry, ArrayList<String> bid) {
+//
+//
+//        ArrayList<String> array_list = new ArrayList<String>();
+//        ArrayList<String> bidList = new ArrayList<>();
+//        bidList.addAll(bid);
+//        array_list.add("All");
+//        openDB();
+//        Log.d("STOCK","opened DB");
+//        for(int i = 0;i<bidList.size();i++){
+//
+//            String currentBrand = bidList.get(i);
+//            Log.d("STOCK",currentBrand);
+//            qry = qry+ currentBrand;
+//            Cursor res =  db.rawQuery( qry, null );
+//            res.moveToFirst();
+//            Log.d("STOCK","moved to first");
+//            while(!res.isAfterLast()){
+//                array_list.add(res.getString(res.getColumnIndex("Brand")));
+//                Log.d("STOCK",array_list.get(i));
+//                Toast.makeText(context,res.getString(res.getColumnIndex("Brand")),Toast.LENGTH_SHORT).show();
+//                res.moveToNext();
+//            }
+//        }
+//
+//        closeDB();
+//        return array_list;
+//
+//    }
 
     public boolean insertIntoCustomerImage(String imageCode,String customerID){
         openDB();
@@ -263,9 +311,9 @@ public class DBAdapter{
         db.execSQL("INSERT OR REPLACE INTO Mst_ProductMaster (_ID,ItemCode, Description, PrincipleID, Principle, BrandID,Brand,SubBrandID," +
                 "SubBrand,UnitSize,UnitName,RetailPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) values (" +
                 "   (select _ID from Mst_ProductMaster where ItemCode = \""+pro.getItemCode()+"\")," +
-                "   \""+pro.getItemCode()+"\",\""+pro.getDescription()+"\",\""+pro.getPrincipleId()+"\",\" "+pro.getPrinciple()+"\"," +
-                "\" "+ pro.getBrandId()+" \",  \" "+ pro.getBrand()+" \",  \""+pro.getSubBrandId()+"\",\""+pro.getSubBrand()+"\",\""+pro.getUnitSize()+"\"   ,         "+
-                "   \""+pro.getUnitName()+"\",\""+pro.getRetailPrice()+"\",\""+pro.getBuyingPrice()+"\"    ,\""+pro.getActive()+"\", \" "+ DateManager.dateToday()+" \"  ,\""+pro.getTargetAllow()+"\"       "+
+                "   \"" + pro.getItemCode() + "\",\"" + pro.getDescription() + "\",\"" + pro.getPrincipleId() + "\",\"" + pro.getPrinciple() + "\"," +
+                "\"" + pro.getBrandId() + "\",  \"" + pro.getBrand() + "\",  \"" + pro.getSubBrandId() + "\",\"" + pro.getSubBrand() + "\",\"" + pro.getUnitSize() + "\"   ,         " +
+                "   \"" + pro.getUnitName() + "\",\"" + pro.getRetailPrice() + "\",\"" + pro.getBuyingPrice() + "\"    ,\"" + pro.getActive() + "\", \"" + DateManager.dateToday() + "\"  ,\"" + pro.getTargetAllow() + "\"       " +
                 " );");
 
         closeDB();
@@ -273,21 +321,48 @@ public class DBAdapter{
 
     public void setMst_RepTable(Mst_RepTable rep) {
 
+        Log.d("MGT", "inside adapter_" + rep.toString());
         openDB();
 
             try {
-                db.execSQL("INSERT OR REPLACE INTO Mst_RepTable (_ID,RepID,DeviceName,RepName," +
-                        "Address,ContactNo,DealerName,DealerAddress,MacAddress,AgentID,IsActive,LastUpdateDate) values (" +
-                        "(select _ID from Mst_RepTable where RepID = '" + rep.getRepId() + "')," +
-                        "'" + rep.getRepId() + "','" + rep.getDeviceName() + "','" + rep.getRepName() + "','" + rep.getAddress() + "'," +
-                        "'" + rep.getContactNo() + "','" + rep.getDealerName() + "','" + rep.getDealerAdress() + "','" + rep.getMacAdress() + "'," +
-                        "'" + rep.getAgentId() + "'," + rep.getIsActive() + ",'" + DateManager.dateToday() + "'" +
-                        " );");
+                db.execSQL("INSERT OR REPLACE INTO Mst_RepTable (_ID,RepID,DeviceName,RepName,Address,ContactNo,DealerName,DealerAddress,MacAddress,AgentID,IsActive,LastUpdateDate) values ((select _ID from Mst_RepTable where RepID = '" + rep.getRepId() + "'),'" + rep.getRepId() + "','" + rep.getDeviceName() + "','" + rep.getRepName() + "','" + rep.getAddress() + "'," + "'" + rep.getContactNo() + "','" + rep.getDealerName() + "','" + rep.getDealerAdress() + "','" + rep.getMacAdress() + "','" + rep.getAgentId() + "'," + rep.getIsActive() + ",'" + DateManager.dateToday() + "' );");
+                Log.d("MGT", "inserted to rep table");
             }catch (Exception e){
                 Toast.makeText(context,""+e.getMessage(),Toast.LENGTH_LONG).show();
             }
         closeDB();
     }
+
+    public void setCollections(CollectionsOutStanding co) {
+
+        Log.d("COL", "inside col_adapter_" + co.toString());
+        openDB();
+
+        try {
+            db.execSQL("INSERT OR REPLACE INTO Collections (_id,CreditDays,CreditValue,CurrentCreditValue,CustomerName,CustomerNo,InvoiceDate,InvoiceNo,InvoiceTotalValue,RepID,RepName) values ((select _id from Collections where InvoiceNo = '" + co.getInvoiceNo() + "'),'" + co.getCreditDays() + "','" + co.getCreditValue() + "','" + co.getCurrentCreditValue() + "','" + co.getCustomerName() + "'," + "'" + co.getCustomerNo() + "','" + co.getInvoiceDate() + "','" + co.getInvoiceNo() + "','" + co.getInvoiceTotal() + "','" + co.getRepId() + "','" + co.getRepName() + "' );");
+            Log.d("COL", "inserted to collections table");
+        } catch (Exception e) {
+            Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.d("COL", e.getMessage());
+        }
+        closeDB();
+
+    }
+
+    public void setMst_InvNos_Mgt(Mst_InvoiceNos_Mgt inm) {
+
+        Log.d("MGT", "inside DBAdapter saving in DB");
+        openDB();
+
+        try {
+            db.execSQL("INSERT OR REPLACE INTO Mst_InvoiceNumbers_Management (_id,InvoiceNo,InvoiceReturnNo,CollectionNoteNo,LastUpdateDate) VALUES ((select _id from Mst_InvoiceNumbers_Management where InvoiceNo = '" + inm.getInvoiceNo() + "'),'" + inm.getInvoiceNo() + "','" + inm.getInvoiceReturnNo() + "','" + inm.getCollectionNoteNo() + "','" + inm.getlUpdateDate() + "');");
+        } catch (Exception e) {
+            Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        closeDB();
+    }
+
+
     public void insertMst_SupplierTable(Mst_SupplierTable sup){
         openDB();
         db.execSQL(
@@ -421,7 +496,8 @@ public class DBAdapter{
                     ",'"+cus.getCustomerStatus()+"','"+cus.getInsertDate()+"','"+cus.getRouteID()+"','"+cus.getRouteName()+"','"+cus.getImageID()+"',"+cus.getLatitude()+"" +
                     ","+cus.getLongitude()+",'"+cus.getCompanyCode()+"',"+cus.getIsActive()+",'"+cus.getLastUpdateDate()+"');");
         }catch (Exception e){
-            Toast.makeText(context, "Customermaster_insert:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Customermaster_insert:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d("MGT", "Customermaster_insert:" + e.getMessage());
         }
         closeDB();
 
@@ -483,8 +559,49 @@ public class DBAdapter{
                     "'"+DateManager.dateToday()+"');");
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(context, "updae customer upload status:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "updae customer upload status:" + e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
         }
         closeDB();
     }
+
+    public void updateSalesHeaderUploadStatus(String cusNo) {
+        openDB();
+        try {
+            db.execSQL("UPDATE Tr_SalesHeader" +
+                    " SET isUpload = 1 " +
+                    " WHERE CustomerNo = '" + cusNo + "' ;");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "update Sales Header upload status:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+    }
+
+    /**
+     * -----------Get the Header ID and pass it-----------
+     **/
+    public void updateSalesDetailsUploadStatus(String cusNo) {
+        openDB();
+        try {
+            db.execSQL("UPDATE Tr_SalesDetails SET IsUpload = 0 WHERE _id = '" + cusNo + "' ;");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Update Sales Details upload status:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+    }
+
+    public void updateSalesoutstandingUploadStatuscusNo(String cusno) {
+        openDB();
+        try {
+            db.execSQL("UPDATE Tr_InvoiceOutstanding SET IsUpload = 0 WHERE _id = '" + cusno + "' ;");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Update InvoiceOutstanding upload status:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+    }
+
+
+
 }

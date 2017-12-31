@@ -106,7 +106,6 @@
 
 
     <LinearLayout
-
         android:paddingLeft="10dp"
         android:paddingBottom="5dp"
         android:background="@drawable/backshadow"
@@ -114,6 +113,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="0dp"
@@ -134,11 +134,13 @@
                         android:text="Sub Total"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/si_pay_sum_sub_tot"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
@@ -151,11 +153,13 @@
                         android:text="Discount"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/si_pay_sum_disc"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -169,11 +173,13 @@
                         android:text="Return Tot"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/si_pay_sum_return_tot"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
                 <LinearLayout
@@ -186,11 +192,13 @@
                         android:text="Total"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/si_pay_sum__tot"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textSize="16sp"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 
@@ -212,11 +220,13 @@
                     android:text="Invoice Qty"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/si_pay_sum_inv_qty"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
@@ -230,11 +240,13 @@
                     android:text="Free Qty"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/si_pay_sum_free_qty"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
@@ -247,11 +259,13 @@
                     android:text="Return Qty"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/si_pay_sum__return_qty"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
@@ -275,6 +289,7 @@
                     android:text="Credit"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/si_pay_sum_crdt"
@@ -290,6 +305,7 @@
                     android:text="Cash"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/si_pay_sum_cash"
@@ -305,6 +321,7 @@
                     android:text="Cheque"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textSize="16sp"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:id="@+id/si_pay_sum_chq"
