@@ -12,6 +12,17 @@ import java.util.List;
 
 public class SalesInvoiceSummary implements Parcelable{
 
+    public static final Creator<SalesInvoiceSummary> CREATOR = new Creator<SalesInvoiceSummary>() {
+        @Override
+        public SalesInvoiceSummary createFromParcel(Parcel in) {
+            return new SalesInvoiceSummary(in);
+        }
+
+        @Override
+        public SalesInvoiceSummary[] newArray(int size) {
+            return new SalesInvoiceSummary[size];
+        }
+    };
     private static final String TAG = "INVOICE";
     private double discount;
     private double subtotal;
@@ -20,12 +31,8 @@ public class SalesInvoiceSummary implements Parcelable{
     private int returnQty;
     private int invoicedQty;
     private int freeQty;
-
     private int shelfQty;
     private int orderQty;
-
-
-
 
     public SalesInvoiceSummary() {
         discount = 0.0;
@@ -41,6 +48,7 @@ public class SalesInvoiceSummary implements Parcelable{
     }
 
     public SalesInvoiceSummary(double discount, double subtotal, double total, int invoicedQty, int freeQty) {
+
         this.discount = discount;
         this.subtotal = subtotal;
         this.total = total;
@@ -51,6 +59,8 @@ public class SalesInvoiceSummary implements Parcelable{
     }
 
     public SalesInvoiceSummary(double discount, double subtotal, double total, int invoicedQty, int shelfQty, int orderQty, int freeQty) {
+
+
         this.discount = discount;
         this.subtotal = subtotal;
         this.total = total;
@@ -65,10 +75,22 @@ public class SalesInvoiceSummary implements Parcelable{
 
     }
 
+
+    protected SalesInvoiceSummary(Parcel in) {
+        discount = in.readDouble();
+        subtotal = in.readDouble();
+        total = in.readDouble();
+        invoicedQty = in.readInt();
+        freeQty = in.readInt();
+        returnVal = in.readDouble();
+        returnQty = in.readInt();
+
+    }
+
     public static SalesInvoiceSummary createSalesInvoiceSummary(List<SalesInvoiceModel> data){
 
-        Log.d(TAG, "inside SalesInvoiceSummary createSalesInvoiceSummary method");
-        Log.d(TAG, "data list size_" + data.size());
+        Log.d("RET", "inside SalesInvoiceSummary createSalesInvoiceSummary method");
+        Log.d("RET", "data list size_" + data.size());
         double discount=0.0;
         double subtotal=0.0;
         double total=0.0;
@@ -87,40 +109,17 @@ public class SalesInvoiceSummary implements Parcelable{
             freeQty += data.get(i).getFree();
 
             shelfQty += data.get(i).getShelf();
-            Log.d(TAG, "shelf added_" + String.valueOf(data.get(i).getShelf()));
+            Log.d("RET", "shelf added_" + String.valueOf(data.get(i).getShelf()));
             orderQty += data.get(i).getOrder();
-            Log.d(TAG, "order added_" + String.valueOf(data.get(i).getOrder()));
+            Log.d("RET", "order added_" + String.valueOf(data.get(i).getOrder()));
         }
 
-        Log.d(TAG, "shelf_" + String.valueOf(shelfQty));
-        Log.d(TAG, "order_" + String.valueOf(orderQty));
-        Log.d(TAG, "free_" + String.valueOf(freeQty));
+        Log.d("RET", "shelf_" + String.valueOf(shelfQty));
+        Log.d("RET", "order_" + String.valueOf(orderQty));
+        Log.d("RET", "free_" + String.valueOf(freeQty));
 
         return new SalesInvoiceSummary(discount, subtotal, total, invoicedQty, shelfQty, orderQty, freeQty);
     }
-
-    protected SalesInvoiceSummary(Parcel in) {
-        discount = in.readDouble();
-        subtotal = in.readDouble();
-        total = in.readDouble();
-        invoicedQty = in.readInt();
-        freeQty = in.readInt();
-        returnVal = in.readDouble();
-        returnQty = in.readInt();
-
-    }
-
-    public static final Creator<SalesInvoiceSummary> CREATOR = new Creator<SalesInvoiceSummary>() {
-        @Override
-        public SalesInvoiceSummary createFromParcel(Parcel in) {
-            return new SalesInvoiceSummary(in);
-        }
-
-        @Override
-        public SalesInvoiceSummary[] newArray(int size) {
-            return new SalesInvoiceSummary[size];
-        }
-    };
 
     public double getDiscount() {
         DecimalFormat format = new DecimalFormat("0.2f");

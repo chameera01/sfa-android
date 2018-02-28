@@ -8,11 +8,31 @@ import android.os.Parcelable;
  */
 
 public class Cheque implements Parcelable{
+    public static final Creator<Cheque> CREATOR = new Creator<Cheque>() {
+        @Override
+        public Cheque createFromParcel(Parcel in) {
+            return new Cheque(in);
+        }
+
+        @Override
+        public Cheque[] newArray(int size) {
+            return new Cheque[size];
+        }
+    };
     private double chequeVal;
     private String chequeNum;
     private String bank;
     private String collectionDate;
     private String realizedDate;
+    private String branch;
+
+    public Cheque(double chequeVal, String chequeNum, String bank, String realizedDate, String branch) {
+        this.chequeVal = chequeVal;
+        this.chequeNum = chequeNum;
+        this.bank = bank;
+        this.realizedDate = realizedDate;
+        this.branch = branch;
+    }
 
     public Cheque(int chequeVal, String chequeNum, String bank, String collectionDate, String realizedDate) {
         this.chequeVal = chequeVal;
@@ -36,25 +56,18 @@ public class Cheque implements Parcelable{
         bank = in.readString();
         collectionDate = in.readString();
         realizedDate = in.readString();
+        branch = in.readString();
     }
-
-    public static final Creator<Cheque> CREATOR = new Creator<Cheque>() {
-        @Override
-        public Cheque createFromParcel(Parcel in) {
-            return new Cheque(in);
-        }
-
-        @Override
-        public Cheque[] newArray(int size) {
-            return new Cheque[size];
-        }
-    };
 
     public double getChequeVal() {
         return chequeVal;
     }
 
     public void setChequeVal(int chequeVal) {
+        this.chequeVal = chequeVal;
+    }
+
+    public void setChequeVal(double chequeVal) {
         this.chequeVal = chequeVal;
     }
 
@@ -72,6 +85,14 @@ public class Cheque implements Parcelable{
 
     public void setBank(String bank) {
         this.bank = bank;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 
     public String getCollectionDate() {
@@ -102,5 +123,6 @@ public class Cheque implements Parcelable{
         dest.writeString(bank);
         dest.writeString(collectionDate);
         dest.writeString(realizedDate);
+        dest.writeString(branch);
     }
 }

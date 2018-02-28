@@ -28,10 +28,10 @@ import com.example.ahmed.sfa.activities.DisplayProductTableActivity;
 import com.example.ahmed.sfa.activities.Home;
 import com.example.ahmed.sfa.activities.InvCollections;
 import com.example.ahmed.sfa.activities.InvoiceHistory;
-import com.example.ahmed.sfa.activities.ManualSync;
 import com.example.ahmed.sfa.activities.PendingCustomer;
 import com.example.ahmed.sfa.activities.SalesInvoice;
 import com.example.ahmed.sfa.activities.StockView;
+import com.example.ahmed.sfa.activities.Sync;
 import com.example.ahmed.sfa.controllers.CheckInOutManager;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
@@ -50,16 +50,17 @@ import java.util.List;
 
 import static android.content.Context.LOCATION_SERVICE;
 
+//import com.example.ahmed.sfa.activities.ManualSync;
+
 /**
  * Created by Ahmed on 3/10/2017.
  */
 
 public class NavigationDrawerMenuManager implements NavigationView.OnNavigationItemSelectedListener,CheckInCheckOutActions {
-    private Activity activity;
     NavigationView navview;
-
     //String[] places ;
     DrawerLayout drawer ;
+    private Activity activity;
 
     public NavigationDrawerMenuManager(final Activity activity){
 
@@ -282,8 +283,8 @@ public class NavigationDrawerMenuManager implements NavigationView.OnNavigationI
 
             case R.id.activity_manual_sync:
                 if(!(activity instanceof SalesInvoice)){
-                    //Intent intent = new Intent(activity,DisplayProductTableActivity.class);
-                    Intent intent = new Intent(activity, ManualSync.class);
+
+                    Intent intent = new Intent(activity, Sync.class);
                     activity.startActivity(intent);
                     return true;
                 }

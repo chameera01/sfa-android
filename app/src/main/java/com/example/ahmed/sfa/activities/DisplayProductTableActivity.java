@@ -1,8 +1,6 @@
 package com.example.ahmed.sfa.activities;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -14,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,18 +24,16 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.ahmed.sfa.activities.supportactivities.TableThread;
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.activities.supportactivities.TableThread;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.Mst_ProductMaster;
 
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 public class DisplayProductTableActivity extends AppCompatActivity {
     Button btnviewall;
     Spinner spinner_brand;
@@ -49,6 +44,7 @@ public class DisplayProductTableActivity extends AppCompatActivity {
     String brand;
     String principle;
     String keyword;
+    int row_count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,17 +53,16 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);//fixed landscape screan;
 
 
-
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
 
-        NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener = new NavigationDrawerMenuManager(this);
 
         //Intent intent = getIntent();
@@ -83,8 +78,8 @@ public class DisplayProductTableActivity extends AppCompatActivity {
 
         spinner_brand = (Spinner) findViewById(R.id.spinner_brand);
         spinner_principle = (Spinner) findViewById(R.id.spinner_principle);
-        searchView=(SearchView) findViewById(R.id.search_txt);
-        btnviewall=(Button)findViewById(R.id.button_view);
+        searchView = (SearchView) findViewById(R.id.search_txt);
+        btnviewall = (Button) findViewById(R.id.button_view);
 
         //onEventListenr for spinner principle
         spinner_principle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -98,7 +93,6 @@ public class DisplayProductTableActivity extends AppCompatActivity {
                 sortBrandByPrinciple(principle);
 
             }
-
 
 
             @Override
@@ -135,8 +129,8 @@ public class DisplayProductTableActivity extends AppCompatActivity {
             }
         });*/
 
-		//searchView event
-		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        //searchView event
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 brand = spinner_brand.getSelectedItem().toString();
@@ -175,74 +169,52 @@ public class DisplayProductTableActivity extends AppCompatActivity {
                 return;
             }
         });*/
-		
-		
+
+
         setSpinner();//aulto load values to dropdown boxes
         //getdata("All", "All", "cd001");//call default search;
 
 
-
-
     }
+
     private void sortBrandByPrinciple(String principle) {
-        try{
+        try {
             //set brand spinner values accordingt o principle
             DBAdapter adapter = new DBAdapter(this);
 
-            String qry="select DISTINCT Brand from Mst_ProductMaster where Principle='"+principle+"'";
-            ArrayList<String> brandList = adapter.getArryListUniMethod(qry,"Brand");
-            if(brandList.isEmpty()){
+            String qry = "select DISTINCT Brand from Mst_ProductMaster where Principle='" + principle + "'";
+            ArrayList<String> brandList = adapter.getArryListUniMethod(qry, "Brand");
+            if (brandList.isEmpty()) {
                 brandList.add("All");
             }
 
-            ArrayAdapter<String> adp = new ArrayAdapter<String> (this,android.R.layout.simple_spinner_dropdown_item,brandList);
+            ArrayAdapter<String> adp = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, brandList);
             spinner_brand.setAdapter(adp);
             spinner_brand.setVisibility(View.VISIBLE);
-        }catch (Exception e){
-            Toast.makeText(this, "ee"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "ee" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
     }
 
-    public void setListView(){
-        ListView lv= (ListView) findViewById(R.id.list_view);
-        TableLayout tbl= (TableLayout) findViewById(R.id.table_product);
-        TableThread tt = new TableThread(this,this,lv,tbl,"");
+    public void setListView() {
+        ListView lv = (ListView) findViewById(R.id.list_view);
+        TableLayout tbl = (TableLayout) findViewById(R.id.table_product);
+        TableThread tt = new TableThread(this, this, lv, tbl, "");
         tt.start();
     }
-    public void onBackPressed(){
-        DrawerLayout drawer = (DrawerLayout )findViewById(R.id.drawer_layout);
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else{
+        } else {
             super.onBackPressed();
         }
     }
 
-    public  void setSpinner(){
-        DBHelper dbbrand=new DBHelper(this);
-
-
-        ArrayList<String> arrayList1 = new ArrayList<String>();
-        arrayList1=dbbrand.getAllbrands();
-        ArrayAdapter<String> adp = new ArrayAdapter<String> (this,android.R.layout.simple_spinner_dropdown_item,arrayList1);
-        spinner_brand.setAdapter(adp);
-
-        spinner_brand.setVisibility(View.VISIBLE);
-
-
-        //set Spinner values to principle dropdown menu;
-        ArrayList<String> principleList = new ArrayList<String>();
-        principleList=dbbrand.getAllprinciples();
-
-        ArrayAdapter<String> adp2 = new ArrayAdapter<String> (this,android.R.layout.simple_spinner_dropdown_item,principleList);
-        spinner_principle.setAdapter(adp2);
-
-        spinner_principle.setVisibility(View.VISIBLE);
-    }
-
     /*public void viewallbtnClick(View view){
-		brand=spinner_brand.getSelectedItem().toString();
+        brand=spinner_brand.getSelectedItem().toString();
 		principle=spinner_principle.getSelectedItem().toString();
 		keyword=searchView.getQuery().toString();
 
@@ -255,12 +227,34 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         getdata(principle, brand, keyword);
     }*/
 
+    public void setSpinner() {
+        DBHelper dbbrand = new DBHelper(this);
+
+
+        ArrayList<String> arrayList1 = new ArrayList<String>();
+        arrayList1 = dbbrand.getAllbrands();
+        ArrayAdapter<String> adp = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arrayList1);
+        spinner_brand.setAdapter(adp);
+
+        spinner_brand.setVisibility(View.VISIBLE);
+
+
+        //set Spinner values to principle dropdown menu;
+        ArrayList<String> principleList = new ArrayList<String>();
+        principleList = dbbrand.getAllprinciples();
+
+        ArrayAdapter<String> adp2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, principleList);
+        spinner_principle.setAdapter(adp2);
+
+        spinner_principle.setVisibility(View.VISIBLE);
+    }
 
     public void selfDestruct(View view) {
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
-    public int  dbtest() {
+
+    public int dbtest() {
         String result = "ss";
         DBHelper db = new DBHelper(this);
 
@@ -272,50 +266,49 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         btnviewall.setText(result);
 
         db.close();
-        if (result == "success"){
+        if (result == "success") {
             return 1;
-        }else{
-           // Toast.makeText(this, "here toast"+result, Toast.LENGTH_LONG).show();
+        } else {
+            // Toast.makeText(this, "here toast"+result, Toast.LENGTH_LONG).show();
             return 0;
         }
 
     }
-    public void getdata(String ...filter){
 
-        String principle=filter[0];
-        String brand=filter[1];
-        String searchword=filter[2];
-		String searchQry="";
-        String query="select * from Mst_ProductMaster ";
+    public void getdata(String... filter) {
 
-		
+        String principle = filter[0];
+        String brand = filter[1];
+        String searchword = filter[2];
+        String searchQry = "";
+        String query = "select * from Mst_ProductMaster ";
 
-		
-            if(principle=="All" && brand=="All"){
-                if(searchword!=null){
-					query+= " where Description like'%"+searchword+"%'";
-				}
-            }else if(principle=="All" && brand !="All"){
-                query+= " where Brand='"+brand+"' ";
-            }else if(principle!="All" && brand=="All"){
-                query+= " where Principle='"+principle+"' ";
-            }else{
-                query+= " where Brand='"+brand+"'  AND Principle='"+principle+"' ";
+
+        if (principle == "All" && brand == "All") {
+            if (searchword != null) {
+                query += " where Description like'%" + searchword + "%'";
             }
-		if(searchword!=null && !(principle=="All" && brand=="All") ){
-			query+=" AND Description like'%"+searchword+"%'";
-		}
+        } else if (principle == "All" && brand != "All") {
+            query += " where Brand='" + brand + "' ";
+        } else if (principle != "All" && brand == "All") {
+            query += " where Principle='" + principle + "' ";
+        } else {
+            query += " where Brand='" + brand + "'  AND Principle='" + principle + "' ";
+        }
+        if (searchword != null && !(principle == "All" && brand == "All")) {
+            query += " AND Description like'%" + searchword + "%'";
+        }
 
-            //refresh the table;
-			TableLayout table = (TableLayout)findViewById(R.id.table_product);
-			int n=table.getChildCount();
+        //refresh the table;
+        TableLayout table = (TableLayout) findViewById(R.id.table_product);
+        int n = table.getChildCount();
 
 
-           table.removeAllViews();
-            //Thread
-        ListView lv= (ListView) findViewById(R.id.list_view);
-        TableLayout tbl= (TableLayout) findViewById(R.id.table_product);
-        TableThread tt = new TableThread(this,this,lv,tbl,query);
+        table.removeAllViews();
+        //Thread
+        ListView lv = (ListView) findViewById(R.id.list_view);
+        TableLayout tbl = (TableLayout) findViewById(R.id.table_product);
+        TableThread tt = new TableThread(this, this, lv, tbl, query);
         tt.start();
 
         /*try {
@@ -356,12 +349,11 @@ public class DisplayProductTableActivity extends AppCompatActivity {
             //btnviewall.setText(e.getMessage());
         }*/
     }
-    int row_count=0;
     //insert data to  table
 
     private void update(Mst_ProductMaster pm) {
 
-        TableLayout table = (TableLayout)findViewById(R.id.table_product);
+        TableLayout table = (TableLayout) findViewById(R.id.table_product);
 
         /*add style to table row*/
         ContextThemeWrapper wrappedContext = new ContextThemeWrapper(this, R.style.pending_customer_row);
@@ -370,17 +362,17 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         tr.setLayoutParams(new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.MATCH_PARENT));
         /*add style to table row*/
 
-        if(row_count%2!=0) {
+        if (row_count % 2 != 0) {
             wrappedContext = new ContextThemeWrapper(this, R.style.pending_customer_odd_row);
         }
 
         //tv.setLayoutParams(param);
         /*add extra cutomer method*/
-        LinearLayout col_1=new LinearLayout(this);
-        LinearLayout col_2=new LinearLayout(this);
-        LinearLayout col_3=new LinearLayout(this);
-        LinearLayout col_4=new LinearLayout(this);
-        LinearLayout col_5=new LinearLayout(this);
+        LinearLayout col_1 = new LinearLayout(this);
+        LinearLayout col_2 = new LinearLayout(this);
+        LinearLayout col_3 = new LinearLayout(this);
+        LinearLayout col_4 = new LinearLayout(this);
+        LinearLayout col_5 = new LinearLayout(this);
 
         col_1.setOrientation(LinearLayout.VERTICAL);
         col_2.setOrientation(LinearLayout.VERTICAL);
@@ -389,11 +381,10 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         col_5.setOrientation(LinearLayout.VERTICAL);
 
 
-
-        TableRow.LayoutParams  col_param=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT,0.1f);
-        TableRow.LayoutParams  col_param_wide=new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT,0.2f);
-        col_param.weight=1f;
-        col_param_wide.weight=2f;
+        TableRow.LayoutParams col_param = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 0.1f);
+        TableRow.LayoutParams col_param_wide = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT, 0.2f);
+        col_param.weight = 1f;
+        col_param_wide.weight = 2f;
         //col_param.width=150;
         //col_param_wide.width=350;
 
@@ -406,38 +397,38 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         /*end addextra customer method*/
 
         //add coloum_item_code
-        TextView tv = new TextView(wrappedContext,null,0);
+        TextView tv = new TextView(wrappedContext, null, 0);
         tv.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv.setText(pm.getItemCode());
         tv.setGravity(Gravity.LEFT);
         //add coloum_brand
-        TextView tv_brand = new TextView(wrappedContext,null,0);
+        TextView tv_brand = new TextView(wrappedContext, null, 0);
         tv_brand.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         tv_brand.setText(pm.getBrand());
         tv_brand.setGravity(Gravity.LEFT);
 
-        TextView th_prdct=(TextView) findViewById(R.id.tv_product_col_title);
+        TextView th_prdct = (TextView) findViewById(R.id.tv_product_col_title);
         //tv.setWidth(th_prdct.getWidth());
         //tv.setText("Entry-1");
 
         //add coloum_unitsize
-        TextView tv_unitsize = new TextView(wrappedContext,null,0);
+        TextView tv_unitsize = new TextView(wrappedContext, null, 0);
         tv_unitsize.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-        tv_unitsize.setText(" "+pm.getUnitSize());
+        tv_unitsize.setText(" " + pm.getUnitSize());
 
 
         //add coloum_sellingprice
-        TextView tv_sellingprice = new TextView(wrappedContext,null,0);
+        TextView tv_sellingprice = new TextView(wrappedContext, null, 0);
         tv_sellingprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
-        String  sp= ""+pm.getSellingPrice();
+        String sp = "" + pm.getSellingPrice();
         //String[] sellp_str=sp.split(".");
         //String[] decimal_sp=sellp_str[1].split("");
         double sellp = Double.parseDouble(new DecimalFormat("##.##").format(pm.getSellingPrice()));
-        tv_sellingprice.setText(""+sellp);
+        tv_sellingprice.setText("" + sellp);
         tv_sellingprice.setGravity(Gravity.RIGHT);
 
         //add coloum_sellingprice
-        TextView tv_retailprice = new TextView(wrappedContext,null,0);
+        TextView tv_retailprice = new TextView(wrappedContext, null, 0);
         tv_retailprice.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT));
         double retailp = Double.parseDouble(new DecimalFormat("##.##").format(pm.getRetailPrice()));
         tv_retailprice.setText(" " + retailp);
@@ -447,7 +438,6 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         /*TextView tv2 = new TextView(wrappedContext,null,0);
         tv2.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT));
         tv2.setText("Entry-2");*/
-
 
 
         col_1.addView(tv);
@@ -464,7 +454,6 @@ public class DisplayProductTableActivity extends AppCompatActivity {
         tr.addView(col_5);
 
         table.addView(tr);
-
 
 
     }

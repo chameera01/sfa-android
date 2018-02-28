@@ -1,7 +1,5 @@
 package com.example.ahmed.sfa;
 
-import java.util.HashMap;
-
 /**
  * Created by Ahmed on 3/25/2017.
  */
@@ -33,6 +31,10 @@ public class Constants {
     public static final int DISMISSED = 2;
     public static final int DEFAULT_VAL = 0;
 
+    public static final String BASE_URL = "http://124.43.19.123:8082/BizMapExpertHesperus_UATTest/";
+
+    // File upload url (replace the ip with your server address)
+    public static final String FILE_UPLOAD_URL = "http://192.168.1.114/AndroidFileUpload/fileUpload.php";
 
 
     public static final String[] CHEQUE_TABLE_COLUMNS ={"SerialCode","InvoiceDate","InvoiceNo","CustomerNo",
@@ -45,7 +47,7 @@ public class Constants {
     public static final String[] SALES_HEADER_TABLE_COLUMNS = {"ItineraryID","CustomerNo","InvoiceNo","InvoiceDate","PaymentTime",
             "SubTotal","InvoiceTotal","FullDiscountRate","DiscountAmount","DiscountType","IsOnInvoiceReturn","OnInvoiceReturnNo",
             "OnInvoiceReturnValue","CreditAmount","CashAmount","ChequeAmount","Isprint","ProductCount",
-            "InvoiceType","Latitude","Longitude","IsUpload","UploadDate"};
+            "InvoiceType", "Latitude", "Longitude", "IsUpload", "UploadDate", "CashDiscount"};
 
     public static final String SALES_DETAILS_TABLE ="Tr_SalesDetails";
     public static final String[] SALES_DETAILS_TABLE_COLUMNS={"HeaderID","ItemCode","UnitPrice"
@@ -81,5 +83,5 @@ public class Constants {
 
     public static final String PRINCIPLE_DISCOUNT_TABLE = "Tr_PrincipleDiscount";
     public static final String[] PRINCIPLE_DISCOUNT_TABLE_COLUMNS = {"InvoiceId","CustomerNo","Date","PrincipleID",
-            "Principle","Value","DiscountRate","DiscountValue"};
+            "Principle", "Value", "DiscountRate", "DiscountValue", "IsUpload"};
 }

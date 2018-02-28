@@ -1,92 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
+    android:layout_gravity="bottom"
+    android:orientation="vertical"
     android:paddingBottom="10dp"
-    android:layout_gravity="bottom">
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
     <LinearLayout
-        android:orientation="vertical"
-        android:background="@drawable/backshadow"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2">
+        android:layout_weight="2"
+        android:background="@drawable/backshadow"
+        android:orientation="vertical">
         <TableLayout
             android:id="@+id/table_header"
-            android:layout_below="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/search_bar"
             android:background="@color/colorPrimary"
             android:textColor="@color/listSelectedText"
             >
             <TableRow android:background="@drawable/backshadow"
                 android:backgroundTint="@color/secondoryText"
-                android:textColor="@color/textPrimary"
+                android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:textColor="@color/textPrimary">
                 <TextView
-                    android:text="Code"
+                    style="@style/SalesTableHeaderTextViews"
 
                     android:layout_weight="1"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Product"
+                    android:text="Code"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
 
                     android:layout_weight="4"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Batch Number"
+                    android:text="Product"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
 
                     android:layout_weight="2"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Expiry Date"
-                    android:visibility="gone"
+                    android:text="Batch Number"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
                     android:layout_weight="1.5"
+                    android:text="Expiry Date"
                     android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Unit Price"
+                    android:visibility="gone" />
 
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+
+                    android:layout_weight="1"
                     android:inputType="numberDecimal"
-                    android:layout_weight="1"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Stock"
+                    android:text="Unit Price" />
 
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+
+                    android:layout_weight="1"
                     android:inputType="numberDecimal"
+                    android:text="Stock"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+
+                    android:layout_weight="0.9"
+                    android:inputType="number"
+                    android:text="Shelf"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+                    android:layout_weight="0.9"
+                    android:inputType="number"
+                    android:text="Request"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+                    android:layout_weight="0.9"
+                    android:inputType="number"
+                    android:text="Order"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+                    android:layout_weight="0.9"
+                    android:text="Free"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+
+                    android:layout_weight="0.9"
+                    android:text="Disc%"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+
                     android:layout_weight="1"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Shelf"
-
-                    android:inputType="number"
-                    android:layout_weight="0.9"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Request"
-                    android:layout_weight="0.9"
-                    android:inputType="number"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Order"
-                    android:layout_weight="0.9"
-                    android:inputType="number"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Free"
-                    android:layout_weight="0.9"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Disc%"
-
-                    android:layout_weight="0.9"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Line Value"
-
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
+                    android:text="Line Value"
+                    android:textAlignment="center" />
             </TableRow>
         </TableLayout>
         <ScrollView
@@ -106,236 +129,251 @@
 
 
     <LinearLayout
-        android:paddingLeft="10dp"
-        android:paddingBottom="5dp"
-        android:background="@drawable/backshadow"
-        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_marginTop="25dp"
+        android:layout_weight="1"
+        android:background="@drawable/backshadow"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:orientation="horizontal">
             <!-- second row first column here-->
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <LinearLayout
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
                     <TextView
-                        android:text="Sub Total"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:layout_height="wrap_content" />
+                        android:text="Sub Total"
+                        android:textSize="16sp" />
                     <TextView
                         android:id="@+id/si_pay_sum_sub_tot"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:layout_height="wrap_content" />
+                        android:textSize="16sp" />
                 </LinearLayout>
                 <LinearLayout
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
                     <TextView
-                        android:text="Discount"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:layout_height="wrap_content" />
+                        android:text="Discount"
+                        android:textSize="16sp" />
                     <TextView
                         android:id="@+id/si_pay_sum_disc"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:layout_height="wrap_content" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
                 <LinearLayout
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
                     <TextView
-                        android:text="Return Tot"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:layout_height="wrap_content" />
+                        android:text="Return Tot"
+                        android:textSize="16sp" />
                     <TextView
                         android:id="@+id/si_pay_sum_return_tot"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:layout_height="wrap_content" />
+                        android:textSize="16sp" />
                 </LinearLayout>
                 <LinearLayout
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp">
                     <TextView
-                        android:text="Total"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:layout_height="wrap_content" />
+                        android:text="Total"
+                        android:textSize="16sp" />
                     <TextView
                         android:id="@+id/si_pay_sum__tot"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:layout_height="wrap_content" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
             <!-- second row second column here-->
             <LinearLayout
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
                 <TextView
-                    android:text="Invoice Qty"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:layout_height="wrap_content" />
+                    android:text="Invoice Qty"
+                    android:textSize="16sp" />
                 <TextView
                     android:id="@+id/si_pay_sum_inv_qty"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:layout_height="wrap_content" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
                 <TextView
-                    android:text="Free Qty"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:layout_height="wrap_content" />
+                    android:text="Free Qty"
+                    android:textSize="16sp" />
                 <TextView
                     android:id="@+id/si_pay_sum_free_qty"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:layout_height="wrap_content" />
+                    android:textSize="16sp" />
             </LinearLayout>
             <LinearLayout
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
                 <TextView
-                    android:text="Return Qty"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:layout_height="wrap_content" />
+                    android:text="Return Qty"
+                    android:textSize="16sp" />
                 <TextView
                     android:id="@+id/si_pay_sum__return_qty"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:layout_height="wrap_content" />
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
     <LinearLayout
-        android:background="@drawable/backshadow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/backshadow">
         <LinearLayout
-            android:padding="15dp"
-            android:orientation="vertical"
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:layout_height="wrap_content">
+            android:orientation="vertical"
+            android:padding="15dp">
             <LinearLayout
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="Credit"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:layout_height="wrap_content" />
+                    android:text="Credit"
+                    android:textSize="16sp" />
                 <TextView
                     android:id="@+id/si_pay_sum_crdt"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="Cash"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:layout_height="wrap_content" />
+                    android:text="Cash"
+                    android:textSize="16sp" />
                 <TextView
                     android:id="@+id/si_pay_sum_cash"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content">
                 <TextView
-                    android:text="Cheque"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:layout_height="wrap_content" />
+                    android:text="Cheque"
+                    android:textSize="16sp" />
                 <TextView
                     android:id="@+id/si_pay_sum_chq"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
             </LinearLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingBottom="10dp"
-            android:layout_height="match_parent">
+            android:padding="10dp">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/home_button_ss"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:enabled="false"
+                android:text="Home" />
 
             <Button
                 android:id="@+id/print_button_ss"

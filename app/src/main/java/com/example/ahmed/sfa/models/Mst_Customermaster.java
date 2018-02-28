@@ -35,6 +35,7 @@ public class Mst_Customermaster {
     private  String companyCode="default";
     private  int isActive=0;
     private  String lastUpdateDate;
+    private int isCashCustomer = 0;
 
     public String getCustomerNo() {
         return CustomerNo;
@@ -258,5 +259,13 @@ public class Mst_Customermaster {
 
     public void setLastUpdateDate(String lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
+    }
+
+    public int getIsCashCustomer() {
+        return isCashCustomer;
+    }
+
+    public void setIsCashCustomer(int isCashCustomer) {
+        this.isCashCustomer = isCashCustomer;
     }
 }

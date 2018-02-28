@@ -55,7 +55,6 @@
                             android:layout_width="100dp"
                             android:layout_height="35dp"
                             android:layout_marginStart="179dp"
-
                             android:layout_marginTop="20dp"
                             android:layout_weight="0.2"
                             android:text="Update Product Details" />
@@ -72,12 +71,11 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:layout_marginStart="36dp"
-
                             android:layout_marginTop="0dp"
                             android:layout_toEndOf="@+id/textView4"
                             android:layout_weight="0.8"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -121,7 +119,7 @@
                             android:layout_toEndOf="@+id/textView4"
                             android:layout_weight="0.8"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
 
@@ -166,7 +164,7 @@
                             android:layout_toEndOf="@+id/textView4"
                             android:layout_weight="0.08"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -188,7 +186,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="34dp"
                             android:layout_marginStart="179dp"
-
                             android:layout_marginTop="20dp"
                             android:text="Update Product Brand Details" />
                     </LinearLayout>
@@ -203,13 +200,12 @@
                             android:id="@+id/iv_ProductBradnSync"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-
                             android:layout_marginStart="36dp"
                             android:layout_marginTop="0dp"
                             android:layout_toEndOf="@+id/textView4"
                             android:layout_weight="0.20"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -231,7 +227,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="34dp"
                             android:layout_marginStart="179dp"
-
                             android:layout_marginTop="20dp"
                             android:layout_weight="0.02"
                             android:text="Update Customer Status" />
@@ -248,13 +243,12 @@
                             android:id="@+id/iv_CustomerStatusSync"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-
                             android:layout_marginStart="36dp"
                             android:layout_marginTop="0dp"
                             android:layout_toEndOf="@+id/textView4"
                             android:layout_weight="0.20"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -298,7 +292,7 @@
                             android:layout_toEndOf="@+id/textView4"
                             android:layout_weight="0.20"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -336,13 +330,11 @@
                             android:id="@+id/iv_TerritorySync"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-
                             android:layout_marginStart="36dp"
                             android:layout_marginTop="0dp"
-                            android:layout_toEndOf="@+id/textView4"
                             android:layout_weight="0.20"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -364,7 +356,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="34dp"
                             android:layout_marginStart="179dp"
-
                             android:layout_marginTop="20dp"
                             android:layout_weight="0.03"
                             android:text="Update Route Details" />
@@ -380,13 +371,11 @@
                             android:id="@+id/iv_RouteSync"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-
-
                             android:layout_marginStart="36dp"
                             android:layout_marginTop="0dp"
                             android:layout_weight="0.20"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -408,7 +397,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="34dp"
                             android:layout_marginStart="179dp"
-
                             android:layout_marginTop="20dp"
                             android:layout_weight="0.02"
                             android:text="Update Reasons Details" />
@@ -424,13 +412,11 @@
                             android:id="@+id/iv_ReasonSync"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-
-
                             android:layout_marginStart="36dp"
                             android:layout_marginTop="0dp"
                             android:layout_weight="0.20"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -452,7 +438,6 @@
                             android:layout_width="185dp"
                             android:layout_height="34dp"
                             android:layout_marginStart="179dp"
-
                             android:layout_marginTop="20dp"
                             android:text="Update CheckInOutPoints Details" />
                     </LinearLayout>
@@ -467,13 +452,11 @@
                             android:id="@+id/iv_chechInOutPointsSync"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-
-
                             android:layout_marginStart="36dp"
                             android:layout_marginTop="0dp"
                             android:layout_weight="0.20"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -495,7 +478,6 @@
                             android:layout_width="185dp"
                             android:layout_height="34dp"
                             android:layout_marginStart="179dp"
-
                             android:layout_marginTop="20dp"
                             android:text="Update Customer Details" />
                     </LinearLayout>
@@ -510,13 +492,11 @@
                             android:id="@+id/iv_CustomerSync"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-
-
                             android:layout_marginStart="36dp"
                             android:layout_marginTop="0dp"
                             android:layout_weight="0.20"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -539,7 +519,6 @@
                             android:layout_width="185dp"
                             android:layout_height="34dp"
                             android:layout_marginStart="179dp"
-
                             android:layout_marginTop="20dp"
                             android:text="Update TabStock" />
                     </LinearLayout>
@@ -558,7 +537,7 @@
                             android:layout_marginTop="0dp"
                             android:layout_weight="0.20"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -600,14 +579,98 @@
                             android:layout_toEndOf="@+id/textView4"
                             android:layout_weight="0.20"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_downloads" />
                     </LinearLayout>
 
                 </LinearLayout>
 
                 <!--Added by Shani on 7th Dec-->
 
+                <!--Collections-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="#aad7f9"
+                    android:orientation="horizontal">
 
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvCollect"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="179dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="0.00"
+                            android:text="Update Collections" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_Collections"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="36dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_weight="0.20"
+                            android:scaleType="fitStart"
+                            app:srcCompat="@drawable/ic_downloads" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--Audit-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:background="#94cbf4"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvAudit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="179dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_weight="0.00"
+                            android:text="Update Audit" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/iv_audit"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="36dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_weight="0.20"
+                            android:scaleType="fitStart"
+                            app:srcCompat="@drawable/ic_downloads" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--Sales Details-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
@@ -686,56 +749,16 @@
                             android:layout_marginTop="0dp"
                             android:layout_weight="0.20"
                             android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
+                            app:srcCompat="@drawable/ic_upload" />
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <!--Collections-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:background="#aad7f9"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvCollect"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="179dp"
-                            android:layout_marginTop="20dp"
-                            android:layout_weight="0.00"
-                            android:text="Update Collections" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/iv_Collections"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_marginStart="36dp"
-                            android:layout_marginTop="0dp"
-                            android:layout_weight="0.20"
-                            android:scaleType="fitStart"
-                            app:srcCompat="@drawable/ico_sync" />
-                    </LinearLayout>
-
-                </LinearLayout>
 
             </LinearLayout>
         </ScrollView>
 
+        //add two separate UI layouts for upload and download
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

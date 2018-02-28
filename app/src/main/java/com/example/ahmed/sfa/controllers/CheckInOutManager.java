@@ -6,8 +6,8 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
-
 import com.example.ahmed.sfa.models.CheckInCheckOutActions;
 import com.example.ahmed.sfa.models.CheckSession;
 
@@ -19,13 +19,9 @@ import java.util.ArrayList;
 
 public class CheckInOutManager {
 
-    enum SELECTION{IN,OUT}
-
-
     Context context;
     CheckingDBAdapter dbAdapter;
     CheckInCheckOutActions actions;
-
     public CheckInOutManager(Context c, CheckInCheckOutActions actions){
         this.context = c;
         this.actions = actions;
@@ -70,6 +66,8 @@ public class CheckInOutManager {
         actions.onCheckOut();
     }
 
+    enum SELECTION {IN, OUT}
+
     class CheckingDBAdapter extends BaseDBAdapter {
 
         public CheckingDBAdapter(Context context){
@@ -89,9 +87,13 @@ public class CheckInOutManager {
             while(cursor.moveToNext()){
                 result.add(cursor.getString(0));
             }
+            Log.d("CHECKIIN", "list size: " + result.size());
+            String[] list = result.toArray(new String[result.size()]);
 
-            ArrayAdapter<String> out = new ArrayAdapter<String>(context,android.R.layout.simple_spinner_item,result);
-            out.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            ArrayAdapter<String> out = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, list);
+//            out.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            out.setDropDownViewResource(R.layout.custom_spinner);
             closeDB();
             return out;
 

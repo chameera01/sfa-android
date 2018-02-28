@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +21,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,8 +31,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
 import com.example.ahmed.sfa.activities.Dialogs.Alert;
+import com.example.ahmed.sfa.activities.supportactivities.AndroidMultiPartEntity;
 import com.example.ahmed.sfa.controllers.DateManager;
 import com.example.ahmed.sfa.controllers.ImageManager;
 import com.example.ahmed.sfa.controllers.PermissionManager;
@@ -40,6 +45,17 @@ import com.example.ahmed.sfa.models.CustomerStatus;
 import com.example.ahmed.sfa.models.District;
 import com.example.ahmed.sfa.models.Route;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,13 +64,9 @@ import java.util.List;
  */
 
 public class AddCustomer extends AppCompatActivity {
-    private Alert alert;
-
     ImageManager imgMan;
     DBAdapter dbAdapter;
-
     Bitmap customerImageBitmap;
-
     ImageView customerImage;
     TextView customerName;
     TextView address;
@@ -75,10 +87,16 @@ public class AddCustomer extends AppCompatActivity {
     Button saveandsubmitbtn;
     Location lastKnownLocation;
     Button dismiss;
+    private Alert alert;
+    private String repId;
+    private String deviecId;
 
     private boolean controlsEnabled=false;
 
     private Bundle savedInstance;
+
+    private long totalSize = 0;
+
 
     private void enableControls(){
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
@@ -160,17 +178,60 @@ public class AddCustomer extends AppCompatActivity {
                 district.setEnabled(false);
                 controlsEnabled=false;
 
-                init();
+//                init();
 
 
             }
         });
-        /*district.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //
+    }
+
+    public void getRepAndDeviceId() {
+        try {
+            Log.d("MGT", "inside getRepID");
+            com.example.ahmed.sfa.controllers.adapters.DBAdapter dbAdapter = new com.example.ahmed.sfa.controllers.adapters.DBAdapter(this);
+            Log.d("MGT", dbAdapter.toString());
+            dbAdapter.openDB();
+            Cursor deviceCursor = dbAdapter.runQuery("select * from DeviceCheckController where ACTIVESTATUS = 'YES'");
+            Log.d("MGT", deviceCursor.toString());
+            Cursor repCursor = null;
+
+            if (deviceCursor.getCount() == 0) {
+                Log.d("MGT", "dcursor is empty");
+            } else {
+                Log.d("MGT", "dcursor is not empty");
             }
-        });*/
+
+            if (deviceCursor.moveToFirst()) {
+                Log.d("MGT", "cursor moved to first_device");
+                deviecId = deviceCursor.getString(deviceCursor.getColumnIndex("DeviceID"));
+                Log.d("MGT", "Inside getRepId_" + deviecId);
+                deviceCursor.moveToNext();
+                Log.d("MGT", "cursor moved to next_device");
+            }
+
+            repCursor = dbAdapter.runQuery("select * from Mst_RepTable");
+
+            if (repCursor.getCount() == 0) {
+                Log.d("MGT", "rcursor is empty");
+            } else {
+                Log.d("MGT", "rcursor is not empty");
+                Log.d("MGT", String.valueOf(repCursor.getCount()));
+            }
+
+            if (repCursor.moveToFirst()) {
+                Log.d("MGT", "cursor moved to first_rep");
+                repId = repCursor.getString(repCursor.getColumnIndex("RepID"));
+                Log.d("MGT", "Inside getRepId_" + repId);
+                repCursor.moveToNext();
+                Log.d("MGT", "cursor moved to next_rep");
+            }
+
+            dbAdapter.closeDB();
+        } catch (Exception e) {
+            String msg = (e.getMessage() == null) ? "getrepid failed!" : e.getMessage();
+            Log.e("data:", msg);
+        }
+
     }
 
 
@@ -189,7 +250,7 @@ public class AddCustomer extends AppCompatActivity {
             }
             //lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             /* -----------------------------------------------------------------------------------------------*/
-            lastKnownLocation = new Location(LocationManager.GPS_PROVIDER);//this line has to be removed
+            //lastKnownLocation = new Location(LocationManager.GPS_PROVIDER);//this line has to be removed
             /* -----------------------------------------------------------------------------------------------*/
             //this has been added since emmulator failed to send gps points
 
@@ -272,8 +333,17 @@ public class AddCustomer extends AppCompatActivity {
                 final DialogInterface.OnClickListener confirmedAddingListener = new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(addDataToDB()) Toast.makeText(AddCustomer.this,"Customer Added",Toast.LENGTH_SHORT).show();
-                        saveandsubmitbtn.setEnabled(false);
+                        if (addDataToDB()) {
+                            Toast.makeText(AddCustomer.this, "Customer Added", Toast.LENGTH_SHORT).show();
+                            saveandsubmitbtn.setEnabled(false);
+
+                            ManualSyncFromOtherActivities msfoa = new ManualSyncFromOtherActivities(AddCustomer.this);
+                            Boolean status = msfoa.uploadNewCustomers(repId);
+
+                            //Toast.makeText(AddCustomer.this,"Path: "+ ImageManager.image.getPath(),Toast.LENGTH_LONG).show();
+                            //new UploadFileToServer().execute();
+                        }
+
                     }
                 };
 
@@ -324,19 +394,22 @@ public class AddCustomer extends AppCompatActivity {
         cvFrTrCustomer.put("District", district.getSelectedItem().toString());
         cvFrTrCustomer.put("Town", town.getText().toString());
         cvFrTrCustomer.put("Telephone", ContactNo.getText().toString());
-        cvFrTrCustomer.put("Fax", fax.getText().toString());
-        cvFrTrCustomer.put("Email", email.getText().toString());
-        cvFrTrCustomer.put("OwnerContactNo", ownersContactNo.getText().toString());
-        cvFrTrCustomer.put("OwnerName", ownersName.getText().toString());
-        cvFrTrCustomer.put("PharmacyRegNo", registrationNo.getText().toString());
+
+        cvFrTrCustomer.put("Fax", TextUtils.isEmpty(fax.getText()) ? "N/A" : fax.getText().toString());
+        cvFrTrCustomer.put("Email", TextUtils.isEmpty(email.getText()) ? "N/A" : email.getText().toString());
+        cvFrTrCustomer.put("BRno", TextUtils.isEmpty(brNo.getText()) ? "N/A" : brNo.getText().toString());
+        cvFrTrCustomer.put("OwnerContactNo", TextUtils.isEmpty(ownersContactNo.getText()) ? "N/A" : ownersContactNo.getText().toString());
+        cvFrTrCustomer.put("OwnerName", TextUtils.isEmpty(ownersName.getText()) ? "N/A" : ownersName.getText().toString());
+        cvFrTrCustomer.put("PharmacyRegNo", TextUtils.isEmpty(registrationNo.getText()) ? "N/A" : registrationNo.getText().toString());
+
         cvFrTrCustomer.put("CustomerStatusID", ((CustomerStatus) customerStatus.getSelectedItem()).getCustomerStatusID());
         cvFrTrCustomer.put("CustomerStatus", ((CustomerStatus) customerStatus.getSelectedItem()).getCustomerStatus());
         cvFrTrCustomer.put("InsertDate", DateManager.dateToday());
         cvFrTrCustomer.put("RouteID", ((Route) route.getSelectedItem()).getRouteID());
         cvFrTrCustomer.put("RouteName", ((Route) route.getSelectedItem()).getRouteID());
         cvFrTrCustomer.put("ImageID",imageCode);
-        cvFrTrCustomer.put("Latitude", Double.parseDouble(latitude.getText().toString()));
-        cvFrTrCustomer.put("Longitude", Double.parseDouble(longitude.getText().toString()));
+        cvFrTrCustomer.put("Latitude", TextUtils.isEmpty(latitude.getText()) ? 0.0 : Double.parseDouble(latitude.getText().toString()));
+        cvFrTrCustomer.put("Longitude", TextUtils.isEmpty(longitude.getText()) ? 0.0 : Double.parseDouble(longitude.getText().toString()));
         cvFrTrCustomer.put("isUpload", 0);
         cvFrTrCustomer.put("UploadDate", DateManager.dateToday());
         cvFrTrCustomer.put("ApproveStatus", 1);
@@ -396,6 +469,8 @@ public class AddCustomer extends AppCompatActivity {
             this.customerImage.setImageBitmap(customerImage);
             if(!controlsEnabled){
                 enableControls();
+                //enabling button after saving one
+                saveandsubmitbtn.setEnabled(true);
             }
         }
     }
@@ -528,6 +603,83 @@ public class AddCustomer extends AppCompatActivity {
             closeDB();
             return true;
         }
+    }
+
+    /**
+     * Uploading the file to server
+     */
+    private class UploadFileToServer extends AsyncTask<Void, Integer, String> {
+        @Override
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            return uploadFile();
+        }
+
+        @SuppressWarnings("deprecation")
+        private String uploadFile() {
+            String responseString = null;
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(Constants.FILE_UPLOAD_URL);
+
+            try {
+                AndroidMultiPartEntity entity = new AndroidMultiPartEntity(new AndroidMultiPartEntity.ProgressListener() {
+
+                    @Override
+                    public void transferred(long num) {
+
+                    }
+                });
+
+
+                File sourceFile = new File(ImageManager.image.getPath());
+
+                // Adding file data to http body
+                entity.addPart("image", new FileBody(sourceFile));
+
+
+                totalSize = entity.getContentLength();
+                httppost.setEntity(entity);
+
+                // Making server call
+                HttpResponse response = httpclient.execute(httppost);
+                HttpEntity r_entity = response.getEntity();
+
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == 200) {
+                    // Server response
+                    responseString = EntityUtils.toString(r_entity);
+                } else {
+                    responseString = "Error occurred! Http Status Code: " + statusCode;
+                }
+
+            } catch (ClientProtocolException e) {
+                responseString = e.toString();
+            } catch (IOException e) {
+                responseString = e.toString();
+            }
+
+            return responseString;
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.e("IMAGE", "Response from server: " + result);
+
+            super.onPostExecute(result);
+        }
+
     }
 
 }

@@ -3,50 +3,82 @@
   <component name="AndroidConfiguredLogFilters">
     <filters>
       <filter>
+        <option name="logLevel" value="verbose" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="SCROLL" />
+        <option name="name" value="AB" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
         <option name="logLevel" value="debug" />
         <option name="logMessagePattern" value="" />
-        <option name="logTagPattern" value="" />
-        <option name="name" value="T" />
+        <option name="logTagPattern" value="CASH" />
+        <option name="name" value="A" />
         <option name="packageNamePattern" value="" />
         <option name="pid" value="" />
       </filter>
       <filter>
-        <option name="logLevel" value="verbose" />
-        <option name="logMessagePattern" value="" />
-        <option name="logTagPattern" value="TABLE" />
-        <option name="name" value="New" />
-        <option name="packageNamePattern" value="" />
-        <option name="pid" value="" />
-      </filter>
-      <filter>
-        <option name="logLevel" value="verbose" />
-        <option name="logMessagePattern" value="" />
-        <option name="logTagPattern" value="Error &gt;" />
-        <option name="name" value="Magula" />
-        <option name="packageNamePattern" value="" />
-        <option name="pid" value="" />
-      </filter>
-      <filter>
-        <option name="logLevel" value="verbose" />
-        <option name="logMessagePattern" value="" />
-        <option name="logTagPattern" value="STOCK" />
-        <option name="name" value="Unnamed-0" />
-        <option name="packageNamePattern" value="" />
-        <option name="pid" value="" />
-      </filter>
-      <filter>
-        <option name="logLevel" value="verbose" />
+        <option name="logLevel" value="debug" />
         <option name="logMessagePattern" value="" />
         <option name="logTagPattern" value="COL" />
-        <option name="name" value="Unnamed-1" />
+        <option name="name" value="Col" />
         <option name="packageNamePattern" value="" />
         <option name="pid" value="" />
       </filter>
       <filter>
-        <option name="logLevel" value="verbose" />
+        <option name="logLevel" value="debug" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="NUT" />
+        <option name="name" value="BT" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="debug" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="BRAND" />
+        <option name="name" value="BRAND" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="debug" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="ABC" />
+        <option name="name" value="ABC" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="debug" />
         <option name="logMessagePattern" value="" />
         <option name="logTagPattern" value="INVOICE" />
-        <option name="name" value="Invoice" />
+        <option name="name" value="INVOICE" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="debug" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="NUM" />
+        <option name="name" value="NUM" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="debug" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="A" />
+        <option name="name" value="ABCD" />
+        <option name="packageNamePattern" value="" />
+        <option name="pid" value="" />
+      </filter>
+      <filter>
+        <option name="logLevel" value="debug" />
+        <option name="logMessagePattern" value="" />
+        <option name="logTagPattern" value="MGT" />
+        <option name="name" value="MGT" />
         <option name="packageNamePattern" value="" />
         <option name="pid" value="" />
       </filter>
@@ -54,120 +86,90 @@
   </component>
   <component name="AndroidLayouts">
     <shared>
-      <config />
+      <config>
+        <devices>
+          <device id="Nexus 7" />
+          <device id="Samsung Tab" />
+          <device id="Nexus 7 2013" />
+        </devices>
+        <target>android-23</target>
+      </config>
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2904401-072f-4d3b-a397-27c8c4e1d28f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_add_customer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_add_extra_customer.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_history_black_24dp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_home.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_payment.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_product.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_search_black_24dp.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_stock.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_sync.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InvCollections.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InvoiceHistory.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SingleInvoiceHistoryDisplay.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/CollectionsSummaryFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/InvoiceSummaryFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/ReturnsSummaryFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/CollectionNoteAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceHistoryClickListener.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceSummaryAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceSummaryChangeReceiver.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/ReturnsSummaryAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/RowViewRecyclerAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionChequeDetails.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionNote.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionNoteDetails.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionNoteHeader.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionsOutStanding.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/InvoiceSummary.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/InvoiceSummaryFromSalesDetails.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/InvoiceSummaryFromSalesHeader.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Mst_InvoiceNos_Mgt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/OutstandingInvoice.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/PrincipleQtySummary.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SpinnerItem.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/UploadSalesHeader.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_collections.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_generated_invoice__summary.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_invoice_history.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_single_invoice_history_display.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/custom_spinner.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_collections_summary.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_invoice_summary.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_returns_summary.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/invoice_summary_row.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/returns_summary_row.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/row_collections.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/rowview.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/spinner_item.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dictionaries/Ahmed.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules/git-SFA.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+    <list default="true" id="6cf168dd-527c-4b4a-b4bf-3db33ddcaef3" name="Default" comment="Pushing the last edited files by 28 Feb 2018.&#10;Newly added main functions: Collections and Print functionality">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/cache.properties.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileHashes.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/fileSnapshotsToTreeSnapshotsIndex.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.14.1/taskArtifacts/taskArtifacts.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/2.14.1/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/3.2/taskArtifacts/fileHashes.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/3.2/taskArtifacts/fileSnapshots.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/3.2/taskArtifacts/taskArtifacts.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/3.2/taskArtifacts/taskArtifacts.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/3.2/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/3.2/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/3.2/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/3.2/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Constants.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Constants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/AddCustomer.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/AddCustomer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/AddExtraCustomer.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/AddExtraCustomer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Dialogs/PricipleDiscountDialog.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Dialogs/PricipleDiscountDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/DisplayProductTableActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/DisplayProductTableActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InitialLogin.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InitialLogin.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InvCollections.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InvCollections.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Invoice.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Invoice.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/ManualSync.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/ManualSync.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Return.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Return.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesInvoicePayment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesInvoicePayment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesSummaryActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesSummaryActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/StockView.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/StockView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/CheckIn.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/CheckIn.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/CustomerPopupFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/CustomerPopupFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/TableThread.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/TableThread.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/Customer_pennding_listview_adptr.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/Customer_pennding_listview_adptr.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/CheckInOutManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/CheckInOutManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/ImageManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/ImageManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/CollectionNoteAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/CollectionNoteAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/DBAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/DBAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/NavigationDrawerMenuManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/NavigationDrawerMenuManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/Stockview_listview_adp.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/Stockview_listview_adp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/ReturnRecyclerAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/ReturnRecyclerAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/database/DBHelper.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/database/DBHelper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Cheque.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Cheque.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Mst_Customermaster.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Mst_Customermaster.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Mst_ProductMaster.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Mst_ProductMaster.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceModel.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceModel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceSummary.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceSummary.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesPayment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesPayment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesReturnSummary.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesReturnSummary.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/JsonFilter_Send.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/JsonFilter_Send.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/JsonObjGenerate.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/JsonObjGenerate.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/SyncReturn.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/SyncReturn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/UploadSalesHeader.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/UploadSalesHeader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/UploadTables.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/UploadTables.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_display_message.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_display_message.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_collections.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_collections.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_invoice.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_invoice.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_invoice_payment.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_invoice_payment.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_manual_sync.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_manual_sync.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_pending_customer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_pending_customer.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_stock_view.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_stock_view.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/addcustomerlayout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/addcustomerlayout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/colmn_row.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/colmn_row.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/customer_pending_listview_row.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/customer_pending_listview_row.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/customerpopupforhomeui.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/customerpopupforhomeui.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_return.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_return.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_cheque_details.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_cheque_details.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/invoicetabel_row.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/invoicetabel_row.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/location_not_found_error_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/location_not_found_error_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/principle_discount_dialog.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/principle_discount_dialog.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/returntable_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/returntable_layout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/row_collections.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/row_collections.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/sales_invoice_summary_activity.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/sales_invoice_summary_activity.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/sales_summary_row.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/sales_summary_row.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/si_viewrow_layout.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/si_viewrow_layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/stockview_lv_row.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/stockview_lv_row.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/activity_navigation_drawer_drawer.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/activity_navigation_drawer_drawer.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sfa-android.iml" afterPath="$PROJECT_DIR$/sfa-android.iml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -185,109 +187,147 @@
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
-        <projects_view />
+        <projects_view>
+          <tree_state />
+        </projects_view>
       </state>
     </system>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="sfa-android" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="InvCollections.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InvCollections.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="333" column="85" lean-forward="false" selection-start-line="333" selection-start-column="85" selection-end-line="333" selection-end-column="85" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#3947#3948#0" expanded="false" />
+                <element signature="e#3987#3988#0" expanded="false" />
+                <element signature="method#hideSoftKeyboard#0;class#InvCollections#0" expanded="false" />
+                <element signature="e#4691#4692#0" expanded="false" />
+                <element signature="e#4747#4748#0" expanded="false" />
+                <element signature="e#4921#4922#0" expanded="false" />
+                <element signature="e#4984#4985#0" expanded="false" />
+                <element signature="e#18969#18970#0" expanded="false" />
+                <element signature="e#19013#19014#0" expanded="false" />
+                <element signature="method#onActivityResult#0;class#InvCollections#0" expanded="false" />
+                <element signature="method#clearData#0;class#InvCollections#0" expanded="false" />
+                <element signature="method#setInvoiceSpinner#0;class#InvCollections#0" expanded="false" />
+                <element signature="method#setCustomerSpinner#0;class#InvCollections#0" expanded="false" />
+                <element signature="method#setRepSpinner#0;class#InvCollections#0" expanded="false" />
+                <element signature="method#setRouteSpinner#0;class#InvCollections#0" expanded="false" />
+                <element signature="method#init#0;class#InvCollections#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Invoice.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Invoice.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5940">
-              <caret line="322" column="59" lean-forward="false" selection-start-line="322" selection-start-column="59" selection-end-line="322" selection-end-column="59" />
+            <state relative-caret-position="2037">
+              <caret line="144" column="26" lean-forward="false" selection-start-line="144" selection-start-column="26" selection-end-line="144" selection-end-column="26" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#3204#3205#0" expanded="false" />
+                <element signature="e#3268#3269#0" expanded="false" />
+                <element signature="e#3454#3455#0" expanded="false" />
+                <element signature="e#3525#3526#0" expanded="false" />
+                <element signature="e#6366#6367#0" expanded="false" />
+                <element signature="e#6426#6427#0" expanded="false" />
+                <element signature="e#8810#8811#0" expanded="false" />
+                <element signature="e#8873#8874#0" expanded="false" />
+                <element signature="e#12544#12545#0" expanded="false" />
+                <element signature="e#12600#12601#0" expanded="false" />
+                <element signature="e#15211#15212#0" expanded="false" />
+                <element signature="e#15243#15244#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InvoiceRecyclerAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java">
+      <file leaf-file-name="DBHelper.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/database/DBHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="235" column="53" lean-forward="false" selection-start-line="235" selection-start-column="53" selection-end-line="235" selection-end-column="53" />
+            <state relative-caret-position="16800">
+              <caret line="823" column="23" lean-forward="false" selection-start-line="823" selection-start-column="23" selection-end-line="823" selection-end-column="23" />
               <folding>
-                <element signature="e#8109#8725#0" expanded="true" />
-                <element signature="e#8724#8725#0" expanded="true" />
-                <element signature="e#8851#10423#0" expanded="true" />
-                <element signature="e#10422#10423#0" expanded="true" />
-                <element signature="e#10545#12174#0" expanded="true" />
-                <element signature="e#12173#12174#0" expanded="true" />
-                <element signature="e#12294#13592#0" expanded="true" />
-                <element signature="e#13591#13592#0" expanded="true" />
-                <element signature="e#13720#14743#0" expanded="true" />
-                <element signature="e#14742#14743#0" expanded="true" />
+                <element signature="e#61568#61569#0" expanded="false" />
+                <element signature="e#61604#61605#0" expanded="false" />
+                <element signature="e#61650#61651#0" expanded="false" />
+                <element signature="e#61692#61693#0" expanded="false" />
+                <element signature="e#61730#61731#0" expanded="false" />
+                <element signature="e#61768#61769#0" expanded="false" />
+                <element signature="e#61818#61819#0" expanded="false" />
+                <element signature="e#61864#61865#0" expanded="false" />
+                <element signature="e#62025#62026#0" expanded="false" />
+                <element signature="e#62068#62069#0" expanded="false" />
+                <element signature="e#62128#62129#0" expanded="false" />
+                <element signature="e#62184#62185#0" expanded="false" />
+                <element signature="e#62225#62226#0" expanded="false" />
+                <element signature="e#62266#62267#0" expanded="false" />
+                <element signature="e#62322#62323#0" expanded="false" />
+                <element signature="e#62374#62375#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InvoiceSummaryChangeReceiver.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceSummaryChangeReceiver.java">
+      <file leaf-file-name="InitialLogin.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InitialLogin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_home.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1452">
-              <caret line="66" column="36" lean-forward="false" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
+            <state relative-caret-position="399">
+              <caret line="451" column="0" lean-forward="false" selection-start-line="451" selection-start-column="0" selection-end-line="451" selection-end-column="0" />
               <folding />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_invoice_payment.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_invoice_payment.xml">
           <provider editor-type-id="android-designer2">
             <state />
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="customerpopupforhomeui.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customerpopupforhomeui.xml">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ManualSync.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/ManualSync.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9548">
-              <caret line="482" column="11" lean-forward="false" selection-start-line="482" selection-start-column="11" selection-end-line="482" selection-end-column="11" />
+            <state relative-caret-position="1154">
+              <caret line="344" column="26" lean-forward="false" selection-start-line="344" selection-start-column="26" selection-end-line="344" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Home.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Home.java">
+      <file leaf-file-name="DBAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/DBAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2772">
-              <caret line="156" column="30" lean-forward="false" selection-start-line="156" selection-start-column="30" selection-end-line="156" selection-end-column="30" />
+            <state relative-caret-position="13440">
+              <caret line="669" column="31" lean-forward="false" selection-start-line="669" selection-start-column="31" selection-end-line="669" selection-end-column="31" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CustomerPopupFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/CustomerPopupFragment.java">
+      <file leaf-file-name="Test.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2574">
-              <caret line="159" column="50" lean-forward="false" selection-start-line="159" selection-start-column="50" selection-end-line="159" selection-end-column="50" />
-              <folding />
+            <state relative-caret-position="8946">
+              <caret line="471" column="59" lean-forward="false" selection-start-line="471" selection-start-column="59" selection-end-line="471" selection-end-column="59" />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#4342#4343#0" expanded="false" />
+                <element signature="e#4398#4399#0" expanded="false" />
+                <element signature="e#4572#4573#0" expanded="false" />
+                <element signature="e#4635#4636#0" expanded="false" />
+                <element signature="e#18561#18562#0" expanded="false" />
+                <element signature="e#18605#18606#0" expanded="false" />
+                <element signature="e#21383#21384#0" expanded="false" />
+                <element signature="e#21423#21424#0" expanded="false" />
+                <element signature="e#28069#28070#0" expanded="false" />
+                <element signature="e#28101#28102#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -297,46 +337,51 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="layoutResourceFile" />
         <option value="layoutResourceFile_vertical" />
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Colle</find>
-      <find>Move</find>
-      <find>HeaderID</find>
-      <find>setGrid</find>
-      <find>insert</find>
-      <find>Itinerary</find>
-      <find>loc</find>
-      <find>id</find>
-      <find>tvcreditAmt</find>
-      <find>note</find>
-      <find>shelf</find>
-      <find>salesInvoiceSummary</find>
-      <find>updateSummaryView</find>
-      <find>principleSpinner</find>
-      <find>invoicedQty</find>
-      <find>filterContent</find>
-      <find>getInvoicedItems</find>
-      <find>refresh</find>
-      <find>hasFocus</find>
-      <find>least</find>
-      <find>salesInvoice</find>
-      <find>updateInvoiceData</find>
-      <find>invoiceModelList</find>
-      <find>updateSummary</find>
-      <find>check</find>
-      <find>tmpData</find>
+      <find>list</find>
+      <find>SIM_ARRAYLIST</find>
+      <find>returnedList</find>
+      <find>BluetoothActivity</find>
+      <find>RETURNED_LIST</find>
       <find>Handler</find>
-      <find>Collections</find>
-      <find>Last</find>
-      <find>complete</find>
+      <find>Intent</find>
+      <find>&quot;BLUE&quot;</find>
+      <find>BluetoothDevice</find>
+      <find>google-services.json</find>
+      <find>starting print</find>
+      <find>alert</find>
+      <find>MODELS</find>
+      <find>cashDisc</find>
+      <find>payment</find>
+      <find>returnSummary</find>
+      <find>Constants.SALES_RETURN_SUMMARY</find>
+      <find>getIntent</find>
+      <find>INV_TOTAL</find>
+      <find>CALLING_ACT</find>
+      <find>RETURN_HEADER_SUMMARY</find>
+      <find>increaseInvoiceReturnNo</find>
+      <find>onBackPressed</find>
+      <find>Button</find>
+      <find>DownloadFragment</find>
+      <find>Mst_</find>
+      <find>RepDetails</find>
+      <find>rece</find>
+      <find>LOWER</find>
+      <find>Temp_CNote_Payment_Types</find>
     </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>getActivity()</replace>
+      <replace>UploadFragment.this.getActivity()</replace>
+      <replace>DownloadFragment.this.getActivity()</replace>
+      <replace>TAG</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -2057,57 +2102,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/rowview.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/RowViewRecyclerAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/UploadTables.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/invoicetabel_row.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/si_viewrow_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesInvoicePayment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Return.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Mst_InvoiceNos_Mgt.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/JsonObjGenerate.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/SyncReturn.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/UploadSalesHeader.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SpinnerItem.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InitialLogin.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionsOutStanding.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/JsonFilter_Send.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/DBAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/OutstandingInvoice.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/StockView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/NavigationDrawerMenuManager.java" />
-        <option value="$USER_HOME$/AppData/Local/Android/sdk/platforms/android-25/data/res/layout/simple_spinner_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/spinner_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionNoteHeader.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionNote.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/CheckIn.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/nav_header_navigation_drawer.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/row_collections.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionNoteDetails.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_navigation_drawer_drawer.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionChequeDetails.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/CollectionNoteAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_collections.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_invoice.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/PrincipleWiseQtyUpdateListener.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/PrincipleQtySummary.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/PrincipleQtyUpdater.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/DBUpdateThread.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceSummary.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/DataLoaderResponse.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Mst_Customermaster.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesPayment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/ReturnRecyclerAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/CollectionNoteAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_upload.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/manual_sync.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/ManualSyncFromOtherActivities.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/location_not_found_error_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/ManualSync.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_manual_sync.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/NavigationDrawerMenuManager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Sync.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Mst_ProductMaster.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceModel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/AndroidMultiPartEntity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/ImageManager.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/DeviceListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_bluetooth.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/device_listview.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/PrintUtility.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_test.xml" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceSummaryChangeReceiver.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Invoice.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/AddCustomer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/UploadSalesHeader.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/UploadTables.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/UploadFragment.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_cheque_details.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/principle_discount_dialog.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Dialogs/PricipleDiscountDialog.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesInvoicePayment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/CustomerPopupFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/ReturnSummary.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/sales_invoice_summary_activity.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesSummaryActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Mst_DeviceRepDetails.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/JsonFilter_Send.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_download.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/DownloadFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/DBAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Return.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/SyncReturn.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Constants.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Test.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/database/DBHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InvCollections.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_manual_sync.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/ManualSync.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/AddExtraCustomer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/CustomerPopupFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Invoice.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InitialLogin.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_invoice_payment.xml" />
       </list>
     </option>
   </component>
@@ -2132,9 +2177,20 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sfa-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sfa-android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
@@ -2144,94 +2200,8 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidBuildScriptsGroupNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="xml" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="values" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="drawable" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2285,114 +2255,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="sfa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="example" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="example" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="example" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="example" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="adapters" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2420,73 +2282,36 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="activities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="example" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="supportactivities" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfa-android" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/sfa-android Edited/sfa-android" />
     <property name="device.picker.selection" value="3100183f27456200" />
-    <property name="SearchEverywhereHistoryKey" value="Principl&#9;PSI&#9;JAVA://com.example.ahmed.sfa.Constants#PRINCIPLE_DISCOUNT_TABLE&#10;runQuery&#9;PSI&#9;JAVA://com.example.ahmed.sfa.controllers.adapters.DBAdapter#runQuery&#10;Mst_Invoicenumbers_Management&#9;null&#9;null&#10;List&#9;PSI&#9;JAVA://com.example.ahmed.sfa.models.ListViewAdapter&#10;http&#9;PSI&#9;JAVA://com.example.ahmed.sfa.service.JsonObjGenerate#httpUrlConnection" />
-    <property name="android.profiler.active" value="true" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="SearchEverywhereHistoryKey" value="ManualSync.java&#9;FILE&#9;file://F:/#Loons Lab/SFA/git/sfa-android (14)/sfa-android/app/src/main/java/com/example/ahmed/sfa/activities/ManualSyncFromOtherActivities.java" />
+    <property name="DEBUGGABLE_DEVICE" value="samsung-sm_t2397-3100183f27456200" />
+    <property name="DEBUGGABLE_PROCESS" value="com.example.ahmed.sfa" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="DEBUGGER_ID" value="Auto" />
+    <property name="android.project.structure.last.selected" value="Project" />
+    <property name="android.project.structure.proportion" value="0.15" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.example.ahmed.sfa.models" />
-      <recent name="com.example.ahmed.sfa.controllers.adapters" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
+    <key name="android.template.packageName">
       <recent name="com.example.ahmed.sfa.activities" />
-      <recent name="com.example.ahmed.sfa.controllers.database" />
+      <recent name="com.example.ahmed.sfa.activities.supportactivities" />
+      <recent name="com.example.ahmed.sfa.activities.Dialogs" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\#Loons Lab\SFA\git\sfa-android\app\src\main\res\layout" />
-      <recent name="F:\#Loons Lab\SFA\git\sfa-android\app\src\main\java\com\example\ahmed\sfa\service" />
-      <recent name="F:\#Loons Lab\SFA\git\sfa-android\app\src\main\res\drawable" />
-      <recent name="F:\#Loons Lab\SFA\git\sfa-android\app\src\main\java\com\example\ahmed\sfa\models" />
-      <recent name="F:\#Loons Lab\SFA\git\sfa-android\app\src\main\java\com\example\ahmed\sfa\controllers\adapters" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.ahmed.sfa.controllers.adapters" />
+      <recent name="com.example.ahmed.sfa.activities.supportactivities" />
+      <recent name="com.example.ahmed.sfa.activities" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -2571,7 +2396,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514693042123" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1519824144713" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2618,7 +2443,7 @@
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
       </Profilers>
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514693042123" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1519824144713" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2779,7 +2604,7 @@
       <option name="DEEP_LINK" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <method>
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1514693042123" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1519824144713" />
       </method>
     </configuration>
     <list size="1">
@@ -2812,488 +2637,710 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a2904401-072f-4d3b-a397-27c8c4e1d28f" name="Default" comment="" />
-      <created>1512536447960</created>
+      <changelist id="6cf168dd-527c-4b4a-b4bf-3db33ddcaef3" name="Default" comment="" />
+      <created>1515320797280</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1512536447960</updated>
+      <updated>1515320797280</updated>
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1378" height="744" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32764506" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.81578946" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5784832" sideWeight="0.506135" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16725352" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.092150174" sideWeight="0.49386504" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31562975" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.50907713" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881355" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922536" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33552632" sideWeight="0.49092284" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2003035" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297546" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.59703946" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5784832" sideWeight="0.506135" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.02112676" sideWeight="0.49386504" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.10526316" sideWeight="0.5030675" order="13" side_tool="true" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6576271" sideWeight="0.4969325" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.9911817" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922536" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16894197" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0345092" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922536" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.004601227" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="SHOW_UNVERSIONED_FILES_WHILE_COMMIT" value="false" />
+    <MESSAGE value="Pushing the last edited files by 28 Feb 2018.&#10;Newly added main functions: Collections and Print functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pushing the last edited files by 28 Feb 2018.&#10;Newly added main functions: Collections and Print functionality" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/UploadTables.java</url>
-          <line>22</line>
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>385</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>76</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>74</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>77</line>
+          <properties />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>79</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>104</line>
+          <properties />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>103</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>347</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>346</line>
+          <properties />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>356</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>355</line>
+          <properties />
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>401</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>469</line>
+          <properties />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>468</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>484</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>380</line>
+          <properties />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>496</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>495</line>
+          <properties />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>552</line>
+          <properties />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>551</line>
+          <properties />
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>417</line>
+          <properties />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>418</line>
+          <properties />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>406</line>
+          <properties />
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>402</line>
+          <properties />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>75</line>
+          <properties />
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java</url>
+          <line>106</line>
+          <properties />
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="5" />
+      <option name="time" value="31" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/addcustomer.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/productdetails.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/extracustomer.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/stock.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/sync.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/activity_navigation_drawer_drawer.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/ImageManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="45" column="12" lean-forward="false" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionNoteDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="18" column="25" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="18" selection-end-column="25" />
+        <state relative-caret-position="188">
+          <caret line="213" column="22" lean-forward="false" selection-start-line="213" selection-start-column="22" selection-end-line="213" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/CollectionChequeDetails.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/UploadSalesHeader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1402">
-          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="735">
+          <caret line="46" column="33" lean-forward="false" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/CollectionNoteAdapter.java">
+    <entry file="file://$PROJECT_DIR$/local.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="56" column="45" lean-forward="false" selection-start-line="56" selection-start-column="9" selection-end-line="56" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesInvoice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-924">
-          <caret line="57" column="13" lean-forward="false" selection-start-line="57" selection-start-column="13" selection-end-line="57" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-v7-25.2.0.aar/756d50f7e471e6f67454635fbd91a6a4/res/drawable/abc_btn_default_mtrl_shape.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-324">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-v7-25.2.0.aar/756d50f7e471e6f67454635fbd91a6a4/res/drawable/abc_btn_colored_material.xml">
+    <entry file="file://$PROJECT_DIR$/gradle.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="47" selection-end-line="19" selection-end-column="47" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/appcompat-v7-25.2.0.aar/756d50f7e471e6f67454635fbd91a6a4/res/values/values.xml">
+    <entry file="file://$PROJECT_DIR$/app/proguard-rules.pro">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="1162" column="63" lean-forward="false" selection-start-line="1162" selection-start-column="63" selection-end-line="1162" selection-end-column="63" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/NavigationDrawerMenuManager.java">
+    <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="135" column="0" lean-forward="false" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="147">
+          <caret line="7" column="28" lean-forward="false" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="26" column="38" lean-forward="false" selection-start-line="26" selection-start-column="38" selection-end-line="26" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_collections.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-45">
-          <caret line="118" column="50" lean-forward="false" selection-start-line="118" selection-start-column="50" selection-end-line="118" selection-end-column="50" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_cheque_details.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Return.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="378" column="15" lean-forward="false" selection-start-line="378" selection-start-column="15" selection-end-line="378" selection-end-column="15" />
+        <state relative-caret-position="231">
+          <caret line="23" column="38" lean-forward="false" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/PrincipleWiseQtyUpdateListener.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/PrincipleQtyUpdater.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/PrincipleQtySummary.java">
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="60" column="64" lean-forward="false" selection-start-line="60" selection-start-column="64" selection-end-line="60" selection-end-column="64" />
+        <state relative-caret-position="490">
+          <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/SummaryUpdater.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Volley/StringRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="26" lean-forward="true" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-          <folding />
+        <state relative-caret-position="-511">
+          <caret line="16" column="17" lean-forward="false" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_invoice.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Volley/VolleyLog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4092">
-          <caret line="186" column="40" lean-forward="false" selection-start-line="186" selection-start-column="40" selection-end-line="186" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/database/sqlite/SQLiteOpenHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="284" column="29" lean-forward="false" selection-start-line="284" selection-start-column="29" selection-end-line="284" selection-end-column="29" />
+        <state relative-caret-position="-1379">
+          <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/database/BaseDBAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Volley/TimeoutError.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="33" column="24" lean-forward="false" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
+        <state relative-caret-position="168">
+          <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/os/Handler.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/HttpGetRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="112" column="11" lean-forward="false" selection-start-line="112" selection-start-column="11" selection-end-line="112" selection-end-column="11" />
+        <state relative-caret-position="-854">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/DBUpdateThread.java" />
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/os/AsyncTask.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/HttpGetRequestAbstract.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="374" column="30" lean-forward="false" selection-start-line="374" selection-start-column="30" selection-end-line="374" selection-end-column="30" />
+        <state relative-caret-position="168">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/DataLoaderResponse.java" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/ReturnRecyclerAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/JsonRequestListerner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="118" column="16" lean-forward="false" selection-start-line="118" selection-start-column="16" selection-end-line="118" selection-end-column="16" />
-          <folding />
+        <state relative-caret-position="105">
+          <caret line="5" column="17" lean-forward="false" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Login.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Volley/VolleyError.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3498">
-          <caret line="185" column="68" lean-forward="false" selection-start-line="185" selection-start-column="63" selection-end-line="185" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceSummary.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="70" column="54" lean-forward="false" selection-start-line="70" selection-start-column="54" selection-end-line="70" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InitialLogin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2332">
-          <caret line="381" column="62" lean-forward="false" selection-start-line="381" selection-start-column="62" selection-end-line="381" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="57" column="24" lean-forward="false" selection-start-line="57" selection-start-column="24" selection-end-line="57" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/SummaryUpdateListner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/database/DBHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="799" column="52" lean-forward="false" selection-start-line="799" selection-start-column="52" selection-end-line="799" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesSummaryActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="275" column="44" lean-forward="false" selection-start-line="275" selection-start-column="44" selection-end-line="275" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InvCollections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6097">
-          <caret line="535" column="47" lean-forward="false" selection-start-line="535" selection-start-column="47" selection-end-line="535" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_manual_sync.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="722" column="0" lean-forward="true" selection-start-line="722" selection-start-column="0" selection-end-line="722" selection-end-column="0" />
-          <folding>
-            <element signature="e#23931#25818#0" expanded="false" />
-            <element signature="e#25887#27702#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1452">
-          <caret line="66" column="36" lean-forward="false" selection-start-line="66" selection-start-column="36" selection-end-line="66" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/AddExtraCustomer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="225" column="0" lean-forward="false" selection-start-line="225" selection-start-column="0" selection-end-line="225" selection-end-column="0" />
-          <folding>
-            <element signature="e#8303#8711#0" expanded="true" />
-            <element signature="e#8710#8711#0" expanded="true" />
-            <element signature="e#8762#8960#0" expanded="true" />
-            <element signature="e#8959#8960#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/ManualSync.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9548">
-          <caret line="482" column="11" lean-forward="false" selection-start-line="482" selection-start-column="11" selection-end-line="482" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Home.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2772">
-          <caret line="156" column="30" lean-forward="false" selection-start-line="156" selection-start-column="30" selection-end-line="156" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/customerpopupforhomeui.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/CustomerPopupFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2574">
-          <caret line="159" column="50" lean-forward="false" selection-start-line="159" selection-start-column="50" selection-end-line="159" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Invoice.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5940">
-          <caret line="322" column="59" lean-forward="false" selection-start-line="322" selection-start-column="59" selection-end-line="322" selection-end-column="59" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="210">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceRecyclerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="235" column="53" lean-forward="false" selection-start-line="235" selection-start-column="53" selection-end-line="235" selection-end-column="53" />
-          <folding>
-            <element signature="e#8109#8725#0" expanded="true" />
-            <element signature="e#8724#8725#0" expanded="true" />
-            <element signature="e#8851#10423#0" expanded="true" />
-            <element signature="e#10422#10423#0" expanded="true" />
-            <element signature="e#10545#12174#0" expanded="true" />
-            <element signature="e#12173#12174#0" expanded="true" />
-            <element signature="e#12294#13592#0" expanded="true" />
-            <element signature="e#13591#13592#0" expanded="true" />
-            <element signature="e#13720#14743#0" expanded="true" />
-            <element signature="e#14742#14743#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="331">
+          <caret line="578" column="13" lean-forward="false" selection-start-line="578" selection-start-column="13" selection-end-line="578" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/TableThread.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/ReturnRecyclerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="43" column="13" lean-forward="false" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+        <state relative-caret-position="336">
+          <caret line="418" column="0" lean-forward="false" selection-start-line="418" selection-start-column="0" selection-end-line="418" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/BluetoothActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8757">
+          <caret line="455" column="0" lean-forward="false" selection-start-line="455" selection-start-column="0" selection-end-line="455" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/InvoiceSummaryChangeReceiver.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/principle_discount_dialog.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
+        <state relative-caret-position="105">
+          <caret line="5" column="40" lean-forward="false" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/PrincipleDiscountAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="966">
+          <caret line="61" column="16" lean-forward="false" selection-start-line="61" selection-start-column="16" selection-end-line="61" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Dialogs/PricipleDiscountDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3276">
+          <caret line="196" column="20" lean-forward="false" selection-start-line="196" selection-start-column="20" selection-end-line="196" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesReturnSummary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
           <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesInvoiceSummary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1373">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InvoiceHistory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="37" column="13" lean-forward="false" selection-start-line="37" selection-start-column="13" selection-end-line="37" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/sales_invoice_summary_activity.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7539">
+          <caret line="359" column="47" lean-forward="false" selection-start-line="359" selection-start-column="47" selection-end-line="359" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/UploadFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1281">
+          <caret line="182" column="0" lean-forward="false" selection-start-line="180" selection-start-column="14" selection-end-line="182" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/JsonObjGenerate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-84">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/SalesPayment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Dialogs/ChequeDetailsPopup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1309">
+          <caret line="58" column="38" lean-forward="true" selection-start-line="58" selection-start-column="38" selection-end-line="58" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Mst_InvoiceNos_Mgt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/models/Mst_DeviceRepDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesInvoicePayment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="511">
+          <caret line="217" column="68" lean-forward="false" selection-start-line="217" selection-start-column="68" selection-end-line="217" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_download.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="650" column="57" lean-forward="false" selection-start-line="650" selection-start-column="45" selection-end-line="650" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/CustomerPopupFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="207" column="55" lean-forward="false" selection-start-line="207" selection-start-column="55" selection-end-line="207" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Return.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="713" column="41" lean-forward="false" selection-start-line="713" selection-start-column="41" selection-end-line="713" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/JsonFilter_Send.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="42" column="29" lean-forward="false" selection-start-line="42" selection-start-column="29" selection-end-line="42" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/supportactivities/DownloadFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="484" column="17" lean-forward="true" selection-start-line="484" selection-start-column="17" selection-end-line="484" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/service/SyncReturn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Sync.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="57" column="43" lean-forward="false" selection-start-line="57" selection-start-column="43" selection-end-line="57" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="35" column="97" lean-forward="false" selection-start-line="35" selection-start-column="97" selection-end-line="35" selection-end-column="97" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/SalesSummaryActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9245">
+          <caret line="489" column="26" lean-forward="false" selection-start-line="489" selection-start-column="26" selection-end-line="489" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/ReturnSummary.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="521" column="13" lean-forward="false" selection-start-line="521" selection-start-column="13" selection-end-line="521" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Invoice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2037">
+          <caret line="144" column="26" lean-forward="false" selection-start-line="144" selection-start-column="26" selection-end-line="144" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3204#3205#0" expanded="false" />
+            <element signature="e#3268#3269#0" expanded="false" />
+            <element signature="e#3454#3455#0" expanded="false" />
+            <element signature="e#3525#3526#0" expanded="false" />
+            <element signature="e#6366#6367#0" expanded="false" />
+            <element signature="e#6426#6427#0" expanded="false" />
+            <element signature="e#8810#8811#0" expanded="false" />
+            <element signature="e#8873#8874#0" expanded="false" />
+            <element signature="e#12544#12545#0" expanded="false" />
+            <element signature="e#12600#12601#0" expanded="false" />
+            <element signature="e#15211#15212#0" expanded="false" />
+            <element signature="e#15243#15244#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8946">
+          <caret line="471" column="59" lean-forward="false" selection-start-line="471" selection-start-column="59" selection-end-line="471" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#4342#4343#0" expanded="false" />
+            <element signature="e#4398#4399#0" expanded="false" />
+            <element signature="e#4572#4573#0" expanded="false" />
+            <element signature="e#4635#4636#0" expanded="false" />
+            <element signature="e#18561#18562#0" expanded="false" />
+            <element signature="e#18605#18606#0" expanded="false" />
+            <element signature="e#21383#21384#0" expanded="false" />
+            <element signature="e#21423#21424#0" expanded="false" />
+            <element signature="e#28069#28070#0" expanded="false" />
+            <element signature="e#28101#28102#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/adapters/DBAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13440">
+          <caret line="669" column="31" lean-forward="false" selection-start-line="669" selection-start-column="31" selection-end-line="669" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/controllers/database/DBHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16800">
+          <caret line="823" column="23" lean-forward="false" selection-start-line="823" selection-start-column="23" selection-end-line="823" selection-end-column="23" />
+          <folding>
+            <element signature="e#61568#61569#0" expanded="false" />
+            <element signature="e#61604#61605#0" expanded="false" />
+            <element signature="e#61650#61651#0" expanded="false" />
+            <element signature="e#61692#61693#0" expanded="false" />
+            <element signature="e#61730#61731#0" expanded="false" />
+            <element signature="e#61768#61769#0" expanded="false" />
+            <element signature="e#61818#61819#0" expanded="false" />
+            <element signature="e#61864#61865#0" expanded="false" />
+            <element signature="e#62025#62026#0" expanded="false" />
+            <element signature="e#62068#62069#0" expanded="false" />
+            <element signature="e#62128#62129#0" expanded="false" />
+            <element signature="e#62184#62185#0" expanded="false" />
+            <element signature="e#62225#62226#0" expanded="false" />
+            <element signature="e#62266#62267#0" expanded="false" />
+            <element signature="e#62322#62323#0" expanded="false" />
+            <element signature="e#62374#62375#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InvCollections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="333" column="85" lean-forward="false" selection-start-line="333" selection-start-column="85" selection-end-line="333" selection-end-column="85" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3947#3948#0" expanded="false" />
+            <element signature="e#3987#3988#0" expanded="false" />
+            <element signature="method#hideSoftKeyboard#0;class#InvCollections#0" expanded="false" />
+            <element signature="e#4691#4692#0" expanded="false" />
+            <element signature="e#4747#4748#0" expanded="false" />
+            <element signature="e#4921#4922#0" expanded="false" />
+            <element signature="e#4984#4985#0" expanded="false" />
+            <element signature="e#18969#18970#0" expanded="false" />
+            <element signature="e#19013#19014#0" expanded="false" />
+            <element signature="method#onActivityResult#0;class#InvCollections#0" expanded="false" />
+            <element signature="method#clearData#0;class#InvCollections#0" expanded="false" />
+            <element signature="method#setInvoiceSpinner#0;class#InvCollections#0" expanded="false" />
+            <element signature="method#setCustomerSpinner#0;class#InvCollections#0" expanded="false" />
+            <element signature="method#setRepSpinner#0;class#InvCollections#0" expanded="false" />
+            <element signature="method#setRouteSpinner#0;class#InvCollections#0" expanded="false" />
+            <element signature="method#init#0;class#InvCollections#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/ahmed/sfa/activities/InitialLogin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="451" column="0" lean-forward="false" selection-start-line="451" selection-start-column="0" selection-end-line="451" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_invoice_payment.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1154">
+          <caret line="344" column="26" lean-forward="false" selection-start-line="344" selection-start-column="26" selection-end-line="344" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>

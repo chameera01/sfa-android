@@ -23,7 +23,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ahmed.sfa.Constants;
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.activities.Dialogs.Alert;
 import com.example.ahmed.sfa.controllers.adapters.DBAdapter;
 import com.example.ahmed.sfa.controllers.adapters.NavigationDrawerMenuManager;
 import com.example.ahmed.sfa.service.CallbackReceiver;
@@ -31,10 +33,7 @@ import com.example.ahmed.sfa.service.JsonFilter_Send;
 import com.example.ahmed.sfa.service.JsonObjGenerate;
 import com.example.ahmed.sfa.service.JsonRequestListerner;
 import com.example.ahmed.sfa.service.SyncReturn;
-import com.example.ahmed.sfa.service.UploadSalesHeader;
-import com.example.ahmed.sfa.service.UploadTables;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,7 +43,6 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,6 +62,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
     ImageView ivNewCustomer;
     ImageView ivTabStockSync, ivSalesHeaderSync;
     ImageView ivCollections;
+    ImageView ivAudit;
     String deviecId;
     String repId;
     ImageView ivItineraryDeatildSync;
@@ -91,6 +90,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivCollections = (ImageView) findViewById(R.id.iv_Collections);
 
         ivSalesHeaderSync = (ImageView) findViewById(R.id.iv_SalesDetails);
+        ivAudit = (ImageView) findViewById(R.id.iv_audit);
 
         setListeners();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -179,16 +179,20 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivCollections.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ManualSync.this, "clckedSync", Toast.LENGTH_LONG).show();
+                Toast.makeText(ManualSync.this, "Connecting..", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Tr_OutstandingForCollections/Tr_OutstandingForCollections?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/Tr_OutstandingForCollections/Tr_OutstandingForCollections?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("Collections");
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
             }
         });
@@ -197,16 +201,20 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivProductSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ManualSync.this, "clckedSync", Toast.LENGTH_LONG).show();
+                Toast.makeText(ManualSync.this, "Connecting..", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/productdetails/SelectProductDetails?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/productdetails/SelectProductDetails?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("productdetails");
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
+
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
 
@@ -216,17 +224,20 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivrepSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ManualSync.this, "clckedSync", Toast.LENGTH_LONG).show();
+                Toast.makeText(ManualSync.this, "Connecting..", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/GetRepDetails/SelectGetRepDetails?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/GetRepDetails/SelectGetRepDetails?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("RepDetails");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
 
@@ -237,17 +248,20 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivSupplierSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ManualSync.this, "clckedSync", Toast.LENGTH_LONG).show();
+                Toast.makeText(ManualSync.this, "Connecting..", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_SupplierTable/SelectProductMst_SupplierTable?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/Mst_SupplierTable/SelectProductMst_SupplierTable?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("SupplierTable");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
 
@@ -258,17 +272,20 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivProductBradnSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ManualSync.this, "clckedSync", Toast.LENGTH_LONG).show();
+                Toast.makeText(ManualSync.this, "Connecting..", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/ProductBrandManagement/SelectProductBrandManagement?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/ProductBrandManagement/SelectProductBrandManagement?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("ProductBrandManagement");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
 
@@ -279,37 +296,43 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
         ivCustomerStatusSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(ManualSync.this, "clckedSync", Toast.LENGTH_LONG).show();
+                Toast.makeText(ManualSync.this, "Connecting..", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_CustomerStatus/SelectMst_CustomerStatus?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/Mst_CustomerStatus/SelectMst_CustomerStatus?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("CustomerStatus");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
 
             }
         });
-        /**Sync Distric Details**/
+        /**Sync District Details**/
         ivDistrictSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this, "Connecting...", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_District/SelectMst_District?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/Mst_District/SelectMst_District?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("district");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
 
@@ -321,15 +344,18 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this, "Connecting...", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_Territory/SelectMst_Territory?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/Mst_Territory/SelectMst_Territory?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("territory");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
 
@@ -341,15 +367,18 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this, "Connecting...", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_Route/SelectMst_Route?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/Mst_Route/SelectMst_Route?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("route");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
 
@@ -361,15 +390,18 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this, "Connecting...", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_Reasons/SelectMst_Reasons?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/Mst_Reasons/SelectMst_Reasons?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("Reason");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
 
@@ -381,15 +413,18 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this, "Connecting...", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_CheckInOutPoints/SelectMst_CheckInOutPoints?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/Mst_CheckInOutPoints/SelectMst_CheckInOutPoints?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("CheckInOutPoints");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
 
@@ -403,56 +438,13 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View v) {
 
                 Toast.makeText(ManualSync.this, "Connecting...", Toast.LENGTH_LONG).show();
-
-                try {
-                    //uploading data
-                    UploadTables uplwd = new UploadTables(ManualSync.this);
-                    ArrayList<String> cusArr = uplwd.mstCustomerMaster();
-
-                    Toast.makeText(ManualSync.this, "size" + cusArr.get(0), Toast.LENGTH_SHORT).show();
-
-                    try {
-                        for (final String url : cusArr) {
-
-
-                            //method 3
-                            new UploadWithCallback() {
-
-                                //HashMap<String, String> map = new HashMap<String, String>();//put in it
-                                //map.put(stts, filename[i]);
-                                String urlToSplit = url;
-
-                                String cusNo = urlToSplit.split("TabCustomerNo=")[1].split("&CustomerName")[0];
-
-                                @Override
-                                public void receiveData(Object result) {
-                                    Toast.makeText(ManualSync.this, "Ststus" + url, Toast.LENGTH_SHORT).show();
-                                    String response = (String) result;
-                                    Toast.makeText(ManualSync.this, "Response_callback:" + response, Toast.LENGTH_SHORT).show();
-                                    try {
-                                        if (response != null) {
-                                            JSONArray responseArr = new JSONArray(response);
-                                            JSONObject respondObj = responseArr.getJSONObject(0);
-                                            String stts = respondObj.getString("Status");
-                                            if (stts.equals("Success")) {
-                                                DBAdapter adp = new DBAdapter(ManualSync.this);
-                                                adp.updateCustomerUploadStatus(cusNo);
-
-                                            } else {
-                                                Toast.makeText(ManualSync.this, "Ststus" + stts, Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }.execute(url);
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(ManualSync.this, "ArrayList:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                ManualSyncFromOtherActivities msfoa = new ManualSyncFromOtherActivities(ManualSync.this);
+                if (msfoa.uploadNewCustomers(repId)) {
+                    Alert alert = new Alert(ManualSync.this);
+                    alert.showAlert("Success", "Updated successfully!", null, null);
+                } else {
+                    Alert alert = new Alert(ManualSync.this);
+                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
             }
@@ -460,7 +452,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
 
 
 
-        /*sunc Customer*/
+        /*sync Customer*/
         ivCustomerSync.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -468,15 +460,17 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
 
                 //download customer master data
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Mst_Customermaster/SelectMst_Customermaster?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/Mst_Customermaster/SelectMst_Customermaster?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("Customer");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
-                    // e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
             }
@@ -487,15 +481,18 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             public void onClick(View view) {
                 Toast.makeText(ManualSync.this, "Connecting...", Toast.LENGTH_LONG).show();
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/D_Tr_RepStock/GetRepStock?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/D_Tr_RepStock/GetRepStock?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("TabStock");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Toast.makeText(ManualSync.this, "clck.ExceptionCalled", Toast.LENGTH_LONG).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
 
@@ -508,14 +505,17 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             @Override
             public void onClick(View view) {
                 try {
-                    JsonObjGenerate jObjGen = new JsonObjGenerate("http://124.43.19.123:8082/BizMapExpertHesperus/DIstributorManagementSystem/Tr_ItineraryDetails/GetItineraryDetails?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
+                    JsonObjGenerate jObjGen = new JsonObjGenerate(Constants.BASE_URL + "DIstributorManagementSystem/Tr_ItineraryDetails/GetItineraryDetails?DeviceID=" + deviecId + "&RepID=" + repId + "", ManualSync.this);
                     jObjGen.setFilterType("ItineraryDetails");
 
                     SyncReturn io = new SyncReturn();
                     io.execute(jObjGen);
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Success", "Updated successfully!", null, null);
 
                 } catch (Exception e) {
-                    Toast.makeText(ManualSync.this, "ItineraryDeatils Download:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+//                    Alert alert = new Alert(ManualSync.this);
+//                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
             }
         });
@@ -527,240 +527,62 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
             @SuppressLint("StaticFieldLeak")
             @Override
             public void onClick(View view) {
-                Toast.makeText(ManualSync.this, "Connecting...", Toast.LENGTH_LONG).show();
-                try {
-                    //uploading data
-                    UploadSalesHeader uplwd = new UploadSalesHeader(ManualSync.this);
-                    ArrayList<String> cusArr = uplwd.mstSalesInvoiceHeader();
-                    Toast.makeText(ManualSync.this, "size" + cusArr.get(0), Toast.LENGTH_SHORT).show();
 
-                    try {
-                        for (final String url : cusArr) {
-
-                            //method 3
-                            new UploadWithCallback() {
-
-
-                                String urlToSplit = url;
-
-                                String cusNo = urlToSplit.split("TabID=")[1].split("&ItineraryID")[0];
-
-
-                                @Override
-                                public void receiveData(Object result) {
-                                    Toast.makeText(ManualSync.this, "Ststus" + url, Toast.LENGTH_SHORT).show();
-                                    String response = (String) result;
-                                    Toast.makeText(ManualSync.this, "Response_callback:" + response, Toast.LENGTH_SHORT).show();
-                                    try {
-                                        if (response != null) {
-                                            JSONArray responseArr = new JSONArray(response);
-                                            JSONObject respondObj = responseArr.getJSONObject(0);
-                                            String stts = respondObj.getString("Status");
-                                            if (stts.equals("Success")) {
-                                                DBAdapter adp = new DBAdapter(ManualSync.this);
-                                                adp.updateSalesHeaderUploadStatus(cusNo);
-
-                                            } else {
-                                                Toast.makeText(ManualSync.this, "Ststus" + stts, Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }.execute(url);
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(ManualSync.this, "ArrayList:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                //sales details
-                try {
-                    //uploading data
-                    UploadSalesHeader uplwd = new UploadSalesHeader(ManualSync.this);
-                    ArrayList<String> cusArr = uplwd.mstSalesInvoiceDetails();
-                    Toast.makeText(ManualSync.this, "size" + cusArr.get(0), Toast.LENGTH_SHORT).show();
-
-                    try {
-                        for (final String url : cusArr) {
-
-                            //method 3
-                            new UploadWithCallback() {
-
-
-                                String urlToSplit = url;
-
-
-                                String[] domains = urlToSplit.split("&");
-
-                                String cusNo = domains[1];
-
-
-                                @Override
-                                public void receiveData(Object result) {
-                                    Toast.makeText(ManualSync.this, "Ststus" + url, Toast.LENGTH_SHORT).show();
-                                    String response = (String) result;
-                                    Toast.makeText(ManualSync.this, "Response_callback:" + response, Toast.LENGTH_SHORT).show();
-                                    try {
-                                        if (response != null) {
-                                            JSONArray responseArr = new JSONArray(response);
-                                            JSONObject respondObj = responseArr.getJSONObject(0);
-                                            String stts = respondObj.getString("Status");
-                                            if (stts.equals("Success")) {
-                                                DBAdapter adp = new DBAdapter(ManualSync.this);
-                                                adp.updateSalesDetailsUploadStatus(cusNo);
-
-                                            } else {
-                                                Toast.makeText(ManualSync.this, "Ststus" + stts, Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }.execute(url);
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(ManualSync.this, "ArrayList:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
+                ManualSyncFromOtherActivities msfa = new ManualSyncFromOtherActivities(ManualSync.this);
+                if (msfa.uploadSalesDetails(repId)) {
+                    Alert alert = new Alert(ManualSync.this);
+                    alert.showAlert("Success", "Updated successfully!", null, null);
+                } else {
+                    Alert alert = new Alert(ManualSync.this);
+                    alert.showAlert("Error", "Failed to update!", null, null);
                 }
 
-
-                /// discounts
-                try {
-                    //uploading data
-                    UploadSalesHeader uplwd = new UploadSalesHeader(ManualSync.this);
-                    ArrayList<String> cusArr = uplwd.mstSalesInvoiceDiscountDetails();
-                    Toast.makeText(ManualSync.this, "size" + cusArr.get(0), Toast.LENGTH_SHORT).show();
-
-                    try {
-                        for (final String url : cusArr) {
-
-                            //method 3
-                            new UploadWithCallback() {
-
-
-                                String urlToSplit = url;
-
-
-                                String[] domains = urlToSplit.split("&");
-
-                                String cusNo = domains[1];
-
-
-                                @Override
-                                public void receiveData(Object result) {
-                                    Toast.makeText(ManualSync.this, "Ststus" + url, Toast.LENGTH_SHORT).show();
-                                    String response = (String) result;
-                                    Toast.makeText(ManualSync.this, "Response_callback:" + response, Toast.LENGTH_SHORT).show();
-                                    try {
-                                        if (response != null) {
-                                            JSONArray responseArr = new JSONArray(response);
-                                            JSONObject respondObj = responseArr.getJSONObject(0);
-                                            String stts = respondObj.getString("Status");
-                                            if (stts.equals("Success")) {
-                                                DBAdapter adp = new DBAdapter(ManualSync.this);
-                                                //adp.updateSalesDetailsUploadStatus(cusNo);
-
-                                            } else {
-                                                Toast.makeText(ManualSync.this, "Ststus" + stts, Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }.execute(url);
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(ManualSync.this, "ArrayList:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                try {
-                    //uploading data - Outstanding Upload
-                    UploadSalesHeader uplwd = new UploadSalesHeader(ManualSync.this);
-                    ArrayList<String> cusArr = uplwd.mstSalesInvoiceOutstandingDetails();
-                    Toast.makeText(ManualSync.this, "size" + cusArr.get(0), Toast.LENGTH_SHORT).show();
-
-                    try {
-                        for (final String url : cusArr) {
-
-                            //method 3
-                            new UploadWithCallback() {
-
-
-                                String urlToSplit = url;
-
-
-                                String[] domains = urlToSplit.split("&");
-
-                                String cusNo = domains[1];
-
-
-                                @Override
-                                public void receiveData(Object result) {
-                                    Toast.makeText(ManualSync.this, "Ststus" + url, Toast.LENGTH_SHORT).show();
-                                    String response = (String) result;
-                                    Toast.makeText(ManualSync.this, "Response_callback:" + response, Toast.LENGTH_SHORT).show();
-                                    try {
-                                        if (response != null) {
-                                            JSONArray responseArr = new JSONArray(response);
-                                            JSONObject respondObj = responseArr.getJSONObject(0);
-                                            String stts = respondObj.getString("Status");
-                                            if (stts.equals("Success")) {
-                                                DBAdapter adp = new DBAdapter(ManualSync.this);
-                                                adp.updateSalesoutstandingUploadStatuscusNo(cusNo);
-
-                                            } else {
-                                                Toast.makeText(ManualSync.this, "Ststus" + stts, Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }.execute(url);
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(ManualSync.this, "ArrayList:" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
         });
         /*FRANK Jayawardana */
+
+        ivAudit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ManualSync.this, "Connecting...", Toast.LENGTH_LONG).show();
+                DBAdapter dbAdapter = new DBAdapter(ManualSync.this);
+                if (dbAdapter.updateaudit()) {
+                    Alert alert = new Alert(ManualSync.this);
+                    alert.showAlert("Success", "Updated successfully!", null, null);
+                } else {
+                    Alert alert = new Alert(ManualSync.this);
+                    alert.showAlert("Error", "Failed to update!", null, null);
+                }
+
+            }
+        });
 
     }
 
     @Override
     public void receiveData(String result, String filter) {
-        Toast.makeText(this, "came inside recieve data", Toast.LENGTH_LONG).show();
+//        Toast.makeText(this, "came inside recieve data", Toast.LENGTH_LONG).show();
         if (result != null) {
             String josnString = result;
-            Toast.makeText(this, "result:" + josnString, Toast.LENGTH_LONG).show();
+//            Toast.makeText(this, "result:" + josnString, Toast.LENGTH_LONG).show();
             try {
                 JsonFilter_Send josnFilter = new JsonFilter_Send(ManualSync.this.getApplicationContext());
                 josnFilter.filterJsonData(josnString, filter);
+                Alert alert = new Alert(ManualSync.this);
+                alert.showAlert("Success", "Updated successfully!", null, null);
 
             } catch (Exception e) {
-                Toast.makeText(this, "RecieveData:" + e.getMessage(), Toast.LENGTH_LONG).show();
+                Alert alert = new Alert(ManualSync.this);
+                alert.showAlert("Error", "Failed to update!", null, null);
+
             }
         } else {
-            Toast.makeText(this, "is nulllll", Toast.LENGTH_LONG).show();
+            Alert alert = new Alert(ManualSync.this);
+            alert.showAlert("Error", "Failed to update!", null, null);
+
         }
-        Toast.makeText(ManualSync.this, "method_complete", Toast.LENGTH_LONG).show();
+//        Toast.makeText(ManualSync.this, "method_complete", Toast.LENGTH_LONG).show();
     }
 
     public void send_to_web() {
@@ -822,7 +644,7 @@ public class ManualSync extends AppCompatActivity implements JsonRequestListerne
     }
 
     //upload private class
-    private static abstract class UploadWithCallback extends AsyncTask<String, String, String> implements CallbackReceiver {
+    public static abstract class UploadWithCallback extends AsyncTask<String, String, String> implements CallbackReceiver {
         public static final String REQUEST_METHOD = "GET";
         public static final int READ_TIMEOUT = 15000;
         public static final int CONNECTION_TIMEOUT = 15000;

@@ -47,6 +47,8 @@ public class CustomerPopupFragment extends Fragment {
     private Spinner reason;
     private String invoiceNo;
     private double credit;
+    private AlertDialog dialog;
+    private AlertDialog.Builder builder;
 
     public static CustomerPopupFragment newInstance(Itinerary itinerary){
         CustomerPopupFragment customerPopupFragment = new CustomerPopupFragment();
@@ -203,17 +205,21 @@ public class CustomerPopupFragment extends Fragment {
                     intent.putExtra(Constants.ITINERARY, itineraryforCurrentCustomer);//this data will be passed on to the db insert step
                     intent.putExtra("INVOICE_NO", invoiceNo);
                     intent.putExtra("CURRENT_CREDIT", credit);
+                    intent.putExtra("CALLING_ACT", false);
 
                     startActivity(intent);
+                    dialog.dismiss();
 
                 }
             });
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+            builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog_Alert);
 
-            builder.setTitle("Outstanding Invoices - Select one")
-                    .setView(lv)
-                    .create().show();
+            builder.setTitle("Outstanding Invoices - Select one");
+            builder.setView(lv);
+            dialog = builder.create();
+            dialog.show();
+
         } else {
             Log.d("COL", "inside DB helper_empty");
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog_Alert);

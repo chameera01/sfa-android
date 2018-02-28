@@ -10,6 +10,7 @@ import com.example.ahmed.sfa.models.CollectionsOutStanding;
 import com.example.ahmed.sfa.models.Mst_CheckInOutPoints;
 import com.example.ahmed.sfa.models.Mst_CustomerStatus;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
+import com.example.ahmed.sfa.models.Mst_DeviceRepDetails;
 import com.example.ahmed.sfa.models.Mst_District;
 import com.example.ahmed.sfa.models.Mst_InvoiceNos_Mgt;
 import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
@@ -30,19 +31,43 @@ import org.json.JSONObject;
  */
 
 public class JsonFilter_Send {
-    private  Context context;
-    public  JsonFilter_Send(Context c){
+    private static final String TAG = "COL";
+    private Context context;
+
+    public JsonFilter_Send(Context c) {
 
 
-        context=c;
+        context = c;
     }
 
-    public void filterJsonData(String result, String filter) {
+    public Boolean filterJsonData(String result, String filter) {
 
 
         try {
 
-            switch (filter){
+            switch (filter) {
+
+                case "DeviceRepDetails":
+                    Log.d("MGT", "inside json_filter_send");
+                    Mst_DeviceRepDetails drd = new Mst_DeviceRepDetails();
+                    DBAdapter drdAdapter = new DBAdapter(context);
+
+                    JSONArray drdArray = new JSONArray(result);
+                    for (int i = 0; i < drdArray.length(); i++) {
+                        JSONObject drdObject = drdArray.getJSONObject(i);
+
+                        drd.setDeviceId(drdObject.optString("DeviceID"));
+                        drd.setRepId(drdObject.optString("RepID"));
+                        drd.setRepName(drdObject.optString("RepName"));
+
+//                        Log.d("MGT", inm.getInvoiceNo() + "_" + inm.getInvoiceReturnNo() + "_" + inm.getCollectionNoteNo() + "_" + inm.getlUpdateDate());
+                        drdAdapter.setDeviceRepDetails(drd);
+//                        Log.d("MGT", inm.toString());
+                    }
+
+                    break;
+
+
                 case "salesProductBrand":
                     JSONArray jsonArray = new JSONArray(result);
 
@@ -80,50 +105,58 @@ public class JsonFilter_Send {
 
                     break;
 
-                case   "deviceid_pass":
+                case "deviceid_pass":
 
                     JSONArray jsonArray2 = new JSONArray(result);
                     JSONObject jsonObject = jsonArray2.getJSONObject(0);
-                    String status=jsonObject.optString("ACTIVESTATUS");
+                    String status = jsonObject.optString("ACTIVESTATUS");
                     //activeStatus=status;
                     break;
 
                 case "productdetails":
-                    Mst_ProductMaster productMst= new Mst_ProductMaster();
-                    DBAdapter adptr=new DBAdapter(context);
+                    Mst_ProductMaster productMst = new Mst_ProductMaster();
+                    DBAdapter adptr = new DBAdapter(context);
 
                     JSONArray jsonProductArray = new JSONArray(result);
                     for (int i = 0; i < jsonProductArray.length(); i++) {
                         JSONObject jsonProductObject = jsonProductArray.getJSONObject(i);
 
-                        productMst.setItemCode( jsonProductObject.optString("ItemCode"));
-                        productMst.setDescription(  jsonProductObject.optString("Description"));
-                        productMst.setPrincipleId( jsonProductObject.optString("PrincipleID"));
-                        productMst.setPrinciple( jsonProductObject.optString("Principle"));
-                        productMst.setBrandId(  jsonProductObject.optString("BrandID"));
-                        productMst.setBrand( jsonProductObject.optString("Brand"));
-                        productMst.setSubBrandId( jsonProductObject.optString("SubBrandID"));
-                        productMst.setSubBrand( jsonProductObject.optString("SubBrand"));
-                        productMst.setUnitSize( jsonProductObject.optInt("UnitSize"));
-                        productMst.setUnitName(  jsonProductObject.optString("UnitName"));
+                        productMst.setItemCode(jsonProductObject.optString("ItemCode"));
+                        productMst.setDescription(jsonProductObject.optString("Description"));
+                        productMst.setPrincipleId(jsonProductObject.optString("PrincipleID"));
+                        productMst.setPrinciple(jsonProductObject.optString("Principle"));
+                        productMst.setBrandId(jsonProductObject.optString("BrandID"));
+                        productMst.setBrand(jsonProductObject.optString("Brand"));
+                        productMst.setSubBrandId(jsonProductObject.optString("SubBrandID"));
+                        productMst.setSubBrand(jsonProductObject.optString("SubBrand"));
+                        productMst.setUnitSize(jsonProductObject.optInt("UnitSize"));
+                        productMst.setUnitName(jsonProductObject.optString("UnitName"));
                         productMst.setRetailPrice(jsonProductObject.optDouble("RetailPrice"));
+                        productMst.setSellingPrice(jsonProductObject.optLong("SellingPrice"));
                         productMst.setBuyingPrice(jsonProductObject.optDouble("BuyingPrice"));
-                        productMst.setActive( jsonProductObject.optInt("Active"));
-                        productMst.setTargetAllow( jsonProductObject.optInt("TargetAllow"));
+                        productMst.setActive(jsonProductObject.optInt("Active"));
+                        productMst.setTargetAllow(jsonProductObject.optInt("TargetAllow"));
 
+                        // temporarily hardcoded
+                        productMst.setSortOrder(0.0);
+
+                        Log.d("PRODUCT", "unitprice: " + jsonProductObject.optInt("UnitSize"));
+                        Log.d("PRODUCT", "sellingprice: " + jsonProductObject.optLong("SellingPrice"));
 
                         adptr.setMst_ProductMaster(productMst);
                         //jsonMyArray.add(productMst);
                         //Toast.makeText(this.context,productMst.getBrand(),Toast.LENGTH_LONG).show();
-                       // result_view.setText(productMst.getBrand());
+                        // result_view.setText(productMst.getBrand());
                     }
                     break;
 
                 case "Collections":
+
                     CollectionsOutStanding co = new CollectionsOutStanding();
                     DBAdapter col_adp = new DBAdapter(context);
-                    Log.d("COL", "inside filter send");
+                    Log.d(TAG, "inside filter send");
                     JSONArray jsonColArray = new JSONArray(result);
+
                     for (int i = 0; i < jsonColArray.length(); i++) {
                         JSONObject jsonColObj = jsonColArray.getJSONObject(i);
                         Log.d("COL", "Inside FilterSend_" + i);
@@ -144,24 +177,24 @@ public class JsonFilter_Send {
                     }
 
                 case "RepDetails":
-                    Mst_RepTable rep= new Mst_RepTable();
-                    DBAdapter rep_adptr=new DBAdapter(context);
+                    Mst_RepTable rep = new Mst_RepTable();
+                    DBAdapter rep_adptr = new DBAdapter(context);
 
                     JSONArray jsonRepArray = new JSONArray(result);
                     for (int i = 0; i < jsonRepArray.length(); i++) {
                         JSONObject jsonRepObject = jsonRepArray.getJSONObject(i);
 
-                        rep.setRepId( jsonRepObject.optString("RepID"));
+                        rep.setRepId(jsonRepObject.optString("RepID"));
                         Log.d("MGT", "Inside FilterSend_" + rep.getRepId());
-                        rep.setDeviceName(  jsonRepObject.optString("DeviceName"));
-                        rep.setRepName( jsonRepObject.optString("RepName"));
-                        rep.setAddress( jsonRepObject.optString("Address"));
-                        rep.setContactNo(  jsonRepObject.optString("ContactNo"));
-                        rep.setDealerName( jsonRepObject.optString("DealerName"));
-                        rep.setDealerAdress( jsonRepObject.optString("DealerAddress"));
-                        rep.setMacAdress( jsonRepObject.optString("MacAddress"));
-                        rep.setAgentId( jsonRepObject.optString("AgentID"));
-                        rep.setIsActive(  jsonRepObject.optInt("IsActive"));
+                        rep.setDeviceName(jsonRepObject.optString("DeviceName"));
+                        rep.setRepName(jsonRepObject.optString("RepName"));
+                        rep.setAddress(jsonRepObject.optString("Address"));
+                        rep.setContactNo(jsonRepObject.optString("ContactNo"));
+                        rep.setDealerName(jsonRepObject.optString("DealerName"));
+                        rep.setDealerAdress(jsonRepObject.optString("DealerAddress"));
+                        rep.setMacAdress(jsonRepObject.optString("MacAddress"));
+                        rep.setAgentId(jsonRepObject.optString("AgentID"));
+                        rep.setIsActive(jsonRepObject.optInt("IsActive"));
 
 
                         rep_adptr.setMst_RepTable(rep);
@@ -173,19 +206,17 @@ public class JsonFilter_Send {
 
                     break;
 
-                case  "SupplierTable":
-                    Mst_SupplierTable sup= new Mst_SupplierTable();
-                    DBAdapter sup_adptr=new DBAdapter(context);
+                case "SupplierTable":
+                    Mst_SupplierTable sup = new Mst_SupplierTable();
+                    DBAdapter sup_adptr = new DBAdapter(context);
 
                     JSONArray jsonSupplierArray = new JSONArray(result);
                     for (int i = 0; i < jsonSupplierArray.length(); i++) {
                         JSONObject jsonSupObject = jsonSupplierArray.getJSONObject(i);
 
-                        sup.setPrincipleID( jsonSupObject.optString("PrincipleID"));
-                        sup.setPrinciple(  jsonSupObject.optString("Principle"));
-                        sup.setActive( jsonSupObject.optInt("Activate"));
-
-
+                        sup.setPrincipleID(jsonSupObject.optString("PrincipleID"));
+                        sup.setPrinciple(jsonSupObject.optString("Principle"));
+                        sup.setActive(jsonSupObject.optInt("Activate"));
 
 
                         sup_adptr.insertMst_SupplierTable(sup);
@@ -196,21 +227,19 @@ public class JsonFilter_Send {
                     break;
 
                 case "ProductBrandManagement":
-                    Mst_ProductBrandManagement brand= new Mst_ProductBrandManagement();
-                    DBAdapter brand_adptr=new DBAdapter(context);
+                    Mst_ProductBrandManagement brand = new Mst_ProductBrandManagement();
+                    DBAdapter brand_adptr = new DBAdapter(context);
 
                     JSONArray jsonBrandArray = new JSONArray(result);
                     for (int i = 0; i < jsonBrandArray.length(); i++) {
                         JSONObject jsonSupObject = jsonBrandArray.getJSONObject(i);
 
-                        brand.setBrandID( jsonSupObject.optString("BrandID"));
-                        brand.setPrincipleID(  jsonSupObject.optString("PrincipleID"));
+                        brand.setBrandID(jsonSupObject.optString("BrandID"));
+                        brand.setPrincipleID(jsonSupObject.optString("PrincipleID"));
                         brand.setPrinciple(jsonSupObject.optString("Principle"));
                         brand.setMainBrand(jsonSupObject.optString("MainBrand"));
-                        brand.setActive( jsonSupObject.optInt("Activate"));
+                        brand.setActive(jsonSupObject.optInt("Activate"));
                         brand.setLastUpdateDate(DateManager.dateToday());
-
-
 
 
                         brand_adptr.insertMst_ProductBrandManagement(brand);
@@ -220,8 +249,8 @@ public class JsonFilter_Send {
                     }
                     break;
                 case "CustomerStatus":
-                    Mst_CustomerStatus cusStatus= new Mst_CustomerStatus();
-                    DBAdapter status_adptr=new DBAdapter(context);
+                    Mst_CustomerStatus cusStatus = new Mst_CustomerStatus();
+                    DBAdapter status_adptr = new DBAdapter(context);
 
                     JSONArray jsonStatusArray = new JSONArray(result);
                     for (int i = 0; i < jsonStatusArray.length(); i++) {
@@ -235,11 +264,11 @@ public class JsonFilter_Send {
 
                         status_adptr.insertCustomerStatus(cusStatus);
                     }
-                        break;
+                    break;
                 case "district":
 
-                    Mst_District district= new Mst_District();
-                    DBAdapter district_adptr=new DBAdapter(context);
+                    Mst_District district = new Mst_District();
+                    DBAdapter district_adptr = new DBAdapter(context);
 
                     JSONArray jsonDistrictArray = new JSONArray(result);
                     for (int i = 0; i < jsonDistrictArray.length(); i++) {
@@ -255,8 +284,8 @@ public class JsonFilter_Send {
                     }
                     break;
                 case "territory":
-                    Mst_Territory terri= new Mst_Territory();
-                    DBAdapter territory_adptr=new DBAdapter(context);
+                    Mst_Territory terri = new Mst_Territory();
+                    DBAdapter territory_adptr = new DBAdapter(context);
 
                     JSONArray jsonTerriArray = new JSONArray(result);
                     for (int i = 0; i < jsonTerriArray.length(); i++) {
@@ -272,8 +301,8 @@ public class JsonFilter_Send {
 
                 case "route":
 
-                    Mst_Route route= new Mst_Route();
-                    DBAdapter route_adptr=new DBAdapter(context);
+                    Mst_Route route = new Mst_Route();
+                    DBAdapter route_adptr = new DBAdapter(context);
 
                     JSONArray jsonRouteArray = new JSONArray(result);
                     for (int i = 0; i < jsonRouteArray.length(); i++) {
@@ -291,8 +320,8 @@ public class JsonFilter_Send {
                     break;
                 case "Reason":
 
-                    Mst_Reasons reason =new Mst_Reasons();
-                    DBAdapter reason_adptr=new DBAdapter(context);
+                    Mst_Reasons reason = new Mst_Reasons();
+                    DBAdapter reason_adptr = new DBAdapter(context);
 
                     JSONArray jsonReasonArray = new JSONArray(result);
                     for (int i = 0; i < jsonReasonArray.length(); i++) {
@@ -312,7 +341,7 @@ public class JsonFilter_Send {
                     DBAdapter tabstock_adptr = new DBAdapter(context);
 
                     JSONArray jsontabStockArr = new JSONArray(result);
-                    for(int i = 0; i< jsontabStockArr.length(); i++){
+                    for (int i = 0; i < jsontabStockArr.length(); i++) {
                         JSONObject jsonTabStockObj = jsontabStockArr.getJSONObject(i);
 
 
@@ -330,11 +359,11 @@ public class JsonFilter_Send {
                     }
                     break;
 
-                case  "CheckInOutPoints":
+                case "CheckInOutPoints":
                     ////ID | ServerID | Type | PointDescription | IsActive | LastUpdateDate
 
-                    Mst_CheckInOutPoints checkInOutPoints=new Mst_CheckInOutPoints();
-                    DBAdapter checkin_adptr=new DBAdapter(context);
+                    Mst_CheckInOutPoints checkInOutPoints = new Mst_CheckInOutPoints();
+                    DBAdapter checkin_adptr = new DBAdapter(context);
 
                     JSONArray jsonCheckInArray = new JSONArray(result);
                     for (int i = 0; i < jsonCheckInArray.length(); i++) {
@@ -342,7 +371,7 @@ public class JsonFilter_Send {
 
                         checkInOutPoints.setServerId(jsonSupObject.optString("ServerID"));
                         checkInOutPoints.setType(jsonSupObject.optString("Type"));
-                        checkInOutPoints.setPointDescription(jsonSupObject.optString("PointDescription"));
+                        checkInOutPoints.setPointDescription(jsonSupObject.optString("PintDescription"));
                         checkInOutPoints.setIsActive(jsonSupObject.optInt("isActive"));
                         checkInOutPoints.setLastUpdateDate(DateManager.dateToday());
 
@@ -350,10 +379,10 @@ public class JsonFilter_Send {
                     }
                     break;
 
-                case"Customer":
+                case "Customer":
 
                     Mst_Customermaster cus = new Mst_Customermaster();
-                    DBAdapter cus_adptr=new DBAdapter(context);
+                    DBAdapter cus_adptr = new DBAdapter(context);
 
                     JSONArray jsonCusInArray = new JSONArray(result);
                     for (int i = 0; i < jsonCusInArray.length(); i++) {
@@ -393,17 +422,17 @@ public class JsonFilter_Send {
 //                        cus.setCompanyCode(jsonSupObject.optString("CompanyCode"));
                         cus.setIsActive(jsonSupObject.optInt("isActive"));
                         cus.setLastUpdateDate(DateManager.dateToday());
+                        cus.setIsCashCustomer(jsonSupObject.optInt("IsCashCustomer"));
 
                         cus_adptr.insertCustomerData(cus);
                     }
-
 
 
                     break;
 
                 case "ItineraryDetails":
                     Tr_ItineraryDetails itineraryDetails = new Tr_ItineraryDetails();
-                    DBAdapter itinerary_adptr=new DBAdapter(context);
+                    DBAdapter itinerary_adptr = new DBAdapter(context);
 
                     JSONArray jsonItineraryDetailsArray = new JSONArray(result);
                     for (int i = 0; i < jsonItineraryDetailsArray.length(); i++) {
@@ -423,11 +452,13 @@ public class JsonFilter_Send {
                     break;
             }
 
+            return true;
 
+        } catch (Exception e) {
 
-        }catch (Exception e){
             e.printStackTrace();
-           Toast.makeText(context,""+e.getMessage(),Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_LONG).show();
+            return false;
         }
     }
 }

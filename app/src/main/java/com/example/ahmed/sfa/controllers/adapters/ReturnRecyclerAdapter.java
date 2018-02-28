@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,15 +23,18 @@ import java.util.List;
  */
 
 public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAdapter.MyViewHolder> implements SummaryUpdater{
-    private List<SalesInvoiceModel> salesInvoice;
-    boolean onBind;
-
     public final String SHELF = "SHLEF",REQUEST="REQUEST", RETURN ="RETURN",FREE="FREE",DISCOUNT="DISCOUNT",
             LINEVAL = "LINEVAL",UNITPRICE="UNITPRICE";
+    boolean onBind;
     DBAdapter dbAdapter;
-
     SummaryUpdateListner listner;
+    private List<SalesInvoiceModel> salesInvoice;
+    private boolean lostFocus = false;
 
+
+    public ReturnRecyclerAdapter(List<SalesInvoiceModel> list) {
+        this.salesInvoice = list;
+    }
 
     @Override
     public void notifyUpdate() {
@@ -42,70 +44,6 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
     @Override
     public void addListener(SummaryUpdateListner listner) {
         this.listner = listner;
-    }
-
-
-
-    public class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView code,product,expiry,stock,lineval,batchNum;
-        EditText shelf,request,unitprice, returnQty,free,discount;
-        int ref;
-
-        View view;
-        public MyViewHolder(View view){
-            super(view);
-            this.view = view;
-            dbAdapter = new ReturnRecyclerAdapter.DBAdapter(view.getContext());
-            code = (TextView) view.findViewById(R.id.code_e);
-            product =(TextView) view.findViewById(R.id.product_e);
-            batchNum = (TextView) view.findViewById(R.id.batch_e);
-            expiry = (TextView)view.findViewById(R.id.expiry_e);
-
-            stock = (TextView)view.findViewById(R.id.stock_e);
-            lineval = (TextView)view.findViewById(R.id.line_val_e);
-
-            shelf = (EditText)view.findViewById(R.id.shelf_e);
-            request =(EditText)view.findViewById(R.id.request_e);
-            returnQty = (EditText)view.findViewById(R.id.order_e);
-            free = (EditText)view.findViewById(R.id.free_e);
-            discount = (EditText)view.findViewById(R.id.dsc_e);
-            unitprice = (EditText) view.findViewById(R.id.unit_price);
-
-        }
-
-        public void setCursor(String view){
-            switch (view){
-                case SHELF:
-                    shelf.setSelection(shelf.getText().length());
-                    break;
-                case REQUEST:
-                    request.setSelection(request.getText().length());
-                    break;
-
-                case RETURN:
-                    returnQty.setSelection(returnQty.getText().length());
-                    break;
-
-                case FREE:
-                    free.setSelection(free.getText().length());
-                    break;
-                case DISCOUNT:
-                    discount.setSelection(discount.getText().length());
-                    break;
-
-
-
-            }
-        }
-
-        public void setColor(int color){
-            view.setBackgroundColor(color);
-        }
-
-    }
-
-    public ReturnRecyclerAdapter(List<SalesInvoiceModel> list){
-        this.salesInvoice = list;
     }
 
     public ReturnRecyclerAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -152,19 +90,34 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                 String val = (String) editText;
                 switch (val) {
                     case SHELF:
-                        holder.shelf.setText(salesInvoice.get(position).getShelf() + "");
+                        //added by shani
+                        if (lostFocus) {
+                            holder.shelf.setText(salesInvoice.get(position).getShelf() + "");
+                        }
                         break;
                     case REQUEST:
-                        holder.request.setText(salesInvoice.get(position).getRequest() + "");
+//                       //added by shani
+                        if (lostFocus) {
+                            holder.request.setText(salesInvoice.get(position).getRequest() + "");
+                        }
                         break;
                     case RETURN:
-                        holder.returnQty.setText(salesInvoice.get(position).getOrder() + "");
+                        //added by shani
+                        if (lostFocus) {
+                            holder.returnQty.setText(salesInvoice.get(position).getOrder() + "");
+                        }
                         break;
                     case FREE:
-                        holder.free.setText(salesInvoice.get(position).getFree() + "");
+                        //added by shani
+                        if (lostFocus) {
+                            holder.free.setText(salesInvoice.get(position).getFree() + "");
+                        }
                         break;
                     case DISCOUNT:
-                        holder.discount.setText(salesInvoice.get(position).getDiscountRate() + "");
+                        //added by shani
+                        if (lostFocus) {
+                            holder.discount.setText(salesInvoice.get(position).getDiscountRate() + "");
+                        }
                         break;
 
                     case LINEVAL:
@@ -204,32 +157,10 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                     //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
                     notifyItemChanged(pos,LINEVAL);
                 }
+//                dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
             }
         });
-        /*
-        holder.unitprice.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                EditText editText = (EditText)v;
-                String s = editText.getText().toString();
-                if(!s.toString().equals("")) {
 
-                    salesInvoice.get(position).setUnitPrice(Double.parseDouble(s+""));
-
-                    //initTable();
-                    // if(!onBind)notifyItemChanged(position);
-
-
-                }else{
-                    salesInvoice.get(position).setUnitPrice(0.0);
-                }
-                dbAdapter.updateInvoiceData(salesInvoice.get(position));
-                if(!onBind)notifyItemChanged(position,LINEVAL);
-
-                return false;
-
-            }
-        });*/
 
 
 
@@ -250,28 +181,10 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                     }
                     //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
                 }
+//                dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
             }
         });
-        /*
-        holder.shelf.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                EditText editText = (EditText)v;
-                String s = editText.getText().toString();
-                if(!s.toString().equals("")) {
 
-                    salesInvoice.get(position).setShelf(Integer.parseInt(s+""));
-
-                    //initTable();
-                    // if(!onBind)notifyItemChanged(position);
-
-                }else{
-                    salesInvoice.get(position).setShelf(0);
-                }
-                dbAdapter.updateInvoiceData(salesInvoice.get(position));
-                return false;
-            }
-        });*/
 
         holder.request.setOnFocusChangeListener(new FocusChangeListener());
         holder.request.addTextChangedListener(new GenericTextWatcher(){
@@ -283,6 +196,8 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                         int val = Integer.parseInt(s);
                         salesInvoice.get(pos).setRequest(val);
                         salesInvoice.get(pos).setOrder(val);
+                        CharSequence value = String.valueOf(val);
+                        holder.returnQty.setText(value);
                     }else{
                         salesInvoice.get(pos).setRequest(0);
                     }
@@ -293,40 +208,12 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                         notifyItemChanged(position,LINEVAL);
 
                         //dbAdapter.updateInvoiceData(salesInvoice.get(position));
-                        notifyUpdate();
+//                        notifyUpdate();
                 }
-
+//                dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
 
             }
         });
-        /*
-        holder.request.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if(!((EditText)v).getText().toString().equals("")){
-
-                    int val = Integer.parseInt(((EditText)v).getText().toString());
-                    salesInvoice.get(position).setRequest(val);
-                    salesInvoice.get(position).setOrder(val);
-                }else{
-                    salesInvoice.get(position).setRequest(0);
-                }
-
-
-
-                if(!onBind){
-
-                    notifyItemChanged(position, RETURN);
-                    notifyItemChanged(position,LINEVAL);
-                }
-                dbAdapter.updateInvoiceData(salesInvoice.get(position));
-                notifyUpdate();
-
-                return false;
-            }
-        });*/
-
 
         holder.returnQty.setOnFocusChangeListener(new FocusChangeListener());
         holder.returnQty.addTextChangedListener(new GenericTextWatcher(){
@@ -347,35 +234,9 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                 //dbAdapter.updateInvoiceData(salesInvoice.get(pos)); //update the value in the database
 
             }
-
+//                dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
             }
         });
-        /*
-        holder.returnQty.setOnKeyListener(new View.OnKeyListener() {
-            boolean valHasChanged = false;
-            boolean freeHasChanged = false;
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                valHasChanged = false;
-                freeHasChanged = false;
-                EditText editText = (EditText)v;
-                String s = editText.getText().toString();
-                if(!(s.toString().equals(""))){
-
-                    int val = Integer.parseInt(s.toString());
-                    salesInvoice.get(position).setOrder(val);//make sure we set returnQty before
-
-                }else{
-                    salesInvoice.get(position).setOrder(0);
-                }
-                if(!onBind)notifyItemChanged(position,LINEVAL);
-                dbAdapter.updateInvoiceData(salesInvoice.get(position)); //update the value in the database
-                notifyUpdate();
-                return false;
-            }
-        });*/
-
-
 
         holder.free.setOnFocusChangeListener(new FocusChangeListener());
         holder.free.addTextChangedListener(new GenericTextWatcher(){
@@ -394,31 +255,9 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
                     //dbAdapter.updateInvoiceData(salesInvoice.get(pos));
                    // notifyUpdate();
                 }
-
+//                dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
             }
         });
-        /*
-        holder.free.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                EditText editText = (EditText)v;
-                String s = editText.getText().toString();
-                if (!s.toString().equals("")) {
-
-                    int val = Integer.parseInt(s.toString());
-                    salesInvoice.get(position).setFree(val);
-                }
-                if(!onBind){
-                    //notifyItemChanged(position);
-                    notifyItemChanged(position,LINEVAL);
-
-                }
-                holder.setCursor(FREE);
-                dbAdapter.updateInvoiceData(salesInvoice.get(position));
-                notifyUpdate();
-                return false;
-            }
-        });*/
 
         holder.discount.setOnFocusChangeListener(new FocusChangeListener());
         holder.discount.addTextChangedListener(new GenericTextWatcher(){
@@ -439,30 +278,9 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
 
                     }
                 }
-
+//                dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
             }
         });
-        /*
-        holder.discount.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                EditText editText = (EditText)v;
-                String s = editText.getText().toString();
-                if(!(s.equals(salesInvoice.get(position).getDiscountRate()+""))){
-                    if(!s.toString().equals("")){
-                        Double rate = Double.parseDouble(s.toString().trim());
-
-                        salesInvoice.get(position).setDiscountRate(rate);
-                        //notifyItemChanged(position);
-                        if(!onBind)notifyItemChanged(position,LINEVAL);
-                        dbAdapter.updateInvoiceData(salesInvoice.get(position));
-                        notifyUpdate();
-                    }
-                }
-                return false;
-            }
-        });*/
-
 
         if(position%2==0){
             holder.setColor(Color.LTGRAY);
@@ -471,8 +289,12 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         }
 
         onBind=false;
-        dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
-        notifyUpdate();
+        if (dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref))) {
+            Log.d("RET", "Success updating db");
+        } else {
+            Log.d("RET", "Error updating db");
+        }
+//        notifyUpdate();
 
     }
 
@@ -485,6 +307,63 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
         return salesInvoice.size();
     }
 
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView code, product, expiry, stock, lineval, batchNum;
+        EditText shelf, request, returnQty, free, discount, unitprice;
+        int ref;
+
+        View view;
+
+        public MyViewHolder(View view) {
+            super(view);
+            this.view = view;
+            dbAdapter = new ReturnRecyclerAdapter.DBAdapter(view.getContext());
+            code = (TextView) view.findViewById(R.id.code_e);
+            product = (TextView) view.findViewById(R.id.product_e);
+            batchNum = (TextView) view.findViewById(R.id.batch_e);
+            expiry = (TextView) view.findViewById(R.id.expiry_e);
+
+            stock = (TextView) view.findViewById(R.id.stock_e);
+            lineval = (TextView) view.findViewById(R.id.line_val_e);
+
+            shelf = (EditText) view.findViewById(R.id.shelf_e);
+            request = (EditText) view.findViewById(R.id.request_e);
+            returnQty = (EditText) view.findViewById(R.id.order_e);
+            free = (EditText) view.findViewById(R.id.free_e);
+            discount = (EditText) view.findViewById(R.id.dsc_e);
+            unitprice = (EditText) view.findViewById(R.id.unit_price);
+
+        }
+
+        public void setCursor(String view) {
+            switch (view) {
+                case SHELF:
+                    shelf.setSelection(shelf.getText().length());
+                    break;
+                case REQUEST:
+                    request.setSelection(request.getText().length());
+                    break;
+
+                case RETURN:
+                    returnQty.setSelection(returnQty.getText().length());
+                    break;
+
+                case FREE:
+                    free.setSelection(free.getText().length());
+                    break;
+                case DISCOUNT:
+                    discount.setSelection(discount.getText().length());
+                    break;
+
+
+            }
+        }
+
+        public void setColor(int color) {
+            view.setBackgroundColor(color);
+        }
+
+    }
 
     class GenericTextWatcher implements TextWatcher {
 
@@ -515,18 +394,28 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
 
         }
 
-        public void updateInvoiceData(final SalesInvoiceModel model){
-            openDB();
+        public Boolean updateInvoiceData(final SalesInvoiceModel model) {
 
+            try {
+                openDB();
 
-            String sql = "UPDATE temp_return SET SellingPrice="+model.getUnitPrice() +
-                    ", Shelf="+model.getShelf()+" , Request="+model.getRequest()
-                    +" , returnQty="+model.getOrder()+" , Free="+model.getFree()
-                    +" , Disc="+model.getDiscountRate()+" , LineVal="+model.getLineValue()
-                    +" WHERE _id="+model.getId();
-            db.execSQL(sql);
+                String sql = "UPDATE temp_return SET SellingPrice=" + model.getUnitPrice() +
+                        ", Shelf=" + model.getShelf() + " , Request=" + model.getRequest()
+                        + " , returnQty=" + model.getOrder() + " , Free=" + model.getFree()
+                        + " , Disc=" + model.getDiscountRate() + " , LineVal=" + model.getLineValue()
+                        + " WHERE _id=" + model.getId();
+                db.execSQL(sql);
 
-            closeDB();
+                if (model.getOrder() > 0) {
+                    Log.d("RET", "sql: " + sql);
+                }
+
+                closeDB();
+                return true;
+            } catch (Exception e) {
+                Log.d("RET", "Ex: " + e.getLocalizedMessage());
+                return false;
+            }
 
         }
 
@@ -542,12 +431,15 @@ public class ReturnRecyclerAdapter extends RecyclerView.Adapter<ReturnRecyclerAd
             if(hasFocus){
                 view.setBackgroundColor(Color.BLACK);
                 (view).setTextColor(Color.WHITE);
-                /*if(view.getText().toString().equals("0") || view.getText().toString().equals("0.0")){
+                //added by shani
+                if (view.getText().toString().trim().equals("0")) {
                     view.setText("");
-                }else{
-                    view.setSelection(view.getText().length());
-                }*/
+                }
                 view.setSelection(view.getText().length());
+            } else if (!hasFocus && view.getText() == null) {
+
+                //added by shani
+                lostFocus = true;
             }else{
                 v.setBackgroundColor(Color.TRANSPARENT);
                 (view).setTextColor(Color.BLACK);

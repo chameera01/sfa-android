@@ -16,6 +16,7 @@ import com.example.ahmed.sfa.models.DeviceCheckController;
 import com.example.ahmed.sfa.models.Mst_CheckInOutPoints;
 import com.example.ahmed.sfa.models.Mst_CustomerStatus;
 import com.example.ahmed.sfa.models.Mst_Customermaster;
+import com.example.ahmed.sfa.models.Mst_DeviceRepDetails;
 import com.example.ahmed.sfa.models.Mst_District;
 import com.example.ahmed.sfa.models.Mst_InvoiceNos_Mgt;
 import com.example.ahmed.sfa.models.Mst_ProductBrandManagement;
@@ -309,11 +310,11 @@ public class DBAdapter{
 
 
         db.execSQL("INSERT OR REPLACE INTO Mst_ProductMaster (_ID,ItemCode, Description, PrincipleID, Principle, BrandID,Brand,SubBrandID," +
-                "SubBrand,UnitSize,UnitName,RetailPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow) values (" +
+                "SubBrand,UnitSize,UnitName,RetailPrice,SellingPrice,BuyingPrice,Active,LastUpdateDate,TargetAllow,SortOrder) values (" +
                 "   (select _ID from Mst_ProductMaster where ItemCode = \""+pro.getItemCode()+"\")," +
                 "   \"" + pro.getItemCode() + "\",\"" + pro.getDescription() + "\",\"" + pro.getPrincipleId() + "\",\"" + pro.getPrinciple() + "\"," +
                 "\"" + pro.getBrandId() + "\",  \"" + pro.getBrand() + "\",  \"" + pro.getSubBrandId() + "\",\"" + pro.getSubBrand() + "\",\"" + pro.getUnitSize() + "\"   ,         " +
-                "   \"" + pro.getUnitName() + "\",\"" + pro.getRetailPrice() + "\",\"" + pro.getBuyingPrice() + "\"    ,\"" + pro.getActive() + "\", \"" + DateManager.dateToday() + "\"  ,\"" + pro.getTargetAllow() + "\"       " +
+                "   \"" + pro.getUnitName() + "\",\"" + pro.getRetailPrice() + "\",\"" + pro.getSellingPrice() + "\",\"" + pro.getBuyingPrice() + "\",\"" + pro.getActive() + "\", \"" + DateManager.dateToday() + "\"  ,\"" + pro.getTargetAllow() + "\",\"" + pro.getSortOrder() + "\"" +
                 " );");
 
         closeDB();
@@ -489,12 +490,12 @@ public class DBAdapter{
                     "Area,Town,Telephone,Fax,Email,BRno,OwnerContactNo," +
                     "OwnerName,PhamacyRegNo ,CreditLimit,CurrentCreditAmount ,CustomerStatus" +
                     ",InsertDate,RouteID ,RouteName,ImageID,Latitude ,Longitude ,CompanyCode ," +
-                    "IsActive ,LastUpdateDate) VALUES((select _id from  Mst_Customermaster where CustomerNo='"+cus.getCustomerNo()+"')" +
+                    "IsActive ,LastUpdateDate,IsCashCustomer) VALUES((select _id from  Mst_Customermaster where CustomerNo='" + cus.getCustomerNo() + "')" +
                     ",'"+cus.getCustomerNo()+"','"+cus.getCustomerName()+"','"+cus.getAddress()+"','"+cus.getDistrictID()+"','"+cus.getDistrict()+"'," +
                     "'"+cus.getAreaID()+"','"+cus.getArea()+"','"+cus.getTown()+"','"+cus.getTelephone()+"','"+cus.getFax()+"','"+cus.getEmail()+"'" +
                     ",'"+cus.getBrNo()+"','"+cus.getOwnerContactNo()+"','"+cus.getOwnerName()+"','"+cus.getPhamacyRegNo()+"',"+cus.getCreditLimit()+","+cus.getCurrentCreditAmount()+"" +
                     ",'"+cus.getCustomerStatus()+"','"+cus.getInsertDate()+"','"+cus.getRouteID()+"','"+cus.getRouteName()+"','"+cus.getImageID()+"',"+cus.getLatitude()+"" +
-                    ","+cus.getLongitude()+",'"+cus.getCompanyCode()+"',"+cus.getIsActive()+",'"+cus.getLastUpdateDate()+"');");
+                    "," + cus.getLongitude() + ",'" + cus.getCompanyCode() + "'," + cus.getIsActive() + ",'" + cus.getLastUpdateDate() + "','" + cus.getIsCashCustomer() + "');");
         }catch (Exception e){
             //Toast.makeText(context, "Customermaster_insert:"+e.getMessage(), Toast.LENGTH_SHORT).show();
             Log.d("MGT", "Customermaster_insert:" + e.getMessage());
@@ -603,5 +604,86 @@ public class DBAdapter{
     }
 
 
+    public void updateSalesReturnDetails(String cusNo) {
 
+        openDB();
+        try {
+            db.execSQL("UPDATE Tr_SalesReturnDetails SET IsUpload = 0 WHERE _id = '" + cusNo + "' ;");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Update SalesReturnDetails upload status:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+    }
+
+    public void updateSalesReturnHeader(String cusno) {
+        openDB();
+        try {
+            db.execSQL("UPDATE Tr_SalesReturn SET IsUpload = 1 WHERE _id = '" + cusno + "' ;");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Update Sales Header upload status:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        closeDB();
+    }
+
+    //manual sync
+    public Boolean updateaudit() {
+        openDB();
+        try {
+            db.execSQL("UPDATE Tr_SalesHeader SET IsUpload = 0;");
+            db.execSQL("UPDATE Tr_SalesDetails SET IsUpload = 0;");
+            db.execSQL("UPDATE Tr_InvoiceOutstanding SET IsUpload = 0;");
+            db.execSQL("UPDATE Tr_NewCustomer SET IsUpload = 0;");
+            db.execSQL("UPDATE Tr_SalesReturn SET IsUpload = 0;");
+            db.execSQL("UPDATE Tr_SalesReturnDetails SET IsUpload = 0;");
+            closeDB();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Update Invoice Outstanding upload status:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+    }
+
+    public double getLastRemaining(String customer) {
+        Log.d("COL", "inside getLastRemaining customer: " + customer);
+        double remain = -1.0;
+        openDB();
+        Cursor c = runQuery("SELECT LastRemaining FROM Temp_LastSelected_Collection WHERE LastSelectedCustomer = '" + customer + "'");
+        if (c.getCount() != 0 && c.moveToLast()) {
+            remain = c.getInt(0);
+        }
+        Log.d("COL", "last remaining: " + remain);
+        closeDB();
+        return remain;
+    }
+
+    public Boolean setLastRemaining(String cust, double remaining) {
+
+        try {
+            openDB();
+            db.execSQL("INSERT INTO Temp_LastSelected_Collection(LastSelectedCustomer,LastRemaining) VALUES('" + cust + "','" + remaining + "') ");
+            closeDB();
+            return true;
+        } catch (Exception e) {
+            Log.d("CASH", "Ex: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public void setDeviceRepDetails(Mst_DeviceRepDetails drd) {
+
+        Log.d("MGT", "inside DBAdapter saving in DB");
+        openDB();
+
+        try {
+            db.execSQL("INSERT OR REPLACE INTO Mst_DeviceRepDetails (DeviceID,RepID, RepName) VALUES ('" + drd.getDeviceId() + "','" + drd.getRepId() + "','" + drd.getRepName() + "');");
+        } catch (Exception e) {
+            Toast.makeText(context, "" + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+        closeDB();
+
+    }
 }

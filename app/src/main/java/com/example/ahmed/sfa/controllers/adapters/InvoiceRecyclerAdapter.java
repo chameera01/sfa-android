@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.ahmed.sfa.R;
+import com.example.ahmed.sfa.controllers.database.BaseDBAdapter;
 import com.example.ahmed.sfa.controllers.database.DBHelper;
 import com.example.ahmed.sfa.models.SalesInvoiceModel;
 
@@ -32,16 +33,16 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
         implements SummaryUpdater {
 
     private static final String TAG = "INVOICE";
-    private List<SalesInvoiceModel> salesInvoice;
-    private String principle;
-    boolean onBind;
     public final String SHELF = "SHLEF", REQUEST = "REQUEST", ORDER = "RETURN", FREE = "FREE", DISCOUNT = "DISCOUNT", LINEVAL = "LINEVAL";
-    //    DBAdapterAsync dbAdapter;
-    private Context getContextForAdapter;
+    boolean onBind;
+    DBAdapter dbAdapter;
     SummaryUpdateListner listner;
     boolean refreshed = true;
     int lastUpdatedRow = -1;
     boolean refresh = false;
+    private List<SalesInvoiceModel> salesInvoice;
+    private String principle;
+    private Context getContextForAdapter;
     private boolean lostFocus = false;
     private SalesInvoiceModel model;
     private Context context;
@@ -50,6 +51,12 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
     private BroadcastReceiver receiver = new InvoiceSummaryChangeReceiver();
 
 //    private UpdateDBTask task;
+
+    public InvoiceRecyclerAdapter(List<SalesInvoiceModel> list, Context context) {
+        this.salesInvoice = list;
+//        this.principle = principle;
+        this.context = context;
+    }
 
     @Override
     public void notifyUpdate() {
@@ -62,76 +69,8 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
         this.listner = listner;
     }
 
-
     public void customNotifyDataSetChanged() {
         this.notifyDataSetChanged();
-    }
-
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView code, product, expiry, unitprice, stock, lineval, batchNum;
-        EditText shelf, request, order, free, discount;
-        int ref;
-
-        View view;
-
-        public MyViewHolder(View view) {
-            super(view);
-            this.view = view;
-//            dbAdapter = new DBAdapterAsync(view.getContext());
-            getContextForAdapter = view.getContext();
-            code = (TextView) view.findViewById(R.id.code_e);
-            product = (TextView) view.findViewById(R.id.product_e);
-            batchNum = (TextView) view.findViewById(R.id.batch_e);
-            expiry = (TextView) view.findViewById(R.id.expiry_e);
-            unitprice = (TextView) view.findViewById(R.id.unit_price_e);
-            stock = (TextView) view.findViewById(R.id.stock_e);
-            lineval = (TextView) view.findViewById(R.id.line_val_e);
-
-            shelf = (EditText) view.findViewById(R.id.shelf_e);
-            request = (EditText) view.findViewById(R.id.request_e);
-            order = (EditText) view.findViewById(R.id.order_e);
-            free = (EditText) view.findViewById(R.id.free_e);
-            discount = (EditText) view.findViewById(R.id.dsc_e);
-
-
-        }
-
-        public void setCursor(String view) {
-            switch (view) {
-                case SHELF:
-                    shelf.setSelection(shelf.getText().length());
-                    break;
-                case REQUEST:
-                    request.setSelection(request.getText().length());
-                    break;
-
-                case ORDER:
-                    order.setSelection(order.getText().length());
-                    break;
-
-                case FREE:
-                    free.setSelection(free.getText().length());
-                    break;
-                case DISCOUNT:
-                    discount.setSelection(discount.getText().length());
-                    break;
-
-
-            }
-        }
-
-        public void setColor(int color) {
-            view.setBackgroundColor(color);
-        }
-
-    }
-
-
-    public InvoiceRecyclerAdapter(List<SalesInvoiceModel> list, String principle, Context context) {
-        this.salesInvoice = list;
-        this.principle = principle;
-        this.context = context;
     }
 
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -240,12 +179,12 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
                         Log.d(TAG, "inside text change typed shelf_" + s);
                         salesInvoice.get(pos).setShelf(Integer.parseInt(s + ""));
 
-
                     } else {
                         salesInvoice.get(pos).setShelf(0);
                     }
                     lastUpdatedRow = pos;
                 }
+//                dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
             }
         });
 
@@ -268,7 +207,11 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
                             valHasChanged = true;
                         }
                         salesInvoice.get(pos).setRequest(val);
-                        if (!refresh) salesInvoice.get(pos).setOrder(val);
+                        if (!refresh) {
+                            salesInvoice.get(pos).setOrder(val);
+                            CharSequence value = String.valueOf(val);
+                            holder.order.setText(value);
+                        }
 
                         if (salesInvoice.get(pos).getFree() + salesInvoice.get(pos).getOrder() > salesInvoice.get(pos).getStock()) {
                             salesInvoice.get(pos).setFree(0);
@@ -291,6 +234,7 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
 
                     lastUpdatedRow = pos;
                 }
+//                dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
 
             }
         });
@@ -338,7 +282,7 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
                     lastUpdatedRow = pos;
 
                 }
-
+//                dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
 
             }
         });
@@ -376,7 +320,7 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
                     lastUpdatedRow = pos;
 
                 }
-
+//                dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
             }
         });
 
@@ -407,6 +351,7 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
 
                     }
                 }
+//                dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
             }
         });
 
@@ -418,14 +363,19 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
         }
 
         onBind = false;
-        notifyUpdate();
+
         Log.d("ASY", "before db call");
-        DBAdapterAsync dbAdapter = new DBAdapterAsync(getContextForAdapter);
-        dbAdapter.execute(salesInvoice.get(holder.ref));
+        dbAdapter.updateInvoiceData(salesInvoice.get(holder.ref));
+//        SalesInvoiceSummary.createSummary(salesInvoice.get(holder.ref));
+
+//        DBAdapterAsync dbAdapter = new DBAdapterAsync(getContextForAdapter);
+//        dbAdapter.execute(salesInvoice.get(holder.ref));
+
         Log.d("ASY", "after db call");
 
-    }
+//        notifyUpdate();
 
+    }
 
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
@@ -436,6 +386,98 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
         return salesInvoice.size();
     }
 
+    static class DBAdapter extends BaseDBAdapter {
+
+        protected DBAdapter(Context c) {
+            super(c);
+
+        }
+
+        void updateInvoiceData(final SalesInvoiceModel model) {
+            openDB();
+
+            Log.d(TAG, "inside updateInvoiceData_");
+            Log.d(TAG, "shelf_" + model.getShelf());
+            Log.d(TAG, "order_" + model.getOrder());
+            Log.d(TAG, "free_" + model.getFree());
+
+            String sql = "UPDATE temp_invoice SET" +
+                    " Shelf=" + model.getShelf() + " , Request=" + model.getRequest()
+                    + " , OrderQty=" + model.getOrder() + " , Free=" + model.getFree()
+                    + " , Disc=" + model.getDiscountRate() + " , LineVal=" + model.getLineValue()
+                    + ", RetailPriceLineVal=" + model.getRetailLineVal()
+                    + " WHERE _id=" + model.getId();
+            db.execSQL(sql);
+
+            closeDB();
+
+        }
+
+
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView code, product, expiry, unitprice, stock, lineval, batchNum;
+        EditText shelf, request, order, free, discount;
+        int ref;
+
+        View view;
+
+        public MyViewHolder(View view) {
+            super(view);
+            this.view = view;
+
+//            dbAdapter = new DBAdapterAsync(view.getContext());
+
+            getContextForAdapter = view.getContext();
+            dbAdapter = new DBAdapter(getContextForAdapter);
+
+            code = (TextView) view.findViewById(R.id.code_e);
+            product = (TextView) view.findViewById(R.id.product_e);
+            batchNum = (TextView) view.findViewById(R.id.batch_e);
+            expiry = (TextView) view.findViewById(R.id.expiry_e);
+            unitprice = (TextView) view.findViewById(R.id.unit_price_e);
+            stock = (TextView) view.findViewById(R.id.stock_e);
+            lineval = (TextView) view.findViewById(R.id.line_val_e);
+
+            shelf = (EditText) view.findViewById(R.id.shelf_e);
+            request = (EditText) view.findViewById(R.id.request_e);
+            order = (EditText) view.findViewById(R.id.order_e);
+            free = (EditText) view.findViewById(R.id.free_e);
+            discount = (EditText) view.findViewById(R.id.dsc_e);
+
+
+        }
+
+        public void setCursor(String view) {
+            switch (view) {
+                case SHELF:
+                    shelf.setSelection(shelf.getText().length());
+                    break;
+                case REQUEST:
+                    request.setSelection(request.getText().length());
+                    break;
+
+                case ORDER:
+                    order.setSelection(order.getText().length());
+                    break;
+
+                case FREE:
+                    free.setSelection(free.getText().length());
+                    break;
+                case DISCOUNT:
+                    discount.setSelection(discount.getText().length());
+                    break;
+
+
+            }
+        }
+
+        public void setColor(int color) {
+            view.setBackgroundColor(color);
+        }
+
+    }
 
     class GenericTextWatcher implements TextWatcher {
 
@@ -458,16 +500,6 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
             afterTextChanged(s.toString());
         }
     }
-
-
-//    public void customOnPause(){
-//        context.unregisterReceiver(receiver);
-//    }
-//
-//    public void customOnResume(){
-////        context.registerReceiver(receiver,new IntentFilter("afterTextChanged"));
-//    }
-
 
     class FocusChangeListener implements View.OnFocusChangeListener {
 
@@ -493,6 +525,7 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
                     Log.d(TAG, "inside (salesInvoice.size() > 0)");
                     v.setBackgroundColor(Color.TRANSPARENT);
                     (view).setTextColor(Color.BLACK);
+
                 } else if (!hasFocus && view.getText() == null) {
                     Log.d(TAG, "inside (view.getText() == null)");
                     //added by shani
@@ -503,7 +536,7 @@ public class InvoiceRecyclerAdapter extends RecyclerView.Adapter<InvoiceRecycler
         }
     }
 
-
+    //async task class for DB Update
     @SuppressLint("StaticFieldLeak")
     private class DBAdapterAsync extends AsyncTask<SalesInvoiceModel, Void, String> {
 

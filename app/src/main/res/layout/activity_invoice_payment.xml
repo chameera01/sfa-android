@@ -1,170 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="3"
         >
         <LinearLayout
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:orientation="horizontal"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
             android:layout_weight="2"
             android:background="@color/secondoryText"
-            android:layout_height="match_parent">
+            android:orientation="horizontal"
+            android:padding="10dp">
             <LinearLayout
 
-                android:orientation="vertical"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:layout_height="match_parent">
+                android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:text="Subtotal "
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
                         style="@style/InvoicePaymentTextView"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Subtotal " />
                     <EditText
-                        android:editable="false"
                         android:id="@+id/subtotal"
+                        style="@style/InvoicePaymentEditText"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        style="@style/InvoicePaymentEditText"/>
+                        android:layout_weight="1"
+                        android:editable="false" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:text="Discount Amount"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
                         style="@style/InvoicePaymentTextView"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Discount Amount" />
                     <EditText
-                        android:editable="false"
                         android:id="@+id/payment_discount"
+                        style="@style/InvoicePaymentEditText"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        style="@style/InvoicePaymentEditText"/>
+                        android:layout_weight="1"
+                        android:editable="false" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:text="Return Amount"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
                         style="@style/InvoicePaymentTextView"
-                        android:layout_height="wrap_content"/>
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Return Amount" />
                     <EditText
-                        android:editable="false"
                         android:id="@+id/return_total"
+                        style="@style/InvoicePaymentEditText"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        style="@style/InvoicePaymentEditText"/>
+                        android:layout_weight="1"
+                        android:editable="false" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/InvoicePaymentTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Cash Disc. 3%" />
+
+                    <EditText
+                        android:id="@+id/cash_discount"
+                        style="@style/InvoicePaymentEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:editable="false" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
                         style="@style/InvoicePaymentTextView"
-                        android:text="Invoice Amount"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"/>
-                    <EditText
-                        android:editable="false"
-                        android:id="@+id/invoice_total"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        style="@style/InvoicePaymentEditText"/>
+                        android:layout_weight="1"
+                        android:text="Invoice Amount" />
+                    <EditText
+                        android:id="@+id/invoice_total"
+                        style="@style/InvoicePaymentEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:editable="false" />
                 </LinearLayout>
 
             </LinearLayout>
             <LinearLayout
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent">
+                android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
                         style="@style/InvoicePaymentTextView"
-                        android:text="Invoiced Qty"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"/>
+                        android:text="Invoiced Qty" />
                     <EditText
-                        android:editable="false"
                         android:id="@+id/invoice_qty"
-                        android:layout_height="wrap_content"
+                        style="@style/InvoicePaymentEditText"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        style="@style/InvoicePaymentEditText" />
+                        android:editable="false" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
                         style="@style/InvoicePaymentTextView"
-                        android:text="Free Qty"
                         android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_height="wrap_content"/>
+                        android:text="Free Qty" />
                     <EditText
-                        android:editable="false"
                         android:id="@+id/free_qty"
+                        style="@style/InvoicePaymentEditText"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        style="@style/InvoicePaymentEditText"/>
+                        android:layout_weight="1"
+                        android:editable="false" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
                         style="@style/InvoicePaymentTextView"
-                        android:text="Return Qty"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"/>
-                    <EditText
-                        android:editable="false"
-                        android:id="@+id/return_qty"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
-                        style="@style/InvoicePaymentEditText"/>
+                        android:layout_weight="1"
+                        android:text="Return Qty" />
+                    <EditText
+                        android:id="@+id/return_qty"
+                        style="@style/InvoicePaymentEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:editable="false" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:orientation="vertical"
-            android:background="@color/listUnDone"
-            android:padding="20dp"
-            android:layout_marginLeft="5dp"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:background="@color/listUnDone"
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <TextView
                 style="@style/InvoicePaymentTextView"
@@ -177,30 +198,30 @@
                 android:layout_height="wrap_content">
                 <TextView
                     style="@style/InvoicePaymentTextView"
-                    android:text="Discount % "
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:text="Discount % " />
 
                 <EditText
                     android:id="@+id/full_invoice_discount"
                     style="@style/InvoicePaymentEditText"
                     android:layout_width="0dp"
-                    android:inputType="numberDecimal"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:editable="true"
-                    android:enabled="false" />
+                    android:enabled="false"
+                    android:inputType="numberDecimal" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     style="@style/InvoicePaymentTextView"
-                    android:text="Brand Disc. "
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
+                    android:text="Brand Disc. " />
 
                 <Button
                     android:id="@+id/btn_principle_discount"
@@ -217,18 +238,18 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/secondoryText"
-        android:layout_width="match_parent"
-        android:layout_weight="2"
-        android:layout_height="0dp">
+        android:layout_weight="1.5"
+        android:background="@color/secondoryText">
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -266,58 +287,58 @@
                 <EditText
                     android:id="@+id/si_pay_cash"
                     style="@style/InvoicePaymentEditText"
-                    android:inputType="numberDecimal"
-
                     android:layout_width="0dp"
+
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:editable="true" />
+                    android:editable="true"
+                    android:inputType="numberDecimal" />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:orientation="vertical"
-            android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
                     style="@style/InvoicePaymentTextView"
-                    android:layout_marginTop="5dp"
-                    android:text="Cheque Amount "
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"/>
-                <EditText
-                    android:layout_marginTop="15dp"
-                    android:editable="false"
-                    android:id="@+id/si_pay_cheque"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    style="@style/InvoicePaymentEditText"/>
-                <Button
-                    android:visibility="gone"
                     android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="Cheque Amount " />
+                <EditText
+                    android:id="@+id/si_pay_cheque"
+                    style="@style/InvoicePaymentEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:editable="false" />
+                <Button
                     android:id="@+id/si_pay_cheque_popup"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:visibility="gone" />
             </LinearLayout>
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
                     style="@style/InvoicePaymentTextView"
-                    android:text="Credit Days"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content" />
+                    android:text="Credit Days" />
 
                 <Spinner
                     android:id="@+id/pay_si_credit_dates"
@@ -326,19 +347,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
-                    android:background="@android:color/white" />
+                    android:background="@android:color/white"
+                    tools:targetApi="lollipop" />
             </LinearLayout>
 
         </LinearLayout>
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
             <LinearLayout
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true">
 
                 <Button
                     android:id="@+id/si_pay_return_to_si"

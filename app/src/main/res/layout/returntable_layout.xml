@@ -1,75 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:background="@drawable/backshadow"
-    android:textAlignment="center"
-    android:paddingTop="2dp"
-    android:paddingBottom="2dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/backshadow"
+    android:orientation="vertical"
+    android:paddingBottom="2dp"
+    android:paddingTop="2dp"
+    android:textAlignment="center">
 
     <TextView
 
         android:id="@+id/code_e"
-        android:text="test1"
+        style="@style/SalesRowTextView"
 
         android:layout_weight="1.5"
-        android:textAlignment="center"
-        style="@style/SalesRowTextView"/>
-    <LinearLayout android:layout_width="0dp" android:layout_weight="4" android:layout_height="match_parent">
+        android:text="test1"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4">
 
 
         <TextView android:id="@+id/product_e"
-            android:textAlignment="textStart"
-            android:layout_width="wrap_content"
             style="@style/SalesRowTextView"
+            android:layout_width="wrap_content"
+            android:textAlignment="textStart"
             />
     </LinearLayout>
 
     <TextView android:id="@+id/batch_e"
 
+        style="@style/SalesRowTextView"
         android:layout_weight="2"
-        android:textAlignment="textStart"
-        style="@style/SalesRowTextView"/>
+        android:textAlignment="textStart" />
     <TextView android:id="@+id/expiry_e"
-        android:visibility="gone"
+        style="@style/SalesRowTextView"
         android:layout_weight="1.5"
         android:textAlignment="textStart"
-        style="@style/SalesRowTextView"/>
-    <EditText android:id="@+id/unit_price"
+        android:visibility="gone" />
 
-        android:inputType="numberDecimal"
+    <EditText android:id="@+id/unit_price"
+        style="@style/SalesRowEditText"
         android:layout_weight="1"
-        android:textAlignment="center"
-        style="@style/SalesRowEditText"/>
+        android:inputType="numberDecimal"
+        android:textAlignment="center" />
     <TextView android:id="@+id/stock_e"
 
-        android:inputType="number"
+        style="@style/SalesRowTextView"
         android:layout_weight="1"
-        android:textAlignment="center"
-        style="@style/SalesRowTextView"/>
-    <EditText android:id="@+id/shelf_e"
         android:inputType="number"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/shelf_e"
+        style="@style/SalesRowEditText"
         android:layout_weight="1"
-        android:textAlignment="center"
-        style="@style/SalesRowEditText"/>
+        android:inputType="number"
+        android:textAlignment="center" />
     <EditText android:id="@+id/request_e"
 
+        style="@style/SalesRowEditText"
         android:layout_weight="1"
         android:inputType="number"
-        android:textAlignment="center"
-        style="@style/SalesRowEditText"/>
+        android:textAlignment="center" />
     <EditText android:id="@+id/order_e"
 
+        style="@style/SalesRowEditText"
         android:layout_weight="1"
         android:inputType="number"
-        android:textAlignment="center"
-        style="@style/SalesRowEditText"/>
+        android:textAlignment="center" />
     <EditText android:id="@+id/free_e"
 
+        style="@style/SalesRowEditText"
         android:layout_weight="1"
         android:inputType="number"
-        android:textAlignment="center"
-        style="@style/SalesRowEditText"/>
+        android:textAlignment="center" />
     <EditText android:id="@+id/dsc_e"
         style="@style/SalesRowEditText"
         android:layout_weight="1"
@@ -77,8 +84,8 @@
         android:textAlignment="center"
         />
     <TextView android:id="@+id/line_val_e"
-        android:layout_weight="1"
         style="@style/SalesRowTextView"
+        android:layout_weight="1"
         android:textAlignment="center"
         />
 </TableRow>

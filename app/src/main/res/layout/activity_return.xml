@@ -15,15 +15,15 @@
         android:layout_height="wrap_content">
         <LinearLayout
             android:id="@+id/search_bar"
-            android:layout_alignParentTop="true"
-
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="1dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
                 <Spinner
                     android:id="@+id/principleSpinner"
                     style="@style/SalesSpinnerViews">
@@ -32,8 +32,8 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="1dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
                 <Spinner
                     android:id="@+id/subBrandSpinner"
                     style="@style/SalesSpinnerViews">
@@ -42,8 +42,8 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="1dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
                 <android.widget.SearchView
                     android:id="@+id/search"
                     android:layout_width="match_parent"
@@ -53,79 +53,101 @@
         <!--table header-->
         <TableLayout
             android:id="@+id/table_header"
-            android:layout_below="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/search_bar"
             android:background="@color/colorPrimary"
             android:textColor="@color/listSelectedText"
             >
             <TableRow android:background="@drawable/backshadow"
                 android:backgroundTint="@color/secondoryText"
-                android:textColor="@color/textPrimary"
+                android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp">
+                android:textColor="@color/textPrimary">
                 <TextView
-                    android:text="Code"
+                    style="@style/SalesTableHeaderTextViews"
 
                     android:layout_weight="1.5"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Product"
+                    android:text="Code"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
 
                     android:layout_weight="4"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Batch Number"
+                    android:text="Product"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
 
                     android:layout_weight="2"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Expiry Date"
-                    android:visibility="gone"
+                    android:text="Batch Number"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
                     android:layout_weight="1.5"
+                    android:text="Expiry Date"
                     android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Unit Price"
+                    android:visibility="gone" />
 
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+
+                    android:layout_weight="1"
                     android:inputType="numberDecimal"
-                    android:layout_weight="1"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Stock"
+                    android:text="Unit Price" />
 
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+
+                    android:layout_weight="1"
                     android:inputType="numberDecimal"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Shelf"
+                    android:text="Stock"
+                    android:textAlignment="center" />
 
-                    android:inputType="number"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Request"
-                    android:layout_weight="1"
-                    android:inputType="number"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Return"
-                    android:layout_weight="1"
-                    android:inputType="number"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Free"
-                    android:layout_weight="1"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Disc%"
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
 
                     android:layout_weight="1"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
-                <TextView android:text="Line Value"
+                    android:inputType="number"
+                    android:text="Shelf"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:text="Request"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:text="Return"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+                    android:layout_weight="1"
+                    android:text="Free"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
 
                     android:layout_weight="1"
-                    android:textAlignment="center"
-                    style="@style/SalesTableHeaderTextViews"/>
+                    android:text="Disc%"
+                    android:textAlignment="center" />
+
+                <TextView
+                    style="@style/SalesTableHeaderTextViews"
+
+                    android:layout_weight="1"
+                    android:text="Line Value"
+                    android:textAlignment="center" />
             </TableRow>
         </TableLayout>
 
@@ -134,49 +156,87 @@
         <android.support.v7.widget.RecyclerView
 
             android:id="@+id/invoiceRecycler"
-            android:paddingTop="10dp"
-            android:layout_below="@+id/table_header"
-            android:layout_above="@+id/invoice_summary"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-        <LinearLayout
-            android:layout_marginTop="4dp"
-            android:paddingTop="2dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:background="@color/listSelected"
-            android:id="@+id/invoice_summary"
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
+            android:layout_above="@+id/invoice_summary"
+            android:layout_below="@+id/table_header"
+            android:paddingTop="10dp"></android.support.v7.widget.RecyclerView>
+        <LinearLayout
+            android:id="@+id/invoice_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="4dp"
+            android:background="@color/listSelected"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="2dp">
+
+            <Button
+                android:id="@+id/refresh_ri"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1.6"
+                android:text="Refresh" />
+
             <TextView
-                android:text="Sub Total"
-                style="@style/SalesSummaryTextViews" />
+                style="@style/SalesSummaryTextViews"
+                android:text="Shelf Qty"
+                android:textColor="@color/colorAccent" />
+            <TextView
+                android:id="@+id/shelf_ri"
+                style="@style/SalesSummaryTextViews"
+                android:layout_weight="0.8" />
+            <TextView
+                style="@style/SalesSummaryTextViews"
+                android:text="Return Qty"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/order_ri"
+                style="@style/SalesSummaryTextViews"
+                android:layout_weight="0.8" />
+
+            <TextView
+                style="@style/SalesSummaryTextViews"
+                android:text="Free Qty"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/free_ri"
+                style="@style/SalesSummaryTextViews"
+                android:layout_weight="0.8" />
+
+            <TextView
+                style="@style/SalesSummaryTextViews"
+                android:text="Invoiced Qty" />
+            <TextView
+                android:id="@+id/inv_qty_ri"
+                style="@style/SalesSummaryTextViews"
+                android:layout_weight="0.8" />
+
+            <TextView
+                style="@style/SalesSummaryTextViews"
+                android:text="Sub Total" />
+
             <TextView
                 android:id="@+id/sub_tot_ri"
                 style="@style/SalesSummaryTextViews"/>
+
             <TextView
-                android:text="Invoiced Qty"
-                style="@style/SalesSummaryTextViews" />
-            <TextView
-                android:id="@+id/inv_qty_ri"
-                style="@style/SalesSummaryTextViews"/>
-            <TextView
-                android:text="Discount"
-                style="@style/SalesSummaryTextViews"/>
+                style="@style/SalesSummaryTextViews"
+                android:text="Discount" />
             <TextView
                 android:id="@+id/discount_ri"
                 style="@style/SalesSummaryTextViews"/>
             <TextView
-                android:text="Total"
-                style="@style/SalesSummaryTextViews" />
+                style="@style/SalesSummaryTextViews"
+                android:text="Total" />
             <TextView
                 android:id="@+id/tot_ri"
                 style="@style/SalesSummaryTextViews"/>
-            <TextView
-
-                style="@style/SalesSummaryTextViews" />
 
             <Button
                 android:id="@+id/next_ri"

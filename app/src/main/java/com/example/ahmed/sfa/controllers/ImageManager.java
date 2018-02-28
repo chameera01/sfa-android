@@ -7,9 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
-
 
 import com.example.ahmed.sfa.R;
 
@@ -27,6 +25,7 @@ public class ImageManager {
     public static final String CAMERA_PREF = "camera_pref";
     */
     public static final int CAMERA_REQUEST = 1888;
+    public static File root, image;
     Activity activity;
     private PermissionManager permissionManager;
 
@@ -215,14 +214,12 @@ public class ImageManager {
             //File root = c.getFilesDir();this line is for internel storage
             File root = new File(activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES),"sfaimages");
             if (!root.exists()) root.mkdir();
-            //File imagesFolder = new File(root, "images");
-            //if (!imagesFolder.exists()) imagesFolder.mkdir();
+
 
             File image = new File(root, filename);
 
             try {
                 FileOutputStream fileOutputStream = new FileOutputStream(image);
-                //FileOutputStream fileOutputStream = c.openFileOutput(image.getAbsolutePath(), Context.MODE_PRIVATE);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
                 fileOutputStream.flush();
                 fileOutputStream.close();
@@ -237,7 +234,7 @@ public class ImageManager {
 
     }
 
-    //this method will retrive the image from the appication private space
+    //this method will retrieve the image from the appication private space
     //returns null if the image location is empty
     public Bitmap retrieveImage(String filename){
         Bitmap bitmap;
@@ -247,10 +244,10 @@ public class ImageManager {
             return  temp.getDrawingCache();
         }
         if (permissionManager.checkPermissionToExternalStorage()){
-            File root = new File(activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES),"sfaimages");
+            root = new File(activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "sfaimages");
             if (!root.exists()) root.mkdir();
 
-            File image = new File(root, filename);
+            image = new File(root, filename);
 
             try {
                 FileInputStream fileInputStream = new FileInputStream(image);

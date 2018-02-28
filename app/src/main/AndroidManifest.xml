@@ -8,53 +8,103 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <!--uses-permission android:name="android.permission.GET_ACCOUNTS" /-->
-    <!--uses-permission android:name="android.permission.READ_PROFILE" /-->
-    <!--uses-permission android:name="android.permission.READ_CONTACTS" /-->
-
+    <!-- uses-permission android:name="android.permission.GET_ACCOUNTS" / -->
+    <!-- uses-permission android:name="android.permission.READ_PROFILE" / -->
+    <!-- uses-permission android:name="android.permission.READ_CONTACTS" / -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
-
         android:screenOrientation="landscape"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
-
         <activity
+            android:name=".activities.AddExtraCustomer"
+            android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
-            android:name="com.example.ahmed.sfa.activities.AddExtraCustomer"
-            android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.AndroidDatabaseManager"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.AddCustomer"
+            android:configChanges="orientation"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.DisplayProductTableActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.Home"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.StockView"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.PendingCustomer"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.SalesInvoice"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.SalesInvoicePayment"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.SalesSummaryActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.SalesReturn"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.Return"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.Invoice"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.Dialogs.PricipleDiscountDialog"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Dialog"
+            android:windowSoftInputMode="stateHidden" />
 
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask" android:name=".activities.AndroidDatabaseManager" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask" android:name=".activities.AddCustomer" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask"  android:name=".activities.DisplayProductTableActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask" android:name=".activities.Home" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask" android:name=".activities.StockView" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask" android:name=".activities.PendingCustomer" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask" android:name=".activities.SalesInvoice" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask" android:name=".activities.SalesInvoicePayment" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask" android:name=".activities.SalesSummaryActivity" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask" android:name=".activities.SalesReturn" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:name=".activities.Return" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask" android:name=".activities.Invoice" android:windowSoftInputMode="stateHidden"/>
-        <activity android:screenOrientation="landscape" android:name=".activities.Dialogs.PricipleDiscountDialog" android:theme="@android:style/Theme.Dialog" android:windowSoftInputMode="stateHidden"/>
-
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <!--
+     ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-
         //added by shani
         <receiver android:name=".controllers.adapters.InvoiceSummaryChangeReceiver">
             <intent-filter>
@@ -62,22 +112,33 @@
             </intent-filter>
         </receiver>
 
-
-        <activity android:screenOrientation="landscape" android:name=".activities.ServiceTest"></activity>
+        <activity
+            android:name=".activities.ServiceTest"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".activities.InitialLogin"
-            android:label="@string/title_activity_login"  android:windowSoftInputMode="stateHidden">
-            <!--intent-filter>
+            android:label="@string/title_activity_login"
+            android:windowSoftInputMode="stateHidden">
+
+            <!--
+            intent-filter>
                            <action android:name="android.intent.action.MAIN" />
                            <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter-->
+            </intent-filter
+            -->
         </activity>
+        <activity
+            android:name=".activities.supportactivities.CheckIn"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="stateHidden">
 
-        <activity android:screenOrientation="landscape"  android:launchMode="singleTask" android:name=".activities.supportactivities.CheckIn" android:windowSoftInputMode="stateHidden">
-            <!--intent-filter>
+            <!--
+            intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter-->
+            </intent-filter
+            -->
 
         </activity>
 
@@ -86,12 +147,17 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask" android:name=".activities.ManualSync">
-        </activity>
-
-        <activity android:screenOrientation="landscape" android:launchMode="singleTask"  android:name=".activities.Login">
+        <activity
+            android:name=".activities.ManualSync"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.Login"
+            android:launchMode="singleTask"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -103,9 +169,30 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activities.InvCollections"
+            android:configChanges="orientation"
             android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".activities.Dialogs.ChequeDetailsPopup"
+            android:label="Cheque Details"
+            android:screenOrientation="landscape"
+            android:theme="@style/Base.V7.Theme.AppCompat.Dialog"
             android:windowSoftInputMode="adjustResize" />
-
+        <activity
+            android:name=".activities.ReturnSummary"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.Sync"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".activities.supportactivities.BluetoothActivity"
+            android:configChanges="orientation"
+            android:label="Nearby Bluetooth Devices"
+            android:screenOrientation="landscape"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog" />
+        <activity android:name=".activities.Test"></activity>
     </application>
 
 </manifest>

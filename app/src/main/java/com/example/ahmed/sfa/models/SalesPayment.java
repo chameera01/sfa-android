@@ -6,33 +6,39 @@ import android.util.Log;
 
 import com.example.ahmed.sfa.controllers.Utils;
 
-import java.text.DecimalFormat;
-
 /**
  * Created by Ahmed on 3/25/2017.
  */
 
 public class SalesPayment implements Parcelable{
-    private double fullInvDisc;//this is the total invoice descount rate
+    public static final Creator<SalesPayment> CREATOR = new Creator<SalesPayment>() {
+        @Override
+        public SalesPayment createFromParcel(Parcel in) {
+            return new SalesPayment(in);
+        }
+
+        @Override
+        public SalesPayment[] newArray(int size) {
+            return new SalesPayment[size];
+        }
+    };
+    private double fullInvDisc;//this is the total invoice discount rate
     private double discount;//this is the discount comes from the invoice
     private double totalDiscount;//this is the total of the discounts
-    private double totalPrincipleDiscounts;//this is the discount comes from
     //discounts accounted for specific principle types
-
+    private double totalPrincipleDiscounts;//this is the discount comes from
     private double credit;
     private double cheque;
     private double cash;
-
     private double subTotal;
     private int invQty;
     private int freeQty;
-
     private int creditDays;
-
     private double returnTot;
     private int returnQty;
-
     private  double total;
+    //new
+    private String discountType;
 
     public SalesPayment( double total, double subTotal, int invQty, int freeQty) {
         //this.fullInvDisc = fullInvDisc;
@@ -49,9 +55,12 @@ public class SalesPayment implements Parcelable{
     }
 
     public SalesPayment(SalesInvoiceSummary summary){
+
+        Log.d("CASH", "inside creating new SalesPayment_obj.getTotal(): " + summary.getTotal());
         this.fullInvDisc = 0.0;
         this.discount = summary.getDiscount();
         this.total = summary.getTotal();
+        Log.d("CASH", "inside creating new SalesPayment_this.total: " + this.total);
         this.subTotal =summary.getSubtotal();
         this.invQty = summary.getInvoicedQty();
         this.freeQty = summary.getFreeQty();
@@ -81,6 +90,14 @@ public class SalesPayment implements Parcelable{
         totalPrincipleDiscounts  = in.readDouble();
     }
 
+    public String getDiscountType() {
+        return discountType;
+    }
+
+    public void setDiscountType(String discountType) {
+        this.discountType = discountType;
+    }
+
     public int getCreditDays() {
         return creditDays;
     }
@@ -88,18 +105,6 @@ public class SalesPayment implements Parcelable{
     public void setCreditDays(int creditDays) {
         this.creditDays = creditDays;
     }
-
-    public static final Creator<SalesPayment> CREATOR = new Creator<SalesPayment>() {
-        @Override
-        public SalesPayment createFromParcel(Parcel in) {
-            return new SalesPayment(in);
-        }
-
-        @Override
-        public SalesPayment[] newArray(int size) {
-            return new SalesPayment[size];
-        }
-    };
 
     private void calculateFields(){
 
@@ -195,11 +200,14 @@ public class SalesPayment implements Parcelable{
     }
 
     public double getTotal() {
-        return Utils.decimalFix(total);
+        Log.d("CASH", "inside getTotal_this.total: " + this.total);
+        return Utils.decimalFix(this.total);
     }
 
     public void setTotal(double total) {
+        Log.d("CASH", "inside model class_setTotal: " + total);
         this.total = total;
+        Log.d("CASH", "inside model class_this.total after setting: " + this.total);
     }
 
     public double getDiscount() {

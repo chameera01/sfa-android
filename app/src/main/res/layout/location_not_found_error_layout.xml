@@ -13,16 +13,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
-        android:text="Without location cant continue Please move try again in sometime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_red_light"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:text="Cannot continue without location. Please try again later!"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="22sp" />
 </RelativeLayout>
 <android.support.design.widget.NavigationView
 android:id="@+id/nav_view"

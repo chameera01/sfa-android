@@ -24,6 +24,8 @@ public class Mst_ProductMaster {
     private Date lastupadateDate;
     private int targetAllow;
 
+    private double sortOrder;
+
 
     public String getId() {
         return id;
@@ -159,5 +161,13 @@ public class Mst_ProductMaster {
 
     public void setTargetAllow(int targetAllow) {
         this.targetAllow = targetAllow;
+    }
+
+    public double getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(double sortOrder) {
+        this.sortOrder = sortOrder;
     }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TableLayout
         android:id="@+id/table_data"
@@ -12,51 +12,58 @@
         <TableRow
 
             android:backgroundTint="@color/secondoryText"
-            android:textColor="@color/textPrimary"
+            android:paddingBottom="10dp"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:textColor="@color/textPrimary">
 
             <TextView
-                android:text="Invoice No."
-                android:layout_weight="2"
                 android:id="@+id/tvInvNo"
-                android:textAlignment="center"
-                style="@style/SalesRowTextView" />
+                style="@style/SalesRowTextView"
+                android:layout_weight="2"
+                android:text="Invoice No."
+                android:textAlignment="center" />
 
             <TextView
-                android:text="Credit Amount"
-                android:layout_weight="3"
                 android:id="@+id/tvCrdtAmt"
-                android:textAlignment="center"
-                style="@style/SalesRowTextView" />
+                style="@style/SalesRowTextView"
+                android:layout_weight="3"
+                android:text="Credit Amount"
+                android:textAlignment="center" />
 
             <TextView
-                android:text="Cash"
-                android:layout_weight="2"
                 android:id="@+id/tvCashAmt"
-                android:textAlignment="center"
-                style="@style/SalesRowTextView" />
-
-            <TextView
-                android:text="Cheque"
+                style="@style/SalesRowTextView"
                 android:layout_weight="2"
+                android:text="Cash"
+                android:textAlignment="center" />
+
+            <TextView
                 android:id="@+id/tvChequeAmt"
-                android:textAlignment="center"
-                style="@style/SalesRowTextView" />
+                style="@style/SalesRowTextView"
+                android:layout_weight="2"
+                android:text="Cheque"
+                android:textAlignment="center" />
 
             <TextView
-                android:text="Credit Balance"
-                android:layout_weight="3"
                 android:id="@+id/tvCrdtBalance"
-                android:textAlignment="center"
-                style="@style/SalesRowTextView" />
+                style="@style/SalesRowTextView"
+                android:layout_weight="3"
+                android:text="Credit Balance"
+                android:textAlignment="center" />
 
             <TextView
-                android:text="Remaining"
-                android:layout_weight="3"
                 android:id="@+id/tvRemaining"
-                android:textAlignment="center"
-                style="@style/SalesRowTextView" />
+                style="@style/SalesRowTextView"
+                android:layout_weight="3"
+                android:text="Remaining"
+                android:textAlignment="center" />
+
+            <Button
+                android:id="@+id/removeItem"
+                style="@style/SalesRowTextView"
+                android:layout_weight="1"
+                android:text="X"
+                android:textAlignment="center" />
 
         </TableRow>
     </TableLayout>
